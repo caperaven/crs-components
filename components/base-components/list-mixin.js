@@ -82,7 +82,13 @@ async function collapse() {
     console.log("collapse");
 }
 
-async function focus() {
+async function focus(event) {
+    console.log(event);
+
+    if (Array.from(this.children).indexOf(event.relatedTarget) != -1) {
+        return;
+    }
+
     const selectedIndex = Number(this.dataset.selected || 0);
     this.focusedIndex = selectedIndex;
     await setNewSelectedIndex.call(this, selectedIndex);
