@@ -1,4 +1,4 @@
-import "./../../components/menu/menu.js";
+import "../../components/main-menu/main-menu.js";
 
 export default class UnorderedMenu extends crsbinding.classes.ViewBase {
     async connectedCallback() {

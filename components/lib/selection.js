@@ -21,11 +21,21 @@ export async function ensureSelectionBounds(index) {
     return result;
 }
 
+/**
+ * Remove the current focus mark on the current focused element
+ * @param index
+ * @returns {Promise<void>}
+ */
 export async function reverseFocus(index) {
     if (index == null) return;
     this.children[index].setAttribute("tabindex", "-1");
 }
 
+/**
+ * Set the current focus mark on the new focused element
+ * @param index
+ * @returns {Promise<void>}
+ */
 export async function setFocus(index) {
     this.children[index].setAttribute("tabindex", "0");
     this.children[index].focus();
