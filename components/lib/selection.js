@@ -5,7 +5,7 @@ export async function setNewFocusIndex(newValue) {
 }
 
 export async function setNewSelectedIndex(newValue) {
-    await reverseSelection.call(this, newValue);
+    await reverseSelection.call(this, this._selectedIndex);
     this._selectedIndex = newValue;
     await setSelection.call(this, newValue);
 }
@@ -33,9 +33,19 @@ export async function setFocus(index) {
 
 export async function reverseSelection(index) {
     if (index == null) return;
-    this.children[index].removeAttribute("aria-selected");
+    if (this.reverseSelection != null) {
+        await this.reverseSelection(this.children[index]);
+    }
+    else {
+        this.children[index].removeAttribute("aria-selected");
+    }
 }
 
 export async function setSelection(index) {
-    this.children[index].setAttribute("aria-selected", "true");
+    if (this.setSelection != null) {
+        await this.setSelection(this.children[index]);
+    }
+    else {
+        this.children[index].setAttribute("aria-selected", "true");
+    }
 }
