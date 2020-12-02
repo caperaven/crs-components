@@ -23,9 +23,9 @@
       "view": "overflow-toolbar"
     },
     {
-      "title": "Unordered Menu",
-      "hash": "#unordered-menu",
-      "view": "unordered-menu"
+      "title": "Lists",
+      "hash": "#lists",
+      "view": "lists"
     },
     {
       "title": "404",

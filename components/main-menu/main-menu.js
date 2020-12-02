@@ -1,6 +1,6 @@
-import {UnorderedList} from "./../base-components/unordered-list.js";
+import {OrderedList} from "../base-components/ordered-list.js";
 
-class MainMenu extends UnorderedList {
+class MainMenu extends OrderedList {
     async connectedCallback() {
         await super.connectedCallback("menu", "menuitem");
     }
@@ -14,4 +14,4 @@ class MainMenu extends UnorderedList {
     }
 }
 
-customElements.define("main-menu", MainMenu, { extends: 'ul' });
+customElements.define("main-menu", MainMenu, { extends: 'ol' });
