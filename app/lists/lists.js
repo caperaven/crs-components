@@ -1,6 +1,6 @@
 import "./../../components/main-menu/main-menu.js";
-import "./../../components/lists/ol-list.js";
-import "./../../components/lists/ul-list.js";
+import "./../../components/lists/ordered-list.js";
+import "./../../components/lists/unordered-list.js";
 
 export default class Lists extends crsbinding.classes.ViewBase {
     async connectedCallback() {

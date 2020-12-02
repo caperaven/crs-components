@@ -1,4 +1,4 @@
-import {OrderedList} from "../base-components/ordered-list.js";
+import {OrderedList} from "../lists/ordered-list.js";
 
 class MainMenu extends OrderedList {
     async connectedCallback() {

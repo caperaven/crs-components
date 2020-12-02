@@ -1,6 +1,6 @@
-import {enableListFeatures} from "./list-mixin.js";
+import {enableListFeatures} from "../base-components/list-mixin.js";
 
-export class UnorderedList extends HTMLUListElement {
+export class OrderedList extends HTMLOListElement {
     async connectedCallback(role, childRole) {
         await enableListFeatures(this);
         this.init(role, childRole);
@@ -10,3 +10,5 @@ export class UnorderedList extends HTMLUListElement {
         this.dispose();
     }
 }
+
+customElements.define("ol-list", OrderedList, { extends: 'ol' });
