@@ -50,10 +50,12 @@ async function dispose() {
 }
 
 async function gotoNext() {
+    this._direction = 1;
     this.focusedIndex++;
 }
 
 async function gotoPrevious() {
+    this._direction = -1;
     this.focusedIndex--;
 }
 

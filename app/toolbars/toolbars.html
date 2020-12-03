@@ -1,8 +1,12 @@
 <style>
     overflow-toolbar {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         overflow: hidden;
         white-space: nowrap;
+        background: silver;
+        height: 32px;
     }
 </style>
 
@@ -32,7 +36,7 @@
         <button data-label="Button 6">Button 6</button>
     </overflow-toolbar>
 
-    <overflow-toolbar style="width: 220px" id="overflow-toolbar-short">
+    <overflow-toolbar style="width: 250px;" id="overflow-toolbar-short">
         <button data-label="Button 1">Button 1</button>
         <button data-label="Button 2">Button 2</button>
         <button data-label="Button 3">Button 3</button>
