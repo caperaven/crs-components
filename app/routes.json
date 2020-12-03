@@ -18,9 +18,9 @@
       "hasStyle": true
     },
     {
-      "title": "Overflow Toolbar",
-      "hash": "#overflow-toolbar",
-      "view": "overflow-toolbar"
+      "title": "Toolbars",
+      "hash": "#toolbars",
+      "view": "toolbars"
     },
     {
       "title": "Lists",
