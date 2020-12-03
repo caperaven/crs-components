@@ -25,6 +25,8 @@
         "html-minifier": "^4.0.0",
         "jest": "^24.9.0",
         "mkdirp": "^0.5.1",
+        "puppeteer": "^5.5.0",
+        "puppeteer-to-istanbul": "^1.4.0",
         "rollup": "^1.23.0",
         "rollup-plugin-terser": "^5.1.2"
     },
