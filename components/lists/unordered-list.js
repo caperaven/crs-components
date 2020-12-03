@@ -1,9 +1,11 @@
-import {enableListFeatures} from "../base-components/list-mixin.js";
+import {enableContainerFeatures} from "../base-components/container-mixin.js";
+import {enableVerticalKeys} from "../lib/vertical-key-navigation.js";
 
 export class UnorderedList extends HTMLUListElement {
     async connectedCallback(role, childRole) {
-        await enableListFeatures(this);
+        await enableContainerFeatures(this);
         this.init(role, childRole);
+        await enableVerticalKeys(this);
     }
 
     async disconnectedCallback() {

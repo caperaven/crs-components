@@ -5,8 +5,8 @@ export async function enableVerticalKeys(target) {
 async function handleVerticalKeys(event) {
     event.preventDefault();
     switch(event.code) {
-        case "ArrowDown": return this.moveDown && await this.moveDown();
-        case "ArrowUp": return this.moveUp && await this.moveUp();
+        case "ArrowDown": return this.gotoNext && await this.gotoNext();
+        case "ArrowUp": return this.gotoPrevious && await this.gotoPrevious();
         case "ArrowRight": return this.expand && await this.expand();
         case "ArrowLeft": return this.collapse && await this.collapse();
         case "Enter": return this.activate && await this.activate();

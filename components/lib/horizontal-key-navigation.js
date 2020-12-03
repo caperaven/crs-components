@@ -5,8 +5,8 @@ export async function enableHorizontalKeys(target) {
 async function handleHorizontalKeys(event) {
     event.preventDefault();
     switch(event.code) {
-        case "ArrowLeft": return this.moveLeft && await this.moveLeft();
-        case "ArrowRight": return this.moveRight && await this.moveRight();
+        case "ArrowLeft": return this.gotoPrevious && await this.gotoPrevious();
+        case "ArrowRight": return this.gotoNext && await this.gotoNext();
         case "ArrowDown": return this.expand && await this.expand();
         case "ArrowUp": return this.collapse && await this.collapse();
         case "Enter": return this.activate && await this.activate();

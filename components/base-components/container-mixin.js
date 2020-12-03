@@ -1,8 +1,7 @@
 import {setNewFocusIndex, setNewSelectedIndex} from "../lib/selection.js";
 import {disableChildTabbing} from "../lib/element-utils.js";
-import {enableVerticalKeys} from "../lib/vertical-key-navigation.js";
 
-export async function enableListFeatures(target) {
+export async function enableContainerFeatures(target) {
     Object.defineProperty(target, "focusedIndex",{
         get () {
             return this._focusIndex;
@@ -23,8 +22,8 @@ export async function enableListFeatures(target) {
 
     target.init = init;
     target.dispose = dispose;
-    target.moveDown = moveDown;
-    target.moveUp = moveUp;
+    target.gotoNext = gotoNext;
+    target.gotoPrevious = gotoPrevious;
     target.gotoFirst = gotoFirst;
     target.gotoLast = gotoLast;
     target.activate = activate;
@@ -44,19 +43,17 @@ async function init(role, childRole) {
     }
     this.setAttribute("tabindex", "0");
     await disableChildTabbing(this, childRole);
-
-    await enableVerticalKeys(this);
 }
 
 async function dispose() {
     crsbinding.dom.disableEvents(this);
 }
 
-async function moveDown() {
+async function gotoNext() {
     this.focusedIndex++;
 }
 
-async function moveUp() {
+async function gotoPrevious() {
     this.focusedIndex--;
 }
 
@@ -83,8 +80,6 @@ async function collapse() {
 }
 
 async function focus(event) {
-    console.log(event);
-
     if (Array.from(this.children).indexOf(event.relatedTarget) != -1) {
         return;
     }
