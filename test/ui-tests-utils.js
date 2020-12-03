@@ -38,6 +38,18 @@ async function navigateTo(hash) {
     ]).catch(e => console.log(e));
 }
 
+async function focus(query) {
+    await page.click(query);
+}
+
+async function childHasFocus(query, childIndex) {
+    return await page.evaluate((query, childIndex) => {
+        return document.querySelector(query).children[childIndex].getAttribute("tabindex") === "0";
+    }, query, childIndex);
+}
+
 module.exports = {
-    navigateTo: navigateTo
+    navigateTo: navigateTo,
+    focus: focus,
+    childHasFocus: childHasFocus
 }

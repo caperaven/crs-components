@@ -29,14 +29,14 @@ export async function enableContainerFeatures(target) {
     target.activate = activate;
     target.expand = expand;
     target.collapse = collapse;
-    target.focus = focus;
+    target._focus = _focus;
 }
 
 async function init(role, childRole) {
     this._childLength = this.children.length;
 
     crsbinding.dom.enableEvents(this);
-    this.registerEvent(this,"focus", this.focus.bind(this));
+    this.registerEvent(this,"focus", this._focus.bind(this));
 
     if (role != null) {
         this.setAttribute("role", role);
@@ -79,8 +79,8 @@ async function collapse() {
     console.log("collapse");
 }
 
-async function focus(event) {
-    if (Array.from(this.children).indexOf(event.relatedTarget) != -1) {
+async function _focus(event) {
+    if (event != null && Array.from(this.children).indexOf(event.relatedTarget) != -1) {
         return;
     }
 
