@@ -9,7 +9,7 @@ afterAll(async () => {
 })
 
 test("lists", async() => {
-    // await checkKeyboardNavigation("#example-nav-list");
-    // await checkKeyboardNavigation("#unordered-list");
-    // await checkKeyboardNavigation("#ordered-list");
+    await checkKeyboardNavigation("#example-nav-list");
+    await checkKeyboardNavigation("#unordered-list");
+    await checkKeyboardNavigation("#ordered-list");
 });

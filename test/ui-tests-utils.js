@@ -5,7 +5,7 @@ globalThis.browser = null;
 globalThis.page = null;
 
 beforeAll(async () => {
-    jest.setTimeout(100000);
+    jest.setTimeout(10000);
     globalThis.browser = await puppeteer.launch({headless: false, slowMo: 10, args: ['--disable-dev-shm-usage', '--start-maximized']});
     globalThis.page = await browser.newPage();
 

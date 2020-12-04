@@ -49,35 +49,39 @@ async function dispose() {
     crsbinding.dom.disableEvents(this);
 }
 
-async function gotoNext() {
+async function gotoNext(event) {
     this._direction = 1;
     this.focusedIndex++;
 }
 
-async function gotoPrevious() {
+async function gotoPrevious(event) {
     this._direction = -1;
     this.focusedIndex--;
 }
 
-async function gotoFirst() {
+async function gotoFirst(event) {
     this.focusedIndex = 0;
 }
 
-async function gotoLast() {
+async function gotoLast(event) {
     this.focusedIndex = this._childLength - 1;
 }
 
-async function activate() {
+async function activate(event, ignoreOverload = false) {
+    if (this.activateOverload != null && ignoreOverload == false) {
+        return await this.activateOverload(event);
+    }
+
     this.selectedIndex = this.focusedIndex;
     const selectedElement = this.children[this.selectedIndex];
     this.dispatchEvent(new CustomEvent("changed", {detail: selectedElement}));
 }
 
-async function expand() {
+async function expand(event) {
     console.log("expand");
 }
 
-async function collapse() {
+async function collapse(event) {
     console.log("collapse");
 }
 

@@ -18,6 +18,11 @@
       "hasStyle": true
     },
     {
+      "title": "Relative Placement",
+      "hash": "#relative-placement",
+      "view": "relative-placement"
+    },
+    {
       "title": "Toolbars",
       "hash": "#toolbars",
       "view": "toolbars"

@@ -7,8 +7,8 @@ class OverflowToolbar extends HTMLElement {
         await enableContainerFeatures(this);
         await this.init("toolbar")
         await enableHorizontalKeys(this);
-        this.registerEvent(window, "resize", this.checkOverflow.bind(this));
 
+        crsbinding.events.emitter.on("resize", this.checkOverflow.bind(this));
         requestAnimationFrame(async () => await this.checkOverflow());
     }
 
@@ -31,7 +31,7 @@ class OverflowToolbar extends HTMLElement {
         await this.resetOverflow();
 
         const rect = await this.measure(this);
-        const rightBound = rect.left + rect.width;
+        const rightBound = rect.left + rect.width - 36;
         const bounds = [];
 
         for (let i = this.children.length -1; i >= 0; i--) {
@@ -83,6 +83,25 @@ class OverflowToolbar extends HTMLElement {
 
     async removeOverflowElements() {
         if (this.svgButton == null) return;
+    }
+
+    async activateOverload(event) {
+        if (this.focusedIndex > this.children.length - 1) {
+            this.focusedIndex = this.children.length -1;
+        }
+
+        const selectedElement = this.children[this.focusedIndex];
+
+        if (selectedElement == this.svgButton) {
+            await this.showOverflow();
+        }
+    }
+
+    async showOverflow() {
+        this.svgButton.setAttribute("aria-expanded", "true");
+        this.dropdown.removeAttribute("hidden");
+        this.dropdown.setAttribute("tabindex", "0");
+        this.dropdown.focus();
     }
 }
 
