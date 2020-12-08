@@ -7,6 +7,7 @@ class MainMenu extends OrderedList {
 
     async reverseSelection(element) {
         element.removeAttribute("aria-current");
+        element.setAttribute("tabindex", "-1");
     }
 
     async setSelection(element) {

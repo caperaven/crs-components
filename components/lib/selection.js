@@ -5,9 +5,12 @@ export async function setNewFocusIndex(newValue) {
 }
 
 export async function setNewSelectedIndex(newValue) {
-    await reverseSelection.call(this, this._selectedIndex);
+    await reverseSelection.call(this);
     this._selectedIndex = newValue;
-    await setSelection.call(this, newValue);
+
+    if (newValue != null) {
+        await setSelection.call(this, newValue);
+    }
 }
 
 export async function ensureSelectionBounds(index) {
@@ -44,13 +47,16 @@ export async function setFocus(index) {
     this.children[index].focus();
 }
 
-export async function reverseSelection(index) {
-    if (index == null) return;
+export async function reverseSelection() {
+    const element = this.querySelector('[aria-selected]');
+    if (element == null) return;
+
     if (this.reverseSelection != null) {
-        await this.reverseSelection(this.children[index]);
+        await this.reverseSelection(element);
     }
     else {
-        this.children[index].removeAttribute("aria-selected");
+        element.setAttribute("tabindex", "-1");
+        element.removeAttribute("aria-selected");
     }
 }
 

@@ -1,6 +1,8 @@
 import {enableContainerFeatures} from "./../base-components/container-mixin.js";
 import {enableHorizontalKeys} from "./../lib/horizontal-key-navigation.js";
 import {createSvgButton, createVerticalList, createListItem, createSpacer} from "./../lib/element-utils.js";
+import {showElementRelativeTo} from "./../../components/lib/element-utils.js";
+import "./../lists/unordered-list.js";
 
 class OverflowToolbar extends HTMLElement {
     async connectedCallback() {
@@ -94,6 +96,7 @@ class OverflowToolbar extends HTMLElement {
 
         if (selectedElement == this.svgButton) {
             await this.showOverflow();
+            await showElementRelativeTo(this.svgButton, this.dropdown);
         }
     }
 

@@ -20,23 +20,25 @@ export async function enableContainerFeatures(target) {
         }
     });
 
-    target.init = init;
-    target.dispose = dispose;
-    target.gotoNext = gotoNext;
-    target.gotoPrevious = gotoPrevious;
-    target.gotoFirst = gotoFirst;
-    target.gotoLast = gotoLast;
-    target.activate = activate;
-    target.expand = expand;
-    target.collapse = collapse;
-    target._focus = _focus;
+    target.init = init.bind(target);
+    target.dispose = dispose.bind(target);
+    target.gotoNext = gotoNext.bind(target);
+    target.gotoPrevious = gotoPrevious.bind(target);
+    target.gotoFirst = gotoFirst.bind(target);
+    target.gotoLast = gotoLast.bind(target);
+    target.activate = activate.bind(target);
+    target.expand = expand.bind(target);
+    target.collapse = collapse.bind(target);
+    target._focusIn = _focusIn.bind(target);
+    target._focusOut = _focusOut.bind(target);
 }
 
 async function init(role, childRole) {
     this._childLength = this.children.length;
 
     crsbinding.dom.enableEvents(this);
-    this.registerEvent(this,"focus", this._focus.bind(this));
+    this.registerEvent(this,"focusin", this._focusIn);
+    this.registerEvent(this, "focusout", this._focusOut);
 
     if (role != null) {
         this.setAttribute("role", role);
@@ -85,8 +87,8 @@ async function collapse(event) {
     console.log("collapse");
 }
 
-async function _focus(event) {
-    if (event != null && Array.from(this.children).indexOf(event.relatedTarget) != -1) {
+async function _focusIn(event) {
+    if (event == null || event.relatedTarget == null || event.relatedTarget.parentElement == this) {
         return;
     }
 
@@ -94,5 +96,19 @@ async function _focus(event) {
     this.focusedIndex = selectedIndex;
     await setNewSelectedIndex.call(this, selectedIndex);
 
-    this.children[this.selectedIndex].focus();
+    this.setAttribute("tabindex", "-1");
+    this.children[selectedIndex].focus();
+}
+
+async function _focusOut(event) {
+    if (event == null || event.relatedTarget == null || event.relatedTarget.parentElement == this) {
+        return;
+    }
+
+    if (this.dataset.persist === "true") {
+        this.dataset.selected = this._focusIndex;
+    }
+
+    await setNewSelectedIndex.call(this, null);
+    this.setAttribute("tabindex", "0");
 }
