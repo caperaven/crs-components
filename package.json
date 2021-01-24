@@ -1,6 +1,6 @@
 {
     "name": "",
-    "version": "0.0.8",
+    "version": "0.0.16",
     "description": "",
     "main": "index.js",
     "directories": {
@@ -9,7 +9,7 @@
     "scripts": {
         "test": "jest",
         "bundle": "rollup -c",
-        "build-publish": "node build/publish.js"
+        "build-publish": "rollup -c && node build/publish.js"
     },
     "keywords": [],
     "author": "",

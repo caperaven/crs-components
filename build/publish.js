@@ -7,9 +7,8 @@ const htmlMinifi = require("html-minifier").minify;
 class Publish {
     static async distribute() {
         const instance = new Publish();
-        await instance.copyFiles("./dist/*.*");
         await instance.copyFiles("./readme.md");
-        await instance.copySource("app");
+        await instance.copyFiles("./dist/components/html-to-text/html-to-text.js", "components/html-to-text/");
         await instance.saveCommands();
         instance.bumpVersion();
     }
