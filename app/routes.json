@@ -33,6 +33,11 @@
       "view": "lists"
     },
     {
+      "title": "HTML to Text",
+      "hash": "#html-to-text",
+      "view": "html-to-text"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",
