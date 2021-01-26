@@ -34,8 +34,6 @@ export async function enableContainerFeatures(target) {
 }
 
 async function init(role, childRole) {
-    this._childLength = this.children.length;
-
     crsbinding.dom.enableEvents(this);
     this.registerEvent(this,"focusin", this._focusIn);
     this.registerEvent(this, "focusout", this._focusOut);
@@ -66,7 +64,7 @@ async function gotoFirst(event) {
 }
 
 async function gotoLast(event) {
-    this.focusedIndex = this._childLength - 1;
+    this.focusedIndex = this.children.length - 1;
 }
 
 async function activate(event, ignoreOverload = false) {
@@ -98,6 +96,9 @@ async function _focusIn(event) {
 
     this.setAttribute("tabindex", "-1");
     this.children[selectedIndex].focus();
+
+    event.preventDefault();
+    event.stopPropagation();
 }
 
 async function _focusOut(event) {
@@ -111,4 +112,7 @@ async function _focusOut(event) {
 
     await setNewSelectedIndex.call(this, null);
     this.setAttribute("tabindex", "0");
+
+    event.preventDefault();
+    event.stopPropagation();
 }

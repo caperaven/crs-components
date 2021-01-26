@@ -15,10 +15,11 @@ export async function setNewSelectedIndex(newValue) {
 
 export async function ensureSelectionBounds(index) {
     let result = index;
+    const length = this.children.length;
     if (index < 0) {
-        result = this._childLength - 1;
+        result = length - 1;
     }
-    else if (index > this._childLength - 1) {
+    else if (index > length - 1) {
         result = 0;
     }
     return result;
@@ -30,7 +31,7 @@ export async function ensureSelectionBounds(index) {
  * @returns {Promise<void>}
  */
 export async function reverseFocus(index) {
-    if (index == null) return;
+    if (index == null || index > this.children.length - 1) return;
     this.children[index].setAttribute("tabindex", "-1");
 }
 

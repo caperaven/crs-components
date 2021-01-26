@@ -10,11 +10,13 @@ export async function disableChildTabbing(element, childRole) {
     }
 }
 
-export async function createSvgButton(name, hasPopup = true) {
+export async function createSvgButton(name, id, hasPopup = true) {
     const svg = document.createElementNS(xmlns, "svg");
     const use = document.createElementNS(xmlns, "use");
     use.setAttribute("href", `#${name}`);
+    use.style.pointerEvents = "none";
     svg.appendChild(use);
+    svg.setAttribute("id", id);
     svg.setAttribute("viewBox","0 0 24 24");
     svg.setAttribute("role", "button");
     svg.setAttribute("width", "32px");
@@ -37,12 +39,12 @@ export async function createSvgButton(name, hasPopup = true) {
  * @returns {Promise<HTMLUListElement>}
  */
 export async function createVerticalList(hidden = true) {
-    const list = document.createElement("ul");
-    list.setAttribute("is", "ul-list");
+    const list = document.createElement("ul", {is: "ul-list"});
 
     if (hidden == true) {
         list.setAttribute("hidden", "hidden");
     }
+
     return list;
 }
 
@@ -55,7 +57,8 @@ export async function createListItem(element) {
     const listItem = document.createElement("li");
     listItem.setAttribute("role", "listitem");
     listItem.setAttribute("tabindex", "-1");
-    listItem.appendChild(element);
+    listItem.innerText = element.getAttribute("aria-label");
+    listItem.__target = element;
     return listItem;
 }
 
@@ -125,8 +128,6 @@ export async function placeLeft(parentElement, element, padding) {
     const left = parentRect.left - rect.width - padding;
     const top = parentRect.top;
     await setFixedPosition(element, left, top);
-
-    return rect;
 }
 
 /**
@@ -137,13 +138,10 @@ export async function placeLeft(parentElement, element, padding) {
  */
 export async function placeRight(parentElement, element, padding) {
     const parentRect = await getElementBounds(parentElement);
-    const rect = await getElementBounds(element);
 
     const left = parentRect.left + parentRect.width + padding;
     const top = parentRect.top;
     await setFixedPosition(element, left, top);
-
-    return rect;
 }
 
 /**
@@ -159,8 +157,6 @@ export async function placeTop(parentElement, element, padding) {
     const left = parentRect.left;
     const top = parentRect.top - rect.height - padding;
     await setFixedPosition(element, left, top);
-
-    return rect;
 }
 
 /**
@@ -171,13 +167,10 @@ export async function placeTop(parentElement, element, padding) {
  */
 export async function placeBottom(parentElement, element, padding) {
     const parentRect = await getElementBounds(parentElement);
-    const rect = await getElementBounds(element);
 
     const left = parentRect.left;
     const top = parentRect.top + parentRect.height + padding;
     await setFixedPosition(element, left, top);
-
-    return rect;
 }
 
 /**

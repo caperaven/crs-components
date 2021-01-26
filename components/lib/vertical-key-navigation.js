@@ -1,8 +1,9 @@
 export async function enableVerticalKeys(target) {
-    target.registerEvent(target,"keyup", handleVerticalKeys.bind(target));
+    target.registerEvent(target,"keyup", handleVerticalKeys.bind(target), {capture: true});
 }
 
 async function handleVerticalKeys(event) {
+    event.preventDefault();
     event.preventDefault();
     switch(event.code) {
         case "ArrowDown": return this.gotoNext && await this.gotoNext(event);
