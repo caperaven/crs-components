@@ -31,9 +31,6 @@ class OverflowToolbar extends HTMLElement {
 
         await this._disposeOverflow();
 
-        this.overflowItems = null;
-        this.svgButton = null;
-        this.dropdown = null;
         this._dropdownClickHandler = null;
         this._dropdownKeyHandler = null;
     }
@@ -43,11 +40,11 @@ class OverflowToolbar extends HTMLElement {
     }
 
     async checkOverflow() {
+        await this._disposeOverflow();
+        await this._makeAllVisible();
         if (this.overflowItems == null) {
             this.overflowItems = [];
         }
-
-        await this.resetOverflow();
 
         const rect = await this.measure(this);
         const rightBound = rect.left + rect.width - 36;
@@ -56,14 +53,15 @@ class OverflowToolbar extends HTMLElement {
         for (let i = this.children.length -1; i >= 0; i--) {
             const child = this.children[i];
             const bound = await this.measure(child);
-
             const cr = bound.left + bound.width;
+
             if (cr > rightBound) {
                 bounds.push(bound);
 
                 child.setAttribute("hidden", "hidden");
                 child.dataset.hidden = "true";
-                this.overflowItems.push(child);
+                this.overflowItems.splice(0, 0, child);
+                //this.overflowItems.push(child);
             }
             else {
                 break;
@@ -76,6 +74,11 @@ class OverflowToolbar extends HTMLElement {
     }
 
     async resetOverflow() {
+        await this._disposeOverflowItems();
+        for (let child of this.children) {
+
+        }
+
         if (this.overflowItems != null) {
             for (let element of this.overflowItems) {
                 element.parentElement.removeChild(element);
@@ -88,7 +91,8 @@ class OverflowToolbar extends HTMLElement {
         if (this.svgButton != null) return;
 
         this.svgButton = await createSvgButton("ellipse", "btnOverflow");
-        this.appendChild(await createSpacer());
+        this.spacer = await createSpacer();
+        this.appendChild(this.spacer);
         this.appendChild(this.svgButton);
 
         this.dropdown = await createVerticalList();
@@ -159,16 +163,48 @@ class OverflowToolbar extends HTMLElement {
         }
     }
 
+    async _makeAllVisible() {
+        for (let i = 0; i < this.children.length; i++) {
+            const child = this.children[i];
+            child.removeAttribute("hidden");
+            delete child.dataset.hidden;
+        }
+    }
+
     async _disposeOverflow() {
+        if (this.spacer != null) {
+            this.spacer.parentElement.removeChild(this.spacer);
+            this.spacer = null;
+        }
+
+        if (this.svgButton != null) {
+            this.svgButton.parentElement.removeChild(this.svgButton);
+            this.svgButton = null;
+        }
+
+        await this._disposeOverflowItems();
+        if (this.dropdown != null) {
+            this.dropdown.parentElement.removeChild(this.dropdown);
+            this.dropdown = null;
+        }
+    }
+
+    async _disposeOverflowItems() {
+        if (this.dropdown == null) return;
+
         for (let child of this.dropdown.children) {
             child.__target = null;
+            this.dropdown.removeChild(child);
         }
-        this.dropdown.parentElement.removeChild(this.dropdown);
+
+        this.overflowItems = null;
+        this.svgButton = null;
         this.dropdown = null;
+
     }
 
     async resize() {
-        console.log("resize");
+        requestAnimationFrame(async () => await this.checkOverflow());
     }
 }
 
