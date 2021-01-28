@@ -41,7 +41,7 @@ class ResizeManager {
         if (this._interval == null) {
             this._interval = setInterval(async () => {
                 const toTime = Date.now();
-                if (toTime - fromTime > 200) {
+                if (toTime - fromTime > 500) {
                     await this._notifyResize();
                     clearInterval(this._interval);
                     this._interval = null;

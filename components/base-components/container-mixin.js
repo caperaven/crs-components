@@ -78,11 +78,11 @@ async function activate(event, ignoreOverload = false) {
 }
 
 async function expand(event) {
-    console.log("expand");
+    this._expand && this._expand(event);
 }
 
 async function collapse(event) {
-    console.log("collapse");
+    this._collapse && this._collapse(event);
 }
 
 async function _focusIn(event) {

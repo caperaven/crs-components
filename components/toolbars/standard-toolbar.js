@@ -9,7 +9,7 @@ class StandardToolbar extends HTMLDivElement {
     }
 
     async disconnectedCallback() {
-        crsbinding.dom.disableEvents(this);
+        this.dispose();
     }
 }
 

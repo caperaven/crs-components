@@ -1,6 +1,6 @@
 export async function setNewFocusIndex(newValue) {
     await reverseFocus.call(this, this._focusIndex);
-    this._focusIndex = await ensureSelectionBounds.call(this, newValue);
+    this._focusIndex = await ensureSelectionBounds.call(this, newValue, this._direction);
     await setFocus.call(this, this._focusIndex);
 }
 
@@ -13,8 +13,8 @@ export async function setNewSelectedIndex(newValue) {
     }
 }
 
-export async function ensureSelectionBounds(index) {
-    let result = index;
+export async function ensureSelectionBounds(index, direction) {
+    let result = validateVisibility.call(this, index, direction);
     const length = this.children.length;
     if (index < 0) {
         result = length - 1;
@@ -23,6 +23,16 @@ export async function ensureSelectionBounds(index) {
         result = 0;
     }
     return result;
+}
+
+function validateVisibility(index, direction) {
+    if (index < 0 || index > this.children.length -1) return index;
+
+    if (this.children[index].dataset.hidden === "true") {
+        return validateVisibility.call(this, index + direction, direction);
+    }
+
+    return index;
 }
 
 /**

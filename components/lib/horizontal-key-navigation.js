@@ -4,7 +4,6 @@ export async function enableHorizontalKeys(target) {
 
 async function handleHorizontalKeys(event) {
     event.preventDefault();
-    event.stopPropagation();
     switch(event.code) {
         case "ArrowLeft": return this.gotoPrevious && await this.gotoPrevious(event);
         case "ArrowRight": return this.gotoNext && await this.gotoNext(event);

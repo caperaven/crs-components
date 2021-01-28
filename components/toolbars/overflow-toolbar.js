@@ -61,7 +61,6 @@ class OverflowToolbar extends HTMLElement {
                 child.setAttribute("hidden", "hidden");
                 child.dataset.hidden = "true";
                 this.overflowItems.splice(0, 0, child);
-                //this.overflowItems.push(child);
             }
             else {
                 break;
@@ -88,7 +87,7 @@ class OverflowToolbar extends HTMLElement {
     }
 
     async addOverflowElements() {
-        if (this.svgButton != null) return;
+        // if (this.svgButton != null) return;
 
         this.svgButton = await createSvgButton("ellipse", "btnOverflow");
         this.spacer = await createSpacer();
@@ -150,15 +149,18 @@ class OverflowToolbar extends HTMLElement {
     }
 
     async _dropdownClick(event) {
-        const target = event.target.__target;
-        if (target != null) {
-            target.click();
-        }
+        event.target.__target && event.target.__target.click();
         await this._closeDropDown();
     }
 
     async _dropdownKey(event) {
-        if (event.code == "Escape" || event.code == "Enter") {
+        const close = event.code == "Escape" || event.code == "Enter";
+
+        if (event.code == "Enter") {
+            event.target.__target && event.target.__target.click();
+        }
+
+        if (close) {
             await this._closeDropDown();
         }
     }
@@ -204,7 +206,17 @@ class OverflowToolbar extends HTMLElement {
     }
 
     async resize() {
+        if (this.dropdown && this.dropdown.getAttribute("hidden") == undefined) {
+            await this._closeDropDown();
+        };
+
         requestAnimationFrame(async () => await this.checkOverflow());
+    }
+
+    async _expand(event) {
+         if (event.target.id == "btnOverflow") {
+            await this.showOverflow();
+         }
     }
 }
 

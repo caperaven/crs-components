@@ -4,7 +4,6 @@ export async function enableVerticalKeys(target) {
 
 async function handleVerticalKeys(event) {
     event.preventDefault();
-    event.preventDefault();
     switch(event.code) {
         case "ArrowDown": return this.gotoNext && await this.gotoNext(event);
         case "ArrowUp": return this.gotoPrevious && await this.gotoPrevious(event);
