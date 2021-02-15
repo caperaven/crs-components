@@ -43,9 +43,12 @@ async function focus(query) {
 }
 
 async function childHasFocus(query, childIndex) {
-    return await page.evaluate((query, childIndex) => {
-        return document.querySelector(query).children[childIndex].getAttribute("tabindex") === "0";
-    }, query, childIndex);
+    return new Promise(async resolve => {
+        const result = await page.evaluate((query, childIndex) => {
+            return document.querySelector(query).children[childIndex].getAttribute("tabindex") === "0";
+        }, query, childIndex);
+        resolve(result);
+    })
 }
 
 async function checkKeyboardNavigation(query) {

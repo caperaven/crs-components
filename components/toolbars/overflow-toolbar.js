@@ -202,7 +202,6 @@ class OverflowToolbar extends HTMLElement {
         this.overflowItems = null;
         this.svgButton = null;
         this.dropdown = null;
-
     }
 
     async resize() {

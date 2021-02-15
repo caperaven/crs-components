@@ -38,6 +38,11 @@
       "view": "html-to-text"
     },
     {
+      "title": "Grid",
+      "hash": "#grid",
+      "view": "grid"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",
