@@ -1,9 +1,12 @@
-export function enableScroll(element, callback) {
+export function enableScroll(element, callback, timeout) {
     const scrollObject = {
         lastTop: 0,
         top: 0,
+        lastLeft: 0,
+        left: 0,
         lastTime: 0,
         callback: callback,
+        timeout: timeout
     }
 
     scrollObject.scrollFn = scroll.bind(scrollObject);
@@ -20,14 +23,15 @@ export function disableScroll(element) {
 }
 
 function scrolling() {
-    if (this.lastTop === this.top) return;
+    if (this.lastTop === this.top && this.lastLeft === this.left) return;
 
     requestAnimationFrame(async (timing) => {
         this.lastTop = this.top;
+        this.lastLeft = this.left;
 
-        if (timing - this.lastTime > 100) {
+        if (timing - this.lastTime > this.timeout) {
             this.lastTime = timing;
-            await this.callback();
+            await this.callback({top: this.top, left: this.left});
         }
         scrolling.call(this)
     });
@@ -35,5 +39,6 @@ function scrolling() {
 
 async function scroll(event) {
     this.top = event.target.scrollTop;
+    this.left = event.target.scrollLeft;
     scrolling.call(event.target.__scroll);
 }
