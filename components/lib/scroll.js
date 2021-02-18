@@ -31,7 +31,7 @@ function scrolling() {
 
         if (timing - this.lastTime > this.timeout) {
             this.lastTime = timing;
-            await this.callback({top: this.top, left: this.left});
+            this.callback({top: this.top, left: this.left});
         }
         scrolling.call(this)
     });

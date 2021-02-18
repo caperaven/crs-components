@@ -11,7 +11,6 @@ export function createScrollBox(parent) {
 
     const marker = document.createElement("div");
     marker.style.position = "absolute";
-    marker.style.transform = "translate(5000px, 5000px)";
     marker.style.width = "1px";
     marker.style.height = "1px";
 

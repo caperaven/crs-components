@@ -1,4 +1,4 @@
-import {generateRowRenderer} from "./data-grid-row-utils.js";
+import {generateRowRenderer, calculateRowWidth} from "./data-grid-row-utils.js";
 import {createScrollBox} from "./scrollbox.js";
 
 class DataGrid extends HTMLElement {
@@ -40,6 +40,7 @@ class DataGrid extends HTMLElement {
         const textHeight = Math.round(textDimensions.actualBoundingBoxAscent + textDimensions.actualBoundingBoxDescent);
 
         this.rowHeight = Math.round(textHeight + (padding * 2));
+        this.rowWidth = calculateRowWidth(this._columnsDef);
 
         const args = {
             columnsDef: this._columnsDef,
@@ -49,6 +50,7 @@ class DataGrid extends HTMLElement {
             padding: padding
         }
 
+        args.rowWidth = this.rowWidth;
         this.rowRenderer = generateRowRenderer(args);
     }
 
@@ -68,12 +70,13 @@ class DataGrid extends HTMLElement {
             index ++;
         }
 
+        this.marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`
         await this._redrawAll();
     }
 
     async redrawItem(id) {
         const target = this.rows.get(id);
-        this._ctx.drawImage(target.ctx.canvas, this.offsetX, target.index * this.rowHeight - this.offsetY);
+        this._ctx.drawImage(target.ctx.canvas, -this.offsetX, target.index * this.rowHeight - this.offsetY);
     }
 
     async _redrawAll() {

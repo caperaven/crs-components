@@ -4,7 +4,6 @@
  * @returns function
  */
 export function generateRowRenderer(args) {
-    // JHR: todo, see if you can optimize this with cloneNode instead of canvas.create
     const code = [
         `const ctx = crs.canvas.create(${args.rowWidth}, ${args.rowHeight}, "#ffffff");`,
         `ctx.fill = "#000000";`,
@@ -21,4 +20,12 @@ export function generateRowRenderer(args) {
     }
     code.push("return ctx");
     return new AsyncFunction("context", code.join("\n"));
+}
+
+export function calculateRowWidth(columns) {
+    let rowWidth = 0;
+    for (let column of columns) {
+        rowWidth += Number(column.width);
+    }
+    return rowWidth;
 }
