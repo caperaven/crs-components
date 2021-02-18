@@ -59,7 +59,7 @@ class DataGrid extends HTMLElement {
             // JHR: todo cleanup rows map
         }
 
-        await this._clear();
+        crs.canvas.clear(this._ctx, "#ffffff");
 
         this.rows = new Map();
         for (let row of this.data || []) {
@@ -77,17 +77,10 @@ class DataGrid extends HTMLElement {
     }
 
     async _redrawAll() {
-        await this._clear();
+        crs.canvas.clear(this._ctx, "#ffffff");
         for (let row of this.data) {
             await this.redrawItem(row.id);
         }
-    }
-
-    async _clear() {
-        this._ctx.save();
-        this._ctx.fillStyle = "#ffffff";
-        this._ctx.fillRect(0, 0, this.rect.width, this.rect.height);
-        this._ctx.restore();
     }
 
     async scroll(args) {
