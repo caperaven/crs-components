@@ -28,6 +28,8 @@ class DataGrid extends HTMLElement {
     }
 
     async disconnectedCallback() {
+        await this._clearBackBuffer();
+
         this._ctx = null;
         this._columnsDef = null;
     }
@@ -41,6 +43,7 @@ class DataGrid extends HTMLElement {
 
         this.rowHeight = Math.round(textHeight + (padding * 2));
         this.rowWidth = calculateRowWidth(this._columnsDef);
+        this.pageSize = this.rect.height / this.rowHeight + 5;
 
         const args = {
             columnsDef: this._columnsDef,
@@ -57,10 +60,7 @@ class DataGrid extends HTMLElement {
     async refresh() {
         let index = 0;
 
-        if (this.rows != null) {
-            // JHR: todo cleanup rows map
-        }
-
+        await this._clearBackBuffer();
         crs.canvas.clear(this._ctx, "#ffffff");
 
         this.rows = new Map();
@@ -72,6 +72,13 @@ class DataGrid extends HTMLElement {
 
         this.marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`
         await this._redrawAll();
+    }
+
+    async _clearBackBuffer() {
+        if (this.rows != null) {
+            Array.from(this.rows).forEach(row => row[1] = null);
+            this.rows.clear();
+        }
     }
 
     async redrawItem(id) {
