@@ -16,7 +16,17 @@ export function createData(rowCount) {
             field7: "field 7",
             field8: "field 8",
             field9: "field 9",
-            field10: "field 10"
+            field10: "field 10",
+            field11: "field 11",
+            field12: "field 12",
+            field13: "field 13",
+            field14: "field 14",
+            field15: "field 15",
+            field16: "field 16",
+            field17: "field 17",
+            field18: "field 18",
+            field19: "field 19",
+            field20: "field 20"
         });
     }
 
