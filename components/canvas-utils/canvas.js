@@ -7,6 +7,7 @@ export function createCanvas(width, height) {
     canvas.style.height = `${height}px`;
 
     const ctx = canvas.getContext('2d');
+    ctx.font = getFont(dpr);
     ctx.scale(dpr, dpr);
     ctx.bounds = {x: 0, y: 0, width: width, height: height};
 
@@ -20,4 +21,8 @@ export function clearCanvas(ctx, color = "#ffffff") {
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.restore();
+}
+
+function getFont(dpr) {
+    return `1rem Open Sans`;
 }

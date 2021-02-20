@@ -43,6 +43,11 @@
       "view": "grid"
     },
     {
+      "title": "Grid 3D",
+      "hash": "#grid3d",
+      "view": "grid3d"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",
