@@ -17,6 +17,8 @@ export function createCanvas(width, height) {
 }
 
 export function clearCanvas(ctx, color = "#ffffff") {
+    if (ctx == null) return;
+
     ctx.save();
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);

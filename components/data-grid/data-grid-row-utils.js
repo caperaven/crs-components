@@ -6,7 +6,9 @@
 export function generateRowRenderer(args) {
     const code = [
         `const ctx = crs.canvas.create(${args.rowWidth}, ${args.rowHeight}, "#ffffff");`,
-        `ctx.fill = "#000000";`,
+        `ctx.fillStyle = "transparent";`,
+        `ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);`,
+        `ctx.fillStyle = "#000000";`,
         `ctx.font = "16px serif";`
     ];
     let offsetX = 0;

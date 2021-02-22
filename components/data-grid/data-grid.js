@@ -25,23 +25,6 @@ class DataGrid extends DataGridBase {
         this._columnsDef = null;
     }
 
-
-
-    async _createBackBuffer(startIndex, endIndex) {
-        for (let i = startIndex; i <= endIndex; i++) {
-            const row = this.data[i];
-            const ctx = await this.rowRenderer(row);
-            this.rows.set(row.id, {ctx: ctx, index: i});
-        }
-    }
-
-    async _clearBackBuffer() {
-        if (this.rows != null) {
-            Array.from(this.rows).forEach(row => row[1] = null);
-            this.rows.clear();
-        }
-    }
-
     async redrawItem(id) {
         const target = this.rows.get(id);
         this._ctx.drawImage(target.ctx.canvas, -this.offsetX, target.index * this.rowHeight - this.offsetY);
