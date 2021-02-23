@@ -48,6 +48,11 @@
       "view": "grid3d"
     },
     {
+      "title": "Orthographic Camera",
+      "hash": "#orthographic-canvas",
+      "view": "orthographic-canvas"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

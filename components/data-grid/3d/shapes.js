@@ -15,10 +15,7 @@ export function addCube(scene, color) {
 
 export function addPlane(scene, texture, width, height) {
     const geometry = new PlaneGeometry(width, height);
-    const material = new MeshBasicMaterial();
-    material.mat = texture;
-    //material.color = new Color( 0xff0090 );
-    //material.mat = texture;
+    const material = new MeshBasicMaterial({map: texture});
     const plane = new Mesh(geometry, material);
     scene.add(plane);
     return plane;

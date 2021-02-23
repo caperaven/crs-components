@@ -3,7 +3,7 @@ import {initialize} from './3d/initialize.js';
 import {addCube, addPlane} from './3d/shapes.js';
 import {createScrollBox} from "./scrollbox.js";
 import {generateRowRenderer} from "./data-grid-row-utils.js";
-import {Texture} from '/node_modules/three/src/textures/Texture.js';
+import {CanvasTexture} from "/node_modules/three/src/textures/CanvasTexture.js";
 
 class DataGrid3d extends DataGridBase {
     get data() {
@@ -87,18 +87,16 @@ class DataGrid3d extends DataGridBase {
     async redrawItem(id) {
         const target = this.rows.get(id);
         if (target.texture == null) {
-            target.texture = new Texture(target.ctx.canvas);
+            target.texture = new CanvasTexture(target.ctx.canvas);
         }
         addPlane(this.env.scene, target.texture, this.rect.width, this.rowHeight);
     }
 
     async _redrawAll() {
-        await this.redrawItem(0);
-
-        // for (let i = this.startIndex; i < this.endIndex; i++) {
-        //     const row = this.data[i];
-        //     await this.redrawItem(row.id);
-        // }
+        for (let i = this.startIndex; i < this.endIndex; i++) {
+            const row = this.data[i];
+            await this.redrawItem(row.id);
+        }
     }
 }
 
