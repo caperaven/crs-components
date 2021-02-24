@@ -1,4 +1,4 @@
-import "./../../components/data-grid/data-grid-3d.js"
+import "./../../components/data-grid-3d/data-grid-3d.js"
 import {createData} from "./datafactory.js";
 import {columnsDef} from "./columns-def.js";
 

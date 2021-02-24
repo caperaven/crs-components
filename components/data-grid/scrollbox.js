@@ -1,4 +1,4 @@
-import {enableScroll} from "./../lib/scroll.js"
+import {enableScroll, disableScroll} from "./../lib/scroll.js"
 
 export function createScrollBox(parent) {
     const scroll =  document.createElement("div");
@@ -21,4 +21,8 @@ export function createScrollBox(parent) {
     parent.marker = marker;
 
     enableScroll(scroll, parent.scrollHandler, 1);
+}
+
+export function disposeScrollBox(parent) {
+    disableScroll(parent);
 }

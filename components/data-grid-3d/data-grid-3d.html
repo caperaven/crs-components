@@ -1,0 +1,47 @@
+<style>
+    data-grid-3d {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 3rem 2rem 1fr;
+        overflow: hidden;
+    }
+
+    data-grid-3d .grid-grouping {
+        display: flex;
+        flex-direction: row;
+    }
+
+    data-grid-3d .grid-columns {
+        display: flex;
+        flex-direction: row;
+    }
+
+    data-grid-3d .grid-body {
+        position: relative;
+    }
+
+    data-grid-3d .scroll, data-grid-3d orthographic-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    data-grid-3d .column-header {
+        background: #dedede;
+        border-right: solid 1px silver;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+    }
+</style>
+
+<div class="grid-grouping"></div>
+<div class="grid-columns"></div>
+<div class="grid-body">
+    <div class="scroll">
+        <div class="scroll-marker"></div>
+    </div>
+    <orthographic-canvas></orthographic-canvas>
+</div>
