@@ -19,7 +19,6 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     }
 
     _createPlane() {
-        const aspect = this.canvas.aspect;
         const geometry = new PlaneGeometry(800, 48);
         const material = new MeshBasicMaterial({color: new Color(0xff0000)});
         this.plane = new Mesh(geometry, material);
