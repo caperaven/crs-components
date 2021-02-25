@@ -5,6 +5,7 @@ export function createColumns(element, columnsDef) {
         ce.textContent = column.title;
         ce.style.width = `${column.width}px`;
         ce.classList.add("column-header");
+        ce.dataset.field = column.field;
         fragment.appendChild(ce);
     }
     element.appendChild(fragment);

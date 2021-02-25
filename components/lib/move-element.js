@@ -61,8 +61,9 @@ async function mouseUp(event) {
     }
 
     // 3. if not replace the placeholder
+    this.dragElement.style.transform = null;
+
     if (result == null) {
-        this.dragElement.style.transform = null;
         this.dragElement.__placeHolder.parentElement.replaceChild(this.dragElement, this.dragElement.__placeHolder);
     }
     else {

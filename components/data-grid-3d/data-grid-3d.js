@@ -133,9 +133,26 @@ class DataGrid3D extends HTMLElement {
     }
 
     async drop(element, placeholder, dropTarget) {
-        console.log(element);
-        console.log(placeholder);
-        console.log(dropTarget);
+        const dropFn = dropTarget.dataset.drop || dropTarget.parentElement.dataset.drop;
+        await this[dropFn](element, placeholder, dropTarget);
+    }
+
+    async orderColumns(element, placeholder,dropTarget) {
+
+    }
+
+    async orderGrouping(element, placeholder,dropTarget) {
+        if (dropTarget.classList.contains("grid-grouping")) {
+            const hasField = this.querySelector(`.grid-grouping [data-field="${element.dataset.field}"]`);
+
+            if (hasField == null) {
+                const node = element.cloneNode(true);
+                node.style.width = null;
+                dropTarget.appendChild(node);
+            }
+
+            placeholder.parentElement.replaceChild(element, placeholder);
+        }
     }
 }
 

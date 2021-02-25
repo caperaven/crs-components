@@ -13,6 +13,8 @@
         flex-direction: row;
         background: var(--cl-header);
         border: solid 1px var(--cl-border);
+        align-items: center;
+        padding-left: 0.5rem;
     }
 
     data-grid-3d .grid-columns {
@@ -42,14 +44,21 @@
         user-select: none;
     }
 
+    data-grid-3d .grid-grouping .column-header {
+        width: auto;
+        padding: 0.5rem 1rem;
+        border: solid 1px var(--cl-border);
+        height: 2rem;
+    }
+
     .drag-layer .column-header {
         pointer-events: none;
     }
 
 </style>
 
-<div class="grid-grouping"></div>
-<div class="grid-columns"></div>
+<div class="grid-grouping" data-drop="orderGrouping"></div>
+<div class="grid-columns" data-drop="orderColumns"></div>
 <div class="grid-body">
     <div class="scroll">
         <div class="scroll-marker"></div>
