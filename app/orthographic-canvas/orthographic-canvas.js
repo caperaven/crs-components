@@ -27,7 +27,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
 
     render() {
         requestAnimationFrame(this.render.bind(this));
-        this.canvas.render();
         this.plane.rotateZ(0.01);
+        this.canvas.render();
     }
 }

@@ -21,7 +21,7 @@ class DataGrid3D extends HTMLElement {
         this.scrollHandler = this.scroll.bind(this);
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
 
-        await initialize(this)
+        await initialize(this, this.drop.bind(this));
     }
 
     async disconnectedCallback() {
@@ -130,6 +130,12 @@ class DataGrid3D extends HTMLElement {
             this.canvas.render();
             this.animate();
         });
+    }
+
+    async drop(element, placeholder, dropTarget) {
+        console.log(element);
+        console.log(placeholder);
+        console.log(dropTarget);
     }
 }
 

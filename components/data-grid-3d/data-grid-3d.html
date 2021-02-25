@@ -1,5 +1,7 @@
 <style>
     data-grid-3d {
+        --cl-header: #dedede;
+        --cl-border: #bebebe;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 3rem 2rem 1fr;
@@ -9,6 +11,8 @@
     data-grid-3d .grid-grouping {
         display: flex;
         flex-direction: row;
+        background: var(--cl-header);
+        border: solid 1px var(--cl-border);
     }
 
     data-grid-3d .grid-columns {
@@ -28,14 +32,20 @@
         height: 100%;
     }
 
-    data-grid-3d .column-header {
+    data-grid-3d .column-header, .drag-layer .column-header {
         background: #dedede;
-        border-right: solid 1px silver;
+        border-right: solid 1px var(--cl-border);
         display: flex;
         align-items: center;
         padding-left: 1rem;
         box-sizing: border-box;
+        user-select: none;
     }
+
+    .drag-layer .column-header {
+        pointer-events: none;
+    }
+
 </style>
 
 <div class="grid-grouping"></div>

@@ -208,3 +208,40 @@ export async function ensureOnScreen(element, screenPadding) {
 
     await setFixedPosition(element, elementBounds.left, elementBounds.top);
 }
+
+export async function setStyleProperties(element, args) {
+    const keys = Object.keys(args);
+    for (let key of keys) {
+        element.style[key] = args[key];
+    }
+}
+
+export async function createDragCanvas() {
+    const element = document.createElement("div");
+    element.classList.add("drag-layer");
+    await setStyleProperties(element, {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        background: "transparent"
+    })
+    document.body.appendChild(element);
+    return element;
+}
+
+export async function setPlaceholder(element) {
+    const bounds = element.getBoundingClientRect();
+    const placeholder = document.createElement("div");
+    await setStyleProperties(placeholder, {
+        width: `${bounds.width}px`,
+        height: `${bounds.height}px`,
+        boxSizing: "border-box",
+        background: "#eaeaea"
+    })
+    placeholder.dataset.placeholder = "true";
+    element.parentElement.replaceChild(placeholder, element);
+    element.__placeHolder = placeholder;
+    return element;
+}
