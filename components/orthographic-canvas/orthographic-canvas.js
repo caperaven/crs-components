@@ -12,11 +12,16 @@ export class OrthographicCanvas extends HTMLElement {
         requestAnimationFrame(() => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
+            this.aspect = this.width / this.height;
             this.scene = new Scene();
             this.scene.background = new Color(this.background);
+            this.top = this.height / 2;
+            this.left = this.width / -2;
 
-            this.camera = new OrthographicCamera( this.width / - 2, this.width / 2, this.height / 2, this.height / - 2, 0, 100);
+            this.camera = new OrthographicCamera( this.left, this.width / 2, this.top, this.height / - 2, 0, 100);
             this.camera.position.z = 0;
+            this.camera.aspect = this.aspect;
+            this.camera.updateProjectionMatrix();
             this.scene.add(this.camera);
 
             this.renderer = new WebGLRenderer({antialias: true});

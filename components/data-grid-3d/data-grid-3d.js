@@ -60,6 +60,7 @@ class DataGrid3D extends HTMLElement {
         await createColumns(this.querySelector(".grid-columns"), columnsDef);
 
         const padding = 16;
+        // THis should be calculated according to the pixel hight of the font.
         const textHeight = 12;
 
         this.rowHeight = Math.round(textHeight + (padding * 2));
@@ -76,7 +77,7 @@ class DataGrid3D extends HTMLElement {
 
         args.rowWidth = this.rowWidth;
 
-        this.canvasInflator = await generateRowRenderer(args);
+        this.canvasInflatorFn = await generateRowRenderer(args);
     }
 
     /**
@@ -104,15 +105,31 @@ class DataGrid3D extends HTMLElement {
     async _createBackBuffer(startIndex, endIndex) {
         for (let i = startIndex; i <= endIndex; i++) {
             const row = this.data[i];
-            const ctx = await this.canvasInflator(row);
+            const ctx = await this.canvasInflatorFn(row);
             this.rows.set(row.id, {ctx: ctx, index: i});
         }
     }
 
     async _render() {
-        const plane = await createRowItem(this.width, this.rowHeight, this.rows.get(0).ctx);
-        this.canvas.scene.add(plane);
+        const top = this.canvas.top - this.rowHeight / 2;
+        for (let i = 0; i < 1; i++) {
+            const row = this.rows.get(i);
+            const width = Number(row.ctx.canvas.width);
+            const plane = await createRowItem(width, this.rowHeight, row.ctx);
+
+            const nextTop = top - (row.index * this.rowHeight);
+            plane.position.y = nextTop;
+            this.canvas.scene.add(plane);
+        }
         this.canvas.render();
+        this.animate();
+    }
+
+    async animate() {
+        requestAnimationFrame(() => {
+            this.canvas.render();
+            this.animate();
+        });
     }
 }
 

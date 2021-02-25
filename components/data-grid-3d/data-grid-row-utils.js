@@ -12,17 +12,24 @@ import {Color} from "/node_modules/three/src/math/Color.js";
 export async function generateRowRenderer(args) {
     const code = [
         `const ctx = crs.canvas.create(${args.rowWidth}, ${args.rowHeight}, "#ffffff");`,
-        `ctx.fillStyle = "white";`,
+        `ctx.fillStyle = "yellow";`,
         `ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);`,
         `ctx.fillStyle = "#000000";`,
-        `ctx.font = "16px serif";`
+        `ctx.font = "16px Open Sans";`,
+        `ctx.strokeWidth = "1px";`
     ];
     let offsetX = 0;
     for (let column of args.columnsDef) {
         const field = column["field"];
-        const width = Number(column["width"] || args.defaultWidth);
+        const width = Number(column["width"]);
 
-        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding});`)
+        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding});`);
+
+        // draw the line from top to bottom after the field text
+        code.push(`ctx.beginPath();`);
+        code.push(`ctx.moveTo(${offsetX + width}, 0);`);
+        code.push(`ctx.lineTo(${offsetX + width}, ${args.rowHeight});`);
+        code.push(`ctx.stroke();`)
 
         offsetX += width;
     }
