@@ -142,25 +142,6 @@ class DataGrid3D extends HTMLElement {
     async orderColumns(element, placeholder,dropTarget) {
 
     }
-
-    async orderGrouping(element, placeholder,dropTarget) {
-        this.querySelector(".grid-grouping").setAttribute("title", "");
-        if (dropTarget.classList.contains("grid-grouping")) {
-            const hasField = this.querySelector(`.grid-grouping [data-field="${element.dataset.field}"]`);
-
-            if (hasField == null) {
-                const node = element.cloneNode(true);
-                node.style.width = null;
-                node.removeChild(node.children[1]);
-                node.removeChild(node.children[1]);
-                node.appendChild(await createSvgImage("close", "close-icon"))
-
-                dropTarget.appendChild(node);
-            }
-
-            placeholder.parentElement.replaceChild(element, placeholder);
-        }
-    }
 }
 
 customElements.define("data-grid-3d", DataGrid3D);

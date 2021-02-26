@@ -1,16 +1,19 @@
 import "./../orthographic-canvas/orthographic-canvas.js";
 import {disableScroll, enableScroll} from "../lib/scroll.js";
 import {disableMoveElements, enableMoveElements} from "../lib/move-element.js";
+import {disableGrouping, enableGrouping} from "./data-grid-grouping.js";
 
 export async function initialize(parent, dropCallback) {
     await createScrollBox(parent);
     await createCanvas(parent);
+    await enableGrouping(parent);
     await enableMoveElements(parent.querySelector(".grid-columns"), ".column-header", [".column-header", ".grid-grouping", ".grid-columns"], dropCallback);
 }
 
 export async function dispose(parent) {
     await disposeScrollBox(parent);
     await disposeCanvas(parent);
+    await disableGrouping(parent);
     await disableMoveElements(parent.querySelector(".grid-columns"));
 }
 
