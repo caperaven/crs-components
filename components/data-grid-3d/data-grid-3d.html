@@ -57,11 +57,11 @@
         pointer-events: none;
     }
 
-    data-grid-3d .grid-grouping .column-header-group {
+    data-grid-3d .grid-grouping .column-header-group, .drag-layer .column-header-group {
+        background: white;
         border: solid 1px var(--cl-border);
         width: max-content;
         min-width: 100px;
-        position: relative;
         display: flex;
         align-items: center;
         padding: 0.25rem 1rem;
@@ -70,6 +70,7 @@
 
     data-grid-3d .grid-grouping .column-header-group span {
         flex: 1;
+        pointer-events: none;
     }
 
     data-grid-3d .filter-icon {
@@ -100,6 +101,10 @@
     .drag-layer .column-header {
         pointer-events: none;
         height: 2rem;
+    }
+
+    .drag-layer .column-header-group {
+        pointer-events: none;
     }
 
     .drag-layer .column-header .filter-icon, .drag-layer .column-header .resize-icon {

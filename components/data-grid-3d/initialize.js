@@ -9,7 +9,7 @@ export async function initialize(parent, dropCallback) {
     await createCanvas(parent);
     await enableGrouping(parent);
     await enableMoveElements(parent.querySelector(".grid-columns"), ".column-header", [".column-header", ".grid-grouping", ".grid-columns"], dropCallback);
-    await enableMoveElements(parent.querySelector(".grid-grouping"), ".column-header", [".column-header", ".grid-grouping"], dropCallback);
+    await enableMoveElements(parent.querySelector(".grid-grouping"), ".column-header-group", [".column-header-group", ".grid-grouping"], dropCallback);
     await enableColumnResize(parent, parent.minColumnWidth);
 }
 
