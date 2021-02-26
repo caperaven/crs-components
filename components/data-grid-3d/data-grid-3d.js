@@ -112,7 +112,7 @@ class DataGrid3D extends HTMLElement {
 
     async _render() {
         const top = this.canvas.top - this.rowHeight / 2;
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < this.pageSize; i++) {
             const row = this.rows.get(i);
             const width = Number(row.ctx.canvas.width);
             const plane = await createRowItem(width, this.rowHeight, row.ctx);

@@ -1,6 +1,15 @@
 import {createDragCanvas, setPlaceholder} from "./element-utils.js";
 
+/**
+ * Function to allow elements to be dragged around
+ * @param parentElement {element} contains the draggable elements
+ * @param query {query selector string} what can I drag around
+ * @param dropQueries {query selector string} on what kind of element can I drop this
+ * @param callback {function} call me when dropping and item
+ * @returns {Promise<void>}
+ */
 export async function enableMoveElements(parentElement, query, dropQueries, callback) {
+    // moveArgs becomes "this"
     const moveArgs = {
         moveQuery: query,
         dropQueries: dropQueries,
