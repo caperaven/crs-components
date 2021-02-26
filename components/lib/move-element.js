@@ -13,7 +13,8 @@ export async function enableMoveElements(parentElement, query, dropQueries, call
     const moveArgs = {
         moveQuery: query,
         dropQueries: dropQueries,
-        drop: callback
+        drop: callback,
+        parent: parentElement
     }
 
     moveArgs.mouseDownHandler = mouseDown.bind(moveArgs);
@@ -24,6 +25,7 @@ export async function enableMoveElements(parentElement, query, dropQueries, call
 
 export async function disableMoveElements(parentElement) {
     parentElement.removeEventListener("mousedown", parentElement.__moveArgs.mouseDownHandler);
+    delete parentElement.__moveArgs.parent;
     delete parentElement.__moveArgs.drop;
     delete parentElement.__moveArgs.moveQuery;
     delete parentElement.__moveArgs.dropQueries;
@@ -47,7 +49,96 @@ async function mouseDown(event) {
 }
 
 async function mouseMove(event) {
+    this.x = event.clientX;
+    this.y = event.clientY;
     this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+
+    crsbinding.idleTaskManager.add(async () => {
+        const target = await checkMoveTarget.call(this);
+        if (target != null) {
+            const direction = await checkPosition(target, event.clientX, event.clientY);
+            await movePlaceholder.call(this, target, direction);
+        }
+    });
+}
+
+async function movePlaceholder(element, direction) {
+    if (direction == -1) {
+        if (element.previousSibling && element.previousSibling.dataset.placeholder == "true") return;
+        await movePlaceholderBefore.call(this, element);
+    }
+    else if (direction == 1) {
+        if (element.nextSibling && element.nextSibling.dataset.placeholder == "true") return;
+        await movePlaceholderAfter.call(this, element);
+    }
+}
+
+/**
+ * Insert placeholder before this element
+ * @param element
+ * @returns {Promise<void>}
+ */
+async function movePlaceholderBefore(element) {
+    const placeholder = this.dragElement.__placeHolder;
+    const parentElement = placeholder.parentElement;
+    parentElement.removeChild(placeholder);
+    parentElement.insertBefore(placeholder, element);
+}
+
+/**
+ * Insert placeholder after this element
+ * @param element
+ * @returns {Promise<void>}
+ */
+async function movePlaceholderAfter(element) {
+    const placeholder = this.dragElement.__placeHolder;
+    const parentElement = placeholder.parentElement;
+    parentElement.removeChild(placeholder);
+
+    if (element.nextSibling == null) {
+        parentElement.appendChild(placeholder);
+    }
+    else {
+        parentElement.insertBefore(placeholder, element.nextSibling);
+    }
+}
+
+/**
+ * Check if the drag target is over a valid sibling.
+ * If not a valid sibling (same type) it returns null
+ * If it is a sibling, other functions will perform the move update.
+ * @returns {Promise<null|Element>}
+ */
+async function checkMoveTarget() {
+    if (this.dragElement == null) return null;
+    const pointerEvent = this.dragElement.parentElement.style.pointerEvents;
+    this.dragElement.parentElement.style.pointerEvents = "none";
+    const dropTarget = document.elementFromPoint(this.x, this.y);
+    this.dragElement.parentElement.style.pointerEvents = pointerEvent;
+
+    if (dropTarget.matches(this.moveQuery)) {
+        return dropTarget;
+    }
+
+    return null;
+}
+
+/**
+ * Check if the pointer is on the left or the right of the target element.
+ * Left = insert before, Right = insert after
+ * @param target
+ * @param x
+ * @param y
+ * @returns {Promise<unknown>}
+ */
+async function checkPosition(target, x, y) {
+    target.__rect = target.__rect || target.getBoundingClientRect();
+    const half = target.__rect.width / 2;
+
+    if (x > target.__rect.x + half) {
+        return 1;
+    }
+    return -1;
 }
 
 async function mouseUp(event) {
@@ -83,4 +174,15 @@ async function mouseUp(event) {
 
     delete this.dragElement.__placeHolder;
     delete this.dragElement;
+
+    crsbinding.idleTaskManager.add(clearRect.bind(this));
 }
+
+/**
+ * Clean up the rect that was defined during the drag and drop operations
+ * @returns {Promise<void>}
+ */
+async function clearRect() {
+    this.parent.querySelectorAll(this.moveQuery).forEach(element => delete element.__rect);
+}
+

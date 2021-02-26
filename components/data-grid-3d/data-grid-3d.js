@@ -137,11 +137,13 @@ class DataGrid3D extends HTMLElement {
 
     async drop(element, placeholder, dropTarget) {
         const dropFn = dropTarget.dataset.drop || dropTarget.parentElement.dataset.drop;
-        await this[dropFn](element, placeholder, dropTarget);
+        if (this[dropFn] != null) {
+            await this[dropFn](element, placeholder, dropTarget);
+        }
     }
 
     async orderColumns(element, placeholder,dropTarget) {
-
+        console.log(element);
     }
 }
 
