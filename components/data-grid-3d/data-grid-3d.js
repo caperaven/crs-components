@@ -18,6 +18,7 @@ class DataGrid3D extends HTMLElement {
     async connectedCallback() {
         this.offsetX = 0;
         this.offsetY = 0;
+        this.minColumnWidth = 140;
 
         this.scrollHandler = this.scroll.bind(this);
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());

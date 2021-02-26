@@ -14,6 +14,7 @@ export async function disableGrouping(parent) {
     parent.querySelector(".grid-grouping").removeEventListener("click", parent._groupingContext.groupClickHandler);
     delete parent.orderGrouping;
     delete parent._groupingContext.groupClickHandler;
+    delete parent._groupingContext.grouping;
     delete parent._groupingContext;
 }
 
