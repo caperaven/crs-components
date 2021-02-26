@@ -57,12 +57,19 @@
         pointer-events: none;
     }
 
-    data-grid-3d .grid-grouping .column-header {
-        width: auto;
-        padding: 0.5rem 1rem;
+    data-grid-3d .grid-grouping .column-header-group {
         border: solid 1px var(--cl-border);
-        height: 2rem;
-        margin-right: 0.2rem;
+        width: max-content;
+        min-width: 100px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0.25rem 1rem;
+        margin-right: 0.25rem;
+    }
+
+    data-grid-3d .grid-grouping .column-header-group span {
+        flex: 1;
     }
 
     data-grid-3d .filter-icon {
@@ -83,7 +90,7 @@
         cursor: col-resize;
     }
 
-    data-grid-3d .close-icon {
+    data-grid-3d .close-icon, .drag-layer .close-icon {
         width: 24px;
         height: 24px;
         fill: var(--text);

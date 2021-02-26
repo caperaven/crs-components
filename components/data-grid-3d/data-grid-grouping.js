@@ -24,11 +24,14 @@ async function orderGrouping(element, placeholder,dropTarget) {
         const hasField = this.querySelector(`.grid-grouping [data-field="${element.dataset.field}"]`);
 
         if (hasField == null) {
-            const node = element.cloneNode(true);
-            node.style.width = null;
-            node.removeChild(node.children[1]);
-            node.removeChild(node.children[1]);
-            node.appendChild(await createSvgImage("close", "close-icon"))
+            const node = document.createElement("div");
+            node.classList.add("column-header-group");
+            node.dataset.field = element.dataset.field;
+
+            const span = document.createElement("span");
+            span.textContent = element.children[0].textContent;
+            node.appendChild(span);
+            node.appendChild(await createSvgImage("close", "close-icon"));
 
             dropTarget.appendChild(node);
             this._groupingContext.grouping.push(element.dataset.field);
