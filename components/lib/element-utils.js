@@ -10,19 +10,34 @@ export async function disableChildTabbing(element, childRole) {
     }
 }
 
+export async function createSvgImage(name, className) {
+    const svg = document.createElementNS(xmlns, "svg");
+    svg.classList.add(className);
+    const use = document.createElementNS(xmlns, "use");
+    use.setAttribute("href", `#${name}`);
+    use.style.pointerEvents = "none";
+    svg.appendChild(use);
+
+    return svg;
+}
+
 export async function createSvgButton(name, id, hasPopup = true) {
     const svg = document.createElementNS(xmlns, "svg");
     const use = document.createElementNS(xmlns, "use");
     use.setAttribute("href", `#${name}`);
     use.style.pointerEvents = "none";
     svg.appendChild(use);
-    svg.setAttribute("id", id);
-    svg.setAttribute("viewBox","0 0 24 24");
-    svg.setAttribute("role", "button");
-    svg.setAttribute("width", "32px");
-    svg.setAttribute("height", "32px");
-    svg.setAttribute("tabindex", "-1");
-    svg.setAttribute("aria-label", "additional items");
+
+    await setAttributes(svg, {
+        "id": id,
+        "viewBox": "0 0 24 24",
+        "role": "button",
+        "width": "32px",
+        "height": "32px",
+        "tabindex": "-1",
+        "aria-label": "additional items"
+    })
+
     svg.style.display = "block";
 
     if (hasPopup == true) {
@@ -213,6 +228,13 @@ export async function setStyleProperties(element, args) {
     const keys = Object.keys(args);
     for (let key of keys) {
         element.style[key] = args[key];
+    }
+}
+
+export async function setAttributes(element, args) {
+    const keys = Object.keys(args);
+    for (let key of keys) {
+        element.setAttribute(key, args[key]);
     }
 }
 

@@ -1,6 +1,7 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
 import {generateRowRenderer, calculateRowWidth, createRowItem} from "./data-grid-row-utils.js";
+import {createSvgImage} from "./../lib/element-utils.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {
@@ -72,7 +73,8 @@ class DataGrid3D extends HTMLElement {
             rowWidth: this.offsetWidth,
             rowHeight: this.rowHeight,
             textHeight: textHeight,
-            padding: padding
+            padding: padding,
+            minWidth: 140
         }
 
         args.rowWidth = this.rowWidth;
@@ -142,12 +144,17 @@ class DataGrid3D extends HTMLElement {
     }
 
     async orderGrouping(element, placeholder,dropTarget) {
+        this.querySelector(".grid-grouping").setAttribute("title", "");
         if (dropTarget.classList.contains("grid-grouping")) {
             const hasField = this.querySelector(`.grid-grouping [data-field="${element.dataset.field}"]`);
 
             if (hasField == null) {
                 const node = element.cloneNode(true);
                 node.style.width = null;
+                node.removeChild(node.children[1]);
+                node.removeChild(node.children[1]);
+                node.appendChild(await createSvgImage("close", "close-icon"))
+
                 dropTarget.appendChild(node);
             }
 

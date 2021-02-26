@@ -21,7 +21,10 @@ export async function generateRowRenderer(args) {
     let offsetX = 0;
     for (let column of args.columnsDef) {
         const field = column["field"];
-        const width = Number(column["width"]);
+        let width = Number(column["width"]);
+        if (width < args.minWidth) {
+            width = args.minWidth;
+        }
 
         code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding});`);
 
