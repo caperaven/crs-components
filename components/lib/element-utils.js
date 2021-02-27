@@ -255,8 +255,22 @@ export async function createDragCanvas() {
 
 export async function setPlaceholder(element, datasetFields) {
     const bounds = element.getBoundingClientRect();
-    const placeholder = document.createElement("div");
+    const placeholder = await createPlaceholder(element, datasetFields);
 
+    await setStyleProperties(placeholder, {
+        width: `${bounds.width}px`,
+        height: `${bounds.height}px`,
+        boxSizing: "border-box",
+        background: "#eaeaea"
+    })
+
+    element.parentElement.replaceChild(placeholder, element);
+    element.__placeHolder = placeholder;
+    return element;
+}
+
+export async function createPlaceholder(element, datasetFields) {
+    const placeholder = document.createElement("div");
     if (datasetFields != null) {
         const keys = Object.keys(datasetFields);
         for (let key of keys) {
@@ -268,15 +282,6 @@ export async function setPlaceholder(element, datasetFields) {
             }
         }
     }
-
-    await setStyleProperties(placeholder, {
-        width: `${bounds.width}px`,
-        height: `${bounds.height}px`,
-        boxSizing: "border-box",
-        background: "#eaeaea"
-    })
     placeholder.dataset.placeholder = "true";
-    element.parentElement.replaceChild(placeholder, element);
-    element.__placeHolder = placeholder;
-    return element;
+    return placeholder;
 }
