@@ -8,6 +8,7 @@ export async function enableGrouping(parent) {
 
     parent.querySelector(".grid-grouping").addEventListener("click", parent._groupingContext.groupClickHandler);
     parent.orderGrouping = orderGrouping;
+    parent.reorderGrouping = reorderGrouping;
 }
 
 export async function disableGrouping(parent) {
@@ -34,11 +35,16 @@ async function orderGrouping(element, placeholder,dropTarget) {
             node.appendChild(await createSvgImage("close", "close-icon"));
 
             dropTarget.appendChild(node);
-            this._groupingContext.grouping.push(element.dataset.field);
         }
 
         placeholder.parentElement.replaceChild(element, placeholder);
+
+        await rebuildGrouping(dropTarget, this._groupingContext.grouping);
     }
+}
+
+async function reorderGrouping(element, placeholder, dropTarget) {
+    await rebuildGrouping(this.querySelector(".grid-grouping"), this._groupingContext.grouping);
 }
 
 async function groupClick(event) {
@@ -54,4 +60,10 @@ async function removeGrouping(array, value) {
     if (index != -1) {
         array.splice(index, 1);
     }
+}
+
+export async function rebuildGrouping(parent, array) {
+    array.length = 0;
+    parent.querySelectorAll(".column-header-group").forEach(element => array.push(element.dataset.field));
+    console.log(array);
 }

@@ -1,15 +1,30 @@
 import "./../orthographic-canvas/orthographic-canvas.js";
 import {disableScroll, enableScroll} from "../lib/scroll.js";
-import {disableMoveElements, enableMoveElements} from "../lib/move-element.js";
+import {disableMoveElements, enableMoveElements} from "./grid-move-element.js";
 import {disableGrouping, enableGrouping} from "./data-grid-grouping.js";
 import {disableColumnResize, enableColumnResize} from "./data-grid-columns-resize.js";
 
-export async function initialize(parent, dropCallback) {
+export async function initialize(parent) {
     await createScrollBox(parent);
     await createCanvas(parent);
     await enableGrouping(parent);
-    await enableMoveElements(parent.querySelector(".grid-columns"), ".column-header", [".grid-grouping", ".grid-columns", ".column-header"],["field"], dropCallback);
-    await enableMoveElements(parent.querySelector(".grid-grouping"), ".column-header-group", [".grid-grouping", ".column-header-group"], ["field"], dropCallback);
+
+    await enableMoveElements({
+        grid: parent,
+        container: parent.querySelector(".grid-columns"),
+        movableQuery: ".column-header",
+        dropQueries: [".grid-grouping", ".grid-columns", ".column-header"],
+        copyPlaceholderProperties: {"field": "field"},
+    });
+
+    await enableMoveElements({
+        grid: parent,
+        container: parent.querySelector(".grid-grouping"),
+        movableQuery: ".column-header-group",
+        dropQueries: [".grid-grouping", ".column-header-group"],
+        copyPlaceholderProperties: {"field": "field", "drop": "reorderGrouping"},
+    });
+
     await enableColumnResize(parent, parent.minColumnWidth);
 }
 
@@ -18,6 +33,7 @@ export async function dispose(parent) {
     await disposeCanvas(parent);
     await disableGrouping(parent);
     await disableMoveElements(parent.querySelector(".grid-columns"));
+    await disableMoveElements(parent.querySelector(".grid-grouping"));
     await disableColumnResize(parent);
 }
 

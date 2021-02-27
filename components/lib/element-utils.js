@@ -258,8 +258,14 @@ export async function setPlaceholder(element, datasetFields) {
     const placeholder = document.createElement("div");
 
     if (datasetFields != null) {
-        for (let key of datasetFields) {
-            placeholder.dataset[key] = element.dataset[key];
+        const keys = Object.keys(datasetFields);
+        for (let key of keys) {
+            if (key == datasetFields["key"]) {
+                placeholder.dataset[key] = element.dataset[key];
+            }
+            else {
+                placeholder.dataset[key] = datasetFields[key];
+            }
         }
     }
 
