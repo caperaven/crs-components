@@ -5,16 +5,18 @@ import {createDragCanvas, setPlaceholder} from "./element-utils.js";
  * @param parentElement {element} contains the draggable elements
  * @param query {query selector string} what can I drag around
  * @param dropQueries {query selector string} on what kind of element can I drop this
+ * @param phProperties {object} what properties to copy over to placeholder
  * @param callback {function} call me when dropping and item
  * @returns {Promise<void>}
  */
-export async function enableMoveElements(parentElement, query, dropQueries, callback) {
+export async function enableMoveElements(parentElement, query, dropQueries, phProperties, callback) {
     // moveArgs becomes "this"
     const moveArgs = {
         moveQuery: query,
         dropQueries: dropQueries,
         drop: callback,
-        parent: parentElement
+        parent: parentElement,
+        phProperties: phProperties
     }
 
     moveArgs.mouseDownHandler = mouseDown.bind(moveArgs);
@@ -43,7 +45,7 @@ async function mouseDown(event) {
     element.addEventListener("mousemove", this.mouseMoveHandler);
     element.addEventListener("mouseup", this.mouseUpHandler);
 
-    this.dragElement = await setPlaceholder(event.target);
+    this.dragElement = await setPlaceholder(event.target, this.phProperties);
     element.appendChild(this.dragElement);
     this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
 }
@@ -56,20 +58,25 @@ async function mouseMove(event) {
     crsbinding.idleTaskManager.add(async () => {
         const target = await checkMoveTarget.call(this);
         if (target != null) {
-            const direction = await checkPosition(target, event.clientX, event.clientY);
+            const direction = await checkPosition.call(this, target, event.clientX, event.clientY);
             await movePlaceholder.call(this, target, direction);
         }
     });
 }
 
 async function movePlaceholder(element, direction) {
-    if (direction == -1) {
-        if (element.previousSibling && element.previousSibling.dataset.placeholder == "true") return;
-        await movePlaceholderBefore.call(this, element);
-    }
-    else if (direction == 1) {
-        if (element.nextSibling && element.nextSibling.dataset.placeholder == "true") return;
-        await movePlaceholderAfter.call(this, element);
+    switch(direction) {
+        case 0:
+            await movePlaceholderAppend.call(this, element);
+            break;
+        case -1:
+            if (element.previousSibling && element.previousSibling.dataset.placeholder == "true") return;
+            await movePlaceholderBefore.call(this, element);
+            break;
+        case 1:
+            if (element.nextSibling && element.nextSibling.dataset.placeholder == "true") return;
+            await movePlaceholderAfter.call(this, element);
+            break;
     }
 }
 
@@ -104,6 +111,18 @@ async function movePlaceholderAfter(element) {
 }
 
 /**
+ * Append element to parent on collection
+ * @param element
+ * @returns {Promise<void>}
+ */
+async function movePlaceholderAppend(element) {
+    const placeholder = this.dragElement.__placeHolder;
+    const parentElement = placeholder.parentElement;
+    parentElement.removeChild(placeholder);
+    parentElement.appendChild(placeholder);
+}
+
+/**
  * Check if the drag target is over a valid sibling.
  * If not a valid sibling (same type) it returns null
  * If it is a sibling, other functions will perform the move update.
@@ -116,8 +135,10 @@ async function checkMoveTarget() {
     const dropTarget = document.elementFromPoint(this.x, this.y);
     this.dragElement.parentElement.style.pointerEvents = pointerEvent;
 
-    if (dropTarget.matches(this.moveQuery)) {
-        return dropTarget;
+    for (let query of this.dropQueries) {
+        if (dropTarget.matches(query)) {
+            return dropTarget;
+        }
     }
 
     return null;
@@ -132,6 +153,10 @@ async function checkMoveTarget() {
  * @returns {Promise<unknown>}
  */
 async function checkPosition(target, x, y) {
+    if (target.matches(this.dropQueries[0])) {
+        return 0;
+    }
+
     target.__rect = target.__rect || target.getBoundingClientRect();
     const half = target.__rect.width / 2;
 

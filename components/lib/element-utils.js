@@ -253,9 +253,16 @@ export async function createDragCanvas() {
     return element;
 }
 
-export async function setPlaceholder(element) {
+export async function setPlaceholder(element, datasetFields) {
     const bounds = element.getBoundingClientRect();
     const placeholder = document.createElement("div");
+
+    if (datasetFields != null) {
+        for (let key of datasetFields) {
+            placeholder.dataset[key] = element.dataset[key];
+        }
+    }
+
     await setStyleProperties(placeholder, {
         width: `${bounds.width}px`,
         height: `${bounds.height}px`,
