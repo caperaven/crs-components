@@ -8,23 +8,7 @@ export async function initialize(parent) {
     await createScrollBox(parent);
     await createCanvas(parent);
     await enableGrouping(parent);
-
-    await enableMoveElements({
-        grid: parent,
-        container: parent.querySelector(".grid-columns"),
-        movableQuery: ".column-header",
-        dropQueries: [".grid-grouping", ".grid-columns", ".column-header"],
-        copyPlaceholderProperties: {"field": "field"},
-    });
-
-    await enableMoveElements({
-        grid: parent,
-        container: parent.querySelector(".grid-grouping"),
-        movableQuery: ".column-header-group",
-        dropQueries: [".grid-grouping", ".column-header-group"],
-        copyPlaceholderProperties: {"field": "field", "drop": "reorderGrouping"},
-    });
-
+    await enableMoveElements(parent);
     await enableColumnResize(parent, parent.minColumnWidth);
 }
 
@@ -32,8 +16,7 @@ export async function dispose(parent) {
     await disposeScrollBox(parent);
     await disposeCanvas(parent);
     await disableGrouping(parent);
-    await disableMoveElements(parent.querySelector(".grid-columns"));
-    await disableMoveElements(parent.querySelector(".grid-grouping"));
+    await disableMoveElements(parent);
     await disableColumnResize(parent);
 }
 

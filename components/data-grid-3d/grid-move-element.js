@@ -1,12 +1,13 @@
 import {createDragCanvas, setPlaceholder} from "../lib/element-utils.js";
+import {rebuildGrouping} from "./data-grid-grouping.js";
 
-export async function enableMoveElements(args) {
-    args.container.__moveArgs = new GridMoveElement(args);
+export async function enableMoveElements(parent) {
+    parent._moveContext = new GridMoveElement(parent);
 }
 
-export async function disableMoveElements(container) {
-    container.__moveArgs.dispose();
-    delete container.__moveArgs;
+export async function disableMoveElements(parent) {
+    parent._moveContext.dispose();
+    delete parent._moveContext;
 }
 
 class GridMoveElement {
@@ -15,29 +16,35 @@ class GridMoveElement {
         return this.dragElement.__placeHolder;
     }
 
-    constructor(args) {
-        this.grid = args.grid;
-        this.container = args.container;
-        this.moveQuery = args.movableQuery;
-        this.dropQueries = args.dropQueries;
-        this.phProperties = args.copyPlaceholderProperties;
+    get isDraggingColumn() {
+        return this.dragElement && this.dragElement.classList.contains("column-header");
+    }
+
+    get isDraggingGrouping() {
+        return this.dragElement && this.dragElement.classList.contains("column-header-group");
+    }
+
+    constructor(parent) {
+        this.grid = parent;
+        this.gridGroupingContainer = this.grid.querySelector(".grid-grouping");
+        this.gridColumnsContainer = this.grid.querySelector(".grid-columns");
 
         this._mouseDownHandler = this._mouseDown.bind(this);
         this._mouseMoveHandler = this._mouseMove.bind(this);
         this._mouseUpHandler = this._mouseUp.bind(this);
         this._clearRectHandler = this._clearRect.bind(this);
 
-        this.container.addEventListener("mousedown", this._mouseDownHandler);
+        this.grid.querySelector(".grid-grouping").addEventListener("mousedown", this._mouseDownHandler);
+        this.grid.querySelector(".grid-columns").addEventListener("mousedown", this._mouseDownHandler);
     }
 
     dispose() {
-        this.container.removeEventListener("mousedown", this._mouseDownHandler);
+        this.grid.querySelector(".grid-grouping").removeEventListener("mousedown", this._mouseDownHandler);
+        this.grid.querySelector(".grid-columns").removeEventListener("mousedown", this._mouseDownHandler);
 
         delete this.grid;
-        delete this.container;
-        delete this.moveQuery;
-        delete this.dropQueries;
-        delete this.phProperties;
+        delete this.gridGroupingContainer;
+        delete this.gridColumnsContainer;
 
         this._mouseDownHandler = null;
         this._mouseMoveHandler = null;
@@ -46,7 +53,7 @@ class GridMoveElement {
     }
 
     async _mouseDown(event) {
-        if (event.target.matches(this.moveQuery) == false) return;
+        if (event.target.matches(".column-header, .column-header-group") == false) return;
 
         this.originContainer = event.target.parentElement;
 
@@ -55,9 +62,16 @@ class GridMoveElement {
         element.addEventListener("mousemove", this._mouseMoveHandler);
         element.addEventListener("mouseup", this._mouseUpHandler);
 
-        this.dragElement = await setPlaceholder(event.target, this.phProperties);
+        this.dragElement = await setPlaceholder(event.target, {field: "field"});
         element.appendChild(this.dragElement);
         this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+    }
+
+    async _getTarget(event) {
+        event.target.style.pointerEvents = "none";
+        const dropTarget = document.elementFromPoint(event.clientX, event.clientY);
+        event.target.style.pointerEvents = "initial";
+        return dropTarget;
     }
 
     async _mouseMove(event) {
@@ -65,118 +79,92 @@ class GridMoveElement {
         this.y = event.clientY;
         this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
 
-        crsbinding.idleTaskManager.add(async () => {
-            const target = await this._checkMoveTarget();
-            if (target != null) {
-                const direction = await this._checkPosition(target, event.clientX, event.clientY);
-                await this._movePlaceholder(target, direction);
+        if (this.isDraggingColumn) {
+            await this._movingColumn(event);
+        }
+        else {
+            await this._movingGrouping(event);
+        }
+    }
+
+    async _movingGrouping(event) {
+        const target = await this._getTarget(event);
+        await this._move(target, [".column-header-group"]);
+    }
+
+    async _movingColumn(event) {
+        const target = await this._getTarget(event);
+        await this._move(target, [".column-header"]);
+    }
+
+    async _move(target, query) {
+        if (await this.matches(target, query)) {
+            const position = await this._checkPosition(target, event.clientX);
+
+            if (position == -1) {
+                await this._movePlaceholderBefore(target);
             }
-        });
+            else if (position == 1) {
+                await this._movePlaceholderAfter(target);
+            }
+        }
     }
 
     async _mouseUp(event) {
-        // remove animation layer
-        const element = event.target;
-        element.removeEventListener("mousemove", this._mouseMoveHandler);
-        element.removeEventListener("mouseup", this._mouseUpHandler);
-        element.parentElement.removeChild(element);
-
+        event.target.removeEventListener("mousemove", this._mouseMoveHandler);
+        event.target.removeEventListener("mouseup", this._mouseUpHandler);
+        event.target.parentElement.removeChild(event.target);
         this.dragElement.parentElement.removeChild(this.dragElement);
-
-        // 1. is it on a drop surface?
-        const dropTarget = document.elementFromPoint(event.clientX, event.clientY);
-        let result = null;
-        for (let dropQuery of this.dropQueries) {
-            if (dropTarget.matches(dropQuery)) {
-                result = dropTarget;
-                break;
-            }
-        }
-
-        // 3. if not replace the placeholder
         this.dragElement.style.transform = null;
 
-        const placeholder = this.dragElement.__placeHolder;
-        if (result == null) {
-            placeholder.parentElement.replaceChild(this.dragElement, placeholder);
-
-            if (placeholder.dataset && placeholder.dataset.drop) {
-                crsbinding.idleTaskManager.add(async () => await this.grid.drop(element, placeholder, dropTarget));
-            }
+        if (this.isDraggingColumn) {
+            await this._mouseUpColumn(event);
         }
         else {
-            const element = this.dragElement;
-            const placeholder = this.dragElement.__placeHolder;
-            crsbinding.idleTaskManager.add(async () => await this.grid.drop(element, placeholder, dropTarget));
+            await this._mouseUpGrouping(event);
         }
 
-        delete this.dragElement.__placeHolder;
-        delete this.dragElement;
         delete this.originContainer;
-
-        crsbinding.idleTaskManager.add(this._clearRectHandler);
     }
 
-    async _movePlaceholder(element, direction) {
-        switch(direction) {
-            case 0:
-                if (element.parentElement == this.originContainer) {
-                    await this._movePlaceholderAppend();
-                }
-                break;
-            case -1:
-                if (element.previousSibling && element.previousSibling.dataset.placeholder == "true") return;
-                await this._movePlaceholderBefore(element);
-                break;
-            case 1:
-                if (element.nextSibling && element.nextSibling.dataset.placeholder == "true") return;
-                await this._movePlaceholderAfter(element);
-                break;
+    async _mouseUpColumn(event) {
+        const target = await this._getTarget(event);
+
+        if (target.dataset.placeholder == "true") {
+            // notify that group order changed
         }
-    }
+        else if (target == this.gridGroupingContainer) {
+            const placeholder = this.dragElement.__placeHolder;
+            const element = this.dragElement;
 
-    async _movePlaceholderBefore(element) {
-        this.container.removeChild(this.placeholder);
-        this.container.insertBefore(this.placeholder, element);
-    }
-
-    async _movePlaceholderAfter(element) {
-        this.container.removeChild(this.placeholder);
-
-        if (element.nextSibling == null) {
-            this.container.appendChild(this.placeholder);
+            crsbinding.idleTaskManager.add(async () => {
+                await this.grid.orderGrouping(element, placeholder, target);
+            });
         }
-        else {
-            this.container.insertBefore(this.placeholder, element.nextSibling);
-        }
+
+        await this._swapPlaceAndDrag();
+        await this._clearRect(".column-header");
     }
 
-    async _movePlaceholderAppend() {
-        this.container.removeChild(this.placeholder);
-        this.container.appendChild(this.placeholder);
+    async _mouseUpGrouping(event) {
+        const target = await this._getTarget(event);
+        await this._swapPlaceAndDrag();
+        await this._clearRect(".column-header-group");
+        await rebuildGrouping(this.gridGroupingContainer, this.grid._groupingContext.grouping)
     }
 
-    async _checkMoveTarget() {
-        if (this.dragElement == null) return null;
-        const pointerEvent = this.dragElement.parentElement.style.pointerEvents;
-        this.dragElement.parentElement.style.pointerEvents = "none";
-        const dropTarget = document.elementFromPoint(this.x, this.y);
-        this.dragElement.parentElement.style.pointerEvents = pointerEvent;
-
-        for (let query of this.dropQueries) {
-            if (dropTarget.matches(query)) {
-                return dropTarget;
+    async matches(element, queries) {
+        let isValid = false;
+        for (let query of queries) {
+            if (element.matches(query)) {
+                isValid = true;
+                break;
             }
         }
-
-        return null;
+        return isValid;
     }
 
     async _checkPosition(target, x) {
-        if (target.matches(this.dropQueries[0])) {
-            return 0;
-        }
-
         target.__rect = target.__rect || target.getBoundingClientRect();
         const half = target.__rect.width / 2;
 
@@ -186,8 +174,37 @@ class GridMoveElement {
         return -1;
     }
 
-    async _clearRect() {
-        this.container.querySelectorAll(this.moveQuery).forEach(element => delete element.__rect);
+    async _movePlaceholderBefore(element) {
+        const container = this.placeholder.parentElement;
+        container.removeChild(this.placeholder);
+        container.insertBefore(this.placeholder, element);
+    }
+
+    async _movePlaceholderAfter(element) {
+        const container = this.placeholder.parentElement;
+        container.removeChild(this.placeholder);
+
+        if (element.nextSibling == null) {
+            container.appendChild(this.placeholder);
+        }
+        else {
+            container.insertBefore(this.placeholder, element.nextSibling);
+        }
+    }
+
+    async _swapPlaceAndDrag() {
+        const placeholder = this.dragElement.__placeHolder;
+        placeholder.parentElement.replaceChild(this.dragElement, placeholder);
+        await this._releaseDragElement();
+    }
+
+    async _releaseDragElement() {
+        this.dragElement.__placeHolder = null;
+        this.dragElement = null;
+    }
+
+    async _clearRect(query) {
+        this.grid.querySelectorAll(query).forEach(element => delete element.__rect);
     }
 }
 

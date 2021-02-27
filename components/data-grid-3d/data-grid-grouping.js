@@ -37,8 +37,6 @@ async function orderGrouping(element, placeholder,dropTarget) {
             dropTarget.appendChild(node);
         }
 
-        placeholder.parentElement.replaceChild(element, placeholder);
-
         await rebuildGrouping(dropTarget, this._groupingContext.grouping);
     }
 }
