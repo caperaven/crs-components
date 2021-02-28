@@ -1,4 +1,19 @@
 class OrthographicDraggable {
+    get enabled() {
+        return this._enabled;
+    }
+
+    set enabled(newValue) {
+        this._enabled = newValue;
+
+        if (newValue == false) {
+            this.canvas && this.canvas.removeEventListener("mousedown", this._mouseDownHandler);
+        }
+        else {
+            this.canvas && this.canvas.addEventListener("mousedown", this._mouseDownHandler);
+        }
+    }
+
     constructor(orthographicCanvas) {
         this._mouseDownHandler = this._mouseDown.bind(this);
         this._mouseUpHandler = this._mouseUp.bind(this);
@@ -7,11 +22,11 @@ class OrthographicDraggable {
         this.orthographicCamera = orthographicCanvas;
 
         this.canvas = orthographicCanvas.querySelector("canvas");
-        this.canvas.addEventListener("mousedown", this._mouseDownHandler);
+        this.enabled = true;
     }
 
     dispose() {
-        this.canvas.removeEventListener("mousedown", this._mouseDownHandler);
+        this.enabled = false;
         delete this.orthographicCamera;
         delete this.canvas;
 
