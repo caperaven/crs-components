@@ -12,6 +12,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         const ready = () => {
             this._createPlane();
             this.canvas.removeEventListener("ready", ready);
+            this.canvas.zeroTopLeft();
             this.canvas.render();
         }
 
@@ -19,10 +20,11 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     }
 
     _createPlane() {
-        const geometry = new PlaneGeometry(800, 48);
+        const geometry = new PlaneGeometry(100, 100);
         const material = new MeshBasicMaterial({color: new Color(0xff0000)});
         this.plane = new Mesh(geometry, material);
         this.canvas.scene.add(this.plane);
+        this.canvas.canvasPlace(this.plane,50, 50);
     }
 
     render() {
