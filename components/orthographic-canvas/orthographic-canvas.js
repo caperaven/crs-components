@@ -40,13 +40,13 @@ export class OrthographicCanvas extends HTMLElement {
 
     disconnectedCallback() {
         this.scene.clear();
-        this.render.dispose();
         this.scene = null;
         this.renderer = null;
         this.camera = null;
     }
 
     render() {
+        if (this.renderer == null) return;
         this.renderer.clear();
         this.renderer.render(this.scene, this.camera);
     }
