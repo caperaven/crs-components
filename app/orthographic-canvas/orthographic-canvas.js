@@ -4,14 +4,16 @@ import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMate
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
+import {createRegularMesh} from "./../../shapes/regular-shape.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
         this.canvas = document.querySelector("orthographic-canvas");
 
-        const ready = () => {
-            this._createPlane();
+        const ready = async () => {
+            await this._createPlane();
+            await this._createPenta();
             this.canvas.removeEventListener("ready", ready);
             this.canvas.zeroTopLeft();
             this.canvas.render();
@@ -28,12 +30,18 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         await disableOrthographicDraggable(this.canvas);
     }
 
-    _createPlane() {
+    async _createPlane() {
         const geometry = new PlaneGeometry(100, 100);
-        const material = new MeshBasicMaterial({color: new Color(0xff0000)});
+        const material = new MeshBasicMaterial({color: new Color(0xff0090)});
         this.plane = new Mesh(geometry, material);
         this.canvas.scene.add(this.plane);
-        this.canvas.canvasPlace(this.plane,50, 50);
+        this.canvas.canvasPlace(this.plane,-50, -50);
+    }
+
+    async _createPenta() {
+        const mesh = await createRegularMesh(new MeshBasicMaterial({color: new Color(0xff0000)}), 5, 100);
+        this.canvas.scene.add(mesh);
+        this.canvas.canvasPlace(mesh,100, 100);
     }
 
     async render() {
