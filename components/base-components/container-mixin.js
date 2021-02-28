@@ -43,6 +43,7 @@ async function init(role, childRole) {
     }
     this.setAttribute("tabindex", "0");
     await disableChildTabbing(this, childRole);
+    this.focusedIndex = 0;
 }
 
 async function dispose() {

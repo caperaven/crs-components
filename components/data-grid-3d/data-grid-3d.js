@@ -26,6 +26,7 @@ class DataGrid3D extends HTMLElement {
     }
 
     async disconnectedCallback() {
+        this.canvas = null;
         await dispose(this);
 
         this.scrollHandler = null;
@@ -128,6 +129,7 @@ class DataGrid3D extends HTMLElement {
     }
 
     async animate() {
+        if (this.canvas == null) return;
         requestAnimationFrame(() => {
             this.canvas.render();
             this.animate();
