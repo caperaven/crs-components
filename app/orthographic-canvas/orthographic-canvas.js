@@ -3,6 +3,7 @@ import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
+import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -14,9 +15,17 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
             this.canvas.removeEventListener("ready", ready);
             this.canvas.zeroTopLeft();
             this.canvas.render();
+
+            requestAnimationFrame(async () => {
+                await enableOrthographicDraggable(this.canvas);
+            })
         }
 
         this.canvas.addEventListener("ready", ready);
+    }
+
+    async disconnectedCallback() {
+        await disableOrthographicDraggable(this.canvas);
     }
 
     _createPlane() {
@@ -27,7 +36,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         this.canvas.canvasPlace(this.plane,50, 50);
     }
 
-    render() {
+    async render() {
         requestAnimationFrame(this.render.bind(this));
         this.plane.rotateZ(0.01);
         this.canvas.render();
