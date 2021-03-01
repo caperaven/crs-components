@@ -28,7 +28,7 @@ class OrthographicDraggable {
         this._mouseUpHandler = this._mouseUp.bind(this);
         this._mouseMoveHandler = this._mouseMove.bind(this);
 
-        this.orthographicCamera = orthographicCanvas;
+        this._orthographicCanvas = orthographicCanvas;
 
         this.canvas = orthographicCanvas.querySelector("canvas");
         this.enabled = true;
@@ -36,7 +36,7 @@ class OrthographicDraggable {
 
     dispose() {
         this.enabled = false;
-        delete this.orthographicCamera;
+        delete this._orthographicCanvas;
         delete this.canvas;
 
         this._mouseDownHandler = null;
@@ -62,9 +62,9 @@ class OrthographicDraggable {
         const offsetX = (this.x - this.oldX);
         const offsetY = (this.y - this.oldY);
 
-        const current = this.orthographicCamera.camera.position;
-        this.orthographicCamera.camera.position.set(current.x - offsetX, current.y + offsetY, current.z);
-        await this.orthographicCamera.render();
+        const current = this._orthographicCanvas.camera.position;
+        this._orthographicCanvas.camera.position.set(current.x - offsetX, current.y + offsetY, current.z);
+        await this._orthographicCanvas.render();
 
         this.oldX = this.x;
         this.oldY = this.y;

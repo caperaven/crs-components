@@ -247,7 +247,8 @@ export async function createDragCanvas() {
         left: 0,
         width: "100vw",
         height: "100vh",
-        background: "transparent"
+        background: "transparent",
+        zIndex: 9999999
     })
     document.body.appendChild(element);
     return element;
