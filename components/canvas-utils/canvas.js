@@ -11,8 +11,6 @@ export function createCanvas(width, height) {
     ctx.scale(dpr, dpr);
     ctx.bounds = {x: 0, y: 0, width: width, height: height};
 
-    window.devicePixelRatio = window.devicePixelRatio || dpr;
-
     return ctx;
 }
 
@@ -26,5 +24,6 @@ export function clearCanvas(ctx, color = "#ffffff") {
 }
 
 function getFont(dpr) {
-    return `1rem Open Sans`;
+    const fontSize = 16 / dpr;
+    return `${fontSize}px Open Sans`;
 }

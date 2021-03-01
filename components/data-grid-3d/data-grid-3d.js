@@ -28,9 +28,9 @@ class DataGrid3D extends HTMLElement {
     }
 
     async disconnectedCallback() {
-        this.canvas = null;
         await dispose(this);
         this._marker = null;
+        this.canvas = null;
         this.scrollHandler = null;
     }
 
@@ -120,7 +120,6 @@ class DataGrid3D extends HTMLElement {
             this.canvas.scene.add(plane);
         }
         this.canvas.render();
-        this.animate();
     }
 
     /**

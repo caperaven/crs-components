@@ -12,4 +12,8 @@ export default class Grid extends crsbinding.classes.ViewBase {
             this.grid.data = createData(100);
         })
     }
+
+    async disconnectedCallback() {
+        this.grid = null;
+    }
 }
