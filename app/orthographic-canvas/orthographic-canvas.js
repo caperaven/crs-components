@@ -35,11 +35,11 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         const material = new MeshBasicMaterial({color: new Color(0xff0090)});
         this.plane = new Mesh(geometry, material);
         this.canvas.scene.add(this.plane);
-        this.canvas.canvasPlace(this.plane,-50, -50);
+        this.canvas.canvasPlace(this.plane,0, 0);
     }
 
     async _createPenta() {
-        const mesh = await createRegularMesh(new MeshBasicMaterial({color: new Color(0xff0000)}), 5, 100);
+        const mesh = await createRegularMesh(new MeshBasicMaterial({color: new Color(0xff0000)}), 6, 100);
         this.canvas.scene.add(mesh);
         this.canvas.canvasPlace(mesh,100, 100);
     }

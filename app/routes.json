@@ -53,6 +53,11 @@
       "view": "orthographic-canvas"
     },
     {
+      "title": "Image Card",
+      "hash": "#image-card",
+      "view": "image-card"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

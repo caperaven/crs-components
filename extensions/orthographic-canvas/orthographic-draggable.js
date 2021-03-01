@@ -1,3 +1,12 @@
+export async function enableOrthographicDraggable(orthographicCanvas) {
+    orthographicCanvas._draggable = new OrthographicDraggable(orthographicCanvas);
+}
+
+export async function disableOrthographicDraggable(orthographicCanvas) {
+    orthographicCanvas._draggable.dispose();
+    delete orthographicCanvas._draggable;
+}
+
 class OrthographicDraggable {
     get enabled() {
         return this._enabled;
@@ -60,13 +69,4 @@ class OrthographicDraggable {
         this.oldX = this.x;
         this.oldY = this.y;
     }
-}
-
-export async function enableOrthographicDraggable(orthographicCanvas) {
-    orthographicCanvas._draggable = new OrthographicDraggable(orthographicCanvas);
-}
-
-export async function disableOrthographicDraggable(orthographicCanvas) {
-    orthographicCanvas._draggable.dispose();
-    delete orthographicCanvas._draggable;
 }
