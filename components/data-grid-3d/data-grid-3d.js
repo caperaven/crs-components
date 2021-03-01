@@ -96,6 +96,7 @@ class DataGrid3D extends HTMLElement {
         this.rows = new Map();
         await this._createBackBuffer(0, this.pageSize);
         await this._render();
+        this.marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`;
     }
 
     async _clearBackBuffer() {
@@ -114,20 +115,26 @@ class DataGrid3D extends HTMLElement {
     }
 
     async _render() {
-        const top = this.canvas.top - this.rowHeight / 2;
+        const top = this.rowHeight / 2;
+        const leftOffset = this.rowWidth / 2;
+
         for (let i = 0; i < this.pageSize; i++) {
             const row = this.rows.get(i);
             const width = Number(row.ctx.canvas.width);
             const plane = await createRowItem(width, this.rowHeight, row.ctx);
 
-            const nextTop = top - (row.index * this.rowHeight);
-            plane.position.y = nextTop;
+            const nextTop = top + (row.index * this.rowHeight);
+            this.canvas.canvasPlace(plane, leftOffset, nextTop);
             this.canvas.scene.add(plane);
         }
         this.canvas.render();
         this.animate();
     }
 
+    /**
+     * Temp for debugging purposes so that it will auto render
+     * @returns {Promise<void>}
+     */
     async animate() {
         if (this.canvas == null) return;
         requestAnimationFrame(() => {

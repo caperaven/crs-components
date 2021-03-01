@@ -3,7 +3,8 @@ export const columnsDef = [
         "field": "code",
         "title": "Code",
         "type": "string",
-        "width": "100"
+        "width": "100",
+        "editable": false
     },
     {
         "field": "description",

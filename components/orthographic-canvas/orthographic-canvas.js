@@ -52,9 +52,9 @@ export class OrthographicCanvas extends HTMLElement {
     }
 
     zeroTopLeft() {
-        const x = this.width / 2;
-        const y = this.height / -2;
-        this.camera.position.set(x, y, 0);
+        this.cameraStartLeft = this.width / 2;
+        this.canvasStartTop = this.height / -2;
+        this.camera.position.set(this.cameraStartLeft, this.canvasStartTop, 0);
     }
 
     /**
