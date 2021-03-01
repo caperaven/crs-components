@@ -22,24 +22,16 @@ class DataGrid3D extends HTMLElement {
         this.scrollHandler = this.scroll.bind(this);
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
 
+        this._marker = this.querySelector(".scroll-marker");
+
         await initialize(this);
     }
 
     async disconnectedCallback() {
         this.canvas = null;
         await dispose(this);
-
+        this._marker = null;
         this.scrollHandler = null;
-    }
-
-    /**
-     * scroll event callback
-     * @param args
-     * @returns {Promise<void>}
-     */
-    async scroll(args) {
-        this.offsetX = args.left;
-        this.offsetY = args.top;
     }
 
     /**
@@ -96,7 +88,7 @@ class DataGrid3D extends HTMLElement {
         this.rows = new Map();
         await this._createBackBuffer(0, this.pageSize);
         await this._render();
-        this.marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`;
+        this._marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`;
     }
 
     async _clearBackBuffer() {
