@@ -1,7 +1,6 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
 import {generateRowRenderer, calculateRowWidth, createRowItem} from "./data-grid-row-utils.js";
-import {createCanvas} from "../canvas-utils/canvas.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {
@@ -12,6 +11,7 @@ class DataGrid3D extends HTMLElement {
         this._data = newValue;
         if (this._isReady == true) {
             this._dataChanged().catch(e => console.error(e));
+            this._lastDataIndex = newValue.length -1;
         }
     }
 
@@ -60,7 +60,9 @@ class DataGrid3D extends HTMLElement {
 
         this.rowHeight = Math.round(textHeight + (padding * 2));
         this.rowWidth = calculateRowWidth(columnsDef, this.minColumnWidth);
-        this.pageSize = this.height / this.rowHeight;
+        this.pageSize = (this.height / this.rowHeight) * 2;
+        this.virtualSize = Math.round(this.pageSize / 4);
+        this._orthographicResponder.callbackMargin = this.virtualSize * this.rowHeight;
 
         const args = {
             columnsDef: columnsDef,
@@ -101,10 +103,15 @@ class DataGrid3D extends HTMLElement {
 
     async _createBackBuffer(startIndex, endIndex) {
         for (let i = startIndex; i <= endIndex; i++) {
+            if (i > this._lastDataIndex) break;
             const row = this.data[i];
-            const ctx = createCanvas(this.rowWidth, this.rowHeight);
-            await this.canvasInflatorFn(row, ctx);
-            this.rows.set(row.id, {ctx: ctx, index: i});
+
+            const data = this.rows.get(row.id);
+            if (data == null || data.ctx == null) {
+                const ctx = crs.canvas.createCanvasForTexture(this.rowWidth, this.rowHeight);
+                await this.canvasInflatorFn(row, ctx);
+                this.rows.set(row.id, {ctx: ctx, index: i});
+            }
         }
     }
 
@@ -112,16 +119,26 @@ class DataGrid3D extends HTMLElement {
         const top = this.rowHeight / 2;
         const leftOffset = this.rowWidth / 2;
 
-        for (let i = 0; i < this.pageSize; i++) {
-            const row = this.rows.get(i);
-            const width = Number(row.ctx.canvas.width);
-            const plane = await createRowItem(width, this.rowHeight, row.ctx);
-
-            const nextTop = top + (row.index * this.rowHeight);
-            this.canvas.canvasPlace(plane, leftOffset, nextTop);
-            this.canvas.scene.add(plane);
+        let i = 0;
+        for (i; i < this.pageSize; i++) {
+            await this._renderRowById(this.data[i].id, top, leftOffset)
         }
+
+        this.bottomIndex = i;
+
         this.canvas.render();
+        // return this.animate();
+    }
+
+    async _renderRowById(id, top, leftOffset) {
+        const row = this.rows.get(id);
+        const width = Number(row.ctx.canvas.width);
+        const plane = await createRowItem(width, this.rowHeight, row.ctx);
+
+        const nextTop = top + (row.index * this.rowHeight);
+        this.canvas.canvasPlace(plane, leftOffset, nextTop);
+        this.canvas.scene.add(plane);
+        row.plane = plane;
     }
 
     /**
@@ -141,6 +158,23 @@ class DataGrid3D extends HTMLElement {
         if (this[dropFn] != null) {
             await this[dropFn](element, placeholder, dropTarget);
         }
+    }
+
+    async virtualizeBottomCallback() {
+        const top = this.rowHeight / 2;
+        const leftOffset = this.rowWidth / 2;
+        const start = this.bottomIndex;
+        const end = this.bottomIndex + this.virtualSize;
+        await this._createBackBuffer(this.bottomIndex, this.bottomIndex + this.virtualSize);
+        for (let i = start; i < end; i++) {
+            if (i > this._lastDataIndex) break;
+            await this._renderRowById(this.data[i].id, top, leftOffset);
+        }
+        this.bottomIndex = end;
+    }
+
+    async virtualizeTopCallback() {
+        console.log("virtualize top");
     }
 }
 

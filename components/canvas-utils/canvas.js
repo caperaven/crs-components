@@ -14,6 +14,18 @@ export function createCanvas(width, height) {
     return ctx;
 }
 
+export function createCanvasForTexture(width, height) {
+    const canvas = document.createElement("canvas");
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.font = getFont(dpr);
+
+    return ctx;
+}
+
 export function clearCanvas(ctx, color = "#ffffff") {
     if (ctx == null) return;
 
@@ -24,6 +36,5 @@ export function clearCanvas(ctx, color = "#ffffff") {
 }
 
 function getFont(dpr) {
-    const fontSize = 16 / dpr;
-    return `${fontSize}px Open Sans`;
+    return `${16}px Open Sans`;
 }

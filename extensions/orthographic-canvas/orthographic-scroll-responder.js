@@ -3,7 +3,9 @@ export async function enableOrthographicResponder(parent) {
     const scrollBox = parent.querySelector(".scroll");
 
     const ready = async () => {
-        parent._orthographicResponder = new OrthographicScrollResponder(orthographicCanvas, scrollBox);
+        const virtualizeBottomCallbackHandler = parent.virtualizeBottomCallback ? parent.virtualizeBottomCallback.bind(parent) : null;
+        const virtualizeTopCallbackHandler = parent.virtualizeTopCallback ? parent.virtualizeTopCallback.bind(parent) : null;
+        parent._orthographicResponder = new OrthographicScrollResponder(orthographicCanvas, scrollBox, virtualizeBottomCallbackHandler, virtualizeTopCallbackHandler);
         orthographicCanvas.removeEventListener("ready", ready);
     }
 
@@ -16,14 +18,24 @@ export async function disableOrthographicResponder(parent) {
 }
 
 class OrthographicScrollResponder {
-    constructor(orthographicCanvas, scrollBox) {
+    get callbackMargin() {
+        return this._callbackMargin;
+    }
+
+    set callbackMargin(newValue) {
+        this._callbackMargin = newValue;
+        this._nextCallbackMargin = newValue;
+    }
+
+    constructor(orthographicCanvas, scrollBox, virtualizeBottomCallback, virtualizeTopCallback) {
         this._orthographicCanvas = orthographicCanvas;
         this._scrollbox = scrollBox;
 
         this._scrollHandler = this._scroll.bind(this);
         this._scrollbox.addEventListener("scroll", this._scrollHandler);
-        this._oldX = 0;
-        this._oldY = 0;
+        this._prevCallbackMargin = 0;
+        this._virtualizeBottomCallback = virtualizeBottomCallback;
+        this._virtualizeTopCallback = virtualizeTopCallback;
     }
 
     dispose() {
@@ -38,13 +50,31 @@ class OrthographicScrollResponder {
     async _scroll(event) {
         this._x = event.target.scrollLeft;
         this._y = event.target.scrollTop;
-        const offsetX = this._orthographicCanvas.cameraStartLeft + (this._x - this._oldX);
-        const offsetY = this._orthographicCanvas.cameraStartTop - (this._y - this._oldY);
+        const offsetX = this._orthographicCanvas.cameraStartLeft + this._x;
+        const offsetY = this._orthographicCanvas.cameraStartTop - this._y;
 
         this._orthographicCanvas.camera.position.set(offsetX, offsetY, 0);
         await this._orthographicCanvas.render();
 
-        this.oldX = this._x;
-        this.oldY = this._y;
+        if (this._y != this._oldY) {
+            await this.updateMargins(this._y - this._oldY);
+        }
+
+        this._oldY = this._y;
+    }
+
+    async updateMargins(direction) {
+        if (this._callbackMargin != null) {
+            if (direction > 0 && this._y >= this._nextCallbackMargin) {
+                this._prevCallbackMargin = this._nextCallbackMargin;
+                this._nextCallbackMargin = this._nextCallbackMargin + this._callbackMargin;
+                this._virtualizeBottomCallback();
+            }
+            else if (this._y <= this._prevCallbackMargin) {
+                this._prevCallbackMargin = this._prevCallbackMargin - this._callbackMargin;
+                this._nextCallbackMargin = this._prevCallbackMargin;
+                this._virtualizeTopCallback();
+            }
+        }
     }
 }
