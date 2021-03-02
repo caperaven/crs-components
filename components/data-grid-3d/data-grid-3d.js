@@ -1,6 +1,7 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
 import {generateRowRenderer, calculateRowWidth, createRowItem} from "./data-grid-row-utils.js";
+import {createCanvas} from "../canvas-utils/canvas.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {
@@ -58,7 +59,7 @@ class DataGrid3D extends HTMLElement {
         const textHeight = 12;
 
         this.rowHeight = Math.round(textHeight + (padding * 2));
-        this.rowWidth = calculateRowWidth(columnsDef);
+        this.rowWidth = calculateRowWidth(columnsDef, this.minColumnWidth);
         this.pageSize = this.height / this.rowHeight;
 
         const args = {
@@ -101,7 +102,8 @@ class DataGrid3D extends HTMLElement {
     async _createBackBuffer(startIndex, endIndex) {
         for (let i = startIndex; i <= endIndex; i++) {
             const row = this.data[i];
-            const ctx = await this.canvasInflatorFn(row);
+            const ctx = createCanvas(this.rowWidth, this.rowHeight);
+            await this.canvasInflatorFn(row, ctx);
             this.rows.set(row.id, {ctx: ctx, index: i});
         }
     }
