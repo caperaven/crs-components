@@ -1,0 +1,10 @@
+div[is="standard-toolbar"] {
+    padding: 0.5rem;
+    border: solid 1px #dadada;
+    margin-bottom: 1rem;
+}
+
+div[is="standard-toolbar"] button {
+    min-width: 70px;
+    min-height: 2rem;
+}
