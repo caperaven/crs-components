@@ -41,12 +41,21 @@ async function mouseMove(event) {
     }
 
     this.resizeTarget.style.width = `${width}px`;
+    this.newWidth = width;
 }
 
 async function mouseUp(event) {
     this.container.parentElement.removeEventListener("mousemove", this.mouseMoveHandler);
     this.container.parentElement.removeEventListener("mouseup", this.mouseUpHandler);
 
+    const field = this.resizeTarget.dataset.field;
+    const def = this.columnsDef.find(item => item.field == field);
+    def.width = this.newWidth;
+
+    delete this.columnsDef;
+    delete this.resizeRect;
+    delete this.resizeTarget;
     delete this.startX;
     delete this.x;
+    delete this.newWidth;
 }

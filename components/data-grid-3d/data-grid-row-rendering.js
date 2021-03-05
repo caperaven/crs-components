@@ -1,10 +1,11 @@
-import {createRowItem} from "./data-grid-row-utils.js";
+import {calculateRowWidth, createRowItem, generateRowRenderer} from "./data-grid-row-utils.js";
 
 export async function enableRowRendering(parent) {
     parent._clearBackBuffer = _clearBackBuffer;
     parent._createBackBuffer = _createBackBuffer;
     parent._render = _render;
     parent._renderRowById = _renderRowById;
+    parent._updateRenderFunction = updateRenderFunction;
 }
 
 export async function disableRowRendering(parent) {
@@ -12,6 +13,31 @@ export async function disableRowRendering(parent) {
     parent._createBackBuffer = null;
     parent._render = null;
     parent._renderRowById = null;
+}
+
+async function updateRenderFunction() {
+    const padding = 16;
+    // THis should be calculated according to the pixel hight of the font.
+    const textHeight = 12;
+
+    this.rowHeight = Math.round(textHeight + (padding * 2));
+    this.rowWidth = calculateRowWidth(this.columnsDef, this.minColumnWidth);
+    this.pageSize = (this.height / this.rowHeight) * 2;
+    this.virtualSize = Math.round(this.pageSize / 4);
+    this._orthographicResponder.callbackMargin = this.virtualSize * this.rowHeight;
+
+    const args = {
+        columnsDef: this.columnsDef,
+        rowWidth: this.offsetWidth,
+        rowHeight: this.rowHeight,
+        textHeight: textHeight,
+        padding: padding,
+        minWidth: 140
+    }
+
+    args.rowWidth = this.rowWidth;
+
+    this.canvasInflatorFn = await generateRowRenderer(args);
 }
 
 async function _clearBackBuffer() {

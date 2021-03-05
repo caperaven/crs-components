@@ -52,30 +52,10 @@ class DataGrid3D extends HTMLElement {
      * @returns {Promise<void>}
      */
     async initialize(columnsDef) {
+        this.columnsDef = columnsDef;
+        this._columnResizeContext.columnsDef = columnsDef;
         await createColumns(this.querySelector(".grid-columns"), columnsDef);
-
-        const padding = 16;
-        // THis should be calculated according to the pixel hight of the font.
-        const textHeight = 12;
-
-        this.rowHeight = Math.round(textHeight + (padding * 2));
-        this.rowWidth = calculateRowWidth(columnsDef, this.minColumnWidth);
-        this.pageSize = (this.height / this.rowHeight) * 2;
-        this.virtualSize = Math.round(this.pageSize / 4);
-        this._orthographicResponder.callbackMargin = this.virtualSize * this.rowHeight;
-
-        const args = {
-            columnsDef: columnsDef,
-            rowWidth: this.offsetWidth,
-            rowHeight: this.rowHeight,
-            textHeight: textHeight,
-            padding: padding,
-            minWidth: 140
-        }
-
-        args.rowWidth = this.rowWidth;
-
-        this.canvasInflatorFn = await generateRowRenderer(args);
+        await this._updateRenderFunction();
     }
 
     /**
