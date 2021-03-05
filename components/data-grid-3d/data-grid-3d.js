@@ -55,7 +55,6 @@ class DataGrid3D extends HTMLElement {
         this.columnsDef = columnsDef;
         this._columnResizeContext.columnsDef = columnsDef;
         await createColumns(this.querySelector(".grid-columns"), columnsDef);
-        await this._updateRenderFunction();
     }
 
     /**
@@ -67,6 +66,7 @@ class DataGrid3D extends HTMLElement {
         this.endIndex = this.pageSize;
 
         await this._clearBackBuffer();
+        await this._updateRenderFunction();
 
         this.rows = new Map();
         await this._createBackBuffer(0, this.pageSize);
@@ -91,6 +91,19 @@ class DataGrid3D extends HTMLElement {
         if (this[dropFn] != null) {
             await this[dropFn](element, placeholder, dropTarget);
         }
+    }
+
+    async structureChanged() {
+        await this._updateRenderFunction();
+
+        this.rows.forEach(row => {
+            if (row.ctx != null) {
+                this.canvasInflatorFn(this.data[row.index], row.ctx);
+                row.plane.material.map.needsUpdate = true;
+            }
+        });
+
+        await this._update();
     }
 }
 

@@ -1,13 +1,13 @@
 export async function enableColumnResize(parent, minWidth) {
     parent._columnResizeContext = {
         container: parent.querySelector(".grid-columns"),
+        structureChanged: parent.structureChanged.bind(parent),
         minWidth: minWidth
     };
 
     parent._columnResizeContext.mouseDownHandler = mouseDown.bind(parent._columnResizeContext);
     parent._columnResizeContext.mouseMoveHandler = mouseMove.bind(parent._columnResizeContext);
     parent._columnResizeContext.mouseUpHandler = mouseUp.bind(parent._columnResizeContext);
-
     parent._columnResizeContext.container.addEventListener("mousedown", parent._columnResizeContext.mouseDownHandler);
 }
 
@@ -20,6 +20,7 @@ export async function disableColumnResize(parent) {
     delete parent._columnResizeContext.resizeTarget;
     delete parent._columnResizeContext.resizeRect;
     delete parent._columnResizeContext.columnsDef;
+    delete parent._columnResizeContext.structureChanged;
     delete parent._columnResizeContext;
 }
 
@@ -52,6 +53,8 @@ async function mouseUp(event) {
     const field = this.resizeTarget.dataset.field;
     const def = this.columnsDef.find(item => item.field == field);
     def.width = this.newWidth;
+
+    await this.structureChanged();
 
     delete this.resizeRect;
     delete this.resizeTarget;

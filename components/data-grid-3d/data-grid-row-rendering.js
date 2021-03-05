@@ -6,6 +6,7 @@ export async function enableRowRendering(parent) {
     parent._render = _render;
     parent._renderRowById = _renderRowById;
     parent._updateRenderFunction = updateRenderFunction;
+    parent._update = _update;
 }
 
 export async function disableRowRendering(parent) {
@@ -85,4 +86,8 @@ async function _renderRowById(id, top, leftOffset) {
     this.canvas.canvasPlace(plane, leftOffset, nextTop);
     this.canvas.scene.add(plane);
     row.plane = plane;
+}
+
+async function _update() {
+    this.canvas.render();
 }
