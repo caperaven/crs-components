@@ -19,6 +19,7 @@ export async function disableColumnResize(parent) {
     delete parent._columnResizeContext.container;
     delete parent._columnResizeContext.resizeTarget;
     delete parent._columnResizeContext.resizeRect;
+    delete parent._columnResizeContext.columnsDef;
     delete parent._columnResizeContext;
 }
 
@@ -52,7 +53,6 @@ async function mouseUp(event) {
     const def = this.columnsDef.find(item => item.field == field);
     def.width = this.newWidth;
 
-    delete this.columnsDef;
     delete this.resizeRect;
     delete this.resizeTarget;
     delete this.startX;
