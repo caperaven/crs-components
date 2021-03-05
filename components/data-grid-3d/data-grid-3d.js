@@ -1,6 +1,6 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
-import {generateRowRenderer, calculateRowWidth, createRowItem} from "./data-grid-row-utils.js";
+import {calculateRowWidth} from "./data-grid-row-utils.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {
@@ -95,9 +95,12 @@ class DataGrid3D extends HTMLElement {
 
     async structureChanged() {
         await this._updateRenderFunction();
+        this.rowWidth = calculateRowWidth(this.columnsDef, this.minColumnWidth);
 
         this.rows.forEach(row => {
             if (row.ctx != null) {
+                row.ctx.canvas.width = this.rowWidth;
+                row.plane.geometry.parameters.width = this.rowWidth;
                 this.canvasInflatorFn(this.data[row.index], row.ctx);
                 row.plane.material.map.needsUpdate = true;
             }
