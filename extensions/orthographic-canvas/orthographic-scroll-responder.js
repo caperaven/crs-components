@@ -48,19 +48,21 @@ class OrthographicScrollResponder {
     }
 
     async _scroll(event) {
-        this._x = event.target.scrollLeft;
-        this._y = event.target.scrollTop;
-        const offsetX = this._orthographicCanvas.cameraStartLeft + this._x;
-        const offsetY = this._orthographicCanvas.cameraStartTop - this._y;
+        requestAnimationFrame(async () => {
+            this._x = event.target.scrollLeft;
+            this._y = event.target.scrollTop;
+            const offsetX = this._orthographicCanvas.cameraStartLeft + this._x;
+            const offsetY = this._orthographicCanvas.cameraStartTop - this._y;
 
-        this._orthographicCanvas.camera.position.set(offsetX, offsetY, 0);
-        await this._orthographicCanvas.render();
+            this._orthographicCanvas.camera.position.set(offsetX, offsetY, 0);
+            await this._orthographicCanvas.render();
 
-        if (this._y != this._oldY) {
-            await this.updateMargins(this._y - this._oldY);
-        }
+            if (this._y != this._oldY) {
+                await this.updateMargins(this._y - this._oldY);
+            }
 
-        this._oldY = this._y;
+            this._oldY = this._y;
+        })
     }
 
     async updateMargins(direction) {
