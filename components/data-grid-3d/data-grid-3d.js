@@ -114,6 +114,10 @@ class DataGrid3D extends HTMLElement {
         //await this._render();
         await this._update();
     }
+
+    async swapColumns(startIndex, endIndex) {
+        console.log(startIndex, endIndex);
+    }
 }
 
 customElements.define("data-grid-3d", DataGrid3D);

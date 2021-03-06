@@ -65,6 +65,8 @@ class GridMoveElement {
         this._startY = event.clientY;
         this.originContainer = event.target.parentElement;
         this.selectedColumnElement = event.target;
+
+        this._startIndex = Array.from(this.originContainer.children).indexOf(this.selectedColumnElement);
     }
 
     async _startDrag(event) {
@@ -168,8 +170,14 @@ class GridMoveElement {
             });
         }
 
+        this._endIndex = Array.from(this.originContainer.children).indexOf(target);
+
         await this._swapPlaceAndDrag();
         await this._clearRect(".column-header");
+        await this.grid.swapColumns(this._startIndex, this._endIndex);
+
+        delete this._startIndex;
+        delete this._endIndex;
     }
 
     async _mouseUpGrouping(event) {
