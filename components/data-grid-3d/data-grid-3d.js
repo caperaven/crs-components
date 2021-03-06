@@ -116,7 +116,10 @@ class DataGrid3D extends HTMLElement {
     }
 
     async swapColumns(startIndex, endIndex) {
-        console.log(startIndex, endIndex);
+        const def = this.columnsDef[startIndex];
+        this.columnsDef.splice(startIndex, 1);
+        this.columnsDef.splice(endIndex, 0, def);
+        await this.structureChanged();
     }
 }
 
