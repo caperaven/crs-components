@@ -47,11 +47,16 @@ async function mouseMove(event) {
 }
 
 async function mouseUp(event) {
+    if (this.newWidth == null) return;
+
     this.container.parentElement.removeEventListener("mousemove", this.mouseMoveHandler);
     this.container.parentElement.removeEventListener("mouseup", this.mouseUpHandler);
 
     const field = this.resizeTarget.dataset.field;
     const def = this.columnsDef.find(item => item.field == field);
+
+    if (Math.abs(this.newWidth - Number(def.width)) < 2) return;
+
     def.width = this.newWidth;
 
     await this.structureChanged();

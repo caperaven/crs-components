@@ -29,7 +29,9 @@ export async function generateRowRenderer(args) {
             width = args.minWidth;
         }
 
-        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding});`);
+        const maxWidth = width - (args.padding * 2);
+
+        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding}, ${maxWidth});`);
 
         // draw the line from top to bottom after the field text
         lineCode.push('ctx.beginPath();');
@@ -55,8 +57,10 @@ export function calculateRowWidth(columns, minWidth) {
 }
 
 export async function createRowItem(width, height, ctx) {
-    const geometry = new PlaneGeometry(width, height);
+    const geometry = new PlaneGeometry(1, 1);
     const texture = new CanvasTexture(ctx.canvas);
     const material = new MeshBasicMaterial({map: texture});
-    return new Mesh(geometry, material);
+    const result = new Mesh(geometry, material);
+    result.scale.set(width, height, 1);
+    return result;
 }

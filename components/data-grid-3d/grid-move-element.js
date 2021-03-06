@@ -53,17 +53,23 @@ class GridMoveElement {
     }
 
     async _mouseDown(event) {
+        if (event.button != 0) return;
         if (event.target.matches(".column-header, .column-header-group") == false) return;
 
+        this.dragCanvas = await createDragCanvas();
+        this.dragCanvas.addEventListener("mousemove", this._mouseMoveHandler);
+        this.dragCanvas.addEventListener("mouseup", this._mouseUpHandler);
+
+        this._isMoving = false;
+        this._startX = event.clientX;
+        this._startY = event.clientY;
         this.originContainer = event.target.parentElement;
+        this.selectedColumnElement = event.target;
+    }
 
-        const element = await createDragCanvas();
-
-        element.addEventListener("mousemove", this._mouseMoveHandler);
-        element.addEventListener("mouseup", this._mouseUpHandler);
-
-        this.dragElement = await setPlaceholder(event.target, {field: "field"});
-        element.appendChild(this.dragElement);
+    async _startDrag(event) {
+        this.dragElement = await setPlaceholder(this.selectedColumnElement, {field: "field"});
+        this.dragCanvas.appendChild(this.dragElement);
         this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
     }
 
@@ -77,13 +83,22 @@ class GridMoveElement {
     async _mouseMove(event) {
         this.x = event.clientX;
         this.y = event.clientY;
-        this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
 
-        if (this.isDraggingColumn) {
-            await this._movingColumn(event);
+        if (this._isMoving == true) {
+            this.dragElement.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+
+            if (this.isDraggingColumn) {
+                await this._movingColumn(event);
+            }
+            else {
+                await this._movingGrouping(event);
+            }
         }
         else {
-            await this._movingGrouping(event);
+            if (Math.abs(this.x - this._startX) > 5 || Math.abs(this.y - this._startY) > 5) {
+                this._isMoving = true;
+                return this._startDrag(event);
+            }
         }
     }
 
@@ -114,17 +129,28 @@ class GridMoveElement {
         event.target.removeEventListener("mousemove", this._mouseMoveHandler);
         event.target.removeEventListener("mouseup", this._mouseUpHandler);
         event.target.parentElement.removeChild(event.target);
-        this.dragElement.parentElement.removeChild(this.dragElement);
-        this.dragElement.style.transform = null;
 
-        if (this.isDraggingColumn) {
-            await this._mouseUpColumn(event);
+        if (this.dragElement == null) {
+            if (this.selectedColumnElement.classList.contains("column-header")) {
+                const field = this.selectedColumnElement.dataset.field;
+                this.grid.sort(field);
+            }
         }
         else {
-            await this._mouseUpGrouping(event);
+            this.dragElement.parentElement.removeChild(this.dragElement);
+            this.dragElement.style.transform = null;
+
+            if (this.isDraggingColumn) {
+                await this._mouseUpColumn(event);
+            }
+            else {
+                await this._mouseUpGrouping(event);
+            }
         }
 
         delete this.originContainer;
+        delete this.dragCanvas;
+        delete this.selectedColumnElement;
     }
 
     async _mouseUpColumn(event) {

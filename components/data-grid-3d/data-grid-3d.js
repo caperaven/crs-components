@@ -93,19 +93,25 @@ class DataGrid3D extends HTMLElement {
         }
     }
 
+    async sort(field) {
+        console.log(field);
+    }
+
     async structureChanged() {
         await this._updateRenderFunction();
         this.rowWidth = calculateRowWidth(this.columnsDef, this.minColumnWidth);
-
+        const leftOffset = this.rowWidth / 2;
         this.rows.forEach(row => {
             if (row.ctx != null) {
-                row.ctx.canvas.width = this.rowWidth;
-                row.plane.geometry.parameters.width = this.rowWidth;
+                crs.canvas.resizeCanvas(row.ctx, this.rowWidth, this.rowHeight);
+                row.plane.scale.set(this.rowWidth, this.rowHeight, 1);
                 this.canvasInflatorFn(this.data[row.index], row.ctx);
                 row.plane.material.map.needsUpdate = true;
+                row.plane.position.x = leftOffset;
             }
         });
 
+        //await this._render();
         await this._update();
     }
 }

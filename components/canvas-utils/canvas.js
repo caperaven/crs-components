@@ -21,7 +21,7 @@ export function createCanvasForTexture(width, height) {
     canvas.height = height;
 
     const ctx = canvas.getContext('2d');
-    ctx.font = getFont(dpr);
+    ctx.font = '16px Open Sans';
 
     return ctx;
 }
@@ -35,6 +35,8 @@ export function clearCanvas(ctx, color = "#ffffff") {
     ctx.restore();
 }
 
-function getFont(dpr) {
-    return `${16}px Open Sans`;
+export function resizeCanvas(ctx, width, height) {
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+    ctx.font = '16px Open Sans';
 }
