@@ -1,5 +1,5 @@
 import "./../../components/data-grid-3d/data-grid-3d.js"
-import {createData} from "./datafactory.js";
+import {createData, createGroupedData} from "./datafactory.js";
 import {columnsDef} from "./columns-def.js";
 
 export default class Grid extends crsbinding.classes.ViewBase {
@@ -9,7 +9,7 @@ export default class Grid extends crsbinding.classes.ViewBase {
 
         this.grid.addEventListener("ready", async () => {
             await this.grid.initialize(columnsDef);
-            this.grid.data = createData(100);
+            this.grid.data = createGroupedData(5, 10);
         })
     }
 

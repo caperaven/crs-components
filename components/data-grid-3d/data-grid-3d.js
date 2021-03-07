@@ -16,11 +16,8 @@ class DataGrid3D extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.offsetX = 0;
-        this.offsetY = 0;
         this.minColumnWidth = 140;
 
-        this.scrollHandler = this.scroll.bind(this);
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
 
         this._marker = this.querySelector(".scroll-marker");
@@ -32,7 +29,6 @@ class DataGrid3D extends HTMLElement {
         await dispose(this);
         this._marker = null;
         this.canvas = null;
-        this.scrollHandler = null;
     }
 
     /**
@@ -101,17 +97,17 @@ class DataGrid3D extends HTMLElement {
         await this._updateRenderFunction();
         this.rowWidth = calculateRowWidth(this.columnsDef, this.minColumnWidth);
         const leftOffset = this.rowWidth / 2;
+
         this.rows.forEach(row => {
-            if (row.ctx != null) {
+            if (row.ctx != null && row.isGroup != true) {
                 crs.canvas.resizeCanvas(row.ctx, this.rowWidth, this.rowHeight);
                 row.plane.scale.set(this.rowWidth, this.rowHeight, 1);
                 this.canvasInflatorFn(this.data[row.index], row.ctx);
                 row.plane.material.map.needsUpdate = true;
                 row.plane.position.x = leftOffset;
             }
-        });
+        })
 
-        //await this._render();
         await this._update();
     }
 

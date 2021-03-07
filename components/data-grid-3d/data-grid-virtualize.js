@@ -17,7 +17,7 @@ async function virtualizeBottomCallback() {
     await this._createBackBuffer(this.bottomIndex, this.bottomIndex + this.virtualSize);
     for (let i = start; i < end; i++) {
         if (i > this._lastDataIndex) break;
-        await this._renderRowById(this.data[i].id, top, leftOffset);
+        await this._renderRowById(this.data[i].id, top, leftOffset, i);
     }
     this.bottomIndex = end;
 }

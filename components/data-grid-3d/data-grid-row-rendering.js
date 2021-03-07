@@ -7,6 +7,7 @@ export async function enableRowRendering(parent) {
     parent._renderRowById = _renderRowById;
     parent._updateRenderFunction = updateRenderFunction;
     parent._update = _update;
+    parent._groupRenderer = groupRenderer;
 }
 
 export async function disableRowRendering(parent) {
@@ -14,6 +15,17 @@ export async function disableRowRendering(parent) {
     parent._createBackBuffer = null;
     parent._render = null;
     parent._renderRowById = null;
+    parent._groupRenderer = null;
+}
+
+async function groupRenderer(row, ctx) {
+    ctx.fillStyle = "#f2f2f2";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "#000000";
+    ctx.font = "16px serif";
+    ctx.fillText(row.title, 16, 22);
+    ctx.fillText(row.descriptor, this.width - 100, 22);
+    return ctx;
 }
 
 async function updateRenderFunction() {
@@ -55,9 +67,16 @@ async function _createBackBuffer(startIndex, endIndex) {
 
         const data = this.rows.get(row.id);
         if (data == null || data.ctx == null) {
-            const ctx = crs.canvas.createCanvasForTexture(this.rowWidth, this.rowHeight);
-            await this.canvasInflatorFn(row, ctx);
-            this.rows.set(row.id, {ctx: ctx, index: i});
+            if (row.isGroup == true) {
+                const ctx = crs.canvas.createCanvasForTexture(this.width, 44);
+                await this._groupRenderer(row, ctx);
+                this.rows.set(row.id, {ctx: ctx, index: i, isGroup: true});
+            }
+            else {
+                const ctx = crs.canvas.createCanvasForTexture(this.rowWidth, this.rowHeight);
+                await this.canvasInflatorFn(row, ctx);
+                this.rows.set(row.id, {ctx: ctx, index: i});
+            }
         }
     }
 }
@@ -68,7 +87,8 @@ async function _render() {
 
     let i = 0;
     for (i; i < this.pageSize; i++) {
-        await this._renderRowById(this.data[i].id, top, leftOffset)
+        if (i > this.data.length -1) break;
+        await this._renderRowById(this.data[i].id, top, leftOffset, i)
     }
 
     this.bottomIndex = i;
@@ -77,13 +97,14 @@ async function _render() {
     // return this.animate();
 }
 
-async function _renderRowById(id, top, leftOffset) {
+async function _renderRowById(id, top, leftOffset, index) {
     const row = this.rows.get(id);
+    const x = row.isGroup == true ? this.width / 2 : leftOffset;
     const width = Number(row.ctx.canvas.width);
     const plane = await createRowItem(width, this.rowHeight, row.ctx);
 
-    const nextTop = top + (row.index * this.rowHeight);
-    this.canvas.canvasPlace(plane, leftOffset, nextTop);
+    const nextTop = top + (index * this.rowHeight);
+    this.canvas.canvasPlace(plane, x, nextTop);
     this.canvas.scene.add(plane);
     row.plane = plane;
 }

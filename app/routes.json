@@ -38,11 +38,6 @@
       "view": "html-to-text"
     },
     {
-      "title": "Grid",
-      "hash": "#grid",
-      "view": "grid"
-    },
-    {
       "title": "Grid 3D",
       "hash": "#grid3d",
       "view": "grid3d"

@@ -158,8 +158,10 @@ class GridMoveElement {
     async _mouseUpColumn(event) {
         const target = await this._getTarget(event);
 
+        this._endIndex = Array.from(this.originContainer.children).indexOf(target);
+
         if (target.dataset.placeholder == "true") {
-            // notify that group order changed
+            await this.grid.swapColumns(this._startIndex, this._endIndex);
         }
         else if (target == this.gridGroupingContainer) {
             const placeholder = this.dragElement.__placeHolder;
@@ -170,11 +172,8 @@ class GridMoveElement {
             });
         }
 
-        this._endIndex = Array.from(this.originContainer.children).indexOf(target);
-
         await this._swapPlaceAndDrag();
         await this._clearRect(".column-header");
-        await this.grid.swapColumns(this._startIndex, this._endIndex);
 
         delete this._startIndex;
         delete this._endIndex;

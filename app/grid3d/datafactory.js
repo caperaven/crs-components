@@ -32,3 +32,26 @@ export function createData(rowCount) {
 
     return result;
 }
+
+export function createGroupedData(groupCount, rowCount) {
+    const result = [];
+
+    let id = 0;
+    for (let i = 0; i < groupCount; i++) {
+        result.push({
+            id: `g${i}`,
+            title: `group ${i}`,
+            descriptor: `count: ${rowCount}`,
+            count: rowCount,
+            isGroup: true,
+            isExpanded: false
+        })
+
+        const rows =  createData(5);
+        rows.forEach(row => row.id = id++);
+
+        result.push(...rows);
+    }
+
+    return result;
+}

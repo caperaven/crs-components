@@ -16,7 +16,6 @@ export function createCanvas(width, height) {
 
 export function createCanvasForTexture(width, height) {
     const canvas = document.createElement("canvas");
-    const dpr = window.devicePixelRatio || 1;
     canvas.width = width;
     canvas.height = height;
 
