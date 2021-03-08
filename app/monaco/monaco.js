@@ -15,7 +15,7 @@ export default class Monaco extends crsbinding.classes.ViewBase {
         await this.editor.compare("Hello World", "Hello there World", "text/plain");
     }
 
-    async showDifference2() {
+    async jsDifference() {
         await this.editor.compare("function a() {}", "function b() {\n\tconst result = 2;\n}", "javascript");
     }
 }
