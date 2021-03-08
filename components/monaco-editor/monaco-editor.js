@@ -83,6 +83,10 @@ class MonacoEditor extends HTMLElement {
     }
 
     async _initEditor() {
+        if (globalThis.require == null) {
+            return requestAnimationFrame(() => this._initEditor());
+        }
+
         require.config({paths: {vs: '/node_modules/monaco-editor/min/vs'}});
 
         const options = {
