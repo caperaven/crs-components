@@ -73,7 +73,10 @@ class MonacoEditor extends HTMLElement {
                 const script = document.createElement("script");
                 script.onload = resolve;
                 script.id = "requirejs";
-                script.setAttribute("src","/3rd-party/require.js");
+
+                const requireFile = crsbinding.utils.relativePathFrom(import.meta.url, "./../../3rd-party/require.js");
+
+                script.setAttribute("src",requireFile);
                 document.getElementsByTagName("head")[0].appendChild(script);
             })
         }
@@ -137,7 +140,7 @@ class MonacoEditor extends HTMLElement {
         this._editor.updateOptions(options);
     }
 
-    async compare(origional, modified, language) {
+    async compare(original, modified, language) {
         if (this.editor != null && this._editor.__type != "difference") {
             this.editor.dispose();
             this.editor = monaco.editor.createDiffEditor(this);
@@ -146,7 +149,7 @@ class MonacoEditor extends HTMLElement {
 
         language = language || this.language;
 
-        const originalModel = this.monaco.editor.createModel(origional, language);
+        const originalModel = this.monaco.editor.createModel(original, language);
         const modifiedModel = this.monaco.editor.createModel(modified, language);
 
         this.editor.setModel({
