@@ -53,6 +53,11 @@
       "view": "image-card"
     },
     {
+      "title": "Monaco",
+      "hash": "#monaco",
+      "view": "monaco"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

@@ -33,6 +33,7 @@
     "dependencies": {
         "crs-binding": "0.0.215",
         "crs-router": "0.0.48",
+        "monaco-editor": "^0.23.0",
         "three": "^0.125.2",
         "three-bmfont-text": "^3.0.1"
     }
