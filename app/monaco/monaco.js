@@ -7,6 +7,11 @@ export default class Monaco extends crsbinding.classes.ViewBase {
         this.editor.addEventListener("ready", async () => this.showNormal());
     }
 
+    async disconnectedCallback() {
+        this.editor = null;
+        await super.disconnectedCallback();
+    }
+
     async showNormal() {
         this.editor.value = await fetch(import.meta.url).then(result => result.text());
     }

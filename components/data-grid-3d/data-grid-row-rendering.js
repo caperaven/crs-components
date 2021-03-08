@@ -67,7 +67,7 @@ async function _createBackBuffer(startIndex, endIndex) {
 
         const data = this.rows.get(row.id);
         if (data == null || data.ctx == null) {
-            if (row.isGroup == true) {
+            if (row.__isGroup == true) {
                 const ctx = crs.canvas.createCanvasForTexture(this.width, 44);
                 await this._groupRenderer(row, ctx);
                 this.rows.set(row.id, {ctx: ctx, index: i, isGroup: true});

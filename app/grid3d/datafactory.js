@@ -43,11 +43,11 @@ export function createGroupedData(groupCount, rowCount) {
             title: `group ${i}`,
             descriptor: `count: ${rowCount}`,
             count: rowCount,
-            isGroup: true,
-            isExpanded: false
+            __isGroup: true,
+            __isExpanded: false
         })
 
-        const rows =  createData(5);
+        const rows =  createData(rowCount);
         rows.forEach(row => row.id = id++);
 
         result.push(...rows);
