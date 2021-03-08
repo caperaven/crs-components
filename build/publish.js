@@ -20,12 +20,13 @@ class Publish {
     
     constructor() {
         mkdirp.sync(path.resolve("./publish"));
-        this.commands = [
-            'terser index.js -c -m -o index.js',
-            'terser node_modules/crs-binding/crs-binding.js -c -m -o node_modules/crs-binding/crs-binding.js',
-            'terser node_modules/crs-binding/crs-bindable-element.js -c -m -o node_modules/crs-binding/crs-bindable-element.js',
-            'terser node_modules/crs-binding/crs-view-base.js -c -m -o node_modules/crs-binding/crs-view-base.js'
-        ];
+        this.commands = [];
+        // this.commands = [
+        //     'terser index.js -c -m -o index.js',
+        //     'terser node_modules/crs-binding/crs-binding.js -c -m -o node_modules/crs-binding/crs-binding.js',
+        //     'terser node_modules/crs-binding/crs-bindable-element.js -c -m -o node_modules/crs-binding/crs-bindable-element.js',
+        //     'terser node_modules/crs-binding/crs-view-base.js -c -m -o node_modules/crs-binding/crs-view-base.js'
+        // ];
     }
 
     async copyFiles(query, folder) {
