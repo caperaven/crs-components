@@ -1,11 +1,11 @@
-export async function enableOrthographicResponder(parent) {
+export async function enableOrthographicResponder(parent, callbackMargin) {
     const orthographicCanvas = parent.querySelector("orthographic-canvas");
     const scrollBox = parent.querySelector(".scroll");
 
     const ready = async () => {
         const virtualizeBottomCallbackHandler = parent.virtualizeBottomCallback ? parent.virtualizeBottomCallback.bind(parent) : null;
         const virtualizeTopCallbackHandler = parent.virtualizeTopCallback ? parent.virtualizeTopCallback.bind(parent) : null;
-        parent._orthographicResponder = new OrthographicScrollResponder(orthographicCanvas, scrollBox, virtualizeBottomCallbackHandler, virtualizeTopCallbackHandler);
+        parent._orthographicResponder = new OrthographicScrollResponder(orthographicCanvas, scrollBox, virtualizeBottomCallbackHandler, virtualizeTopCallbackHandler, callbackMargin);
         orthographicCanvas.removeEventListener("ready", ready);
     }
 
@@ -32,7 +32,7 @@ class OrthographicScrollResponder {
         this._nextCallbackMargin = newValue;
     }
 
-    constructor(orthographicCanvas, scrollBox, virtualizeBottomCallback, virtualizeTopCallback) {
+    constructor(orthographicCanvas, scrollBox, virtualizeBottomCallback, virtualizeTopCallback, callbackMargin) {
         this._orthographicCanvas = orthographicCanvas;
         this._scrollbox = scrollBox;
 
@@ -41,6 +41,7 @@ class OrthographicScrollResponder {
         this._prevCallbackMargin = 0;
         this._virtualizeBottomCallback = virtualizeBottomCallback;
         this._virtualizeTopCallback = virtualizeTopCallback;
+        this.callbackMargin = callbackMargin;
     }
 
     dispose() {

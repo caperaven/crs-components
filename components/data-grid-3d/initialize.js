@@ -9,13 +9,13 @@ import {enableRowFactory, disableRowFactory} from "./_row-factory.js";
 
 export async function initialize(parent) {
     await createCanvas(parent);
+    await enableVirtualization(parent);
     await enableRowFactory(parent);
     await enableRowRendering(parent);
     await enableGrouping(parent);
     await enableMoveElements(parent);
     await enableColumnResize(parent, parent._rowFactory.dimensions.minWidth);
-    await enableOrthographicResponder(parent);
-    await enableVirtualization(parent);
+    await enableOrthographicResponder(parent, Math.round(parent.canvas.height / 2));
 
     parent._isReady = true;
     parent.ready();
@@ -24,13 +24,13 @@ export async function initialize(parent) {
 
 export async function dispose(parent) {
     await disposeCanvas(parent);
+    await disableVirtualization(parent);
     await disableRowFactory(parent);
     await disableRowRendering(parent);
     await disableGrouping(parent);
     await disableMoveElements(parent);
     await disableColumnResize(parent);
     await disableOrthographicResponder(parent);
-    await disableVirtualization(parent);
 }
 
 async function createCanvas(parent) {

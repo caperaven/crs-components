@@ -10,16 +10,17 @@ export async function disableVirtualization(parent) {
 
 
 async function virtualizeBottomCallback() {
-    const top = this.rowHeight / 2;
-    const leftOffset = this.rowWidth / 2;
-    const start = this.bottomIndex;
-    const end = this.bottomIndex + this.virtualSize;
-    await this._createBackBuffer(this.bottomIndex, this.bottomIndex + this.virtualSize);
-    for (let i = start; i < end; i++) {
-        if (i > this._lastDataIndex) break;
-        await this._renderRowById(this.data[i].id, top, leftOffset, i);
-    }
-    this.bottomIndex = end;
+    console.log("virtualize");
+    // const top = this.rowHeight / 2;
+    // const leftOffset = this.rowWidth / 2;
+    // const start = this.bottomIndex;
+    // const end = this.bottomIndex + this.virtualSize;
+    // await this._createBackBuffer(this.bottomIndex, this.bottomIndex + this.virtualSize);
+    // for (let i = start; i < end; i++) {
+    //     if (i > this._lastDataIndex) break;
+    //     await this._renderRowById(this.data[i].id, top, leftOffset, i);
+    // }
+    // this.bottomIndex = end;
 }
 
 async function virtualizeTopCallback() {
