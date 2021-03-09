@@ -9,7 +9,12 @@ export async function enableOrthographicResponder(parent) {
         orthographicCanvas.removeEventListener("ready", ready);
     }
 
-    orthographicCanvas.addEventListener("ready", ready);
+    if (orthographicCanvas.isReady == true) {
+        await ready();
+    }
+    else {
+        orthographicCanvas.addEventListener("ready", ready);
+    }
 }
 
 export async function disableOrthographicResponder(parent) {

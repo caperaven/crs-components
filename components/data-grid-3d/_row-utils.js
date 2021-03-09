@@ -56,11 +56,13 @@ export function calculateRowWidth(columns, minWidth) {
     return rowWidth;
 }
 
-export async function createRowItem(width, height, ctx) {
+export async function createRowItem(ctx) {
     const geometry = new PlaneGeometry(1, 1);
     const texture = new CanvasTexture(ctx.canvas);
     const material = new MeshBasicMaterial({map: texture});
     const result = new Mesh(geometry, material);
-    result.scale.set(width, height, 1);
+    result.scale.set(ctx.canvas.width, ctx.canvas.height, 1);
+    result.__ctx = ctx;
+    result.__type = "data-row";
     return result;
 }

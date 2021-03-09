@@ -33,6 +33,7 @@ export class OrthographicCanvas extends HTMLElement {
 
             this.appendChild(this.renderer.domElement);
 
+            this.isReady = true;
             this.dispatchEvent(new CustomEvent("ready"));
             this.render();
         })

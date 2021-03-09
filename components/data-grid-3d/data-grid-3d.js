@@ -1,6 +1,5 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
-import {calculateRowWidth} from "./_row-utils.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {
@@ -11,17 +10,12 @@ class DataGrid3D extends HTMLElement {
         this._data = newValue;
         if (this._isReady == true) {
             this._dataChanged().catch(e => console.error(e));
-            this._lastDataIndex = newValue.length -1;
         }
     }
 
     async connectedCallback() {
-        this.minColumnWidth = 140;
-
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
-
         this._marker = this.querySelector(".scroll-marker");
-
         await initialize(this);
     }
 
@@ -51,6 +45,7 @@ class DataGrid3D extends HTMLElement {
         this.columnsDef = columnsDef;
         this._columnResizeContext.columnsDef = columnsDef;
         await createColumns(this.querySelector(".grid-columns"), columnsDef);
+        await this._rowFactory.updateRenderFunction(columnsDef);
     }
 
     /**
@@ -58,28 +53,11 @@ class DataGrid3D extends HTMLElement {
      * @returns {Promise<void>}
      */
     async _dataChanged() {
-        this.startIndex = 0;
-        this.endIndex = this.pageSize;
+        this._marker.style.transform = `translate(${this._rowFactory.dimensions.rowWidth}px, ${this._rowFactory.dimensions.rowHeight * this.data.length}px)`;
+        const cacheSize = this.data.length < 200 ? this.data.length : 200;
+        await this._rowFactory.initialize(cacheSize);
 
-        await this._clearBackBuffer();
-        await this._updateRenderFunction();
-
-        this.rows = new Map();
-        await this._createBackBuffer(0, this.pageSize);
-        await this._render();
-        this._marker.style.transform = `translate(${this.rowWidth}px, ${this.rowHeight * this.data.length}px)`;
-    }
-
-    /**
-     * Temp for debugging purposes so that it will auto render
-     * @returns {Promise<void>}
-     */
-    async animate() {
-        if (this.canvas == null) return;
-        requestAnimationFrame(() => {
-            this.canvas.render();
-            this.animate();
-        });
+        this._renderer.render(0, this.pageSize);
     }
 
     async drop(element, placeholder, dropTarget) {
@@ -94,21 +72,7 @@ class DataGrid3D extends HTMLElement {
     }
 
     async structureChanged() {
-        await this._updateRenderFunction();
-        this.rowWidth = calculateRowWidth(this.columnsDef, this.minColumnWidth);
-        const leftOffset = this.rowWidth / 2;
-
-        this.rows.forEach(row => {
-            if (row.ctx != null && row.isGroup != true) {
-                crs.canvas.resizeCanvas(row.ctx, this.rowWidth, this.rowHeight);
-                row.plane.scale.set(this.rowWidth, this.rowHeight, 1);
-                this.canvasInflatorFn(this.data[row.index], row.ctx);
-                row.plane.material.map.needsUpdate = true;
-                row.plane.position.x = leftOffset;
-            }
-        })
-
-        await this._update();
+        return this._renderer.structureChanged();
     }
 
     async swapColumns(startIndex, endIndex) {

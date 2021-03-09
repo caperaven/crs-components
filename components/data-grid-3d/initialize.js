@@ -5,19 +5,26 @@ import {disableColumnResize, enableColumnResize} from "./_columns-resize.js";
 import {enableOrthographicResponder, disableOrthographicResponder} from "./../../extensions/orthographic-canvas/orthographic-scroll-responder.js";
 import {enableRowRendering, disableRowRendering} from "./_row-rendering.js";
 import {enableVirtualization, disableVirtualization} from "./_virtualize.js";
+import {enableRowFactory, disableRowFactory} from "./_row-factory.js";
 
 export async function initialize(parent) {
     await createCanvas(parent);
+    await enableRowFactory(parent);
     await enableRowRendering(parent);
     await enableGrouping(parent);
     await enableMoveElements(parent);
-    await enableColumnResize(parent, parent.minColumnWidth);
+    await enableColumnResize(parent, parent._rowFactory.dimensions.minWidth);
     await enableOrthographicResponder(parent);
     await enableVirtualization(parent);
+
+    parent._isReady = true;
+    parent.ready();
+    parent.canvas.zeroTopLeft();
 }
 
 export async function dispose(parent) {
     await disposeCanvas(parent);
+    await disableRowFactory(parent);
     await disableRowRendering(parent);
     await disableGrouping(parent);
     await disableMoveElements(parent);
@@ -27,17 +34,17 @@ export async function dispose(parent) {
 }
 
 async function createCanvas(parent) {
-    const canvas = parent.querySelector("orthographic-canvas");
-    parent.canvas = canvas;
+    return new Promise(resolve => {
+        const canvas = parent.querySelector("orthographic-canvas");
+        parent.canvas = canvas;
 
-    function ready() {
-        parent.ready();
-        parent._isReady = true;
-        canvas.removeEventListener("ready", ready);
-        canvas.zeroTopLeft();
-    }
+        function initializeReady() {
+            canvas.removeEventListener("ready", initializeReady);
+            resolve();
+        }
 
-    canvas.addEventListener("ready", ready);
+        canvas.addEventListener("ready", initializeReady);
+    })
 }
 
 async function disposeCanvas(parent) {
