@@ -1,5 +1,5 @@
 import {createDragCanvas, setPlaceholder} from "../lib/element-utils.js";
-import {rebuildGrouping} from "./data-grid-grouping.js";
+import {rebuildGrouping} from "./_grouping.js";
 
 export async function enableMoveElements(parent) {
     parent._moveContext = new GridMoveElement(parent);

@@ -1,4 +1,4 @@
-import {calculateRowWidth, createRowItem, generateRowRenderer} from "./data-grid-row-utils.js";
+import {calculateRowWidth, createRowItem, generateRowRenderer} from "./_row-utils.js";
 
 export async function enableRowRendering(parent) {
     parent._clearBackBuffer = _clearBackBuffer;

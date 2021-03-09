@@ -1,6 +1,6 @@
 import {initialize, dispose} from "./initialize.js";
 import {createColumns} from "./columns-helper.js";
-import {calculateRowWidth} from "./data-grid-row-utils.js";
+import {calculateRowWidth} from "./_row-utils.js";
 
 class DataGrid3D extends HTMLElement {
     get data() {

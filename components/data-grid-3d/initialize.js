@@ -1,10 +1,10 @@
 import "./../orthographic-canvas/orthographic-canvas.js";
-import {disableMoveElements, enableMoveElements} from "./grid-move-element.js";
-import {disableGrouping, enableGrouping} from "./data-grid-grouping.js";
-import {disableColumnResize, enableColumnResize} from "./data-grid-columns-resize.js";
+import {disableMoveElements, enableMoveElements} from "./_move-element.js";
+import {disableGrouping, enableGrouping} from "./_grouping.js";
+import {disableColumnResize, enableColumnResize} from "./_columns-resize.js";
 import {enableOrthographicResponder, disableOrthographicResponder} from "./../../extensions/orthographic-canvas/orthographic-scroll-responder.js";
-import {enableRowRendering, disableRowRendering} from "./data-grid-row-rendering.js";
-import {enableVirtualization, disableVirtualization} from "./data-grid-virtualize.js";
+import {enableRowRendering, disableRowRendering} from "./_row-rendering.js";
+import {enableVirtualization, disableVirtualization} from "./_virtualize.js";
 
 export async function initialize(parent) {
     await createCanvas(parent);
