@@ -9,7 +9,7 @@ export default class Grid extends crsbinding.classes.ViewBase {
 
         this.grid.addEventListener("ready", async () => {
             await this.grid.initialize(columnsDef);
-            this.grid.data = createData(50);
+            this.grid.data = createData(100);
         })
     }
 

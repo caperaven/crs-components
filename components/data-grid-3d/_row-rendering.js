@@ -16,14 +16,24 @@ class RowRenderer {
         delete this.grid;
     }
 
+    async initialize(pageSize) {
+        this.pageSize = pageSize;
+        return this.render(0, this.pageSize * 2);
+    }
+
     async render(startIndex, count) {
         const rowHeight = this.grid._rowFactory.dimensions.rowHeight;
         const leftOffset = Math.round(this.grid._rowFactory.dimensions.rowWidth / 2);
         const top = Math.round(rowHeight / 2);
 
         for (let i = 0; i < count; i++) {
-            const nextTop = top + (i * rowHeight);
-            const rowItem = await this.grid._rowFactory.get(this.grid.data[i], i);
+            const index = startIndex + i;
+            if (index > this.grid.data.length - 1) {
+                break;
+            }
+
+            const nextTop = top + (index * rowHeight);
+            const rowItem = await this.grid._rowFactory.get(this.grid.data[index], index);
 
             this.grid.canvas.canvasPlace(rowItem, leftOffset, nextTop);
             this.grid.canvas.scene.add(rowItem);

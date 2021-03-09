@@ -56,8 +56,7 @@ class DataGrid3D extends HTMLElement {
         this._marker.style.transform = `translate(${this._rowFactory.dimensions.rowWidth}px, ${this._rowFactory.dimensions.rowHeight * this.data.length}px)`;
         const cacheSize = this.data.length < 200 ? this.data.length : 200;
         await this._rowFactory.initialize(cacheSize);
-
-        this._renderer.render(0, this.pageSize);
+        await this._renderer.initialize(this.pageSize);
     }
 
     async drop(element, placeholder, dropTarget) {
