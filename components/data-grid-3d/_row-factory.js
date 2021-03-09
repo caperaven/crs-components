@@ -16,7 +16,7 @@ class RowFactory extends BaseCacheFactory {
 
         this.grid = parent;
 
-        this.setDimensions(0, 48);
+        this.setDimensions(0, 44);
     }
 
     dispose() {

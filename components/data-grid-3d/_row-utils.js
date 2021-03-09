@@ -31,7 +31,7 @@ export async function generateRowRenderer(args) {
 
         const maxWidth = width - (args.padding * 2);
 
-        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${args.textHeight + args.padding}, ${maxWidth});`);
+        code.push(`context["${field}"] && ctx.fillText(context["${field}"],${offsetX + args.padding}, ${(args.textHeight / 2) + args.padding}, ${maxWidth});`);
 
         // draw the line from top to bottom after the field text
         lineCode.push('ctx.beginPath();');
