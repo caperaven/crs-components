@@ -33,6 +33,7 @@ class OrthographicScrollResponder {
     }
 
     constructor(orthographicCanvas, scrollBox, virtualizeBottomCallback, virtualizeTopCallback, callbackMargin) {
+        this._oldY = 0;
         this._orthographicCanvas = orthographicCanvas;
         this._scrollbox = scrollBox;
 

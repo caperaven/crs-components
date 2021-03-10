@@ -9,9 +9,9 @@ import {enableRowFactory, disableRowFactory} from "./_row-factory.js";
 
 export async function initialize(parent) {
     await createCanvas(parent);
-    await enableVirtualization(parent);
     await enableRowFactory(parent);
     await enableRowRendering(parent);
+    await enableVirtualization(parent);
     await enableGrouping(parent);
     await enableMoveElements(parent);
     await enableColumnResize(parent, parent._rowFactory.dimensions.minWidth);
@@ -19,14 +19,14 @@ export async function initialize(parent) {
 
     parent._isReady = true;
     parent.ready();
-    parent.canvas.zeroTopLeft();
+    parent.canvas.zeroBottomLeft();
 }
 
 export async function dispose(parent) {
     await disposeCanvas(parent);
-    await disableVirtualization(parent);
     await disableRowFactory(parent);
     await disableRowRendering(parent);
+    await disableVirtualization(parent);
     await disableGrouping(parent);
     await disableMoveElements(parent);
     await disableColumnResize(parent);

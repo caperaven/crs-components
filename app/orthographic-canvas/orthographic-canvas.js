@@ -15,7 +15,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
             await this._createPlane();
             await this._createPenta();
             this.canvas.removeEventListener("ready", ready);
-            this.canvas.zeroTopLeft();
+            this.canvas.zeroBottomLeft();
             this.canvas.render();
 
             requestAnimationFrame(async () => {

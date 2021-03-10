@@ -11,7 +11,7 @@ export class OrthographicCanvas extends HTMLElement {
         return this.getAttribute("background") || 0xffffff;
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         requestAnimationFrame(() => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
@@ -34,12 +34,13 @@ export class OrthographicCanvas extends HTMLElement {
             this.appendChild(this.renderer.domElement);
 
             this.isReady = true;
+            if (this.ready != null) this.ready();
             this.dispatchEvent(new CustomEvent("ready"));
             this.render();
         })
     }
 
-    disconnectedCallback() {
+    async disconnectedCallback() {
         this.scene.clear();
         this.scene = null;
         this.renderer = null;
@@ -52,7 +53,7 @@ export class OrthographicCanvas extends HTMLElement {
         this.renderer.render(this.scene, this.camera);
     }
 
-    zeroTopLeft() {
+    zeroBottomLeft() {
         this.cameraStartLeft = this.width / 2;
         this.cameraStartTop = this.height / -2;
         this.camera.position.set(this.cameraStartLeft, this.cameraStartTop, 0);

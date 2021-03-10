@@ -1,0 +1,17 @@
+<style>
+    simple-bar-chart {
+        display: block;
+        width: 800px;
+        height: 600px
+    }
+
+    simple-bar-chart canvas {
+        border: solid 1px silver;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<simple-bar-chart color="#ff0090" disabled-color="#dadada" selected-color="#ffbb00"></simple-bar-chart>
+
+<button click.call="update">Update</button>
