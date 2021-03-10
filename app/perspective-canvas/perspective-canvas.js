@@ -24,13 +24,14 @@ export default class Welcome extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
-        await super.disconnectedCallback();
-        this.box = null;
+        this.cube = null;
         this.canvas = null;
         this.animateHandler = null;
+        await super.disconnectedCallback();
     }
 
     async animate(time) {
+        if (this.animateHandler == null) return;
         requestAnimationFrame(this.animateHandler);
         this.cube.rotation.x += 0.01;
         this.cube.rotation.y += 0.01;
