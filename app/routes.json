@@ -48,6 +48,11 @@
       "view": "orthographic-canvas"
     },
     {
+      "title": "Perspective Camera",
+      "hash": "#perspective-canvas",
+      "view": "perspective-canvas"
+    },
+    {
       "title": "Simple Bar Chart",
       "hash": "#simple-bar-chart",
       "view": "simple-bar-chart"

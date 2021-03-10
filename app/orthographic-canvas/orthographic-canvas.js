@@ -49,8 +49,4 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         this.plane.rotateZ(0.01);
         this.canvas.render();
     }
-
-    async rangeValueChanged(value) {
-        console.log(value);
-    }
 }
