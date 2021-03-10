@@ -2,6 +2,11 @@ import {CameraCanvasBase} from "./../base-components/camera-canvas-base.js";
 import {PerspectiveCamera} from "/node_modules/three/src/cameras/PerspectiveCamera.js";
 
 export class PerspectiveCanvas extends CameraCanvasBase {
+    async connectedCallback() {
+        this._nearPlane = 0.1;
+        await super.connectedCallback();
+    }
+
     get fov() {
         if (this._fov == null) {
             this._fov = Number(this.getAttribute("fov") || 75);
