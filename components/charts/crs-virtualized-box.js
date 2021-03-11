@@ -29,9 +29,15 @@ export class VirtualizedBox extends BaseChart {
     }
 
     async disconnectedCallback() {
-        this.offscreenMesh = null;
+        this.canvas.removeEventListener("mousedown", this._mousedownHandler);
+
         this.geometry = null;
         this.material = null;
+        this.canvas = null;
+        this._mousedownHandler = null;
+        this._mouseupHandler = null;
+        this._mousemoveHandler = null;
+
         await super.disconnectedCallback();
     }
 
@@ -42,6 +48,28 @@ export class VirtualizedBox extends BaseChart {
         this.dummy = new Object3D();
         this.geometry = new PlaneGeometry(1, 1);
         this.material = new MeshBasicMaterial();
+
+        this.canvas = this.querySelector("canvas");
+        this._mousedownHandler = this._mousedown.bind(this);
+        this._mouseupHandler = this._mouseup.bind(this);
+        this._mousemoveHandler = this._mousemove.bind(this);
+        this.canvas.addEventListener("mousedown", this._mousedownHandler);
+    }
+
+    async _mousedown(event) {
+        this._startX = event.clientX;
+        this.canvas.addEventListener("mousemove", this._mousemoveHandler);
+        this.canvas.addEventListener("mouseup", this._mouseupHandler);
+    }
+
+    async _mouseup(event) {
+        this.canvas.removeEventListener("mousemove", this._mousemoveHandler);
+        this.canvas.removeEventListener("mouseup", this._mouseupHandler);
+    }
+
+    async _mousemove(event) {
+        const moveOffsetX = event.clientX - this._startX;
+        await this.moveData(moveOffsetX);
     }
 
     async calculateOffsets() {
@@ -68,7 +96,7 @@ export class VirtualizedBox extends BaseChart {
         this.scene.add(this.mesh);
 
         for (let i = 0; i < this.visibleCount; i++) {
-            await this.scaleItem(i);
+            await this.scaleItem(i, i);
             await this.positionItem((i * this.barWidth) + (i * this.barPadding), 0, chartPadding.x, chartPadding.y);
             this.dummy.updateMatrix();
             this.mesh.setMatrixAt(i, this.dummy.matrix);
@@ -76,22 +104,27 @@ export class VirtualizedBox extends BaseChart {
         }
 
         this.render();
+
+        this._oldIndex = 0;
     }
 
     async updateGraphics(fromIndex) {
-        const toIndex = fromIndex + this.visibleCount;
+        let toIndex = Math.round(fromIndex);
+        if (toIndex == this._oldIndex) return;
 
-        for (let i = 0; i < toIndex; i++) {
-            await this.scaleItem(i);
+        for (let i = 0; i < this.visibleCount; i++) {
+            await this.scaleItem(i, toIndex + i);
+            this.mesh.setMatrixAt(i, this.dummy.matrix);
         }
 
         this.mesh.instanceMatrix.needsUpdate = true;
 
         this.render();
+        this._oldIndex = fromIndex;
     }
 
-    async scaleItem(index) {
-        const item = this.data[index];
+    async scaleItem(index, dataIndex) {
+        const item = this.data[dataIndex];
         const height = item.value * this.heightScale;
         this.mesh.getMatrixAt(index, this.dummy.matrix);
         this.dummy.scale.set(this.barWidth, height, 1);
@@ -106,6 +139,11 @@ export class VirtualizedBox extends BaseChart {
     async updateColor(index, color) {
         this.mesh.setColorAt(index, new Color(color));
         this.mesh.instanceColor.needsUpdate = true;
+    }
+
+    async moveData(offset) {
+        this.currentIndex = this.currentIndex - ((offset / this.visibleCount) * 0.01);
+        await this.updateGraphics(this.currentIndex);
     }
 }
 
