@@ -58,6 +58,11 @@
       "view": "simple-bar-chart"
     },
     {
+      "title": "Virtualized Bar Chart",
+      "hash": "#virtualized-bar-chart",
+      "view": "virtualized-bar-chart"
+    },
+    {
       "title": "Image Card",
       "hash": "#image-card",
       "view": "image-card"

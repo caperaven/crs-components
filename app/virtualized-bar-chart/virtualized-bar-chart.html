@@ -1,0 +1,18 @@
+<style>
+    virtualized-bar-chart {
+        display: block;
+        width: 800px;
+        height: 600px
+    }
+
+    virtualized-bar-chart canvas {
+        border: solid 1px silver;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<virtualized-bar-chart></virtualized-bar-chart>
+
+<button click.call="tpUpdate">Update</button>
+<input type="number" value.bind="tpIndex">

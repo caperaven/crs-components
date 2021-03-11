@@ -27,6 +27,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
+        await super.disconnectedCallback();
         await disableOrthographicDraggable(this.canvas);
     }
 

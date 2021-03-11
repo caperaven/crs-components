@@ -1,67 +1,9 @@
-import {OrthographicCanvas} from "./../orthographic-canvas/orthographic-canvas.js";
+import {BaseChart} from "./crs-base-chart.js";
 import {createNormalizedPlane} from "./../../threejs-helpers/shape-factory.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
 
-export class SimpleBarChart extends OrthographicCanvas {
-    get data() {
-        return this._data;
-    }
-
-    set data(newValue) {
-        this._data = newValue;
-        this._dataChanged();
-    }
-
-    get color() {
-        if (this._color == null) {
-            this._color = this.getAttribute("color") || "#2A7FCD";
-        }
-        return Number(this._color.replace("#", "0x"));
-    }
-
-    set color(newValue) {
-        this._color = newValue;
-    }
-
-    get disabledColor() {
-        if (this._disabledColor == null) {
-            this._disabledColor = this.getAttribute("disabled-color") || "#BEC0C3";
-        }
-        return Number(this._disabledColor.replace("#", "0x"));
-    }
-
-    set disabledColor(newValue) {
-        this._disabledColor = newValue;
-    }
-
-    get selectedColor() {
-        if (this._selectedColor == null) {
-            this._selectedColor = this.getAttribute("selected-color") || "#1C568A"
-        }
-        return Number(this._selectedColor.replace("#", "0x"));
-    }
-
-    set selectedColor(newValue) {
-        this._selectedColor = newValue;
-    }
-
-    get chartPadding() {
-        if (this._chartPadding == null) {
-            this._chartPadding = this.getAttribute("chart-padding") || "16,16";
-        }
-
-        const parts = this._chartPadding.split(",");
-        return {
-            x: Number(parts[0]),
-            y: Number(parts[1])
-        }
-    }
-
-    set chartPadding(newValue) {
-        this._chartPadding = newValue;
-    }
-
+export class SimpleBarChart extends BaseChart {
     get barWidth() {
         if (this._barWidth == null) {
             this._barWidth = Number(this.getAttribute("bar-width") || 32);
@@ -82,10 +24,6 @@ export class SimpleBarChart extends OrthographicCanvas {
 
     set barPadding(newValue) {
         this._barPadding = newValue;
-    }
-
-    async connectedCallback() {
-        await super.connectedCallback();
     }
 
     async disconnectedCallback() {
@@ -117,10 +55,6 @@ export class SimpleBarChart extends OrthographicCanvas {
         }
     }
 
-    async getMaxValue() {
-        return Math.max(...this.data.map(item => item.value));
-    }
-
     canvasPlace(mesh, x, y) {
         mesh.position.set(x, y, 0);
     }
@@ -130,9 +64,6 @@ export class SimpleBarChart extends OrthographicCanvas {
         const chartPadding = this.chartPadding;
         await this.calculateOffsets();
 
-        /**
-         * JHR: TODO we need to make this instanced so that it lessons the draw calls
-         */
         for (let item of this.data) {
             const plane = createNormalizedPlane(this.barWidth, item.value * this.heightScale);
             plane.material.color = new Color(this.color);
