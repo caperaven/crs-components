@@ -27,8 +27,8 @@ export class SimpleBarChart extends BaseChart {
     }
 
     async disconnectedCallback() {
-        await super.disconnectedCallback();
         await disableOrthographicDraggable(this);
+        await super.disconnectedCallback();
     }
 
     async ready() {

@@ -9,8 +9,8 @@ export default class SimpleBarChart extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
-        await super.disconnectedCallback();
         this.canvas = null;
+        await super.disconnectedCallback();
     }
 
     async update() {
