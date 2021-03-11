@@ -5,7 +5,7 @@ import {InstancedMesh} from "/node_modules/three/src/objects/InstancedMesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 
-export class VirtualizedBox extends BaseChart {
+export class VirtualizedBarChart extends BaseChart {
     get barWidth() {
         if (this._barWidth == null) {
             this._barWidth = Number(this.getAttribute("bar-width") || 32);
@@ -147,4 +147,4 @@ export class VirtualizedBox extends BaseChart {
     }
 }
 
-customElements.define("virtualized-bar-chart", VirtualizedBox);
+customElements.define("virtualized-bar-chart", VirtualizedBarChart);
