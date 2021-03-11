@@ -96,7 +96,7 @@ export class SimpleBarChart extends OrthographicCanvas {
     async ready() {
         this._offsetX = -Math.round(this.width / 2);
         this._offsetY = -Math.round(this.height / 2);
-        await enableOrthographicDraggable(this);
+        await enableOrthographicDraggable(this, false, true);
     }
 
     async calculateOffsets() {

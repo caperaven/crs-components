@@ -4,7 +4,7 @@ import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMate
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
-import {createRegularMesh} from "./../../shapes/regular-shape.js";
+import {createRegularMesh} from "./../../threejs-helpers/shape-factory.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {

@@ -1,5 +1,7 @@
-export async function enableOrthographicDraggable(orthographicCanvas) {
+export async function enableOrthographicDraggable(orthographicCanvas, lockX = false, lockY = false) {
     orthographicCanvas._draggable = new OrthographicDraggable(orthographicCanvas);
+    orthographicCanvas._draggable.lockX = lockX;
+    orthographicCanvas._draggable.lockY = lockY;
 }
 
 export async function disableOrthographicDraggable(orthographicCanvas) {
@@ -31,6 +33,8 @@ class OrthographicDraggable {
         this._orthographicCanvas = orthographicCanvas;
 
         this.canvas = orthographicCanvas.querySelector("canvas");
+        this.lockX = false;
+        this.lockY = false;
         this.enabled = true;
     }
 
@@ -63,7 +67,10 @@ class OrthographicDraggable {
         const offsetY = (this.y - this.oldY);
 
         const current = this._orthographicCanvas.camera.position;
-        this._orthographicCanvas.camera.position.set(current.x - offsetX, current.y + offsetY, current.z);
+        const x = this.lockX == true ? current.x : current.x - offsetX;
+        const y = this.lockY == true ? current.y : current.y + offsetY;
+
+        this._orthographicCanvas.camera.position.set(x, y, current.z);
         await this._orthographicCanvas.render();
 
         this.oldX = this.x;
