@@ -4,6 +4,7 @@ import {Object3D} from "/node_modules/three/src/core/Object3D.js";
 import {InstancedMesh} from "/node_modules/three/src/objects/InstancedMesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
+
 export class VirtualizedBox extends BaseChart {
     get barWidth() {
         if (this._barWidth == null) {
@@ -107,16 +108,5 @@ export class VirtualizedBox extends BaseChart {
         this.mesh.instanceColor.needsUpdate = true;
     }
 }
-
-// mesh = new THREE.InstancedMesh( geometry, material, count );
-// const dummy = new THREE.Object3D();
-// dummy.position.set( offset - x, offset - y, offset - z );
-// dummy.rotation.y = ( Math.sin( x / 4 + time ) + Math.sin( y / 4 + time ) + Math.sin( z / 4 + time ) );
-// dummy.rotation.z = dummy.rotation.y * 2;
-//
-// dummy.updateMatrix();
-//
-// mesh.setMatrixAt( i ++, dummy.matrix );
-// mesh.setColorAt( i, color );
 
 customElements.define("virtualized-bar-chart", VirtualizedBox);
