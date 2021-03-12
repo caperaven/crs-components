@@ -8,10 +8,19 @@
     virtualized-bar-chart canvas {
         border: solid 1px silver;
     }
+
+    input[type="range"] {
+        width: 800px;
+    }
 </style>
 
 <h2>${title}</h2>
 
-<virtualized-bar-chart></virtualized-bar-chart>
+<virtualized-bar-chart tabindex="0"></virtualized-bar-chart>
 
-<button click.call="test">Test</button>
+<input type="range" min="0" max="999" value.bind="index">
+<div>${index}</div>
+
+<div>
+    <button click.call="refresh">New Data</button>
+</div>

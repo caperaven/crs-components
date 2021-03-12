@@ -68,7 +68,7 @@ export class VirtualizedBarChart extends BaseChart {
     }
 
     async _mousemove(event) {
-        const moveOffsetX = event.clientX - this._startX;
+        const moveOffsetX = this._startX - event.clientX;
         await this.moveData(moveOffsetX);
     }
 
@@ -109,12 +109,22 @@ export class VirtualizedBarChart extends BaseChart {
     }
 
     async updateGraphics(fromIndex) {
+        if (this.mesh == null) return;
+
+        const chartPadding = this.chartPadding;
         let toIndex = Math.round(fromIndex);
         if (toIndex == this._oldIndex) return;
 
         for (let i = 0; i < this.visibleCount; i++) {
-            await this.scaleItem(i, toIndex + i);
+            if (toIndex > this.data.length - 1) {
+                break;
+            }
+
+            await this.scaleItem(i, toIndex);
+            await this.positionItem((i * this.barWidth) + (i * this.barPadding), 0, chartPadding.x, chartPadding.y);
+            this.dummy.updateMatrix();
             this.mesh.setMatrixAt(i, this.dummy.matrix);
+            toIndex++;
         }
 
         this.mesh.instanceMatrix.needsUpdate = true;
@@ -142,8 +152,14 @@ export class VirtualizedBarChart extends BaseChart {
     }
 
     async moveData(offset) {
-        this.currentIndex = this.currentIndex - ((offset / this.visibleCount) * 0.01);
-        await this.updateGraphics(this.currentIndex);
+        const indexOffset = ((offset / this.visibleCount) * 0.01);
+        this.currentIndex = this.currentIndex + indexOffset;
+        if (this.currentIndex > 0 && this.currentIndex < this.data.length - this.visibleCount) {
+            await this.updateGraphics(this.currentIndex);
+        }
+        else {
+            this.currentIndex = this.currentIndex < 0 ? 0 : this.data.length - this.visibleCount;
+        }
     }
 }
 
