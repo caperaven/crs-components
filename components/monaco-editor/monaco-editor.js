@@ -50,21 +50,31 @@ class MonacoEditor extends HTMLElement {
         this._theme = newValue;
     }
 
+    get visible() {
+        return this._visible;
+    }
+
+    set visible(newValue) {
+        this._visible = newValue;
+        this.style.display = newValue ? "block" : "none";
+    }
+
     async connectedCallback() {
+        this._notifyReadyHandler = this._notifyReady.bind(this);
         this.style.display = "block";
         this.style.overflow = "hidden";
 
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
         await this._addRequireJS();
         await this._initEditor();
-
-        this.dispatchEvent(new CustomEvent("ready"));
+        await this._notifyReady();
     }
 
     async disconnectedCallback() {
         if (this._editor != null) this._editor.dispose();
         this._editor = null;
         this._monaco = null;
+        this._notifyReadyHandler = null;
     }
 
     async _addRequireJS() {
@@ -160,6 +170,14 @@ class MonacoEditor extends HTMLElement {
             original: originalModel,
             modified: modifiedModel
         });
+    }
+
+    async _notifyReady() {
+        if (this.monaco == null || this.monaco.editor == null) {
+            return requestAnimationFrame(this._notifyReadyHandler);
+        }
+
+        this.dispatchEvent(new CustomEvent("ready"));
     }
 }
 
