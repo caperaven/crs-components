@@ -64,9 +64,9 @@
             <button click.setValue="$context.tab = 'vertex'" classlist.if="tab != 'vertex' ? 'flat'">Vertex</button>
         </div>
         <div class="editor-body">
-            <crs-monaco-editor id="edtFragment"></crs-monaco-editor>
-            <crs-monaco-editor id="edtVertex"></crs-monaco-editor>
+            <crs-monaco-editor id="edtFragment" language="cpp" ready.call="loadFragmentCode"></crs-monaco-editor>
+            <crs-monaco-editor id="edtVertex" language="cpp" ready.call="loadVertexCode"></crs-monaco-editor>
         </div>
     </div>
-    <perspective-canvas background="#000000"></perspective-canvas>
+    <perspective-canvas background="#000000" ready.call="loadCanvas"></perspective-canvas>
 </div>
