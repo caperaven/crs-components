@@ -1,0 +1,72 @@
+<style>
+    crs-router {
+        display: grid;
+        grid-template-rows: auto 1fr;
+    }
+    .split-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    perspective-canvas {
+        width: 1024px;
+        height: 768px;
+    }
+
+    .tabs {
+        display: grid;
+        grid-template-rows: auto 1fr;
+    }
+
+    .tab-buttons {
+        display: flex;
+        flex-direction: row;
+        padding: 0.5rem;
+    }
+
+    .tab-buttons button {
+        width: 100px;
+        height: 32px;
+        cursor: pointer;
+        outline: none;
+        padding: 0.5rem;
+    }
+
+    .flat {
+        border: 0;
+        color: gray;
+    }
+
+    .editor-body {
+        position: relative;
+    }
+
+    crs-monaco-editor {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    [hidden="hidden"] {
+        display: none;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<div class="split-container">
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button click.setValue="$context.tab = 'fragment'" classlist.if="tab != 'fragment' ? 'flat'">Fragment</button>
+            <button click.setValue="$context.tab = 'vertex'" classlist.if="tab != 'vertex' ? 'flat'">Vertex</button>
+        </div>
+        <div class="editor-body">
+            <crs-monaco-editor id="edtFragment" hidden.if="tab != 'fragment'"></crs-monaco-editor>
+            <crs-monaco-editor id="edtVertex" hidden.if="tab != 'vertex'"></crs-monaco-editor>
+        </div>
+    </div>
+    <perspective-canvas background="#000000"></perspective-canvas>
+</div>

@@ -2,7 +2,6 @@ import "./../../components/orthographic-canvas/orthographic-canvas.js";
 import {MsdfFont} from "./../../threejs-helpers/msdf/msdf-font.js";
 import {createNormalizedPlane} from "./../../threejs-helpers/shape-factory.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
-import {createCustomUVPlane} from "./../../threejs-helpers/shape-factory.js";
 
 export default class MsdfView extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -33,6 +32,10 @@ export default class MsdfView extends crsbinding.classes.ViewBase {
     async debug() {
         const plane = await this.font.fromText(this.getProperty("text"));
         this.canvas.scene.add(plane);
+        this.canvas.render();
+    }
+
+    async update() {
         this.canvas.render();
     }
 }

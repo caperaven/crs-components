@@ -1,6 +1,7 @@
 import {TextureLoader} from "/node_modules/three/src/loaders/TextureLoader.js";
 import {Group} from "/node_modules/three/src/objects/Group.js";
 import {createCustomUVPlane} from "../shape-factory.js";
+import {MsdfLayout} from "./msdf-layout.js";
 
 export class MsdfFont {
     constructor(json, loadedCallback) {
@@ -9,9 +10,14 @@ export class MsdfFont {
     }
 
     dispose() {
+        this._layout.dispose();
+        this._layout = null;
         this._cache.clear();
         this._cache = null;
         this.texture = null;
+        this.lineHeight = null;
+        this.baseLine = null;
+        this.kernings = null;
     }
 
     /**
@@ -21,16 +27,17 @@ export class MsdfFont {
      */
     async fromText(string) {
         const group = new Group();
-        for (let char of string) {
-            group.add(await this.fromChar(char));
-        }
-        return group;
-    }
 
-    async fromChar(char) {
-        const charItem = this._cache.get(char);
-        const plane = await createCustomUVPlane(100, 100, this.texture, charItem.uv.tx1, charItem.uv.tx2, charItem.uv.ty1, charItem.uv.ty2);
-        return plane;
+        for (let char of string) {
+            const charItem = this._cache.get(char);
+            const plane = await createCustomUVPlane(charItem.width, charItem.height, this.texture, charItem.uv.tx1, charItem.uv.tx2, charItem.uv.ty1, charItem.uv.ty2);
+            plane.__charItem = charItem;
+            group.add(plane);
+        }
+
+        await this._layout.layout(group);
+
+        return group;
     }
 
     /**
@@ -43,6 +50,7 @@ export class MsdfFont {
     async _loadResources(jsonPath) {
         this.texture = new TextureLoader().load(jsonPath.replace(".json", ".png"));
         const json = await fetch(jsonPath).then(result => result.json());
+        this._layout = new MsdfLayout(json);
         await this._populateCache(json);
     }
 
@@ -53,8 +61,8 @@ export class MsdfFont {
      * @private
      */
     async _populateCache(json) {
-        const tWidth = this.texture.image.width;
-        const tHeight = this.texture.image.height;
+        const tWidth = json.common.scaleW;
+        const tHeight = json.common.scaleH;
 
         for (let charItem of json.chars) {
             const char = String.fromCharCode(charItem.id);

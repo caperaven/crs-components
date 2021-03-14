@@ -58,6 +58,4 @@ export async function updatePlaneUV(mesh, tx1, tx2, ty1, ty2) {
     uvAttribute.setXY(1, tx2, ty1);
     uvAttribute.setXY(2, tx1, ty2);
     uvAttribute.setXY(3, tx2, ty2);
-
-    console.log(uvAttribute);
 }
