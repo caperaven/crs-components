@@ -1,8 +1,10 @@
 import "./../../components/monaco-editor/monaco-editor.js";
-import "./../../components/perspective-canvas/perspective-canvas.js";
-import {BoxGeometry} from "/node_modules/three/src/geometries/BoxGeometry.js";
+import "./../../components/orthographic-canvas/orthographic-canvas.js";
 import {RawShaderMaterial} from "/node_modules/three/src/materials/RawShaderMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
+import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
+import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
+import {Color} from "/node_modules/three/src/math/Color.js";
 
 export default class ShaderEditor extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -23,27 +25,6 @@ export default class ShaderEditor extends crsbinding.classes.ViewBase {
     load() {
         this._canvas = this.element.querySelector("perspective-canvas");
         super.load();
-    }
-
-    async _buildScene() {
-        return new Promise(resolve => {
-            const buildScene = (event) => {
-                if (event != null) {
-                    this._canvas.removeEventListener("ready", buildScene);
-                }
-
-                this._buildPlane();
-                this._canvas.camera.position.z = 5;
-                this._canvas.render();
-            }
-
-            if (this._canvas.isReady == true) {
-                buildScene();
-            }
-            else {
-                this._canvas.addEventListener("ready", buildScene);
-            }
-        })
     }
 
     tabChanged(newValue) {
@@ -73,17 +54,14 @@ export default class ShaderEditor extends crsbinding.classes.ViewBase {
 
     async loadCanvas(event) {
         this._canvas = event.target;
-        this._canvas.camera.position.z = 5;
+        await this._buildPlane();
     }
 
-    _buildPlane() {
-        const geometry = new BoxGeometry();
-        const material = new RawShaderMaterial({
-            vertexShader: this._vertexShader,
-            fragmentShader: this._fragmentShader
-        });
-        const mesh = new Mesh(geometry, material);
-
-        this._canvas.scene.add(mesh);
+    async _buildPlane() {
+        const geometry = new PlaneGeometry(this._canvas.width, this._canvas.height);
+        const material = new MeshBasicMaterial({color: new Color(0xff0090)});
+        this.plane = new Mesh(geometry, material);
+        this._canvas.scene.add(this.plane);
+        this._canvas.render();
     }
 }

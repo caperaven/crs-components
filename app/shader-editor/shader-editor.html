@@ -5,10 +5,10 @@
     }
     .split-container {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 1fr 1056px;
     }
 
-    perspective-canvas {
+    orthographic-canvas {
         width: 1024px;
         height: 768px;
     }
@@ -68,5 +68,5 @@
             <crs-monaco-editor id="edtVertex" language="cpp" ready.call="loadVertexCode"></crs-monaco-editor>
         </div>
     </div>
-    <perspective-canvas background="#000000" ready.call="loadCanvas"></perspective-canvas>
+    <orthographic-canvas ready.call="loadCanvas"></orthographic-canvas>
 </div>
