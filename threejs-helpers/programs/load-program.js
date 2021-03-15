@@ -2,6 +2,7 @@ import {RawShaderMaterial} from "/node_modules/three/src/materials/RawShaderMate
 import {TextureLoader} from "/node_modules/three/src/loaders/TextureLoader.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
+import {Color} from "/node_modules/three/src/math/Color.js";
 
 export async function loadProgram(canvas, program) {
     const fragmentShader = await loadShader(program.fragmentShader);
@@ -25,6 +26,10 @@ async function loadShader(file) {
 async function processUniforms(uniforms) {
     const keys = Object.keys(uniforms);
     for (let key of keys) {
+        if (key.indexOf("color") != -1) {
+            uniforms[key].value = new Color(uniforms[key].value)
+        }
+
         if (uniforms[key].type != null) {
             if (uniforms[key].type == "t") {
                 uniforms[key] = await loadTexture(uniforms[key].value);
