@@ -5,16 +5,23 @@ import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
+import {ShaderMaterial} from "/node_modules/three/src/materials/ShaderMaterial.js";
 
 export default class ShaderEditor extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
+        this._keyDownHandler = this._keyDown.bind(this);
+        document.addEventListener("keydown", this._keyDownHandler);
     }
 
     async disconnectedCallback() {
         this._vertexEditor = null;
         this._fragmentEditor = null;
         this._canvas = null;
+
+        document.removeEventListener("keydown", this._keyDownHandler);
+        this._keyDownHandler = null;
+
         await super.disconnectedCallback();
     }
 
@@ -41,6 +48,7 @@ export default class ShaderEditor extends crsbinding.classes.ViewBase {
         this._fragmentShader = code;
         this._fragmentEditor.value = code;
         this._fragmentEditor.visible = this.getProperty("tab") === "fragment";
+        await this._buildPlane();
     }
 
     async loadVertexCode(event) {
@@ -50,6 +58,7 @@ export default class ShaderEditor extends crsbinding.classes.ViewBase {
         this._vertexShader = code;
         this._vertexEditor.value = code;
         this._vertexEditor.visible = this.getProperty("tab") === "vertex";
+        await this._buildPlane();
     }
 
     async loadCanvas(event) {
@@ -58,10 +67,29 @@ export default class ShaderEditor extends crsbinding.classes.ViewBase {
     }
 
     async _buildPlane() {
+        if (this._vertexShader == null || this._fragmentShader == null || this._canvas == null) return;
         const geometry = new PlaneGeometry(this._canvas.width, this._canvas.height);
-        const material = new MeshBasicMaterial({color: new Color(0xff0090)});
+
+        const material = new ShaderMaterial({
+            uniforms: {},
+            vertexShader: this._vertexShader,
+            fragmentShader: this._fragmentShader
+        });
+
         this.plane = new Mesh(geometry, material);
         this._canvas.scene.add(this.plane);
         this._canvas.render();
+    }
+
+    async _keyDown(event) {
+        if (event.altKey == true && event.code == "Enter") {
+            this._vertexShader = this._vertexEditor.value;
+            this._fragmentShader = this._fragmentEditor.value;
+
+            this.plane.material.fragmentShader = this._fragmentShader;
+            this.plane.material.vertexShader = this._vertexShader;
+            this.plane.material.needsUpdate = true;
+            this._canvas.render();
+        }
     }
 }
