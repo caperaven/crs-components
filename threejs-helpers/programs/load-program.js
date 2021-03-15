@@ -4,6 +4,24 @@ import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 
+class Program {
+    constructor(canvas) {
+        this._canvas = canvas;
+        this._animateHandler = this.animate.bind(this);
+    }
+
+    dispose() {
+        this._canvas = null;
+        this._animateHandler = null;
+    }
+
+    animate() {
+        if (this._animateHandler == null) return;
+        requestAnimationFrame(this._animateHandler);
+        this._canvas.render();
+    }
+}
+
 export async function loadProgram(canvas, program) {
     const fragmentShader = await loadShader(program.fragmentShader);
     const vertexShader = await loadShader(program.vertexShader);
@@ -16,7 +34,8 @@ export async function loadProgram(canvas, program) {
     });
 
     await loadScene(canvas, program.scene, material);
-    canvas.render();
+
+    return new Program(canvas);
 }
 
 async function loadShader(file) {
@@ -32,7 +51,7 @@ async function processUniforms(uniforms) {
 
         if (uniforms[key].type != null) {
             if (uniforms[key].type == "t") {
-                uniforms[key] = await loadTexture(uniforms[key].value);
+                uniforms[key].value = await loadTexture(uniforms[key].value);
             }
         }
     }
