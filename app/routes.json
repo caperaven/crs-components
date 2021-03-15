@@ -78,6 +78,11 @@
       "view": "msdf"
     },
     {
+      "title": "Raw Shader Example",
+      "hash": "#raw-shader-example",
+      "view": "raw-shader-example"
+    },
+    {
       "title": "Shader Editor",
       "hash": "#shader-editor",
       "view": "shader-editor"

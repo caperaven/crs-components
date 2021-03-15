@@ -76,7 +76,6 @@ export class CameraCanvasBase extends HTMLElement {
         window.removeEventListener("resize", this.resizeHandler);
         this.resizeHandler = null;
 
-        this.scene.clear();
         this.scene = null;
         this.renderer = null;
         this.camera = null;
