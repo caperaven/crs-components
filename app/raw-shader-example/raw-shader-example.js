@@ -24,9 +24,10 @@ export default class RawShaderExample extends crsbinding.classes.ViewBase {
 
         const material = new RawShaderMaterial({
             uniforms: {
-                colorA: new Color(0xff0000),
-                colorB: new Color(0x0000ff),
-                time: 0
+                colorA: {value: new Color(0xff0000)},
+                colorB: {value: new Color(0x0000ff)},
+                time: {value: 0},
+                map: {value: null}
             },
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
@@ -40,6 +41,6 @@ export default class RawShaderExample extends crsbinding.classes.ViewBase {
     async _animate(time) {
         if (this._animateHandler == null) return;
         requestAnimationFrame(this._animateHandler);
-        this.plane.material.uniforms.time = time || 0;
+        this.plane.material.uniforms.time.value = time || 0;
     }
 }

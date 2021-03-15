@@ -1,10 +1,15 @@
 export const fragmentShader = [
 "precision highp float;",
 "precision highp int;",
+"uniform vec3 colorA;",
+"uniform vec3 colorB;",
+"uniform float time;",
+"uniform sampler2D map;",
 "varying vec2 vUv;",
 "",
 "void main() {",
-"    gl_FragColor = vec4(vUv.x, 0.0, 1.0, 1.0);",
+"    vec3 color = mix(colorA, colorB, vUv.x);",
+"    gl_FragColor = vec4(vec3(color), 1.0);",
 "}"].join("\n");
 
 export const vertexShader = [
