@@ -3,16 +3,19 @@ import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {RawShaderMaterial} from "/node_modules/three/src/materials/RawShaderMaterial.js";
 import {fragmentShader, vertexShader} from "./shaders.js";
+import {Color} from "/node_modules/three/src/math/Color.js";
 
 export default class RawShaderExample extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
         this.canvas = document.querySelector("orthographic-canvas");
+        this._animateHandler = this._animate.bind(this);
     }
 
     async disconnectedCallback() {
         this.plane = null;
         this.canvas = null;
+        this._animateHandler = null;
         await super.disconnectedCallback();
     }
 
@@ -20,16 +23,23 @@ export default class RawShaderExample extends crsbinding.classes.ViewBase {
         const geometry = new PlaneGeometry(512, 512);
 
         const material = new RawShaderMaterial({
+            uniforms: {
+                colorA: new Color(0xff0000),
+                colorB: new Color(0x0000ff),
+                time: 0
+            },
             vertexShader: vertexShader,
-            fragmentShader: fragmentShader
+            fragmentShader: fragmentShader,
         });
 
         this.plane = new Mesh(geometry, material);
         this.canvas.scene.add(this.plane);
+        await this._animate();
     }
 
-    async animate(time) {
+    async _animate(time) {
+        if (this._animateHandler == null) return;
         requestAnimationFrame(this._animateHandler);
-        this.plane.material.uniform.time = time;
+        this.plane.material.uniforms.time = time || 0;
     }
 }

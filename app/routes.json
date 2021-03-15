@@ -88,6 +88,11 @@
       "view": "shader-editor"
     },
     {
+      "title": "Load Canvas Program",
+      "hash": "#load-canvas-program",
+      "view": "load-canvas-program"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",
