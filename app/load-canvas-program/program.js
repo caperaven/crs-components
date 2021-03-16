@@ -2,9 +2,10 @@ export const program = {
     fragmentShader: "/app/load-canvas-program/shaders/fragment-shader.glsl",
     vertexShader: "/app/load-canvas-program/shaders/vertex-shader.glsl",
     uniforms: {
+        u_opacity: 1,
         u_fgColor: {value: 0xff0090},
         u_bgColor: {value: 0xffffff},
-        u_map: {
+        u_msdf: {
             type: "t",
             value: "/fonts/opensans/OpenSans-Regular.png"
         }

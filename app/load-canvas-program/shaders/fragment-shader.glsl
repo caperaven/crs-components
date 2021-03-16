@@ -1,12 +1,16 @@
 precision highp float;
 
-uniform sampler2D u_map;
+uniform float u_opacity;
+uniform sampler2D u_msdf;
 uniform vec3 u_fgColor;
 uniform vec3 u_bgColor;
-in vec2 v_uv;
-out vec4 color;
+varying vec2 texCoord;
+
+float median(float r, float g, float b) {
+     return max(min(r, g), min(max(r, g), b));
+}
 
 void main() {
-     float a = fwidth(1.0);
-     color = vec4(1.0, 0.0, 0.0, 1.0);
+     vec3 msd = texture2D(u_msdf, texCoord).rgb;
+     gl_FragColor = vec4(msd, 1.0);
 }

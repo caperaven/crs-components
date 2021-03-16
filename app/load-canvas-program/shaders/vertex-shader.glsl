@@ -1,10 +1,10 @@
-in vec2 uv;
-in vec4 position;
+attribute vec2 uv;
+attribute vec4 position;
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
-out vec2 v_uv;
+varying vec2 texCoord;
 
 void main() {
-    v_uv = uv;
+    texCoord = uv;
     gl_Position = projectionMatrix * modelViewMatrix * position;
 }

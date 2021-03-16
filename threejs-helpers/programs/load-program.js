@@ -31,8 +31,8 @@ export async function loadProgram(canvas, program) {
     const material = new RawShaderMaterial({
         fragmentShader: fragmentShader.trim(),
         vertexShader: vertexShader.trim(),
-        uniforms: uniforms,
-        glslVersion: GLSL3,
+        uniforms: uniforms
+        //glslVersion: GLSL3,
     });
 
     await loadScene(canvas, program.scene, material);
