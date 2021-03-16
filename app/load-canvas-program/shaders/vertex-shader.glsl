@@ -1,8 +1,8 @@
-attribute vec2 uv;
-attribute vec4 position;
+in vec2 uv;
+in vec4 position;
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
-varying vec2 texCoord;
+out vec2 texCoord;
 
 void main() {
     texCoord = uv;
