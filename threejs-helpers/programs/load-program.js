@@ -3,6 +3,7 @@ import {TextureLoader} from "/node_modules/three/src/loaders/TextureLoader.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
+import {GLSL3} from "/node_modules/three/src/constants.js";
 
 class Program {
     constructor(canvas) {
@@ -28,9 +29,10 @@ export async function loadProgram(canvas, program) {
     const uniforms = await processUniforms(program.uniforms);
 
     const material = new RawShaderMaterial({
-        fragmentShader: fragmentShader,
-        vertexShader: vertexShader,
-        uniforms: uniforms
+        fragmentShader: fragmentShader.trim(),
+        vertexShader: vertexShader.trim(),
+        uniforms: uniforms,
+        glslVersion: GLSL3,
     });
 
     await loadScene(canvas, program.scene, material);
@@ -45,7 +47,7 @@ async function loadShader(file) {
 async function processUniforms(uniforms) {
     const keys = Object.keys(uniforms);
     for (let key of keys) {
-        if (key.indexOf("color") != -1) {
+        if (key.toLowerCase().indexOf("color") != -1) {
             uniforms[key].value = new Color(uniforms[key].value)
         }
 
