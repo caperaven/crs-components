@@ -3,7 +3,7 @@ import {TextureLoader} from "/node_modules/three/src/loaders/TextureLoader.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
-import {GLSL3} from "/node_modules/three/src/constants.js";
+import {GLSL3, GLSL1} from "/node_modules/three/src/constants.js";
 
 class Program {
     constructor(canvas) {
@@ -32,6 +32,7 @@ export async function loadProgram(canvas, program) {
         fragmentShader: fragmentShader.trim(),
         vertexShader: vertexShader.trim(),
         uniforms: uniforms,
+        defines: program.defines,
         glslVersion: GLSL3,
     });
 

@@ -10,6 +10,11 @@ export const program = {
         },
         u_pxRange: 1
     },
+    defines: {
+        "HALF_SAMPLE_RATE": 0.125,
+        "SAMPLE_RATE": 0.25,
+        "HORIZONTAL_PASS": 1
+    },
     scene: {
         type: "shape",
         shape: "plane",
