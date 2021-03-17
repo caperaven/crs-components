@@ -9,11 +9,11 @@ class Publish {
         const instance = new Publish();
         await instance.copyFiles("./readme.md");
 
-        await instance.copyFiles("./3rd-party/require.js", "3rd-party/");
+        await instance.copyFiles("./src/3rd-party/require.js", "3rd-party/");
 
         await instance.copyFiles("./dist/components/html-to-text/html-to-text.js", "components/html-to-text/");
         await instance.copyFiles("./dist/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
-        await instance.copyFiles("./components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
+        await instance.copyFiles("./src/components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
         await instance.saveCommands();
         instance.bumpVersion();
     }

@@ -2,7 +2,7 @@ import { terser } from "rollup-plugin-terser";
 
 export default[
     {
-        input: "components/html-to-text/html-to-text.js",
+        input: "src/components/html-to-text/html-to-text.js",
         output: [
             { file: 'dist/components/html-to-text/html-to-text.js', format: 'es' },
         ],
@@ -11,7 +11,7 @@ export default[
         ]
     },
     {
-        input: "components/monaco-editor/monaco-editor.js",
+        input: "src/components/monaco-editor/monaco-editor.js",
         output: [
             { file: 'dist/components/monaco-editor/monaco-editor.js', format: 'es' }
         ],
