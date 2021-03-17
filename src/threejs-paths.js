@@ -1,6 +1,6 @@
-const nodePath = "/node_modules/three/src/";
-
-export const threePathsObj = {
+globalThis.crs = globalThis.crs || {};
+globalThis.crs.threejsPath = "/node_modules/three/src/";
+globalThis.crs.threePathsObj = {
     // materials
     "MeshBasicMaterial": "materials/MeshBasicMaterial.js",
     "RawShaderMaterial": "materials/RawShaderMaterial.js",
@@ -32,8 +32,8 @@ export const threePathsObj = {
  * @param className
  * @returns {string}
  */
-export function threePaths(className) {
-    return `${nodePath}${threePathsObj[className]}`;
+globalThis.crs.threePaths = className => {
+    return `${crs.threejsPath}${crs.threePathsObj[className]}`;
 }
 
 /**
@@ -43,8 +43,8 @@ export function threePaths(className) {
  * @param args
  * @returns {Promise<*>}
  */
-export async function createThreeObject(className, ...args) {
-    const module = await import(threePaths(className));
+globalThis.crs.createThreeObject = async (className, ...args) => {
+    const module = await import(crs.threePaths(className));
     return new module[className](...args);
 }
 
@@ -53,13 +53,13 @@ export async function createThreeObject(className, ...args) {
  * @param className
  * @returns {Promise<*>}
  */
-export async function getThreePrototype(className) {
-    const module = await import(threePaths(className));
+globalThis.crs.getThreePrototype = async className => {
+    const module = await import(crs.threePaths(className));
     return module[className];
 }
 
-export async function createColor(color) {
+globalThis.crs.createColor = async color => {
     // JHR: find other places that does this and use this instead.
     const cn = Number(color.replace("#", "0x"));
-    return createThreeObject("Color", cn);
+    return crs.createThreeObject("Color", cn);
 }

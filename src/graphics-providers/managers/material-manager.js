@@ -1,5 +1,4 @@
 import {createClassFromModule} from "../helpers/class-import-factory.js";
-import {threePaths} from "../threejs-paths.js";
 import {updateMaterial} from "../helpers/update-material.js";
 import {BaseManager} from "./base-manager.js";
 
@@ -12,7 +11,7 @@ export default class MaterialManager extends BaseManager {
         if (materials == null) return;
         for (let material of materials) {
             if (program.materials.has(material.id) == false) {
-                const result = await createClassFromModule(threePaths(material.type), material.type);
+                const result = await crs.createThreeObject(material.type);
                 await updateMaterial(result, material.parameters);
                 program.materials.set(material.id, result);
             }
