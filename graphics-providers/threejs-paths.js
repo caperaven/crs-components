@@ -1,6 +1,6 @@
 const nodePath = "/node_modules/three/src/";
 
-const threePathsObj = {
+export const threePathsObj = {
     // materials
     "MeshBasicMaterial": "materials/MeshBasicMaterial.js",
     "RawShaderMaterial": "materials/RawShaderMaterial.js",
@@ -10,6 +10,10 @@ const threePathsObj = {
     // geometry
     "PlaneGeometry": "geometries/PlaneGeometry.js",
     "CircleGeometry": "geometries/CircleGeometry.js",
+    "BoxGeometry": "geometries/BoxGeometry.js",
+    "ConeGeometry": "geometries/ConeGeometry.js",
+    "CylinderGeometry": "geometries/CylinderGeometry.js",
+    "WireframeGeometry": "geometries/WireframeGeometry.js",
 
     // common
     "Mesh": "objects/Mesh.js",
