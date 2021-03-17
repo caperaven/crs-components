@@ -1,4 +1,4 @@
-import "/../../components/monaco-editor/monaco-editor.js";
+import "/../../src/components/monaco-editor/monaco-editor.js";
 
 export default class Monaco extends crsbinding.classes.ViewBase {
     async connectedCallback() {

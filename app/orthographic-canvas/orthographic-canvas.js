@@ -1,10 +1,10 @@
-import "./../../components/orthographic-canvas/orthographic-canvas.js";
+import "../../src/components/orthographic-canvas/orthographic-canvas.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
-import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
-import {createRegularMesh} from "./../../threejs-helpers/shape-factory.js";
+import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
+import {createRegularMesh} from "../../src/threejs-helpers/shape-factory.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {

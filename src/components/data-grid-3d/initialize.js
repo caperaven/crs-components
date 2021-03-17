@@ -1,8 +1,8 @@
-import "./../orthographic-canvas/orthographic-canvas.js";
+import "../orthographic-canvas/orthographic-canvas.js";
 import {disableMoveElements, enableMoveElements} from "./_move-element.js";
 import {disableGrouping, enableGrouping} from "./_grouping.js";
 import {disableColumnResize, enableColumnResize} from "./_columns-resize.js";
-import {enableOrthographicResponder, disableOrthographicResponder} from "./../../extensions/orthographic-canvas/orthographic-scroll-responder.js";
+import {enableOrthographicResponder, disableOrthographicResponder} from "../../extensions/orthographic-canvas/orthographic-scroll-responder.js";
 import {enableRowRendering, disableRowRendering} from "./_row-rendering.js";
 import {enableVirtualization, disableVirtualization} from "./_virtualize.js";
 import {enableRowFactory, disableRowFactory} from "./_row-factory.js";

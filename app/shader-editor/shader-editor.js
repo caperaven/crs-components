@@ -1,10 +1,7 @@
-import "./../../components/monaco-editor/monaco-editor.js";
-import "./../../components/orthographic-canvas/orthographic-canvas.js";
-import {RawShaderMaterial} from "/node_modules/three/src/materials/RawShaderMaterial.js";
+import "../../src/components/monaco-editor/monaco-editor.js";
+import "../../src/components/orthographic-canvas/orthographic-canvas.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
-import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
-import {Color} from "/node_modules/three/src/math/Color.js";
 import {ShaderMaterial} from "/node_modules/three/src/materials/ShaderMaterial.js";
 
 export default class ShaderEditor extends crsbinding.classes.ViewBase {

@@ -1,4 +1,4 @@
-import "./../../components/perspective-canvas/perspective-canvas.js";
+import "../../src/components/perspective-canvas/perspective-canvas.js";
 import {BoxGeometry} from "/node_modules/three/src/geometries/BoxGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Color} from "/node_modules/three/src/math/Color.js";

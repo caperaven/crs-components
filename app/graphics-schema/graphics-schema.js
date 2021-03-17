@@ -1,6 +1,6 @@
 import {orthographicSchema} from "./orthographic-schema.js";
 import {perspectiveSchema} from "./perspective-schema.js";
-import {GraphicsParser} from "./../../graphics-providers/graphics-parser.js";
+import {GraphicsParser} from "../../src/graphics-providers/graphics-parser.js";
 
 export default class GraphicsSchema extends crsbinding.classes.ViewBase {
     async connectedCallback() {

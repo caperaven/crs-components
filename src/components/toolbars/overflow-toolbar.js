@@ -1,9 +1,9 @@
-import {enableContainerFeatures} from "./../base-components/container-mixin.js";
-import {enableHorizontalKeys} from "./../lib/horizontal-key-navigation.js";
-import {createSvgButton, createVerticalList, createListItem, createSpacer} from "./../lib/element-utils.js";
-import {showElementRelativeTo} from "./../../components/lib/element-utils.js";
-import "./../lists/unordered-list.js";
-import {addResizeEvent, removeResize} from "./../../components/lib/resize.js";
+import {enableContainerFeatures} from "../base-components/container-mixin.js";
+import {enableHorizontalKeys} from "../lib/horizontal-key-navigation.js";
+import {createSvgButton, createVerticalList, createListItem, createSpacer} from "../lib/element-utils.js";
+import {showElementRelativeTo} from "../lib/element-utils.js";
+import "../lists/unordered-list.js";
+import {addResizeEvent, removeResize} from "../lib/resize.js";
 
 class OverflowToolbar extends HTMLElement {
     async connectedCallback() {

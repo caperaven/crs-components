@@ -1,4 +1,4 @@
-import {createSvgImage} from "./../lib/element-utils.js";
+import {createSvgImage} from "../lib/element-utils.js";
 
 export async function createColumns(element, columnsDef, minWidth = 140) {
     const fragment = document.createDocumentFragment();

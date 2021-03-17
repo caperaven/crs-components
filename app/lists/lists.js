@@ -1,8 +1,8 @@
-import "./../../components/main-menu/main-menu.js";
-import "./../../components/lists/ordered-list.js";
-import "./../../components/lists/unordered-list.js";
+import "../../src/components/main-menu/main-menu.js";
+import "../../src/components/lists/ordered-list.js";
+import "../../src/components/lists/unordered-list.js";
 
-import {createVerticalList} from "./../../components/lib/element-utils.js";
+import {createVerticalList} from "../../src/components/lib/element-utils.js";
 
 export default class Lists extends crsbinding.classes.ViewBase {
     async connectedCallback() {

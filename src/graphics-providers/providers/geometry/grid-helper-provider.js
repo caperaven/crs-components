@@ -1,5 +1,5 @@
 import {BaseProvider} from "../base-provider.js";
-import {createThreeObject, createColor} from "./../../threejs-paths.js";
+import {createThreeObject, createColor} from "../../threejs-paths.js";
 
 export default class GridHelperProvider extends BaseProvider {
     get key() {

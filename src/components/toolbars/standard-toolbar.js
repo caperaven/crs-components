@@ -1,5 +1,5 @@
-import {enableContainerFeatures} from "./../base-components/container-mixin.js";
-import {enableHorizontalKeys} from "./../lib/horizontal-key-navigation.js";
+import {enableContainerFeatures} from "../base-components/container-mixin.js";
+import {enableHorizontalKeys} from "../lib/horizontal-key-navigation.js";
 
 class StandardToolbar extends HTMLDivElement {
     async connectedCallback() {

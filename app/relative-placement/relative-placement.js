@@ -1,4 +1,4 @@
-import {showElementRelativeTo} from "./../../components/lib/element-utils.js";
+import {showElementRelativeTo} from "../../src/components/lib/element-utils.js";
 
 export default class RelativePlacement extends crsbinding.classes.ViewBase {
     load() {

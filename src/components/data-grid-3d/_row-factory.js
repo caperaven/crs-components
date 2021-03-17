@@ -1,4 +1,4 @@
-import {BaseCacheFactory} from "./../lib/base-cache-factory.js";
+import {BaseCacheFactory} from "../lib/base-cache-factory.js";
 import {calculateRowWidth, createRowItem, generateRowRenderer} from "./_row-utils.js";
 
 export async function enableRowFactory(parent) {

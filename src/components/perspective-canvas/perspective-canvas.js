@@ -1,4 +1,4 @@
-import {CameraCanvasBase} from "./../base-components/camera-canvas-base.js";
+import {CameraCanvasBase} from "../base-components/camera-canvas-base.js";
 import {PerspectiveCamera} from "/node_modules/three/src/cameras/PerspectiveCamera.js";
 
 export class PerspectiveCanvas extends CameraCanvasBase {

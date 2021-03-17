@@ -1,6 +1,6 @@
-import "./../../components/orthographic-canvas/orthographic-canvas.js";
-import {MsdfFont} from "./../../threejs-helpers/msdf/msdf-font.js";
-import {createNormalizedPlane} from "./../../threejs-helpers/shape-factory.js";
+import "../../src/components/orthographic-canvas/orthographic-canvas.js";
+import {MsdfFont} from "../../src/threejs-helpers/msdf/msdf-font.js";
+import {createNormalizedPlane} from "../../src/threejs-helpers/shape-factory.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 
 export default class MsdfView extends crsbinding.classes.ViewBase {

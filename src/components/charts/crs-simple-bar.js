@@ -1,7 +1,7 @@
 import {BaseChart} from "./crs-base-chart.js";
-import {createNormalizedPlane} from "./../../threejs-helpers/shape-factory.js";
+import {createNormalizedPlane} from "../../threejs-helpers/shape-factory.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
-import {enableOrthographicDraggable, disableOrthographicDraggable} from "./../../extensions/orthographic-canvas/orthographic-draggable.js";
+import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../extensions/orthographic-canvas/orthographic-draggable.js";
 
 export class SimpleBarChart extends BaseChart {
     get barWidth() {

@@ -1,4 +1,4 @@
-import {getRandomInt} from "./../../components/lib/random-number.js";
+import {getRandomInt} from "../../src/components/lib/random-number.js";
 
 export function getData(count) {
     const result = [];

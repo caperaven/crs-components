@@ -1,5 +1,5 @@
 import {BaseProvider} from "../base-provider.js";
-import {createThreeObject, getThreePrototype} from "./../../threejs-paths.js";
+import {createThreeObject, getThreePrototype} from "../../threejs-paths.js";
 
 export default class LineGeometryProvider extends BaseProvider {
     get key() {

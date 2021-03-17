@@ -1,6 +1,6 @@
 import {program} from "./program.js";
-import {loadProgram} from "./../../threejs-helpers/programs/load-program.js";
-import "./../../components/orthographic-canvas/orthographic-canvas.js";
+import {loadProgram} from "../../src/threejs-helpers/programs/load-program.js";
+import "../../src/components/orthographic-canvas/orthographic-canvas.js";
 
 export default class LoadCanvasProgram extends crsbinding.classes.ViewBase {
     async disconnectedCallback() {
