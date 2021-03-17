@@ -93,6 +93,11 @@
       "view": "load-canvas-program"
     },
     {
+      "title": "Graphics Schema",
+      "hash": "#graphics-schema",
+      "view": "graphics-schema"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

@@ -1,4 +1,5 @@
 import {RawShaderMaterial} from "/node_modules/three/src/materials/RawShaderMaterial.js";
+import {ShaderMaterial} from "/node_modules/three/src/materials/ShaderMaterial.js";
 import {TextureLoader} from "/node_modules/three/src/loaders/TextureLoader.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";

@@ -34,5 +34,7 @@
         "rollup-plugin-terser": "^5.1.2",
         "three": "^0.125.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "crs-schema": "0.0.46"
+    }
 }
