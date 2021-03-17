@@ -1,4 +1,3 @@
-import {createClassFromModule} from "../helpers/class-import-factory.js";
 import {updateMaterial} from "../helpers/update-material.js";
 import {BaseManager} from "./base-manager.js";
 

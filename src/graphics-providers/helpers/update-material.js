@@ -4,11 +4,11 @@ const fnMap = new Map([
     ["color", createColor]
 ])
 
-export function updateMaterial(material, parameters) {
+export async function updateMaterial(material, parameters) {
     const keys = Object.keys(parameters);
     for (let key of keys) {
         if (fnMap.has(key)) {
-            material[key] = fnMap.get(key)(parameters[key]);
+            material[key] = await fnMap.get(key)(parameters[key]);
         }
         else {
             material[key] = parameters[key];
