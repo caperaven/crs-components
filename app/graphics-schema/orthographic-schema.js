@@ -1,6 +1,6 @@
 export const orthographicSchema = {
     requires: [
-        "/components/orthographic-canvas/orthographic-canvas.js"
+        "/src/components/orthographic-canvas/orthographic-canvas.js"
     ],
     context: {
         type: "orthographic",
