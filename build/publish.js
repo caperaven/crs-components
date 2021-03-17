@@ -14,6 +14,11 @@ class Publish {
         await instance.copyFiles("./dist/components/html-to-text/html-to-text.js", "components/html-to-text/");
         await instance.copyFiles("./dist/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
         await instance.copyFiles("./src/components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
+
+        await instance.copyFiles("./src/components/charts/crs-base-chart.js", "components/charts/");
+        await instance.copyFiles("./src/components/charts/crs-simple-bar.js", "components/charts/");
+        await instance.copyFiles("./src/components/charts/crs-virtualized-bar.js", "components/charts/");
+
         await instance.saveCommands();
         instance.bumpVersion();
     }
