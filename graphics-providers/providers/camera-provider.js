@@ -1,4 +1,6 @@
-export default class CameraProvider {
+import {BaseProvider} from "./base-provider.js";
+
+export default class CameraProvider extends BaseProvider {
     get key() {
         return "camera"
     }

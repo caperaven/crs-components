@@ -5,7 +5,7 @@ export const orthographicSchema = {
     context: {
         type: "orthographic",
         attributes: {
-            background: "#ff0090"
+            background: "#dadada"
         }
     },
     textures: [
@@ -19,8 +19,7 @@ export const orthographicSchema = {
             id: 0,
             type: "MeshBasicMaterial",
             parameters: {
-                color: "#0000ff",
-                map: "floor"
+                color: "#ff0090"
             }
         }
     ],

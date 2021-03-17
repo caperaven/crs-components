@@ -1,13 +1,17 @@
 import {BaseParser} from "/node_modules/crs-schema/es/base-parser.js";
-import CameraProvider from "./providers/camera-provider.js";
 import MaterialManager from "./managers/material-manager.js";
 import ContextManager from "./managers/context-manager.js";
+import SceneProvider from "./providers/scene-provider.js";
+import CameraProvider from "./providers/camera-provider.js";
+import PlaneGeometryProvider from "./providers/plane-geometry-provider.js";
 
 export class GraphicsParser extends BaseParser {
     async initialize() {
         await this.register(ContextManager);
         await this.register(MaterialManager);
         await this.register(CameraProvider);
+        await this.register(SceneProvider);
+        await this.register(PlaneGeometryProvider);
     }
 
     async parse(schema, parentElement) {
@@ -17,6 +21,8 @@ export class GraphicsParser extends BaseParser {
         await this.managers.get("context").processItem(schema.context, parentElement, program);
         await this.managers.get("materials").processItem(schema.materials, program);
 
+        await this.providers.get("scene").processItem(schema.scene, program);
+
         await program.render();
         return program;
     }
@@ -25,15 +31,15 @@ export class GraphicsParser extends BaseParser {
 class Program {
     constructor() {
         this._modules = [];
-        this._materials = new Map();
+        this.materials = new Map();
         return this;
     }
 
     dispose() {
         this.canvas = null;
         this._modules.length = 0;
-        this._materials.clear();
-        this._materials = null;
+        this.materials.clear();
+        this.materials = null;
         return null;
     }
 

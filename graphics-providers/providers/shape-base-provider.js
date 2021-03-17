@@ -1,20 +1,15 @@
+import {BaseProvider} from "./base-provider.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
+import {threePaths} from "./../threejs-paths.js";
+import {createClassFromModule} from "./../helpers/class-import-factory.js";
+import {updateTransform} from "./../helpers/update-transforms.js";
 
-export class ShapeBaseProvider {
-    async processItem(item) {
-        const geometry = await this.createGeometry();
-
-        const material = await this.process_material(item.material);
+export class ShapeBaseProvider extends BaseProvider {
+    async processItem(item, program) {
+        const geometry = await createClassFromModule(threePaths(this.key), this.key);
+        const material = await program.materials.get(item.material);
         const mesh = new Mesh(geometry, material);
-        mesh.scale.set(item.width || 1, item.height || 1, 1);
+        updateTransform(mesh, item.transform);
         return mesh;
-    }
-
-    async createGeometry() {
-
-    }
-
-    async process_material() {
-
     }
 }
