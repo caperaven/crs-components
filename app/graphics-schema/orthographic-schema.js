@@ -21,6 +21,13 @@ export const orthographicSchema = {
             parameters: {
                 color: "#ff0090"
             }
+        },
+        {
+            id: 1,
+            type: "LineBasicMaterial",
+            parameters: {
+                color: "#ff0000"
+            }
         }
     ],
     scene: {
@@ -33,6 +40,14 @@ export const orthographicSchema = {
                     position: {x: 0, y: 0, z:0},
                     rotation: {x: 0, y: 0, z:0}
                 }
+            },
+            {
+                element: "LineGeometry",
+                material: 1,
+                points: [
+                    {x: 0, y: 0, z: 0},
+                    {x: 400, y: 400, z: 0}
+                ]
             }
         ]
     }

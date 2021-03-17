@@ -3,7 +3,8 @@ import MaterialManager from "./managers/material-manager.js";
 import ContextManager from "./managers/context-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
-import PlaneGeometryProvider from "./providers/plane-geometry-provider.js";
+import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
+import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
 
 export class GraphicsParser extends BaseParser {
     async initialize() {
@@ -12,6 +13,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
+        await this.register(LineGeometryProvider);
     }
 
     async parse(schema, parentElement) {
