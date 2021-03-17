@@ -16,8 +16,6 @@ export default class LineGeometryProvider extends BaseProvider {
         geometry.setFromPoints(points);
 
         const material = program.materials.get(item.material);
-
-        const line = await createThreeObject("Line", geometry, material);
-        return line;
+        return await createThreeObject("Line", geometry, material);
     }
 }

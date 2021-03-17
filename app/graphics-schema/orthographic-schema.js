@@ -26,7 +26,7 @@ export const orthographicSchema = {
             id: 1,
             type: "LineBasicMaterial",
             parameters: {
-                color: "#ff0000"
+                color: "#0000ff"
             }
         }
     ],
@@ -46,7 +46,10 @@ export const orthographicSchema = {
                 material: 1,
                 points: [
                     {x: 0, y: 0, z: 0},
-                    {x: 400, y: 400, z: 0}
+                    {x: 100, y: 0, z: 0},
+                    {x: 200, y: 100, z: 0},
+                    {x: 200, y: -100, z: 0},
+                    {x: 100, y: 0, z: 0},
                 ]
             }
         ]

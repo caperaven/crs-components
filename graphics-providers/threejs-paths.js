@@ -22,15 +22,32 @@ const threePathsObj = {
     "Line": "objects/Line.js"
 }
 
+/**
+ * Get the file path on where to find the 3js objects
+ * @param className
+ * @returns {string}
+ */
 export function threePaths(className) {
     return `${nodePath}${threePathsObj[className]}`;
 }
 
+/**
+ * Create a 3js object based on the class.
+ * Also supports parameters
+ * @param className
+ * @param args
+ * @returns {Promise<*>}
+ */
 export async function createThreeObject(className, ...args) {
     const module = await import(threePaths(className));
     return new module[className](...args);
 }
 
+/**
+ * Get a 3js class so you can instanciate it at your own time.
+ * @param className
+ * @returns {Promise<*>}
+ */
 export async function getThreePrototype(className) {
     const module = await import(threePaths(className));
     return module[className];
