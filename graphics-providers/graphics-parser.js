@@ -5,6 +5,7 @@ import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
 import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
+import GridHelperProvider from "./providers/geometry/grid-helper-provider.js";
 
 export class GraphicsParser extends BaseParser {
     async initialize() {
@@ -14,6 +15,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
         await this.register(LineGeometryProvider);
+        await this.register(GridHelperProvider);
     }
 
     async parse(schema, parentElement) {
@@ -22,6 +24,10 @@ export class GraphicsParser extends BaseParser {
 
         await this.managers.get("context").processItem(schema.context, parentElement, program);
         await this.managers.get("materials").processItem(schema.materials, program);
+
+        if (schema.context.grid != null) {
+            await this.providers.get("GridHelper").processItem(schema.context.grid, program);
+        }
 
         await this.providers.get("scene").processItem(schema.scene, program);
 

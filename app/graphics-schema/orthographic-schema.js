@@ -6,6 +6,12 @@ export const orthographicSchema = {
         type: "orthographic",
         attributes: {
             background: "#dadada"
+        },
+        grid: {
+            size: 10,
+            divisions: 10,
+            colorCenterLine: "#ff0000",
+            colorGrid: "#888888"
         }
     },
     textures: [

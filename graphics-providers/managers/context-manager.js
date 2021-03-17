@@ -10,7 +10,7 @@ export default class ContextManager extends BaseManager {
         parentElement.appendChild(canvas);
 
         return new Promise(resolve => {
-            const isReady = () => {
+            const isReady = async () => {
                 canvas.removeEventListener("ready", isReady);
                 program.canvas = canvas;
                 resolve();

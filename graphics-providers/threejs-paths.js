@@ -19,7 +19,8 @@ const threePathsObj = {
 
     // objects
     "BufferGeometry": "core/BufferGeometry.js",
-    "Line": "objects/Line.js"
+    "Line": "objects/Line.js",
+    "GridHelper": "helpers/GridHelper.js"
 }
 
 /**
@@ -51,4 +52,10 @@ export async function createThreeObject(className, ...args) {
 export async function getThreePrototype(className) {
     const module = await import(threePaths(className));
     return module[className];
+}
+
+export async function createColor(color) {
+    // JHR: find other places that does this and use this instead.
+    const cn = Number(color.replace("#", "0x"));
+    return createThreeObject("Color", cn);
 }
