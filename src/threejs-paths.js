@@ -29,6 +29,7 @@ globalThis.crs.threePathsObj = {
     // common
     "Mesh": "objects/Mesh.js",
     "Color": "math/Color.js",
+    "Vector2": "math/Vector2.js",
     "Vector3": "math/Vector3.js",
     "Vector4": "math/Vector4.js",
 
@@ -78,4 +79,11 @@ globalThis.crs.createColor = async color => {
     // JHR: find other places that does this and use this instead.
     const cn = Number(color.replace("#", "0x"));
     return crs.createThreeObject("Color", cn);
+}
+
+globalThis.crs.getThreeConstant = async constant => {
+    if (crs.threePathsObj.constants == null) {
+        crs.threePathsObj.constants = await import(`${crs.threejsPath}constants.js`);
+    }
+    return crs.threePathsObj.constants[constant];
 }

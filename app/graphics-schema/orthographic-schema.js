@@ -17,7 +17,12 @@ export const orthographicSchema = {
     textures: [
         {
             id: "font",
-            texture: "/fonts/opensans/OpenSans-Bold.png"
+            texture: "/fonts/opensans/OpenSans-Bold.png",
+            parameters: {
+                wrapS: "RepeatWrapping",
+                wrapT: "RepeatWrapping",
+                repeat: {x: 2, y: 2}
+            }
         }
     ],
     materials: [
@@ -25,7 +30,6 @@ export const orthographicSchema = {
             id: 0,
             type: "MeshBasicMaterial",
             parameters: {
-                color: "#ff0090",
                 map: "font"
             }
         },
