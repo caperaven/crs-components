@@ -41,7 +41,7 @@ export class VirtualizedBarChart extends BaseChart {
         this._offsetY = -Math.round(this.height / 2);
 
         this.dummy = await crs.createThreeObject("Object3D");
-        this.geometry = await crs.createThreeObject("PlaneGeometry", 1, 1, 1);
+        this.geometry = await crs.createThreeObject("PlaneGeometry", 1, 1);
         this.material = await crs.createThreeObject("MeshBasicMaterial");
 
         this.canvas = this.querySelector("canvas");

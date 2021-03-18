@@ -6,6 +6,7 @@ import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
 import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
 import GridHelperProvider from "./providers/geometry/grid-helper-provider.js";
+import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
 
 export class GraphicsParser extends BaseParser {
     async initialize() {
@@ -16,6 +17,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(PlaneGeometryProvider);
         await this.register(LineGeometryProvider);
         await this.register(GridHelperProvider);
+        await this.register(BoxGeometry);
     }
 
     async parse(schema, parentElement) {
@@ -25,14 +27,25 @@ export class GraphicsParser extends BaseParser {
         await this.managers.get("context").processItem(schema.context, parentElement, program);
         await this.managers.get("materials").processItem(schema.materials, program);
 
-        if (schema.context.grid != null) {
-            await this.providers.get("GridHelper").processItem(schema.context.grid, program);
-        }
+        await this._processContextGrid(schema, program);
+        await this._processCameraPosition(schema, program);
 
         await this.providers.get("scene").processItem(schema.scene, program);
 
         await program.render();
         return program;
+    }
+
+    async _processContextGrid(schema, program) {
+        if (schema.context.grid != null) {
+            await this.providers.get("GridHelper").processItem(schema.context.grid, program);
+        }
+    }
+
+    async _processCameraPosition(schema, program) {
+        if (schema.context.parameters == null || schema.context.parameters.position == null) return;
+        const pos = schema.context.parameters.position;
+        program.canvas.camera.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
     }
 }
 

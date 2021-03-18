@@ -1,5 +1,5 @@
 export function updateTransform(mesh, transform) {
-    if (mesh == null) return;
+    if (mesh == null || transform == null) return;
 
     if (transform.scale != null) {
         const cs = mesh.scale.clone();
@@ -16,10 +16,10 @@ export function updateTransform(mesh, transform) {
             mesh.rotateX(transform.rotation.x)
         }
         if (transform.rotation.y != null) {
-            mesh.rotateX(transform.rotation.y)
+            mesh.rotateY(transform.rotation.y)
         }
         if (transform.rotation.z != null) {
-            mesh.rotateX(transform.rotation.z)
+            mesh.rotateZ(transform.rotation.z)
         }
     }
 }
