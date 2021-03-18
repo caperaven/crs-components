@@ -11,7 +11,7 @@ export default class MaterialManager extends BaseManager {
         for (let material of materials) {
             if (program.materials.has(material.id) == false) {
                 const result = await crs.createThreeObject(material.type);
-                await updateMaterial(result, material.parameters);
+                await updateMaterial(result, material.parameters, program);
                 program.materials.set(material.id, result);
             }
         }

@@ -16,8 +16,8 @@ export const orthographicSchema = {
     },
     textures: [
         {
-            id: "floor",
-            texture: "path to texture"
+            id: "font",
+            texture: "/fonts/opensans/OpenSans-Bold.png"
         }
     ],
     materials: [
@@ -25,7 +25,8 @@ export const orthographicSchema = {
             id: 0,
             type: "MeshBasicMaterial",
             parameters: {
-                color: "#ff0090"
+                color: "#ff0090",
+                map: "font"
             }
         },
         {

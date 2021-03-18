@@ -1,6 +1,7 @@
 import {BaseParser} from "/node_modules/crs-schema/es/base-parser.js";
 import MaterialManager from "./managers/material-manager.js";
 import ContextManager from "./managers/context-manager.js";
+import TextureManager from "./managers/texture-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -12,6 +13,7 @@ export class GraphicsParser extends BaseParser {
     async initialize() {
         await this.register(ContextManager);
         await this.register(MaterialManager);
+        await this.register(TextureManager)
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
@@ -25,6 +27,7 @@ export class GraphicsParser extends BaseParser {
         await program.loadRequired(schema.requires || []);
 
         await this.managers.get("context").processItem(schema.context, parentElement, program);
+        await this.managers.get("textures").processItem(schema.textures, program);
         await this.managers.get("materials").processItem(schema.materials, program);
 
         await this._processContextGrid(schema, program);
@@ -53,6 +56,7 @@ class Program {
     constructor() {
         this._modules = [];
         this.materials = new Map();
+        this.textures = new Map();
         return this;
     }
 
@@ -61,6 +65,8 @@ class Program {
         this._modules.length = 0;
         this.materials.clear();
         this.materials = null;
+        this.textures.clear();
+        this.textures = null;
         return null;
     }
 

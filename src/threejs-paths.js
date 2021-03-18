@@ -32,6 +32,9 @@ globalThis.crs.threePathsObj = {
     "Vector3": "math/Vector3.js",
     "Vector4": "math/Vector4.js",
 
+    // textures
+    "TextureLoader": "loaders/TextureLoader.js",
+
     // objects
     "BufferGeometry": "core/BufferGeometry.js",
     "Line": "objects/Line.js",
