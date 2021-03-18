@@ -3,9 +3,16 @@ globalThis.crs.threejsPath = "/node_modules/three/src/";
 globalThis.crs.threePathsObj = {
     // materials
     "MeshBasicMaterial": "materials/MeshBasicMaterial.js",
+    "LineBasicMaterial": "materials/LineBasicMaterial.js",
+    "LineDashedMaterial": "materials/LineDashedMaterial.js",
+    "MeshPhongMaterial": "materials/MeshPhongMaterial.js",
+    "MeshPhysicalMaterial": "materials/MeshPhysicalMaterial.js",
+    "MeshStandardMaterial": "materials/MeshStandardMaterial.js",
+    "PointsMaterial": "materials/PointsMaterial.js",
     "RawShaderMaterial": "materials/RawShaderMaterial.js",
     "ShaderMaterial": "materials/ShaderMaterial.js",
-    "LineBasicMaterial": "materials/LineBasicMaterial.js",
+    "ShadowMaterial": "materials/ShadowMaterial.js",
+    "SpriteMaterial": "materials/SpriteMaterial.js",
 
     // geometry
     "PlaneGeometry": "geometries/PlaneGeometry.js",
