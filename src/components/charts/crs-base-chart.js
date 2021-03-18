@@ -14,7 +14,7 @@ export class BaseChart extends OrthographicCanvas {
         if (this._color == null) {
             this._color = this.getAttribute("color") || "#2A7FCD";
         }
-        return Number(this._color.replace("#", "0x"));
+        return this._color;
     }
 
     set color(newValue) {

@@ -1,9 +1,4 @@
 import {BaseChart} from "./crs-base-chart.js";
-import {Color} from "/node_modules/three/src/math/Color.js";
-import {Object3D} from "/node_modules/three/src/core/Object3D.js";
-import {InstancedMesh} from "/node_modules/three/src/objects/InstancedMesh.js";
-import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
-import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 
 export class VirtualizedBarChart extends BaseChart {
     get barWidth() {
@@ -45,15 +40,19 @@ export class VirtualizedBarChart extends BaseChart {
         this._offsetX = -Math.round(this.width / 2);
         this._offsetY = -Math.round(this.height / 2);
 
-        this.dummy = new Object3D();
-        this.geometry = new PlaneGeometry(1, 1);
-        this.material = new MeshBasicMaterial();
+        this.dummy = await crs.createThreeObject("Object3D");
+        this.geometry = await crs.createThreeObject("PlaneGeometry", 1, 1, 1);
+        this.material = await crs.createThreeObject("MeshBasicMaterial");
 
         this.canvas = this.querySelector("canvas");
         this._mousedownHandler = this._mousedown.bind(this);
         this._mouseupHandler = this._mouseup.bind(this);
         this._mousemoveHandler = this._mousemove.bind(this);
         this.canvas.addEventListener("mousedown", this._mousedownHandler);
+
+        if (this.data.length > 0) {
+            await this._dataChanged();
+        }
     }
 
     async _mousedown(event) {
@@ -84,6 +83,10 @@ export class VirtualizedBarChart extends BaseChart {
     }
 
     async _dataChanged() {
+        if (this.isReady != true) {
+            return;
+        }
+
         this.currentIndex = 0;
         await this.calculateOffsets();
         await this.createUI();
@@ -92,7 +95,7 @@ export class VirtualizedBarChart extends BaseChart {
     async createUI() {
         const chartPadding = this.chartPadding;
 
-        this.mesh = new InstancedMesh(this.geometry, this.material, this.visibleCount);
+        this.mesh = await crs.createThreeObject("InstancedMesh", this.geometry, this.material, this.visibleCount);
         this.scene.add(this.mesh);
 
         for (let i = 0; i < this.visibleCount; i++) {
@@ -147,7 +150,8 @@ export class VirtualizedBarChart extends BaseChart {
     }
 
     async updateColor(index, color) {
-        this.mesh.setColorAt(index, new Color(color));
+        const clr = await crs.createColor(color);
+        this.mesh.setColorAt(index, clr);
         this.mesh.instanceColor.needsUpdate = true;
     }
 

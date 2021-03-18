@@ -28,7 +28,9 @@ globalThis.crs.threePathsObj = {
     // objects
     "BufferGeometry": "core/BufferGeometry.js",
     "Line": "objects/Line.js",
-    "GridHelper": "helpers/GridHelper.js"
+    "GridHelper": "helpers/GridHelper.js",
+    "Object3D": "core/Object3D.js",
+    "InstancedMesh": "objects/InstancedMesh.js"
 }
 
 /**

@@ -1,6 +1,5 @@
 import {BaseChart} from "./crs-base-chart.js";
 import {createNormalizedPlane} from "../../threejs-helpers/shape-factory.js";
-import {Color} from "/node_modules/three/src/math/Color.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../extensions/orthographic-canvas/orthographic-draggable.js";
 
 export class SimpleBarChart extends BaseChart {
@@ -66,7 +65,7 @@ export class SimpleBarChart extends BaseChart {
 
         for (let item of this.data) {
             const plane = createNormalizedPlane(this.barWidth, item.value * this.heightScale);
-            plane.material.color = new Color(this.color);
+            plane.material.color = await crs.createColor(this.color);
             this.scene.add(plane);
             this.canvasPlace(plane, (index * this.barWidth) + (index * this.barPadding), 0, chartPadding.x, chartPadding.y);
             index ++;
