@@ -7,12 +7,17 @@ export const orthographicSchema = {
         attributes: {
             background: "#dadada"
         },
-        grid: {
-            size: 10,
-            divisions: 10,
-            colorCenterLine: "#ff0000",
-            colorGrid: "#888888"
-        }
+        helpers: [
+            {
+                type: "GridHelper",
+                parameters: {
+                    size: 10,
+                    divisions: 10,
+                    colorCenterLine: "#ff0000",
+                    colorGrid: "#888888"
+                }
+            }
+        ]
     },
     textures: [
         {

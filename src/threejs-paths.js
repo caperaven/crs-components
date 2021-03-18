@@ -39,7 +39,6 @@ globalThis.crs.threePathsObj = {
     // objects
     "BufferGeometry": "core/BufferGeometry.js",
     "Line": "objects/Line.js",
-    "GridHelper": "helpers/GridHelper.js",
     "Object3D": "core/Object3D.js",
     "InstancedMesh": "objects/InstancedMesh.js"
 }
@@ -75,12 +74,22 @@ globalThis.crs.getThreePrototype = async className => {
     return module[className];
 }
 
+/**
+ * Create a Color class based on the string hex value of a color
+ * @param color
+ * @returns {Promise<*>}
+ */
 globalThis.crs.createColor = async color => {
     // JHR: find other places that does this and use this instead.
     const cn = Number(color.replace("#", "0x"));
     return crs.createThreeObject("Color", cn);
 }
 
+/**
+ * Get a 3js constant from the constants.js
+ * @param constant
+ * @returns {Promise<*>}
+ */
 globalThis.crs.getThreeConstant = async constant => {
     if (crs.threePathsObj.constants == null) {
         crs.threePathsObj.constants = await import(`${crs.threejsPath}constants.js`);

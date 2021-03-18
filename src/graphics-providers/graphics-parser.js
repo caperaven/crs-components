@@ -6,11 +6,11 @@ import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
 import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
-import GridHelperProvider from "./providers/geometry/grid-helper-provider.js";
 import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
+import HelpersProvider from "./providers/helpers/helpers-provider.js";
 
 export class GraphicsParser extends BaseParser {
-    async initialize() {
+    async initialize(providers) {
         await this.register(ContextManager);
         await this.register(MaterialManager);
         await this.register(TextureManager)
@@ -18,8 +18,12 @@ export class GraphicsParser extends BaseParser {
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
         await this.register(LineGeometryProvider);
-        await this.register(GridHelperProvider);
         await this.register(BoxGeometry);
+        await this.register(HelpersProvider);
+
+        for (let provider of providers || {}) {
+            await this.register(provider);
+        }
     }
 
     async parse(schema, parentElement) {
@@ -30,7 +34,8 @@ export class GraphicsParser extends BaseParser {
         await this.managers.get("textures").processItem(schema.textures, program);
         await this.managers.get("materials").processItem(schema.materials, program);
 
-        await this._processContextGrid(schema, program);
+        // context must be in place for this to continue;
+        await this._processHelpers(schema.context.helpers, program);
         await this._processCameraPosition(schema, program);
 
         await this.providers.get("scene").processItem(schema.scene, program);
@@ -39,10 +44,9 @@ export class GraphicsParser extends BaseParser {
         return program;
     }
 
-    async _processContextGrid(schema, program) {
-        if (schema.context.grid != null) {
-            await this.providers.get("GridHelper").processItem(schema.context.grid, program);
-        }
+    async _processHelpers(helpers, program) {
+        if (helpers == null) return;
+        await this.providers.get("Helpers").processItem(helpers, program);
     }
 
     async _processCameraPosition(schema, program) {

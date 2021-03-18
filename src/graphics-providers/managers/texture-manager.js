@@ -43,7 +43,9 @@ export default class TextureManager extends BaseManager {
             if (fnMap.has(key)) {
                 texture[key] = await fnMap.get(key)(parameters[key]);
             }
-            texture[key] = parameters[key];
+            else {
+                texture[key] = parameters[key];
+            }
         }
     }
 }
