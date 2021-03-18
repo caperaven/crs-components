@@ -32,7 +32,8 @@ export const orthographicSchema = {
             id: 1,
             type: "LineBasicMaterial",
             parameters: {
-                color: "#0000ff"
+                color: "#0000ff",
+                linewidth: 5
             }
         }
     ],

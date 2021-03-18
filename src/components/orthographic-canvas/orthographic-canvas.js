@@ -1,12 +1,11 @@
-import {OrthographicCamera} from "/node_modules/three/src/cameras/OrthographicCamera.js";
 import {CameraCanvasBase} from "../base-components/camera-canvas-base.js";
 
 /**
  * The purpose of this component is to allow a optimized canvas using webgl but that works closely to canvas settings.
  */
 export class OrthographicCanvas extends CameraCanvasBase {
-    createCamera() {
-        return new OrthographicCamera( this.left, this.width / 2, this.top, this.height / - 2, this.nearPlane, this.farPlane);
+    async createCamera() {
+        return await crs.createThreeObject("OrthographicCamera", this.left, this.width / 2, this.top, this.height / - 2, this.nearPlane, this.farPlane);
     }
 
     zeroBottomLeft() {

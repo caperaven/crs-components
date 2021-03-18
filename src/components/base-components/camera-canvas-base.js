@@ -43,7 +43,7 @@ export class CameraCanvasBase extends HTMLElement {
     }
 
     async connectedCallback() {
-        requestAnimationFrame(() => {
+        requestAnimationFrame(async () => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
             this.aspect = this.width / this.height;
@@ -52,7 +52,7 @@ export class CameraCanvasBase extends HTMLElement {
             this.top = this.height / 2;
             this.left = this.width / -2;
 
-            this.camera = this.createCamera();
+            this.camera = await this.createCamera();
             this.scene.add(this.camera);
 
             this.renderer = new WebGLRenderer({antialias: true});

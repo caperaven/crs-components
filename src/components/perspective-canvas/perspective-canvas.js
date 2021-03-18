@@ -1,5 +1,4 @@
 import {CameraCanvasBase} from "../base-components/camera-canvas-base.js";
-import {PerspectiveCamera} from "/node_modules/three/src/cameras/PerspectiveCamera.js";
 
 export class PerspectiveCanvas extends CameraCanvasBase {
     async connectedCallback() {
@@ -18,8 +17,8 @@ export class PerspectiveCanvas extends CameraCanvasBase {
         this._fov = newValue;
     }
 
-    createCamera() {
-        return new PerspectiveCamera(this.fov, this.width / this.height, this.nearPlane, this.farPlane);
+    async createCamera() {
+        return crs.createThreeObject("PerspectiveCamera", this.fov, this.width / this.height, this.nearPlane, this.farPlane);
     }
 }
 

@@ -15,6 +15,10 @@ globalThis.crs.threePathsObj = {
     "CylinderGeometry": "geometries/CylinderGeometry.js",
     "WireframeGeometry": "geometries/WireframeGeometry.js",
 
+    // cameras
+    "OrthographicCamera": "cameras/OrthographicCamera.js",
+    "PerspectiveCamera": "cameras/PerspectiveCamera.js",
+
     // common
     "Mesh": "objects/Mesh.js",
     "Color": "math/Color.js",
