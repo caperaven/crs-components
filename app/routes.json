@@ -73,26 +73,6 @@
       "view": "monaco"
     },
     {
-      "title": "MSDF",
-      "hash": "#msdf",
-      "view": "msdf"
-    },
-    {
-      "title": "Raw Shader Example",
-      "hash": "#raw-shader-example",
-      "view": "raw-shader-example"
-    },
-    {
-      "title": "Shader Editor",
-      "hash": "#shader-editor",
-      "view": "shader-editor"
-    },
-    {
-      "title": "Load Canvas Program",
-      "hash": "#load-canvas-program",
-      "view": "load-canvas-program"
-    },
-    {
       "title": "Graphics Schema",
       "hash": "#graphics-schema",
       "view": "graphics-schema"
