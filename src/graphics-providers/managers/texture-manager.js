@@ -30,21 +30,21 @@ export default class TextureManager extends BaseManager {
         return new Promise(resolve => {
             loader.load(def.texture, async texture => {
                 program.textures.set(def.id, texture);
-                await this._applyParameters(texture, def.parameters);
+                await this._applyArguments(texture, def.args);
                 resolve();
             })
         })
     }
 
-    async _applyParameters(texture, parameters) {
-        if (parameters == null) return;
-        const keys = Object.keys(parameters);
+    async _applyArguments(texture, args) {
+        if (args == null) return;
+        const keys = Object.keys(args);
         for (let key of keys) {
             if (fnMap.has(key)) {
-                texture[key] = await fnMap.get(key)(parameters[key]);
+                texture[key] = await fnMap.get(key)(args[key]);
             }
             else {
-                texture[key] = parameters[key];
+                texture[key] = args[key];
             }
         }
     }

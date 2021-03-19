@@ -2,7 +2,7 @@ export const perspectiveSchema = {
     requires: ["/src/components/perspective-canvas/perspective-canvas.js"],
     context: {
         type: "perspective",
-        parameters: {
+        args: {
             position: {
                 z: 5
             }
@@ -15,7 +15,7 @@ export const perspectiveSchema = {
         {
             id: 0,
             type: "MeshBasicMaterial",
-            parameters: {
+            args: {
                 color: "#ff0090"
             }
         }

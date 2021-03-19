@@ -50,8 +50,8 @@ export class GraphicsParser extends BaseParser {
     }
 
     async _processCameraPosition(schema, program) {
-        if (schema.context.parameters == null || schema.context.parameters.position == null) return;
-        const pos = schema.context.parameters.position;
+        if (schema.context.args == null || schema.context.args.position == null) return;
+        const pos = schema.context.args.position;
         program.canvas.camera.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
     }
 }

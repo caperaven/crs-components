@@ -9,7 +9,7 @@ export default class LineGeometryProvider extends BaseProvider {
         const Vector3 = await crs.getThreePrototype("Vector3");
         const geometry = await crs.createThreeObject("BufferGeometry");
         const points = [];
-        for (let point of item.points) {
+        for (let point of item.args.points) {
             points.push(new Vector3(point.x, point.y, point.z));
         }
         geometry.setFromPoints(points);

@@ -10,14 +10,14 @@ const fnMap = new Map([
     ["specularMap", setTexture]
 ])
 
-export async function updateMaterial(material, parameters, program) {
-    const keys = Object.keys(parameters);
+export async function updateMaterial(material, args, program) {
+    const keys = Object.keys(args);
     for (let key of keys) {
         if (fnMap.has(key)) {
-            material[key] = await fnMap.get(key)(parameters[key], program);
+            material[key] = await fnMap.get(key)(args[key], program);
         }
         else {
-            material[key] = parameters[key];
+            material[key] = args[key];
         }
     }
     material.needsUpdate = true;
