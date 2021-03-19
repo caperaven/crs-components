@@ -10,9 +10,14 @@ export default class MaterialManager extends BaseManager {
         if (materials == null) return;
         for (let material of materials) {
             if (program.materials.has(material.id) == false) {
-                const result = await crs.createThreeObject(material.type);
-                await updateMaterial(result, material.args, program);
-                program.materials.set(material.id, result);
+                if (this.parser.providers.has(material.type) == true) {
+                    await this.parser.providers.get(material.type).processItem(material, program);
+                }
+                else {
+                    const result = await crs.createThreeObject(material.type);
+                    await updateMaterial(result, material.args, program);
+                    program.materials.set(material.id, result);
+                }
             }
         }
     }
