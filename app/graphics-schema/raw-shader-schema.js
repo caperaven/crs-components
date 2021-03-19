@@ -18,7 +18,8 @@ export const rawShaderSchema = {
             args: {
                 fragmentShader: "/app/graphics-schema/shaders/fragment-shader.glsl",
                 uniforms: {
-                    map: {type: "t", value: "font"}
+                    map: {type: "t", value: "font"},
+                    u_color: {value: "#0000ff"}
                 }
             }
         }
