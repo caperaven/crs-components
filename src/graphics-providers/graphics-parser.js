@@ -2,6 +2,7 @@ import {BaseParser} from "/node_modules/crs-schema/es/base-parser.js";
 import MaterialManager from "./managers/material-manager.js";
 import ContextManager from "./managers/context-manager.js";
 import TextureManager from "./managers/texture-manager.js";
+import LocationsManager from "./managers/locations-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -13,6 +14,7 @@ import HelpersProvider from "./providers/helpers/helpers-provider.js";
 export class GraphicsParser extends BaseParser {
     async initialize(providers) {
         await this.register(ContextManager);
+        await this.register(LocationsManager);
         await this.register(MaterialManager);
         await this.register(TextureManager)
         await this.register(CameraProvider);
@@ -30,11 +32,13 @@ export class GraphicsParser extends BaseParser {
 
     async parse(schema, parentElement) {
         const program = new Program();
+        await this.managers.get("locations").processItem(schema.locations, program);
         await program.loadRequired(schema.requires || []);
 
         await this.managers.get("context").processItem(schema.context, parentElement, program);
         await this.managers.get("textures").processItem(schema.textures, program);
         await this.managers.get("materials").processItem(schema.materials, program);
+
 
         // context must be in place for this to continue;
         await this._processHelpers(schema.context.helpers, program);
@@ -63,6 +67,7 @@ class Program {
         this._modules = [];
         this.materials = new Map();
         this.textures = new Map();
+        this.processors = new Map();
         return this;
     }
 
@@ -73,11 +78,15 @@ class Program {
         this.materials = null;
         this.textures.clear();
         this.textures = null;
+        this.locations = null;
         return null;
     }
 
     async loadRequired(requires) {
         for (let require of requires) {
+            if (require.trim().indexOf("@locations") == 0) {
+                require = await this.processors.get("locations")(require, this.locations);
+            }
             this._modules.push(await import(require));
         }
         return this;

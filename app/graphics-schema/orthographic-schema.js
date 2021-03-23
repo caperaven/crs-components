@@ -1,6 +1,9 @@
 export const orthographicSchema = {
+    locations: {
+        "src": "/src"
+    },
     requires: [
-        "/src/components/orthographic-canvas/orthographic-canvas.js"
+        "@locations.src/components/orthographic-canvas/orthographic-canvas.js"
     ],
     context: {
         type: "orthographic",
@@ -74,5 +77,19 @@ export const orthographicSchema = {
                 }
             }
         ]
-    }
+    },
+    extensions: [
+        {
+            file: "@locations.src/graphics-helpers/graphics-input-manager",
+            enable: {
+                call: "enableInputManager",
+                parameters: ["@context.canvas", ["mouse-move"]]
+            },
+            disable: {
+                call: "disableInputManager",
+                parameters: ["@context.canvas"]
+            },
+            selectionCallback: "@context.itemSelected"
+        }
+    ]
 }
