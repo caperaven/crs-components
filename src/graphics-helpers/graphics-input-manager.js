@@ -27,7 +27,7 @@ class InputManager {
     }
 
     async initialize() {
-        const Vector2 = crs.getThreePrototype("Vector2");
+        const Vector2 = await crs.getThreePrototype("Vector2");
         this._mouse = new Vector2();
         this._startMouse = new Vector2();
     }

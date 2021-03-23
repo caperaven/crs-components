@@ -3,6 +3,7 @@ import MaterialManager from "./managers/material-manager.js";
 import ContextManager from "./managers/context-manager.js";
 import TextureManager from "./managers/texture-manager.js";
 import LocationsManager from "./managers/locations-manager.js";
+import ExtensionsManager from "./managers/extensions-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -16,7 +17,8 @@ export class GraphicsParser extends BaseParser {
         await this.register(ContextManager);
         await this.register(LocationsManager);
         await this.register(MaterialManager);
-        await this.register(TextureManager)
+        await this.register(TextureManager);
+        await this.register(ExtensionsManager);
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
@@ -30,15 +32,26 @@ export class GraphicsParser extends BaseParser {
         }
     }
 
-    async parse(schema, parentElement) {
+    async parse(srcSchema, parentElement) {
+        const schema = JSON.parse(JSON.stringify(srcSchema));
+
+        const ignore = ["scene", "locations"];
         const program = new Program();
+        program.parser = this;
+
         await this.managers.get("locations").processItem(schema.locations, program);
         await program.loadRequired(schema.requires || []);
 
-        await this.managers.get("context").processItem(schema.context, parentElement, program);
-        await this.managers.get("textures").processItem(schema.textures, program);
-        await this.managers.get("materials").processItem(schema.materials, program);
-
+        // register managers
+        const keys = Object.keys(schema);
+        for (let key of keys) {
+            if (ignore.indexOf(key) == -1) {
+                const manager = this.managers.get(key);
+                if (manager != null) {
+                    await manager.processItem(schema[key], program, parentElement);
+                }
+            }
+        }
 
         // context must be in place for this to continue;
         await this._processHelpers(schema.context.helpers, program);
@@ -46,6 +59,7 @@ export class GraphicsParser extends BaseParser {
 
         await this.providers.get("scene").processItem(schema.scene, program);
 
+        delete program.parser;
         await program.render();
         return program;
     }
@@ -65,13 +79,20 @@ export class GraphicsParser extends BaseParser {
 class Program {
     constructor() {
         this._modules = [];
+        this._extensions = [];
         this.materials = new Map();
         this.textures = new Map();
         this.processors = new Map();
         return this;
     }
 
-    dispose() {
+    async dispose() {
+        for (let extension of this._extensions) {
+            await extension(this.canvas);
+        }
+
+        this._extensions = null;
+
         this.canvas = null;
         this._modules.length = 0;
         this.materials.clear();
