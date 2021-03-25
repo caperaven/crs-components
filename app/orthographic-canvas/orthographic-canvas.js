@@ -5,6 +5,7 @@ import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
 import {createRegularMesh} from "../../src/threejs-helpers/shape-factory.js";
+import {enableInputManager, disableInputManager} from "./../../src/graphics-helpers/graphics-input-manager.js"
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -20,6 +21,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
 
             requestAnimationFrame(async () => {
                 await enableOrthographicDraggable(this.canvas);
+                await enableInputManager(this.canvas, ["selection"]);
             })
         }
 
@@ -28,6 +30,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
 
     async disconnectedCallback() {
         await disableOrthographicDraggable(this.canvas);
+        await disableInputManager(this.canvas);
         this.canvas = null;
         this.plane = null;
         await super.disconnectedCallback();
