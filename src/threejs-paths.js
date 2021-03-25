@@ -40,7 +40,8 @@ globalThis.crs.threePathsObj = {
     "BufferGeometry": "core/BufferGeometry.js",
     "Line": "objects/Line.js",
     "Object3D": "core/Object3D.js",
-    "InstancedMesh": "objects/InstancedMesh.js"
+    "InstancedMesh": "objects/InstancedMesh.js",
+    "Raycaster": "core/Raycaster.js"
 }
 
 /**
