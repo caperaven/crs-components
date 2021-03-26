@@ -6,13 +6,18 @@ export default class ExtensionsManager extends BaseManager {
     }
 
     async processItem(extensions, program) {
+        if (program._extensions == null) {
+            program._extensions = [];
+            program._disposables.push(disposeExtensions.bind(program));
+        }
+
         for (let extension of extensions) {
             await this.loadExtension(extension, program);
         }
     }
 
     async loadExtension(extension, program) {
-        let file = await this.parser.managers.get("locations").process(extension.file, program.locations);
+        let file = await this.parser.managers.get("locations").process(extension.file, this.parser.locations);
         if (file.indexOf(".js") == -1) {
             file = `${file}.js`;
         }
@@ -49,4 +54,11 @@ export default class ExtensionsManager extends BaseManager {
         return fn(program);
     }
 
+}
+
+async function disposeExtensions() {
+    for (let extension of this._extensions) {
+        await extension(this.canvas);
+    }
+    this._extensions = null;
 }

@@ -47,16 +47,16 @@ class InputManager {
     }
 
     async _mouseDown(event) {
-        await this._updateMouseFromEvent(event, this._startMouse, this.width, this.height);
+        await this._updateMouseFromEvent(event);
     }
 
     async _mouseMove(event) {
-        await this._updateMouseFromEvent(event, this._mouse, this.width, this.height);
+        await this._updateMouseFromEvent(event);
         requestAnimationFrame(this._moveTimerHandler);
     }
 
     async _mouseUp(event) {
-        await this._updateMouseFromEvent(event, this._mouse, this.width, this.height);
+        await this._updateMouseFromEvent(event);
     }
 
     async _moveTimer(time) {

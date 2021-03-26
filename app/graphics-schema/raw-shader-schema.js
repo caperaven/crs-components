@@ -19,7 +19,7 @@ export const rawShaderSchema = {
                 fragmentShader: "/app/graphics-schema/shaders/fragment-shader.glsl",
                 uniforms: {
                     map: {type: "t", value: "font"},
-                    u_color: {value: "#0000ff"}
+                    u_color: {value: "#ff00ff"}
                 }
             }
         }
@@ -31,7 +31,7 @@ export const rawShaderSchema = {
                 material: 0,
                 args: {
                     transform: {
-                        scale: {x: 200, y: 200}
+                        scale: {x: 255, y: 255}
                     }
                 }
             }

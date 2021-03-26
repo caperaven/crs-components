@@ -6,7 +6,7 @@ export default class SceneProvider extends BaseProvider {
     }
 
     async processItem(item, program) {
-        if (item == null) return;
+        if (item == null || item.elements == null) return;
         for (let i = 0; i < item.elements.length; i++) {
             const element = item.elements[i];
             const provider = this.parser.providers.get(element.element);

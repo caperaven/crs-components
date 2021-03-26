@@ -8,6 +8,12 @@ export default class MaterialManager extends BaseManager {
 
     async processItem(materials, program) {
         if (materials == null) return;
+
+        if (program.materials == null) {
+            program.materials = new Map();
+            program._disposables.push(program.materials)
+        }
+
         for (let material of materials) {
             if (program.materials.has(material.id) == false) {
                 if (this.parser.providers.has(material.type) == true) {

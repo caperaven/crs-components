@@ -7,10 +7,10 @@ export default class LocationsManager extends BaseManager {
 
     async processItem(locations, program) {
         if (locations != null) {
-            program.locations = locations;
+            this.parser.locations = locations;
         }
 
-        program.processors.set(this.key, this.process.bind(this));
+        this.parser.processors.set(this.key, this.process.bind(this));
     }
 
     async process(value, locations) {

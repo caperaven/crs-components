@@ -25,6 +25,10 @@ export default class TextureManager extends BaseManager {
     }
 
     async _loadTexture(def, program, loader) {
+        if (program.textures == null) {
+            program.textures = new Map();
+        }
+
         if (program.textures.has(def.id)) return;
 
         return new Promise(resolve => {
