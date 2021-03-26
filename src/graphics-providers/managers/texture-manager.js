@@ -27,6 +27,7 @@ export default class TextureManager extends BaseManager {
     async _loadTexture(def, program, loader) {
         if (program.textures == null) {
             program.textures = new Map();
+            program._disposables.push(program.textures);
         }
 
         if (program.textures.has(def.id)) return;
