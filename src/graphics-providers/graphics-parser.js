@@ -124,6 +124,9 @@ async function disposeItems(disposables) {
         else if (typeof disposable == "function") {
             await disposable();
         }
+        else if (disposable.dispose != null) {
+            await disposable.dispose();
+        }
         disposables[i] = null;
     }
     disposables.length = 0;
