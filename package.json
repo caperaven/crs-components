@@ -9,7 +9,8 @@
     "scripts": {
         "test": "jest",
         "bundle": "rollup -c",
-        "build-publish": "rollup -c && node build/publish.js"
+        "build-publish": "rollup -c && node build/publish.js",
+        "dev-server": "browser-sync start --server --files '.'"
     },
     "keywords": [],
     "author": "",

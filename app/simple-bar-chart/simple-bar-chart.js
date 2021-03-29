@@ -5,7 +5,7 @@ export default class SimpleBarChart extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
         this.canvas = this.element.querySelector("crs-bar-chart");
-        this.canvas.addEventListener("ready", () => this.canvas.data = getData(100));
+        this.canvas.addEventListener("ready", () => this.canvas.draw(getData(100)));
     }
 
     async disconnectedCallback() {

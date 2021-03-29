@@ -25,6 +25,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(MaterialManager);
         await this.register(TextureManager);
         await this.register(ExtensionsManager);
+        await this.register(TemplateManager);
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);

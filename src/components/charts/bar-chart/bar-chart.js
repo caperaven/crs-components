@@ -16,6 +16,11 @@ export class BarChart extends HTMLElement {
     disconnectedCallback() {
         this._program = this._program.dispose();
     }
+
+    draw(data) {
+        const item = data[0];
+        this._program.addFromTemplate(0, item);
+    }
 }
 
 customElements.define("crs-bar-chart", BarChart);
