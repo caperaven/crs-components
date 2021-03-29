@@ -31,5 +31,6 @@ async function addFromTemplate(id, data) {
         return console.error(`no template found for id: ${id}`);
     }
 
-    await this._templateParser.parse(template, this, data);
+    const mesh = await this._templateParser.parse(template, this, data);
+    this.canvas.scene.add(mesh);
 }

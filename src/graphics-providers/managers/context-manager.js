@@ -7,6 +7,9 @@ export default class ContextManager extends BaseManager {
 
     async processItem(context, program, parentElement) {
         const canvas = await this.parser.providers.get("camera").process(context);
+        canvas.style.display = "block";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
         parentElement.appendChild(canvas);
 
         return new Promise(resolve => {

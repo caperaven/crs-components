@@ -16,7 +16,7 @@ export const schema = {
             id: 0,
             type: "MeshBasicMaterial",
             args: {
-                color: "#5599ff"
+                color: "#ff0090"
             }
         }
     ],
@@ -32,7 +32,5 @@ export const schema = {
                 }
             }
         }
-    ],
-    scene: {
-    }
+    ]
 }
