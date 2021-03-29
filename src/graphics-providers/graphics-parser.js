@@ -10,6 +10,7 @@ import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
 import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
 import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
+import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
 
@@ -33,6 +34,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(BoxGeometry);
         await this.register(HelpersProvider);
         await this.register(RawMaterialProvider);
+        await this.register(IconGeometry);
 
         for (let provider of providers || []) {
             await this.register(provider);

@@ -75,6 +75,11 @@ export const orthographicSchema = {
                         {x: 100, y: 0, z: 0},
                     ]
                 }
+            },
+            {
+                element: "Icon",
+                material: 0,
+                icon: "action/alarm"
             }
         ]
     },

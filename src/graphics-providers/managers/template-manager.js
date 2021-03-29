@@ -20,8 +20,6 @@ export default class TemplateManager extends BaseManager {
 async function dispose() {
     this._templates = null;
     this.addFromTemplate = null;
-
-    this._templateParser.dispose();
     this._templateParser = null;
 }
 
