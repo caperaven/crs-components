@@ -8,6 +8,7 @@
     },
     "scripts": {
         "test": "jest",
+        "copy-three": "node build/build-three.js",
         "bundle": "rollup -c",
         "build-publish": "rollup -c && node build/publish.js",
         "dev-server": "browser-sync start --server --files '.'"
