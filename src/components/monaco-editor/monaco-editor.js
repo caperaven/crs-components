@@ -1,4 +1,15 @@
+/**
+ * Todo
+ * set value must work internal
+ * set language features must work internal
+ * set carret on this and transfer to editor when loaded.
+ */
+
 class MonacoEditor extends HTMLElement {
+    static get observedAttributes() {
+        return ["hidden"];
+    }
+
     get editor() {
         return this._editor;
     }
@@ -50,18 +61,8 @@ class MonacoEditor extends HTMLElement {
         this._theme = newValue;
     }
 
-    get visible() {
-        return this._visible;
-    }
-
-    set visible(newValue) {
-        this._visible = newValue;
-        this.style.display = newValue ? "block" : "none";
-    }
-
     async connectedCallback() {
         this._notifyReadyHandler = this._notifyReady.bind(this);
-        this.style.display = "block";
         this.style.overflow = "hidden";
 
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
@@ -75,6 +76,12 @@ class MonacoEditor extends HTMLElement {
         this._editor = null;
         this._monaco = null;
         this._notifyReadyHandler = null;
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name == "hidden" && newValue == null && this._editor != null) {
+            this._editor.layout();
+        }
     }
 
     async _addRequireJS() {
@@ -177,6 +184,7 @@ class MonacoEditor extends HTMLElement {
             return requestAnimationFrame(this._notifyReadyHandler);
         }
 
+        this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
     }
 }

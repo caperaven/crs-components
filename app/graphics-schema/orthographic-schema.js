@@ -38,6 +38,8 @@ export const orthographicSchema = {
             id: 0,
             type: "MeshBasicMaterial",
             args: {
+                transparent: true,
+                opacity: 0.1,
                 map: "font"
             }
         },

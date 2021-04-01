@@ -1,6 +1,6 @@
-import {Scene} from "/node_modules/three/src/scenes/Scene.js";
-import {Color} from "/node_modules/three/src/math/Color.js";
-import {WebGLRenderer} from "/node_modules/three/src/renderers/WebGLRenderer.js";
+import {Scene} from "./../../../third-party/three/src/scenes/Scene.js";
+import {Color} from "./../../../third-party/three/src/math/Color.js";
+import {WebGLRenderer} from "./../../../third-party/three/src/renderers/WebGLRenderer.js";
 
 export class CameraCanvasBase extends HTMLElement {
     get nearPlane() {

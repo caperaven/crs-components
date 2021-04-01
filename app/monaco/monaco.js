@@ -1,6 +1,10 @@
 import "/../../src/components/monaco-editor/monaco-editor.js";
 
 export default class Monaco extends crsbinding.classes.ViewBase {
+    async preLoad() {
+        this.setProperty("isVisible", true);
+    }
+
     async connectedCallback() {
         await super.connectedCallback();
         this.editor = this.element.querySelector("crs-monaco-editor");
@@ -35,5 +39,10 @@ export default class Monaco extends crsbinding.classes.ViewBase {
             }, null, 4),
             "json"
         )
+    }
+
+    async toggleVisible() {
+        const isVisible = this.getProperty("isVisible");
+        this.setProperty("isVisible", !isVisible);
     }
 }
