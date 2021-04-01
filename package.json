@@ -1,6 +1,6 @@
 {
     "name": "crs-components",
-    "version": "0.0.45",
+    "version": "0.0.54",
     "description": "component library",
     "main": "index.js",
     "directories": {
@@ -33,7 +33,7 @@
         "puppeteer": "^5.5.0",
         "puppeteer-to-istanbul": "^1.4.0",
         "rollup": "^1.23.0",
-        "rollup-plugin-terser": "^5.1.2",
+        "terser": "^5.6.1",
         "three": "^0.125.2"
     },
     "dependencies": {

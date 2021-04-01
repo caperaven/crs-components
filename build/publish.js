@@ -5,6 +5,10 @@ const path = require("path");
 const htmlMinifi = require("html-minifier").minify;
 const {minify} = require("terser");
 
+const minifyOptions = {
+
+}
+
 class Publish {
     static async distribute() {
         const instance = new Publish();
@@ -12,6 +16,10 @@ class Publish {
         await instance.copyFiles("./src/3rd-party/require.js", "3rd-party/");
 
         await instance.copyRecursiveMinified("./third-party/**/*.js");
+
+        await instance.copyMinified("./src/index.js");
+        await instance.copyMinified("./src/svg-paths.js");
+        await instance.copyMinified("./src/threejs-paths.js");
 
         await instance.copyMinified("./src/components/html-to-text/html-to-text.js", "components/html-to-text/");
         await instance.copyMinified("./src/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
@@ -24,6 +32,8 @@ class Publish {
         await instance.copyRecursiveMinified("./src/graphics-providers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/graphics-helpers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/extensions/**/*.js", null, "./src/");
+
+        await instance.copyMinified("./src/graphics-providers/managers/texture-manager.js");
 
         await instance.saveCommands();
         instance.bumpVersion();
@@ -41,9 +51,11 @@ class Publish {
             const fileName = path.basename(file);
             this.initFolder(target);
             const text = fs.readFileSync(file, {encoding: "utf8"});
-            const result = await minify(text);
-            fs.writeFileSync(`${target}/${fileName}`, result.code);
+
             console.log(`${target}/${fileName}`);
+
+            const result = await minify(text, minifyOptions).catch(e => console.error (e));
+            fs.writeFileSync(`${target}/${fileName}`, result.code);
         }
     }
 
@@ -65,9 +77,11 @@ class Publish {
             const target = (folder != null ? `./publish/${folder}/` : "./publish") + `/${f}`;
             this.initFolder(path.dirname(target));
             const text = fs.readFileSync(file, {encoding: "utf8"});
-            const result = await minify(text);
-            fs.writeFileSync(target, result.code);
+
             console.log(target);
+
+            const result = await minify(text, minifyOptions);
+            fs.writeFileSync(target, result.code);
         }
     }
 

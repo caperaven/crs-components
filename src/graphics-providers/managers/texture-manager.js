@@ -8,8 +8,6 @@ const fnMap = new Map([
     ["wrapT", getWrap]
 ])
 
-const Vector2 = await crs.getThreePrototype("Vector2");
-
 export default class TextureManager extends BaseManager {
     get key() {
         return "textures";
@@ -56,9 +54,9 @@ export default class TextureManager extends BaseManager {
 }
 
 async function createVector2(param) {
-    return new Vector2(param.x || 0, param.y || 0);
+    return await crs.createThreeObject("Vector2", param.x || 0, param.y || 0);
 }
 
 async function getWrap(param) {
-    return crs.getThreeConstant(param);
+    return await crs.getThreeConstant(param);
 }

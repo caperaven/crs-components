@@ -38,8 +38,6 @@ export const orthographicSchema = {
             id: 0,
             type: "MeshBasicMaterial",
             args: {
-                transparent: true,
-                opacity: 0.1,
                 map: "font"
             }
         },
@@ -77,11 +75,6 @@ export const orthographicSchema = {
                         {x: 100, y: 0, z: 0},
                     ]
                 }
-            },
-            {
-                element: "Icon",
-                material: 0,
-                icon: "action/alarm"
             }
         ]
     },
