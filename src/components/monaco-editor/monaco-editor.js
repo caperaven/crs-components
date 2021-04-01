@@ -1,10 +1,3 @@
-/**
- * Todo
- * set value must work internal
- * set language features must work internal
- * set carret on this and transfer to editor when loaded.
- */
-
 class MonacoEditor extends HTMLElement {
     static get observedAttributes() {
         return ["hidden"];
@@ -47,7 +40,25 @@ class MonacoEditor extends HTMLElement {
 
     set value(newValue) {
         this._value = newValue;
-        this._update();
+
+        if (this.isReady == true) {
+            this._update();
+        }
+    }
+
+    get caretPosition() {
+        if (this._caretPosition == null) {
+            this._caretPosition = this.getAttribute("caret-position") || "end";
+        }
+        return this._caretPosition;
+    }
+
+    set caretPosition(newValue) {
+        this._caretPosition = newValue;
+
+        if (this.isReady == true) {
+            this._updateCaretPosition();
+        }
     }
 
     get theme() {
@@ -126,6 +137,12 @@ class MonacoEditor extends HTMLElement {
                 this._monaco = monaco;
                 this._editor = monaco.editor.create(this, options);
                 this._editor.__type = "normal";
+
+                if (this._value != null) {
+                    this._editor.setValue(this._value);
+                }
+
+                this._updateCaretPosition();
                 resolve();
             });
         })
@@ -159,6 +176,7 @@ class MonacoEditor extends HTMLElement {
 
         this.editor.setModel(model);
         this._editor.updateOptions(options);
+        await this._updateCaretPosition();
     }
 
     async compare(original, modified, language) {
@@ -186,6 +204,28 @@ class MonacoEditor extends HTMLElement {
 
         this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
+    }
+
+    async _updateCaretPosition() {
+        const position = this.caretPosition;
+        switch(position) {
+            case "start":
+                await this._setCaretAt(1,1);
+                break;
+            case "end":
+                const model = this._editor.getModel();
+                const lineCount = model.getLineCount();
+                await this._setCaretAt(lineCount, model.getLineLength(lineCount) + 1);
+                break;
+            default:
+                const parts = position.split(",");
+                await this._setCaretAt(Number(parts[0].trim()), Number(parts[1].trim()));
+                break;
+        }
+    }
+
+    async _setCaretAt(row, column) {
+        this._editor && this._editor.setPosition({lineNumber: row, column: column});
     }
 }
 
