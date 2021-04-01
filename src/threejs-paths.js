@@ -1,5 +1,5 @@
 globalThis.crs = globalThis.crs || {};
-globalThis.crs.threejsPath = "/third-party/three/src/";
+globalThis.crs.threejsPath = "/publish/third-party/three/src/";
 globalThis.crs.threePathsObj = {
     // materials
     "MeshBasicMaterial": "materials/MeshBasicMaterial.js",

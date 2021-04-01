@@ -1,5 +1,3 @@
-import {Color} from "/node_modules/three/src/math/Color.js";
-
 const fnMap = new Map([
     ["color", createColor],
     ["map", setTexture],
@@ -23,9 +21,9 @@ export async function updateMaterial(material, args, program) {
     material.needsUpdate = true;
 }
 
-function createColor(color) {
+async function createColor(color) {
     const value = Number(color.replace("#", "0x"));
-    return new Color(value);
+    return await crs.createThreeObject("Color", value);
 }
 
 function setTexture(id, program) {

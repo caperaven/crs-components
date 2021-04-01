@@ -3,21 +3,27 @@ const mkdirp = require("mkdirp");
 const glob = require("glob");
 const path = require("path");
 const htmlMinifi = require("html-minifier").minify;
+const {minify} = require("terser");
 
 class Publish {
     static async distribute() {
         const instance = new Publish();
         await instance.copyFiles("./readme.md");
-
         await instance.copyFiles("./src/3rd-party/require.js", "3rd-party/");
 
-        await instance.copyFiles("./dist/components/html-to-text/html-to-text.js", "components/html-to-text/");
-        await instance.copyFiles("./dist/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
+        await instance.copyRecursiveMinified("./third-party/**/*.js");
+
+        await instance.copyMinified("./src/components/html-to-text/html-to-text.js", "components/html-to-text/");
+        await instance.copyMinified("./src/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
         await instance.copyFiles("./src/components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
 
-        await instance.copyFiles("./src/components/charts/crs-base-chart.js", "components/charts/");
-        await instance.copyFiles("./src/components/charts/crs-simple-bar.js", "components/charts/");
-        await instance.copyFiles("./src/components/charts/crs-virtualized-bar.js", "components/charts/");
+        await instance.copyRecursiveMinified("./src/components/base-components/*.js", null,"./src/");
+        await instance.copyRecursiveMinified("./src/components/lib/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/components/main-menu/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/components/lists/*.js", null,"./src/");
+        await instance.copyRecursiveMinified("./src/graphics-providers/**/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/graphics-helpers/**/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/extensions/**/*.js", null, "./src/");
 
         await instance.saveCommands();
         instance.bumpVersion();
@@ -26,12 +32,19 @@ class Publish {
     constructor() {
         mkdirp.sync(path.resolve("./publish"));
         this.commands = [];
-        // this.commands = [
-        //     'terser index.js -c -m -o index.js',
-        //     'terser node_modules/crs-binding/crs-binding.js -c -m -o node_modules/crs-binding/crs-binding.js',
-        //     'terser node_modules/crs-binding/crs-bindable-element.js -c -m -o node_modules/crs-binding/crs-bindable-element.js',
-        //     'terser node_modules/crs-binding/crs-view-base.js -c -m -o node_modules/crs-binding/crs-view-base.js'
-        // ];
+    }
+
+    async copyMinified(query, folder) {
+        const files = await this.getFiles(query);
+        for (let file of files) {
+            const target = folder != null ? `./publish/${folder}/` : `./publish/`;
+            const fileName = path.basename(file);
+            this.initFolder(target);
+            const text = fs.readFileSync(file, {encoding: "utf8"});
+            const result = await minify(text);
+            fs.writeFileSync(`${target}/${fileName}`, result.code);
+            console.log(`${target}/${fileName}`);
+        }
     }
 
     async copyFiles(query, folder) {
@@ -41,6 +54,20 @@ class Publish {
             const fileName = path.basename(file);
             this.initFolder(target);
             fs.copyFileSync(file, `${target}/${fileName}`);
+            console.log(`${target}/${fileName}`);
+        }
+    }
+
+    async copyRecursiveMinified(query, folder, stripOut = "") {
+        const files = await this.getFiles(query);
+        for (let file of files) {
+            const f = file.replace(stripOut, "").replace("./", "");
+            const target = (folder != null ? `./publish/${folder}/` : "./publish") + `/${f}`;
+            this.initFolder(path.dirname(target));
+            const text = fs.readFileSync(file, {encoding: "utf8"});
+            const result = await minify(text);
+            fs.writeFileSync(target, result.code);
+            console.log(target);
         }
     }
 

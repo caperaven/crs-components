@@ -1,6 +1,6 @@
 {
     "name": "crs-components",
-    "version": "0.0.37",
+    "version": "0.0.45",
     "description": "component library",
     "main": "index.js",
     "directories": {
@@ -10,7 +10,7 @@
         "test": "jest",
         "copy-three": "node build/build-three.js",
         "bundle": "rollup -c",
-        "build-publish": "rollup -c && node build/publish.js",
+        "build-publish": "node build/publish.js",
         "dev-server": "browser-sync start --server --files '.'"
     },
     "keywords": [],
