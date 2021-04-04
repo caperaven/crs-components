@@ -7,14 +7,18 @@ export default class RawMaterialProvider extends BaseProvider {
 
     async processItem(item, program) {
         const fragmentShader = await this._loadShader(item.args.fragmentShader);
-        const vertexShader = item.args.vertexShader == null ? await this._loadDefaultVertex() : await this._loadShader(item.args.vertexShader);
+        const version = await crs.getThreeConstant(item.args.glslVersion || "GLSL1");
+        const vertexShader = item.args.vertexShader == null ? await this._loadDefaultVertex(version) : await this._loadShader(item.args.vertexShader);
         const uniforms = await this._processUniforms(item.args.uniforms || {}, program);
 
         const material = await crs.createThreeObject("RawShaderMaterial", {
             fragmentShader: fragmentShader.trim(),
             vertexShader: vertexShader.trim(),
             uniforms: uniforms,
-            defines: item.args.defines
+            defines: item.args.defines,
+            transparent: item.args.transparent || false,
+            opacity: item.args.opacity || 1.0,
+            glslVersion: version
         });
 
         program.materials.set(item.id, material);
@@ -24,9 +28,12 @@ export default class RawMaterialProvider extends BaseProvider {
         return await fetch(file).then(result => result.text());
     }
 
-    async _loadDefaultVertex() {
+    async _loadDefaultVertex(version) {
         const module = await import("./default-vertex-shader.js");
-        return module.defaultVertexShader;
+        if (version == "GLSL1") {
+            return module.defaultVertexShader;
+        }
+        return module.defaultVertexShader3;
     }
 
     async _processUniforms(uniforms, program) {
