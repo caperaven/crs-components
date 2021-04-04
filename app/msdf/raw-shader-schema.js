@@ -11,8 +11,7 @@ export const rawShaderSchema = {
     textures: [
         {
             id: "font",
-            texture: "/fonts/opensans/OpenSans-Regular.png",
-            //texture: "/src/msdf/msdf_rotation.png",
+            texture: "/src/msdf/open-sans/OpenSans-Regular.png",
             args: {
                 minFilter: "LinearFilter",
             }
@@ -25,11 +24,10 @@ export const rawShaderSchema = {
             args: {
                 fragmentShader: "/app/msdf/shaders/fragment-shader.glsl",
                 transparent: true,
-                glslVersion: "GLSL3",
                 uniforms: {
                     map: {type: "t", value: "font"},
                     fgColor: {value: "#ff0090"},
-                    distanceFactor: 10.0
+                    distanceFactor: {value: 1.5}
                 }
             }
         }
@@ -41,7 +39,7 @@ export const rawShaderSchema = {
                 material: 0,
                 args: {
                     transform: {
-                        scale: {x: 256, y: 256}
+                        scale: {x: 256, y: 128}
                     }
                 }
             }

@@ -30,7 +30,7 @@ export default class RawMaterialProvider extends BaseProvider {
 
     async _loadDefaultVertex(version) {
         const module = await import("./default-vertex-shader.js");
-        if (version == "GLSL1") {
+        if (version == "GLSL1" || version == "100") {
             return module.defaultVertexShader;
         }
         return module.defaultVertexShader3;
