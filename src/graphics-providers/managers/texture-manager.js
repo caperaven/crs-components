@@ -4,8 +4,13 @@ const fnMap = new Map([
     ["center", createVector2],
     ["repeat", createVector2],
     ["offset", createVector2],
-    ["wrapS", getWrap],
-    ["wrapT", getWrap]
+    ["wrapS", getConstant],
+    ["wrapT", getConstant],
+    ["minFilter", getConstant],
+    ["magFilter", getConstant],
+    ["format", getConstant],
+    ["internalFormat", getConstant],
+    ["type", getConstant]
 ])
 
 export default class TextureManager extends BaseManager {
@@ -57,6 +62,6 @@ async function createVector2(param) {
     return await crs.createThreeObject("Vector2", param.x || 0, param.y || 0);
 }
 
-async function getWrap(param) {
+async function getConstant(param) {
     return await crs.getThreeConstant(param);
 }

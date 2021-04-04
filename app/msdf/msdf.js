@@ -14,5 +14,12 @@ export default class Msdf extends crsbinding.classes.ViewBase {
         const parser = new GraphicsParser();
         await parser.initialize();
         this._shaderProgram = await parser.parse(rawShaderSchema, shaderParent);
+
+        await this.animate();
+    }
+
+    async animate() {
+        requestAnimationFrame(this.animate.bind(this));
+        this._shaderProgram.render();
     }
 }

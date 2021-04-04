@@ -11,7 +11,11 @@ export const rawShaderSchema = {
     textures: [
         {
             id: "font",
-            texture: "/fonts/opensans/OpenSans-Regular.png"
+            texture: "/fonts/opensans/OpenSans-Regular.png",
+            //texture: "/src/msdf/msdf_rotation.png",
+            args: {
+                minFilter: "LinearFilter",
+            }
         }
     ],
     materials: [
