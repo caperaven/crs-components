@@ -1,56 +1,50 @@
 globalThis.crs = globalThis.crs || {};
-globalThis.crs.threejsPath = "/publish/third-party/three/src/";
-globalThis.crs.threePathsObj = {
+
+export async function loadThreeModules(root) {
+    const url = `${root}three/src/`;
+
     // materials
-    "MeshBasicMaterial": "materials/MeshBasicMaterial.js",
-    "LineBasicMaterial": "materials/LineBasicMaterial.js",
-    "LineDashedMaterial": "materials/LineDashedMaterial.js",
-    "MeshPhongMaterial": "materials/MeshPhongMaterial.js",
-    "MeshPhysicalMaterial": "materials/MeshPhysicalMaterial.js",
-    "MeshStandardMaterial": "materials/MeshStandardMaterial.js",
-    "PointsMaterial": "materials/PointsMaterial.js",
-    "RawShaderMaterial": "materials/RawShaderMaterial.js",
-    "ShaderMaterial": "materials/ShaderMaterial.js",
-    "ShadowMaterial": "materials/ShadowMaterial.js",
-    "SpriteMaterial": "materials/SpriteMaterial.js",
+    await crs.modules.add("MeshBasicMaterial", `${url}materials/MeshBasicMaterial.js`);
+    await crs.modules.add("LineBasicMaterial", `${url}materials/LineBasicMaterial.js`);
+    await crs.modules.add("LineDashedMaterial", `${url}materials/LineDashedMaterial.js`);
+    await crs.modules.add("MeshPhongMaterial", `${url}materials/MeshPhongMaterial.js`);
+    await crs.modules.add("MeshPhysicalMaterial", `${url}materials/MeshPhysicalMaterial.js`);
+    await crs.modules.add("MeshStandardMaterial", `${url}materials/MeshStandardMaterial.js`);
+    await crs.modules.add("PointsMaterial", `${url}materials/PointsMaterial.js`);
+    await crs.modules.add("RawShaderMaterial", `${url}materials/RawShaderMaterial.js`);
+    await crs.modules.add("ShaderMaterial", `${url}materials/ShaderMaterial.js`);
+    await crs.modules.add("ShadowMaterial", `${url}materials/ShadowMaterial.js`);
+    await crs.modules.add("SpriteMaterial", `${url}materials/SpriteMaterial.js`);
 
     // geometry
-    "PlaneGeometry": "geometries/PlaneGeometry.js",
-    "CircleGeometry": "geometries/CircleGeometry.js",
-    "BoxGeometry": "geometries/BoxGeometry.js",
-    "ConeGeometry": "geometries/ConeGeometry.js",
-    "CylinderGeometry": "geometries/CylinderGeometry.js",
-    "WireframeGeometry": "geometries/WireframeGeometry.js",
+    await crs.modules.add("PlaneGeometry", `${url}geometries/PlaneGeometry.js`);
+    await crs.modules.add("CircleGeometry", `${url}geometries/CircleGeometry.js`);
+    await crs.modules.add("BoxGeometry", `${url}geometries/BoxGeometry.js`);
+    await crs.modules.add("ConeGeometry", `${url}geometries/ConeGeometry.js`);
+    await crs.modules.add("CylinderGeometry", `${url}geometries/CylinderGeometry.js`);
+    await crs.modules.add("WireframeGeometry", `${url}geometries/WireframeGeometry.js`);
 
     // cameras
-    "OrthographicCamera": "cameras/OrthographicCamera.js",
-    "PerspectiveCamera": "cameras/PerspectiveCamera.js",
+    await crs.modules.add("OrthographicCamera", `${url}cameras/OrthographicCamera.js`);
+    await crs.modules.add("PerspectiveCamera", `${url}cameras/PerspectiveCamera.js`);
 
     // common
-    "Mesh": "objects/Mesh.js",
-    "Color": "math/Color.js",
-    "Vector2": "math/Vector2.js",
-    "Vector3": "math/Vector3.js",
-    "Vector4": "math/Vector4.js",
+    await crs.modules.add("Mesh", `${url}objects/Mesh.js`);
+    await crs.modules.add("Color", `${url}math/Color.js`);
+    await crs.modules.add("Vector2", `${url}math/Vector2.js`);
+    await crs.modules.add("Vector3", `${url}math/Vector3.js`);
+    await crs.modules.add("Vector4", `${url}math/Vector4.js`);
+    await crs.modules.add("ThreeConstants", `${url}/constants.js`);
 
     // textures
-    "TextureLoader": "loaders/TextureLoader.js",
+    await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);
 
     // objects
-    "BufferGeometry": "core/BufferGeometry.js",
-    "Line": "objects/Line.js",
-    "Object3D": "core/Object3D.js",
-    "InstancedMesh": "objects/InstancedMesh.js",
-    "Raycaster": "core/Raycaster.js"
-}
-
-/**
- * Get the file path on where to find the 3js objects
- * @param className
- * @returns {string}
- */
-globalThis.crs.threePaths = className => {
-    return `${crs.threejsPath}${crs.threePathsObj[className]}`;
+    await crs.modules.add("BufferGeometry", `${url}core/BufferGeometry.js`);
+    await crs.modules.add("Line", `${url}objects/Line.js`);
+    await crs.modules.add("Object3D", `${url}core/Object3D.js`);
+    await crs.modules.add("InstancedMesh", `${url}objects/InstancedMesh.js`);
+    await crs.modules.add("Raycaster", `${url}core/Raycaster.js`);
 }
 
 /**
@@ -61,8 +55,7 @@ globalThis.crs.threePaths = className => {
  * @returns {Promise<*>}
  */
 globalThis.crs.createThreeObject = async (className, ...args) => {
-    const module = await import(crs.threePaths(className));
-    return new module[className](...args);
+    return await crs.modules.getInstanceOf(className, className, ...args);
 }
 
 /**
@@ -71,7 +64,7 @@ globalThis.crs.createThreeObject = async (className, ...args) => {
  * @returns {Promise<*>}
  */
 globalThis.crs.getThreePrototype = async className => {
-    const module = await import(crs.threePaths(className));
+    const module = await crs.modules.get(className);
     return module[className];
 }
 
@@ -81,7 +74,6 @@ globalThis.crs.getThreePrototype = async className => {
  * @returns {Promise<*>}
  */
 globalThis.crs.createColor = async color => {
-    // JHR: find other places that does this and use this instead.
     const cn = Number(color.replace("#", "0x"));
     return crs.createThreeObject("Color", cn);
 }
@@ -92,8 +84,6 @@ globalThis.crs.createColor = async color => {
  * @returns {Promise<*>}
  */
 globalThis.crs.getThreeConstant = async constant => {
-    if (crs.threePathsObj.constants == null) {
-        crs.threePathsObj.constants = await import(`${crs.threejsPath}constants.js`);
-    }
-    return crs.threePathsObj.constants[constant];
+    const module = await crs.modules.get("ThreeConstants");
+    return module[constant];
 }

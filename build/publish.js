@@ -14,6 +14,7 @@ class Publish {
         const instance = new Publish();
         await instance.copyFiles("./readme.md");
         await instance.copyFiles("./src/3rd-party/require.js", "3rd-party/");
+        await instance.copyFiles("./fonts/**/*.*", "fonts");
 
         await instance.copyRecursiveMinified("./third-party/**/*.js");
 
@@ -25,6 +26,7 @@ class Publish {
         await instance.copyMinified("./src/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
         await instance.copyFiles("./src/components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
 
+        await instance.copyRecursiveMinified("./src/components/canvas-utils/*.js", null,"./src/");
         await instance.copyRecursiveMinified("./src/components/base-components/*.js", null,"./src/");
         await instance.copyRecursiveMinified("./src/components/lib/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/components/main-menu/*.js", null, "./src/");

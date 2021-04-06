@@ -3,8 +3,6 @@ import {perspectiveSchema} from "./perspective-schema.js";
 import {GraphicsParser} from "../../src/graphics-providers/graphics-parser.js";
 import {rawShaderSchema} from "./raw-shader-schema.js";
 
-import GridHelperProvider from "../../src/graphics-providers/providers/helpers/grid-helper-provider.js";
-
 export default class GraphicsSchema extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
@@ -24,7 +22,7 @@ export default class GraphicsSchema extends crsbinding.classes.ViewBase {
         const perspectiveParent = this.element.querySelector("#perspective");
 
         const parser = new GraphicsParser();
-        await parser.initialize([GridHelperProvider]);
+        await parser.initialize([]);
         this._orthographicProgram = await parser.parse(orthographicSchema, orthographicParent);
         this._perspectiveProgram = await parser.parse(perspectiveSchema, perspectiveParent);
         this._shaderProgram = await parser.parse(rawShaderSchema, shaderParent);

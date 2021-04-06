@@ -12,6 +12,7 @@ export const rawShaderSchema = {
         {
             id: "font",
             texture: "/src/msdf/open-sans/OpenSans-Regular.png",
+            //texture: "/app/msdf/output.png",
             args: {
                 minFilter: "LinearFilter",
             }
@@ -27,7 +28,8 @@ export const rawShaderSchema = {
                 uniforms: {
                     map: {type: "t", value: "font"},
                     fgColor: {value: "#ff0090"},
-                    distanceFactor: {value: 1.5}
+                    bgColor: {value: "#ffffff"},
+                    distanceFactor: {value:3}
                 }
             }
         }
@@ -39,7 +41,7 @@ export const rawShaderSchema = {
                 material: 0,
                 args: {
                     transform: {
-                        scale: {x: 256, y: 128}
+                        scale: {x: 512, y: 256}
                     }
                 }
             }

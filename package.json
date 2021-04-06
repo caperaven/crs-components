@@ -1,6 +1,6 @@
 {
     "name": "crs-components",
-    "version": "0.0.54",
+    "version": "0.0.58",
     "description": "component library",
     "main": "index.js",
     "directories": {
@@ -37,6 +37,7 @@
         "three": "^0.125.2"
     },
     "dependencies": {
+        "crs-modules": "^1.0.5",
         "crs-schema": "0.0.46"
     }
 }
