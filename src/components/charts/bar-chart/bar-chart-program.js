@@ -1,9 +1,6 @@
 export const schema = {
-    locations: {
-        "src": "/src"
-    },
     requires: [
-        "@locations.src/components/orthographic-canvas/orthographic-canvas.js"
+        "orthographic-canvas"
     ],
     context: {
         type: "orthographic",

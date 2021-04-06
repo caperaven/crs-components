@@ -1,6 +1,6 @@
 export const rawShaderSchema = {
     requires: [
-        "/src/components/orthographic-canvas/orthographic-canvas.js"
+        "orthographic-canvas"
     ],
     context: {
         type: "orthographic",

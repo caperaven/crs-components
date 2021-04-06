@@ -1,5 +1,5 @@
 export const perspectiveSchema = {
-    requires: ["/src/components/perspective-canvas/perspective-canvas.js"],
+    requires: ["perspective-canvas"],
     context: {
         type: "perspective",
         args: {

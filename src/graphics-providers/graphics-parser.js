@@ -49,7 +49,7 @@ export class GraphicsParser extends BaseParser {
         program.parser = this;
 
         await this.managers.get("locations").processItem(schema.locations, program);
-        await this._loadModules(schema, program);
+        await this._loadModules(schema);
 
         // register managers
         const keys = Object.keys(schema);
@@ -84,16 +84,11 @@ export class GraphicsParser extends BaseParser {
         program.canvas.camera.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
     }
 
-    async _loadModules(schema, program) {
+    async _loadModules(schema) {
         if (schema.requires == null) return;
-        program._modules = [];
-        program._disposables.push(program._modules);
 
         for (let require of schema.requires) {
-            if (require.trim().indexOf("@locations") == 0) {
-                require = await this.processors.get("locations")(require, this.locations);
-            }
-            program._modules.push(await import(require));
+            await crs.modules.get(require);
         }
     }
 }
