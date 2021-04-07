@@ -1,4 +1,10 @@
 import {BaseManager} from "./base-manager.js";
+import {processProperty} from "../helpers/property-processor.js";
+
+const fnMap = new Map([
+    ["position", cameraPosition],
+    ["background", createColor],
+])
 
 export default class ContextManager extends BaseManager {
     get key() {
@@ -16,6 +22,7 @@ export default class ContextManager extends BaseManager {
             const isReady = async () => {
                 canvas.removeEventListener("ready", isReady);
                 program.canvas = canvas;
+                await this._processArgs(canvas, program, context.args);
                 resolve();
             }
 
@@ -23,4 +30,24 @@ export default class ContextManager extends BaseManager {
         })
     }
 
+    async _processArgs(canvas, program, args) {
+        if (args == null) return;
+        const keys = Object.keys(args);
+        for (let key of keys) {
+            await fnMap.get(key)?.(args, canvas, key, program);
+        }
+    }
 }
+
+async function cameraPosition(args, canvas, key, program) {
+    if (args == null || args.position == null) return;
+    const pos = processProperty(args[key], program);
+    canvas.camera.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
+}
+
+async function createColor(args, canvas, key, program) {
+    canvas[key] = processProperty(args[key], program);
+}
+
+
+

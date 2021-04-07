@@ -23,10 +23,9 @@ export default class GraphicsSchema extends crsbinding.classes.ViewBase {
 
         const parser = new GraphicsParser();
         await parser.initialize([]);
-        this._orthographicProgram = await parser.parse(orthographicSchema, orthographicParent);
+        this._orthographicProgram = await parser.parse(orthographicSchema, orthographicParent, {background: "#ff0050"});
         this._perspectiveProgram = await parser.parse(perspectiveSchema, perspectiveParent);
         this._shaderProgram = await parser.parse(rawShaderSchema, shaderParent);
-
         this._orthographicProgram.canvas.render();
     }
 }

@@ -1,4 +1,5 @@
 import {BaseManager} from "./base-manager.js";
+import {processProperty} from "../helpers/property-processor.js";
 
 export default class ExtensionsManager extends BaseManager {
     get key() {
@@ -39,21 +40,11 @@ export default class ExtensionsManager extends BaseManager {
 
     async processParameters(parameters, program) {
         for (let i = 0; i < parameters.length; i++) {
-            const parameter = parameters[i];
-            if (typeof parameter == "string", parameter.indexOf("@context") != -1) {
-                parameters[i] = await this.getContextValue(parameter, program);
-            }
+            parameters[i] = processProperty(parameters[i], program);
         }
 
         return parameters;
     }
-
-    async getContextValue(parameter, program) {
-        parameter = parameter.replace("@context.", "return context.");
-        const fn = new Function("context", parameter);
-        return fn(program);
-    }
-
 }
 
 async function disposeExtensions() {

@@ -1,4 +1,5 @@
 import {BaseManager} from "./base-manager.js";
+import {processProperty} from './../helpers/property-processor.js';
 
 const fnMap = new Map([
     ["center", createVector2],
@@ -38,30 +39,32 @@ export default class TextureManager extends BaseManager {
         return new Promise(resolve => {
             loader.load(def.texture, async texture => {
                 program.textures.set(def.id, texture);
-                await this._applyArguments(texture, def.args);
+                await this._applyArguments(texture, def.args, program);
                 resolve();
             })
         })
     }
 
-    async _applyArguments(texture, args) {
+    async _applyArguments(texture, args, program) {
         if (args == null) return;
         const keys = Object.keys(args);
         for (let key of keys) {
             if (fnMap.has(key)) {
-                texture[key] = await fnMap.get(key)(args[key]);
+                texture[key] = await fnMap.get(key)(args[key], program);
             }
             else {
-                texture[key] = args[key];
+                texture[key] = processProperty(args[key], program);
             }
         }
     }
 }
 
-async function createVector2(param) {
+async function createVector2(param, program) {
+    param = processProperty(param, program);
     return await crs.createThreeObject("Vector2", param.x || 0, param.y || 0);
 }
 
-async function getConstant(param) {
+async function getConstant(param, program) {
+    param = processProperty(param, program);
     return await crs.getThreeConstant(param);
 }

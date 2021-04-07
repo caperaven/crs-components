@@ -7,8 +7,8 @@ export const orthographicSchema = {
     ],
     context: {
         type: "orthographic",
-        attributes: {
-            background: "#dadada"
+        args: {
+            background: "@context.background"
         }
     },
     textures: [

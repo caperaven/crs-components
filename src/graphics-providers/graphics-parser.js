@@ -13,6 +13,7 @@ import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
 import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
+import {processProperty} from "./helpers/property-processor.js";
 
 export class GraphicsParser extends BaseParser {
     constructor() {
@@ -41,11 +42,17 @@ export class GraphicsParser extends BaseParser {
         }
     }
 
-    async parse(srcSchema, parentElement) {
+    async parse(srcSchema, parentElement, properties) {
         const schema = JSON.parse(JSON.stringify(srcSchema));
 
         const ignore = ["scene", "locations"];
         const program = new Program();
+
+        const propKeys = Object.keys(properties||{});
+        for (let property of propKeys || []) {
+            program[property] = properties[property];
+        }
+
         program.parser = this;
 
         await this.managers.get("locations").processItem(schema.locations, program);
@@ -64,7 +71,6 @@ export class GraphicsParser extends BaseParser {
 
         // context must be in place for this to continue;
         await this._processHelpers(schema.context.helpers, program);
-        await this._processCameraPosition(schema, program);
 
         await this.providers.get("scene").processItem(schema.scene, program);
 
@@ -76,12 +82,6 @@ export class GraphicsParser extends BaseParser {
     async _processHelpers(helpers, program) {
         if (helpers == null) return;
         await this.providers.get("Helpers").processItem(helpers, program);
-    }
-
-    async _processCameraPosition(schema, program) {
-        if (schema.context.args == null || schema.context.args.position == null) return;
-        const pos = schema.context.args.position;
-        program.canvas.camera.position.set(pos.x || 0, pos.y || 0, pos.z || 0);
     }
 
     async _loadModules(schema) {
