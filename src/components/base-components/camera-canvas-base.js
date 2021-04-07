@@ -1,7 +1,3 @@
-import {Scene} from "./../../../third-party/three/src/scenes/Scene.js";
-import {Color} from "./../../../third-party/three/src/math/Color.js";
-import {WebGLRenderer} from "./../../../third-party/three/src/renderers/WebGLRenderer.js";
-
 export class CameraCanvasBase extends HTMLElement {
     get nearPlane() {
         if (this._nearPlane == null) {
@@ -47,15 +43,15 @@ export class CameraCanvasBase extends HTMLElement {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
             this.aspect = this.width / this.height;
-            this.scene = new Scene();
-            this.scene.background = new Color(this.background);
+            this.scene = await crs.modules.getInstanceOf("Scene", "Scene");
+            this.scene.background = await crs.modules.getInstanceOf("Color", "Color", this.background);
             this.top = this.height / 2;
             this.left = this.width / -2;
 
             this.camera = await this.createCamera();
             this.scene.add(this.camera);
 
-            this.renderer = new WebGLRenderer({antialias: true});
+            this.renderer = await crs.modules.getInstanceOf("WebGLRenderer", "WebGLRenderer", {antialias: true});
             this.renderer.setClearColor(this.background);
             this.renderer.setPixelRatio(window.devicePixelRatio);
             this.renderer.setSize(this.width, this.height);

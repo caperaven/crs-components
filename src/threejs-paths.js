@@ -29,6 +29,8 @@ export async function loadThreeModules(root) {
     await crs.modules.add("PerspectiveCamera", `${url}cameras/PerspectiveCamera.js`);
 
     // common
+    await crs.modules.add("Scene", `${url}scenes/Scene.js`);
+    await crs.modules.add("WebGLRenderer", `${url}renderers/WebGLRenderer.js`);
     await crs.modules.add("Mesh", `${url}objects/Mesh.js`);
     await crs.modules.add("Color", `${url}math/Color.js`);
     await crs.modules.add("Vector2", `${url}math/Vector2.js`);
