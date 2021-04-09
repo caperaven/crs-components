@@ -1,5 +1,5 @@
 export async function mergeBufferGeometries (geometries) {
-	const isIndexed = geometries[0].index !== null;
+	const isIndexed = geometries[0].index != null;
 	const attributes = {};
 	const mergedGeometry = await crs.modules.getInstanceOf("BufferGeometry");
 
@@ -8,6 +8,7 @@ export async function mergeBufferGeometries (geometries) {
 		let attributesCount = 0;
 
 		// gather attributes, exit early if they're different
+
 		for (let name in geometry.attributes) {
 			if (attributes[name] === undefined) attributes[name] = [];
 			attributes[name].push(geometry.attributes[name]);

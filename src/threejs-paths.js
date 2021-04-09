@@ -24,6 +24,7 @@ export async function loadThreeModules(root) {
     await crs.modules.add("CylinderGeometry", `${url}geometries/CylinderGeometry.js`);
     await crs.modules.add("WireframeGeometry", `${url}geometries/WireframeGeometry.js`);
     await crs.modules.add("EdgesGeometry", `${url}geometries/EdgesGeometry.js`);
+    await crs.modules.add("ShapeGeometry", `${url}geometries/ShapeGeometry.js`);
 
     // cameras
     await crs.modules.add("OrthographicCamera", `${url}cameras/OrthographicCamera.js`);
@@ -43,6 +44,7 @@ export async function loadThreeModules(root) {
     await crs.modules.add("Loader", `${url}/loaders/Loader.js`);
     await crs.modules.add("Path", `${url}/extras/core/Path.js`);
     await crs.modules.add("ShapePath", `${url}/extras/core/ShapePath.js`);
+    await crs.modules.add("Shape", `${url}/extras/core/Shape.js`);
 
     // textures
     await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);
