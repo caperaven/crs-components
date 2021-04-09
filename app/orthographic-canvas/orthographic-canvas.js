@@ -68,7 +68,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
         const material = new MeshBasicMaterial({color: new Color(0x0000ff)});
         const mesh = new Mesh(geom, material);
         this.canvas.scene.add(mesh);
-        this.canvas.canvasPlace(mesh, 300, 300);
+        this.canvas.canvasPlace(mesh, 500, 400);
     }
 
     async render() {
