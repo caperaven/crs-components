@@ -37,7 +37,7 @@
         "three": "^0.125.2"
     },
     "dependencies": {
-        "crs-modules": "^1.0.7",
+        "crs-modules": "^1.0.9",
         "crs-schema": "0.0.46"
     }
 }

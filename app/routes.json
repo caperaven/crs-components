@@ -83,6 +83,11 @@
       "view": "msdf"
     },
     {
+      "title": "SVG Loader",
+      "hash": "#svg-loader",
+      "view": "svg-loader"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

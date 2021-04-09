@@ -39,9 +39,11 @@ export const orthographicSchema = {
             }
         }
     ],
+
     scene: {
         elements: [
             {
+                id: "rect",
                 element: "PlaneGeometry",
                 material: 0,
                 args: {
