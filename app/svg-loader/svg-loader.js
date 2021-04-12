@@ -26,9 +26,9 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
         //const result = await loader.load(`${window.location.origin}/images/material-design-icons/action/ic_alarm_24px.svg`);
 
         const material = await crs.createThreeObject("MeshBasicMaterial", {color: await crs.createColor(0xff0000)});
-        const result = await loader.parse("<svg><rect x='0' y='0' width='100' height='100'></rect></svg>");
+        const result = await loader.parse("<svg><rect x='0' y='0' width='100' height='100'></rect><circle x='100' y='100' r='100'></circle></svg>");
 
-        // const result = await loader.parse("<svg><circle x='0' y='0' r='100'></circle></svg>");
+        // const result = await loader.parse("<svg></circle></svg>");
 
         const mesh = await crs.createThreeObject("Mesh", result, material);
         this.canvas.scene.add(mesh);
