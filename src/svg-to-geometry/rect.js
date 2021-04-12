@@ -28,5 +28,16 @@ async function roundRect(x, y, rx, ry, w, h, path) {
     const y2 = y + ry;
     const y3 = y + h - ry;
     const y4 = y3 + ry;
+
+    path.moveTo(x2, y1);
+    path.lineTo(x3, y1);
+    path.bezierCurveTo(x4, y1, x4, y1, x4, y2);
+    path.lineTo(x4, y3);
+    path.bezierCurveTo(x4, y4, x4, y4, x3, y4);
+    path.lineTo(x2, y4);
+    path.bezierCurveTo(x1, y4,x1, y4, x1, y3);
+    path.lineTo(x1, y2);
+    path.bezierCurveTo(x1, y1, x1, y1, x2, y1);
+
     return path;
 }

@@ -28,8 +28,7 @@ export const rawShaderSchema = {
                 uniforms: {
                     map: {type: "t", value: "font"},
                     fgColor: {value: "#ff0090"},
-                    bgColor: {value: "#ffffff"},
-                    distanceFactor: {value:3}
+                    distanceFactor: {value:6}
                 }
             }
         }
@@ -41,7 +40,7 @@ export const rawShaderSchema = {
                 material: 0,
                 args: {
                     transform: {
-                        scale: {x: 512, y: 256}
+                        scale: {x: 1024, y: 512}
                     }
                 }
             }

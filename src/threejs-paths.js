@@ -85,7 +85,7 @@ globalThis.crs.getThreePrototype = async className => {
  * @returns {Promise<*>}
  */
 globalThis.crs.createColor = async color => {
-    const cn = Number(color.replace("#", "0x"));
+    const cn = typeof color == "string" ? Number(color.replace("#", "0x")) : color;
     return crs.createThreeObject("Color", cn);
 }
 
