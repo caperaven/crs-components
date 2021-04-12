@@ -27,8 +27,11 @@ export const rawShaderSchema = {
                 transparent: true,
                 uniforms: {
                     map: {type: "t", value: "font"},
-                    fgColor: {value: "#ff0090"},
-                    distanceFactor: {value:6}
+                    fill: {value: "#ff0090"},
+                    stroke: {value: "#000000"},
+                    strokeWidth: {value: 2},
+                    distanceFactor: {value:6},
+
                 }
             }
         }

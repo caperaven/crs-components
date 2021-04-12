@@ -1,24 +1,24 @@
 export async function createNormalizedPlane(width = 1, height = 1, material = null) {
-    const geometry = await crs.modules.getInstanceOf("PlaneGeometry", "PlaneGeometry", 1, 1);
+    const geometry = await crs.createThreeObject("PlaneGeometry", 1, 1);
 
     if (material == null) {
-        material = await crs.modules.getInstanceOf("MeshBasicMaterial");
+        material = await crs.createThreeObject("MeshBasicMaterial");
     }
 
-    const result = await crs.modules.getInstanceOf("Mesh", "Mesh", geometry, material);
+    const result = await crs.createThreeObject("Mesh", geometry, material);
     result.scale.set(width, height, 1);
     return result;
 }
 
 export async function createRegularMesh(material, segments, radius) {
-    const buffer = await crs.modules.getInstanceOf("CircleGeometry", "CircleGeometry", radius, segments);
-    return await crs.modules.getInstanceOf("Mesh", "Mesh", buffer, material);
+    const buffer = await crs.createThreeObject("CircleGeometry", radius, segments);
+    return await crs.createThreeObject("Mesh", buffer, material);
 }
 
 export async function createCustomUVPlane(width, height, texture, tx1, tx2, ty1, ty2) {
-    const geometry = await crs.modules.getInstanceOf("PlaneGeometry", "PlaneGeometry", 1, 1);
-    const material = await crs.modules.getInstanceOf("MeshBasicMaterial", "MeshBasicMaterial", {map: texture});
-    const mesh = await crs.modules.getInstanceOf("Mesh", "Mesh", geometry, material);
+    const geometry = await crs.createThreeObject("PlaneGeometry", 1, 1);
+    const material = await crs.createThreeObject("MeshBasicMaterial", {map: texture});
+    const mesh = await crs.createThreeObject("Mesh", geometry, material);
     mesh.scale.set(width, height, 1);
 
     await updatePlaneUV(mesh, tx1, tx2, ty1, ty2);

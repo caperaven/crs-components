@@ -2,6 +2,7 @@ import {mergeBufferGeometries} from "./../threejs-helpers/buffer-geometry-utils.
 
 export class SVGLoader {
 	constructor() {
+		this._geometries = ["CircleGeometry", "PlaneGeometry"]
 		this._modules = {
 			"rect": "./rect.js",
 			"circle": "./circle.js",
@@ -57,7 +58,13 @@ export class SVGLoader {
 		const fn = this._modules[tagName].default;
 		const path = await fn(node);
 
-		const geometry = await crs.modules.getInstanceOf("ShapeGeometry", "ShapeGeometry", path);
-		this._shapes.push(geometry);
+		if (this._geometries.indexOf(path.constructor.name) != -1) {
+			this._shapes.push(path);
+		}
+		else
+		{
+			const geometry = await crs.modules.getInstanceOf("ShapeGeometry", "ShapeGeometry", path);
+			this._shapes.push(geometry);
+		}
 	}
 }
