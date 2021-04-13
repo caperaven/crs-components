@@ -3,14 +3,16 @@ import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
-import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
+//import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
 import {createRegularMesh} from "../../src/threejs-helpers/shape-factory.js";
-import {enableInputManager, disableInputManager} from "./../../src/graphics-helpers/graphics-input-manager.js"
+//import {enableInputManager, disableInputManager} from "./../../src/graphics-helpers/graphics-input-manager.js"
 import {mergeBufferGeometries} from "./../../src/threejs-helpers/buffer-geometry-utils.js";
+import {OrbitControls} from "./../../third-party/three/external/controls/OrbitControls.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
+
         this.canvas = document.querySelector("orthographic-canvas");
 
         const ready = async () => {
@@ -19,11 +21,11 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
             await this._createBatch();
             this.canvas.removeEventListener("ready", ready);
             this.canvas.zeroBottomLeft();
-            this.canvas.render();
 
             requestAnimationFrame(async () => {
-                await enableOrthographicDraggable(this.canvas);
-                await enableInputManager(this.canvas, ["selection"]);
+                this.orbitControl = new OrbitControls(this.canvas.camera, this.canvas.renderer.domElement);
+                this.orbitControl.update();
+                await this.render();
             })
         }
 
@@ -31,8 +33,6 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
-        await disableOrthographicDraggable(this.canvas);
-        await disableInputManager(this.canvas);
         this.canvas = null;
         this.plane = null;
         await super.disconnectedCallback();
@@ -73,7 +73,8 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
 
     async render() {
         requestAnimationFrame(this.render.bind(this));
-        this.plane.rotateZ(0.01);
+
+        this.orbitControl.update();
         this.canvas.render();
     }
 }

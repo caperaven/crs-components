@@ -26,7 +26,7 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
 
     async svgLoad() {
         const loader = new SVGLoader();
-        loader.load("/images/svg/floorplan.svg", async data => {
+        loader.load("/images/svg/desk.svg", async data => {
             const paths = data.paths;
             const group = await crs.createThreeObject("Group");
 
