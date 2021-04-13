@@ -1,0 +1,1002 @@
+<svg width="2715" height="1979" viewBox="0 0 2715 1979" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Artboard" clip-path="url(#clip0)">
+<rect width="2715" height="1979" fill="white"/>
+<g id="Walls">
+<path id="Path" fill-rule="evenodd" clip-rule="evenodd" d="M120 30H45V136H63V46H120V30Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2" fill-rule="evenodd" clip-rule="evenodd" d="M284 30.2857L210 29V47H284V30.2857Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 225.084H45V316.084H63.0294V225.084Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 2" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 408H45V511H63.0294V408Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 3" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 600H45V692H63.0294V684H241V677H63L63.0294 600Z" stroke="#272C37" stroke-width="3"/>
+<rect id="Rectangle" x="329" y="677" width="79" height="8" stroke="#272C37" stroke-width="3"/>
+<rect id="Rectangle Copy 2" x="496" y="677" width="113" height="8" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 4" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 783H45V875H63.0294V783Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 5" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 1159.5H45V1252.5H63.0294V1159.5Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 11" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 963.5H45V1071.5H63.0294V1024H592V1006H63.0294V963.5Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 6" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 1341H45V1434H63.0294V1341Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 7" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 1524H45V1629H63.0294V1611H290V1676H306V1668H297V1603H63.0294V1524Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 8" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 1718H45V1809H63.0294V1718Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 12" fill-rule="evenodd" clip-rule="evenodd" d="M673.5 1947H524V1965H673.5V1947Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 13" fill-rule="evenodd" clip-rule="evenodd" d="M876 1947H761V1965H876V1947Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 15" fill-rule="evenodd" clip-rule="evenodd" d="M1998 1645H1973V1652H1980V1947H1833V1965H1989V1652H1998V1645Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 37" fill-rule="evenodd" clip-rule="evenodd" d="M2215 1947H2076V1965H2215V1947Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 16" fill-rule="evenodd" clip-rule="evenodd" d="M2406 1947H2311V1653H2318V1646H2080V1653H2302V1965H2406V1947Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 17" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1862H2630V1898H2647V1947H2494V1965H2664V1862Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 18" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1723H2647V1774H2664V1723Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 19" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1524H2647V1626H2426V1646H2400V1652H2434V1634H2664V1524Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 20" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1341H2647V1436H2664V1341Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 21" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1159H2647V1206H2054V1213H2647V1252H2664V1159Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 22" fill-rule="evenodd" clip-rule="evenodd" d="M2664 958H2647V1068H2664V958Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 23" fill-rule="evenodd" clip-rule="evenodd" d="M2664 767H2647V869H2664V767Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 24" fill-rule="evenodd" clip-rule="evenodd" d="M2664 553H2647V589H2013V402H2006V596H2647V678H2664V553Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 25" fill-rule="evenodd" clip-rule="evenodd" d="M2664 410H2647V464H2664V410Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 26" fill-rule="evenodd" clip-rule="evenodd" d="M2664 226H2647V321H2664V226Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 27" fill-rule="evenodd" clip-rule="evenodd" d="M2664 43H2602V61H2647V138H2664V43Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 28" fill-rule="evenodd" clip-rule="evenodd" d="M2513 43H2439V61H2513V43Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 29" fill-rule="evenodd" clip-rule="evenodd" d="M2349.5 43H2260.5L2261 118H2258V135H2278V61H2349.5V43Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 30" fill-rule="evenodd" clip-rule="evenodd" d="M2029 43H1940V61H2010V135H2020V309H1903V316H2028V135H2030V118H2028L2029 43Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 31" fill-rule="evenodd" clip-rule="evenodd" d="M1850.5 43H1777V61H1850.5V43Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 33" fill-rule="evenodd" clip-rule="evenodd" d="M1450 32H1249V201H1450V32Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 38" fill-rule="evenodd" clip-rule="evenodd" d="M1434 50.5H1265V187.5H1434V50.5Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 34" fill-rule="evenodd" clip-rule="evenodd" d="M1074 28H1011V46H1040V56H1056V431H962V455H1074V28Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 35" fill-rule="evenodd" clip-rule="evenodd" d="M922 28H847V46H922V28Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 9" fill-rule="evenodd" clip-rule="evenodd" d="M63.0294 1896H45V1965H63.0294H233V1947H63.0294V1896Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 2 Copy 10" fill-rule="evenodd" clip-rule="evenodd" d="M388 1668H363V1676H380V1947H322V1965H340.029H435V1947H388V1668Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path_2" fill-rule="evenodd" clip-rule="evenodd" d="M374 30H449V116H431V55H408V46H374V30Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 3" fill-rule="evenodd" clip-rule="evenodd" d="M963 1947H970V1655H977V1749H1125V1585H977V1594H970V1568H1142V1668H1261V1961H1435V1668H1554V1643H1572V1645H1591V1585H1572V1587H1554V1568H1731V1585H1599V1652H1572V1749H1723V1645H1890V1652H1731V1756H1738V1947H1744V1964H1607V1915H1453V1979H1244V1961V1919H1091V1964H963V1947Z" stroke="#272C37" stroke-width="3"/>
+<rect id="Rectangle_2" x="976" y="1909" width="107" height="47" stroke="#272C37" stroke-width="3"/>
+<rect id="Rectangle Copy" x="1614" y="1906" width="102" height="50" stroke="#272C37" stroke-width="3"/>
+<path id="Path 4" fill-rule="evenodd" clip-rule="evenodd" d="M1134 1686H1247V1900H976L976 1756H1134V1686Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 5" fill-rule="evenodd" clip-rule="evenodd" d="M1450 1686H1563V1757H1716V1899H1450V1686Z" stroke="#272C37" stroke-width="3"/>
+<path id="Line" d="M976 1830.5H1127" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2" d="M1125.5 1819.5V1839.5" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2 Copy" d="M1125.5 1755.5V1764.5" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2 Copy 2" d="M1125.5 1892.5V1901.5" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2 Copy 4" d="M1596.5 1755.5V1764.5" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2 Copy 5" d="M1597.5 1888V1899" stroke="#272C37" stroke-width="3"/>
+<path id="Line 2 Copy 3" d="M1597.5 1819.5V1834.5" stroke="#272C37" stroke-width="3"/>
+<path id="Line Copy" d="M1716 1829.5H1598" stroke="#272C37" stroke-width="3"/>
+<path id="Path 6" fill-rule="evenodd" clip-rule="evenodd" d="M1688 43V61H1642V309H1840V316H1831V339H1823V316H1642V435H1722V444H1823V403H1831V452H1625V43H1688Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 7" fill-rule="evenodd" clip-rule="evenodd" d="M676 98V116H693V455H842V449H701V57H724V46H758V28H683V98H676Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 8" fill-rule="evenodd" clip-rule="evenodd" d="M673 1006V1023H738V1029H746V1023H997V1006H696V995H688V1006H673Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 9" fill-rule="evenodd" clip-rule="evenodd" d="M688 925.5V903.5H696V925.5H688Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 10" fill-rule="evenodd" clip-rule="evenodd" d="M696 846H688V597H712V605H696V796H938V605H890V597H962V588H1074V685H1056V605H947V796H1074V977H1015V964H1056V803H696V846Z" stroke="#272C37" stroke-width="3"/>
+<rect id="Rectangle_3" x="803" y="597" width="29" height="8" stroke="#272C37" stroke-width="3"/>
+<path id="Path 11" fill-rule="evenodd" clip-rule="evenodd" d="M1015 964H997V1055H1057V1218H747V1086H739V1434H760V1427H747V1226H1057V1416H969V1427H846V1434H1073L1074 1042H1015V964Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 12" fill-rule="evenodd" clip-rule="evenodd" d="M1625 588V607H1641V605H1662V672H1641V670H1625V681H1641V679H1670V605H1721V596H1915V713H1924V589H1721V587L1625 588Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 13" fill-rule="evenodd" clip-rule="evenodd" d="M1641 790H1625V855H1641V805H1914V807H1923V796H1914V798H1641V790Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 14" fill-rule="evenodd" clip-rule="evenodd" d="M1625 965H1700V1003H1915V889H1923V1003H1970V1020H1923V1027H1915V1020H1700V1063H1625V1046H1641V1049H1684V980H1642V983H1625V965Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 15" fill-rule="evenodd" clip-rule="evenodd" d="M1625 1174V1228H1641V1219H1914V1228H1922V1213H1973V1206H1922V1108H1914V1210H1641V1174H1625Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 16" fill-rule="evenodd" clip-rule="evenodd" d="M1625 1338H1642V1411H1915V1309H1924V1420L1732 1421V1434H1714V1430H1625V1338Z" stroke="#272C37" stroke-width="3"/>
+<path id="Path 17" fill-rule="evenodd" clip-rule="evenodd" d="M1258 201V390H1074V394H1262V201H1258Z" stroke="#272C37"/>
+<path id="Path 18" fill-rule="evenodd" clip-rule="evenodd" d="M1438 201H1441V394H1438V201Z" stroke="#272C37"/>
+<rect id="Rectangle_4" x="1343.5" y="1722.5" width="6.5" height="140.5" stroke="#272C37"/>
+<path id="Line 5" d="M1078.5 384.5L1247.5 128.5" stroke="#272C37" stroke-linecap="square" stroke-dasharray="28 2"/>
+<path id="Line 5_2" d="M1257.5 389.5L1078.5 128.5" stroke="#272C37" stroke-linecap="square" stroke-dasharray="28 2"/>
+</g>
+<g id="Stairs">
+<g id="Bottom">
+<path id="Line 3" d="M1434.53 1719H1262.44" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3 Copy" d="M1339.34 1737.5H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 2" d="M1434.51 1737.5H1354.63" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 3" d="M1339.34 1756H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 4" d="M1434.5 1756H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 6" d="M1339.34 1775H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 5" d="M1434.5 1775H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 13" d="M1434.5 1846H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 12" d="M1339.34 1829H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 11" d="M1434.5 1829H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 10" d="M1339.34 1812H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 9" d="M1434.5 1812H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 8" d="M1339.34 1793H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 7" d="M1434.5 1793H1355.53" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 14" d="M1339.34 1846H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 15" d="M1354.1 1866.5H1262.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Path 19" d="M1301 1721V1917H1397V1721" stroke="#272C37" stroke-dasharray="21 15"/>
+<path id="Path 20" d="M1408 1746L1397 1721L1386 1746" stroke="#272C37"/>
+<path id="Line 4 Copy" d="M1339.34 1719V1866.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 4" d="M1354.1 1719V1865.66" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+<g id="Top">
+<path id="Line 3_2" d="M1441 393.5H1624.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3 Copy_2" d="M1542.5 375H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 2_2" d="M1441 375H1521.86" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 3_2" d="M1542.5 356.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 4_2" d="M1441.01 356.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 6_2" d="M1542.5 337.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 5_2" d="M1441.01 337.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 13_2" d="M1441.01 266.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 12_2" d="M1542.5 283.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 11_2" d="M1441.01 283.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 10_2" d="M1542.5 300.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 9_2" d="M1441.01 300.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 8_2" d="M1542.5 319.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 7_2" d="M1441.01 319.5H1520.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 14_2" d="M1542.5 266.5H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy 15_2" d="M1522 246H1624.5" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 4_2" d="M1522.5 393.5V246.839" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 4 Copy_2" d="M1542.5 393.5V246" stroke="#272C37" stroke-linecap="square"/>
+<path id="Path 19_2" d="M1584 393V197H1481V393" stroke="#272C37" stroke-dasharray="21 15"/>
+<path id="Path 20_2" d="M1469 368L1481 393L1493 368" stroke="#272C37"/>
+</g>
+</g>
+<g id="Ext Windows">
+<g id="Window">
+<g id="Window_2" clip-path="url(#clip1)">
+<path id="Path 17_2" fill-rule="evenodd" clip-rule="evenodd" d="M47 1254H50V1257H47L47 1254Z" stroke="#272C37"/>
+<path id="Path 17 Copy" fill-rule="evenodd" clip-rule="evenodd" d="M47 1336.5H50V1339.5H47L47 1336.5Z" stroke="#272C37"/>
+<path id="Line 4_3" d="M61.5 1254.5V1339.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_3" d="M48.5 1257.56V1335.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 7">
+<g id="Window_3" clip-path="url(#clip2)">
+<path id="Path 17_3" fill-rule="evenodd" clip-rule="evenodd" d="M47 1631H50V1634H47L47 1631Z" stroke="#272C37"/>
+<path id="Path 17 Copy_2" fill-rule="evenodd" clip-rule="evenodd" d="M47 1713.5H50V1716.5H47L47 1713.5Z" stroke="#272C37"/>
+<path id="Line 4_4" d="M61.5 1631.5V1716.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_4" d="M48.5 1634.56V1712.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 9">
+<g id="Window_4" clip-path="url(#clip3)">
+<path id="Path 17_4" fill-rule="evenodd" clip-rule="evenodd" d="M47 1810H50V1813H47L47 1810Z" stroke="#272C37"/>
+<path id="Path 17 Copy_3" fill-rule="evenodd" clip-rule="evenodd" d="M47 1892.5H50V1895.5H47L47 1892.5Z" stroke="#272C37"/>
+<path id="Line 4_5" d="M61.5 1810.5V1895.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_5" d="M48.5 1813.56V1891.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 10">
+<g id="Window_5" clip-path="url(#clip4)">
+<path id="Path 17_5" fill-rule="evenodd" clip-rule="evenodd" d="M234.5 1962.5V1959.5H237.5V1962.5H234.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_4" fill-rule="evenodd" clip-rule="evenodd" d="M317 1962.5V1959.5H320V1962.5H317Z" stroke="#272C37"/>
+<path id="Line 4_6" d="M235 1948H320" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_6" d="M238.059 1961H316.297" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 11">
+<g id="Window_6" clip-path="url(#clip5)">
+<path id="Path 17_6" fill-rule="evenodd" clip-rule="evenodd" d="M436.5 1962.5V1959.5H439.5V1962.5H436.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_5" fill-rule="evenodd" clip-rule="evenodd" d="M519 1962.5V1959.5H522V1962.5H519Z" stroke="#272C37"/>
+<path id="Line 4_7" d="M437 1948H522" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_7" d="M440.059 1961H518.297" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 12">
+<g id="Window_7" clip-path="url(#clip6)">
+<path id="Path 17_7" fill-rule="evenodd" clip-rule="evenodd" d="M674.5 1962.5V1959.5H677.5V1962.5H674.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_6" fill-rule="evenodd" clip-rule="evenodd" d="M757 1962.5V1959.5H760V1962.5H757Z" stroke="#272C37"/>
+<path id="Line 4_8" d="M675 1948H760" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_8" d="M678.059 1961H756.297" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 14">
+<g id="Window_8" clip-path="url(#clip7)">
+<path id="Path 17_8" fill-rule="evenodd" clip-rule="evenodd" d="M1746 1962.5V1959.5H1749V1962.5H1746Z" stroke="#272C37"/>
+<path id="Path 17 Copy_7" fill-rule="evenodd" clip-rule="evenodd" d="M1828.5 1962.5V1959.5H1831.5V1962.5H1828.5Z" stroke="#272C37"/>
+<path id="Line 4_9" d="M1746.5 1948H1831.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_9" d="M1749.56 1961H1827.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 16">
+<g id="Window_9" clip-path="url(#clip8)">
+<path id="Path 17_9" fill-rule="evenodd" clip-rule="evenodd" d="M2217 1962.5V1959.5H2220V1962.5H2217Z" stroke="#272C37"/>
+<path id="Path 17 Copy_8" fill-rule="evenodd" clip-rule="evenodd" d="M2296.5 1962.5V1959.5H2299.5V1962.5H2296.5Z" stroke="#272C37"/>
+<path id="Line 4_10" d="M2217.48 1948H2299.52" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_10" d="M2220.54 1961H2295.81" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 13">
+<g id="Window_10" clip-path="url(#clip9)">
+<path id="Path 17_10" fill-rule="evenodd" clip-rule="evenodd" d="M876.5 1962.5V1959.5H879.5V1962.5H876.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_9" fill-rule="evenodd" clip-rule="evenodd" d="M959 1962.5V1959.5H962V1962.5H959Z" stroke="#272C37"/>
+<path id="Line 4_11" d="M877 1948H962" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_11" d="M880.059 1961H958.297" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 15">
+<g id="Window_11" clip-path="url(#clip10)">
+<path id="Path 17_11" fill-rule="evenodd" clip-rule="evenodd" d="M1990 1962.5V1959.5H1993V1962.5H1990Z" stroke="#272C37"/>
+<path id="Path 17 Copy_10" fill-rule="evenodd" clip-rule="evenodd" d="M2072.5 1962.5V1959.5H2075.5V1962.5H2072.5Z" stroke="#272C37"/>
+<path id="Line 4_12" d="M1990.5 1948H2075.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_12" d="M1993.56 1961H2071.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 17">
+<g id="Window_12" clip-path="url(#clip11)">
+<path id="Path 17_12" fill-rule="evenodd" clip-rule="evenodd" d="M2407 1962.5V1959.5H2410V1962.5H2407Z" stroke="#272C37"/>
+<path id="Path 17 Copy_11" fill-rule="evenodd" clip-rule="evenodd" d="M2489.5 1962.5V1959.5H2492.5V1962.5H2489.5Z" stroke="#272C37"/>
+<path id="Line 4_13" d="M2407.5 1948H2492.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_13" d="M2410.56 1961H2488.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 18">
+<g id="Window_13" clip-path="url(#clip12)">
+<path id="Path 17_13" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1861H2661V1858H2664V1861Z" stroke="#272C37"/>
+<path id="Path 17 Copy_12" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1778.5H2661V1775.5H2664V1778.5Z" stroke="#272C37"/>
+<path id="Line 4_14" d="M2649.5 1860.5V1775.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_14" d="M2662.5 1857.44V1779.2" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 20">
+<g id="Window_14" clip-path="url(#clip13)">
+<path id="Path 17_14" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1523H2661V1520H2664V1523Z" stroke="#272C37"/>
+<path id="Path 17 Copy_13" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1440.5H2661V1437.5H2664V1440.5Z" stroke="#272C37"/>
+<path id="Line 4_15" d="M2649.5 1522.5V1437.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_15" d="M2662.5 1519.44V1441.2" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 22">
+<g id="Window_15" clip-path="url(#clip14)">
+<path id="Path 17_15" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1157H2661V1154H2664V1157Z" stroke="#272C37"/>
+<path id="Path 17 Copy_14" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1072.5H2661V1069.5H2664V1072.5Z" stroke="#272C37"/>
+<path id="Line 4_16" d="M2649.5 1156.49V1070.01" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_16" d="M2662.5 1153.43V1073.21" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 24">
+<g id="Window_16" clip-path="url(#clip15)">
+<path id="Path 17_16" fill-rule="evenodd" clip-rule="evenodd" d="M2664 765H2661V762H2664V765Z" stroke="#272C37"/>
+<path id="Path 17 Copy_15" fill-rule="evenodd" clip-rule="evenodd" d="M2664 682.5H2661V679.5H2664V682.5Z" stroke="#272C37"/>
+<path id="Line 4_17" d="M2649.5 764.5V679.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_17" d="M2662.5 761.441V683.203" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 19">
+<g id="Window_17" clip-path="url(#clip16)">
+<path id="Path 17_17" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1721H2661V1718H2664V1721Z" stroke="#272C37"/>
+<path id="Path 17 Copy_16" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1638.5H2661V1635.5H2664V1638.5Z" stroke="#272C37"/>
+<path id="Line 4_18" d="M2649.5 1720.5V1635.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_18" d="M2662.5 1717.44V1639.2" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 21">
+<g id="Window_18" clip-path="url(#clip17)">
+<path id="Path 17_18" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1339H2661V1336H2664V1339Z" stroke="#272C37"/>
+<path id="Path 17 Copy_17" fill-rule="evenodd" clip-rule="evenodd" d="M2664 1256.5H2661V1253.5H2664V1256.5Z" stroke="#272C37"/>
+<path id="Line 4_19" d="M2649.5 1338.5V1253.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_19" d="M2662.5 1335.44V1257.2" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 23">
+<g id="Window_19" clip-path="url(#clip18)">
+<path id="Path 17_19" fill-rule="evenodd" clip-rule="evenodd" d="M2664 957H2661V954H2664V957Z" stroke="#272C37"/>
+<path id="Path 17 Copy_18" fill-rule="evenodd" clip-rule="evenodd" d="M2664 872.5H2661V869.5H2664V872.5Z" stroke="#272C37"/>
+<path id="Line 4_20" d="M2649.5 956.491V870.009" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_20" d="M2662.5 953.427V873.208" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 25">
+<g id="Window_20" clip-path="url(#clip19)">
+<path id="Path 17_20" fill-rule="evenodd" clip-rule="evenodd" d="M2664 551.5H2661V548.5H2664V551.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_19" fill-rule="evenodd" clip-rule="evenodd" d="M2664 469H2661V466H2664V469Z" stroke="#272C37"/>
+<path id="Line 4_21" d="M2649.5 551V466" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_21" d="M2662.5 547.941V469.703" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 26">
+<g id="Window_21" clip-path="url(#clip20)">
+<path id="Path 17_21" fill-rule="evenodd" clip-rule="evenodd" d="M2664 408H2661V405H2664V408Z" stroke="#272C37"/>
+<path id="Path 17 Copy_20" fill-rule="evenodd" clip-rule="evenodd" d="M2664 325.5H2661V322.5H2664V325.5Z" stroke="#272C37"/>
+<path id="Line 4_22" d="M2649.5 407.5V322.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_22" d="M2662.5 404.441V326.203" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 27">
+<g id="Window_22" clip-path="url(#clip21)">
+<path id="Path 17_22" fill-rule="evenodd" clip-rule="evenodd" d="M2664 225H2661V222H2664V225Z" stroke="#272C37"/>
+<path id="Path 17 Copy_21" fill-rule="evenodd" clip-rule="evenodd" d="M2664 142.5H2661V139.5H2664V142.5Z" stroke="#272C37"/>
+<path id="Line 4_23" d="M2649.5 224.5V139.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_23" d="M2662.5 221.441V143.203" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 28">
+<g id="Window_23" clip-path="url(#clip22)">
+<path id="Path 17_23" fill-rule="evenodd" clip-rule="evenodd" d="M2437.5 44.5V47.5H2434.5V44.5L2437.5 44.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_22" fill-rule="evenodd" clip-rule="evenodd" d="M2354 44.5V47.5H2351V44.5L2354 44.5Z" stroke="#272C37"/>
+<path id="Line 4_24" d="M2437 59L2351.5 59" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_24" d="M2433.93 46L2354.71 46" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 30">
+<g id="Window_24" clip-path="url(#clip23)">
+<path id="Path 17_24" fill-rule="evenodd" clip-rule="evenodd" d="M1775.5 44.5V47.5H1772.5V44.5L1775.5 44.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_23" fill-rule="evenodd" clip-rule="evenodd" d="M1692 44.5V47.5H1689V44.5L1692 44.5Z" stroke="#272C37"/>
+<path id="Line 4_25" d="M1775 59L1689.5 59" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_25" d="M1771.93 46L1692.71 46" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 32">
+<g id="Window_25" clip-path="url(#clip24)">
+<path id="Path 17_25" fill-rule="evenodd" clip-rule="evenodd" d="M1009.75 30V33H1006.75V30L1009.75 30Z" stroke="#272C37"/>
+<path id="Path 17 Copy_24" fill-rule="evenodd" clip-rule="evenodd" d="M926.25 30V33H923.25V30L926.25 30Z" stroke="#272C37"/>
+<path id="Line 4_26" d="M1009.25 44.5L923.753 44.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_26" d="M1006.18 31.5L926.955 31.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 33">
+<g id="Window_26" clip-path="url(#clip25)">
+<path id="Path 17_26" fill-rule="evenodd" clip-rule="evenodd" d="M845.75 30V33H842.75V30L845.75 30Z" stroke="#272C37"/>
+<path id="Path 17 Copy_25" fill-rule="evenodd" clip-rule="evenodd" d="M762.25 30V33H759.25V30L762.25 30Z" stroke="#272C37"/>
+<path id="Line 4_27" d="M845.247 44.5L759.753 44.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_27" d="M842.184 31.5L762.955 31.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 34">
+<g id="Window_27" clip-path="url(#clip26)">
+<path id="Path 17_27" fill-rule="evenodd" clip-rule="evenodd" d="M371.75 30V33H368.75V30L371.75 30Z" stroke="#272C37"/>
+<path id="Path 17 Copy_26" fill-rule="evenodd" clip-rule="evenodd" d="M288.25 30V33H285.25V30L288.25 30Z" stroke="#272C37"/>
+<path id="Line 4_28" d="M371.247 44.5L285.753 44.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_28" d="M368.184 31.5L288.955 31.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 35">
+<g id="Window_28" clip-path="url(#clip27)">
+<path id="Path 17_28" fill-rule="evenodd" clip-rule="evenodd" d="M207.75 30V33H204.75V30L207.75 30Z" stroke="#272C37"/>
+<path id="Path 17 Copy_27" fill-rule="evenodd" clip-rule="evenodd" d="M124.25 30V33H121.25V30L124.25 30Z" stroke="#272C37"/>
+<path id="Line 4_29" d="M207.247 44.5L121.753 44.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_29" d="M204.184 31.5L124.955 31.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 29">
+<g id="Window_29" clip-path="url(#clip28)">
+<path id="Path 17_29" fill-rule="evenodd" clip-rule="evenodd" d="M2600.25 44.5V47.5H2597.25V44.5L2600.25 44.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_28" fill-rule="evenodd" clip-rule="evenodd" d="M2516.75 44.5V47.5H2513.75V44.5L2516.75 44.5Z" stroke="#272C37"/>
+<path id="Line 4_30" d="M2599.75 59L2514.25 59" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_30" d="M2596.68 46L2517.46 46" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 31">
+<g id="Window_30" clip-path="url(#clip29)">
+<path id="Path 17_30" fill-rule="evenodd" clip-rule="evenodd" d="M1938.25 44.5V47.5H1935.25V44.5L1938.25 44.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_29" fill-rule="evenodd" clip-rule="evenodd" d="M1854.75 44.5V47.5H1851.75V44.5L1854.75 44.5Z" stroke="#272C37"/>
+<path id="Line 4_31" d="M1937.75 59L1852.25 59" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_31" d="M1934.68 46L1855.46 46" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 2">
+<g id="Window_31" clip-path="url(#clip30)">
+<path id="Path 17_31" fill-rule="evenodd" clip-rule="evenodd" d="M47 876H50V879H47L47 876Z" stroke="#272C37"/>
+<path id="Path 17 Copy_30" fill-rule="evenodd" clip-rule="evenodd" d="M47 958.5H50V961.5H47L47 958.5Z" stroke="#272C37"/>
+<path id="Line 4_32" d="M61.5 876.5V961.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_32" d="M48.5 879.559V957.797" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 4">
+<g id="Window_32" clip-path="url(#clip31)">
+<path id="Path 17_32" fill-rule="evenodd" clip-rule="evenodd" d="M47 512.5H50V515.5H47L47 512.5Z" stroke="#272C37"/>
+<path id="Path 17 Copy_31" fill-rule="evenodd" clip-rule="evenodd" d="M47 596H50V599H47L47 596Z" stroke="#272C37"/>
+<path id="Line 4_33" d="M61.5 513.003V598.497" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_33" d="M48.5 516.066V595.295" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy">
+<g id="Window_33" clip-path="url(#clip32)">
+<path id="Path 17_33" fill-rule="evenodd" clip-rule="evenodd" d="M47 1072H50V1075H47L47 1072Z" stroke="#272C37"/>
+<path id="Path 17 Copy_32" fill-rule="evenodd" clip-rule="evenodd" d="M47 1154.5H50V1157.5H47L47 1154.5Z" stroke="#272C37"/>
+<path id="Line 4_34" d="M61.5 1072.5V1157.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_34" d="M48.5 1075.56V1153.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 8">
+<g id="Window_34" clip-path="url(#clip33)">
+<path id="Path 17_34" fill-rule="evenodd" clip-rule="evenodd" d="M47 1436H50V1439H47L47 1436Z" stroke="#272C37"/>
+<path id="Path 17 Copy_33" fill-rule="evenodd" clip-rule="evenodd" d="M47 1518.5H50V1521.5H47L47 1518.5Z" stroke="#272C37"/>
+<path id="Line 4_35" d="M61.5 1436.5V1521.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_35" d="M48.5 1439.56V1517.8" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 3">
+<g id="Window_35" clip-path="url(#clip34)">
+<path id="Path 17_35" fill-rule="evenodd" clip-rule="evenodd" d="M47 694H50V697H47L47 694Z" stroke="#272C37"/>
+<path id="Path 17 Copy_34" fill-rule="evenodd" clip-rule="evenodd" d="M47 776.5H50V779.5H47L47 776.5Z" stroke="#272C37"/>
+<path id="Line 4_36" d="M61.5 694.5V779.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_36" d="M48.5 697.559V775.797" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 5">
+<g id="Window_36" clip-path="url(#clip35)">
+<path id="Path 17_36" fill-rule="evenodd" clip-rule="evenodd" d="M47 318H50V321H47L47 318Z" stroke="#272C37"/>
+<path id="Path 17 Copy_35" fill-rule="evenodd" clip-rule="evenodd" d="M47 403.5H50V406.5H47L47 403.5Z" stroke="#272C37"/>
+<path id="Line 4_37" d="M61.5 318.515V405.985" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_37" d="M48.5 321.58V402.79" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window Copy 6">
+<g id="Window_37" clip-path="url(#clip36)">
+<path id="Path 17_37" fill-rule="evenodd" clip-rule="evenodd" d="M47 137H50V140H47L47 137Z" stroke="#272C37"/>
+<path id="Path 17 Copy_36" fill-rule="evenodd" clip-rule="evenodd" d="M47 220.5H50V223.5H47L47 220.5Z" stroke="#272C37"/>
+<path id="Line 4_38" d="M61.5 137.503V222.997" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+<path id="Line 3_38" d="M48.5 140.566V219.795" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+</g>
+<g id="Int Windows">
+<g id="Window/Int">
+<g id="Window_38" clip-path="url(#clip37)">
+<path id="Path 17_38" fill-rule="evenodd" clip-rule="evenodd" d="M327.682 679.5V682.5H324.682V679.5H327.682Z" stroke="#272C37"/>
+<path id="Path 17 Copy_37" fill-rule="evenodd" clip-rule="evenodd" d="M246.182 679.5V682.5H243.182V679.5H246.182Z" stroke="#272C37"/>
+<path id="Line 3_39" d="M324.13 681H246.734" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 4">
+<g id="Window_39" clip-path="url(#clip38)">
+<path id="Path 17_39" fill-rule="evenodd" clip-rule="evenodd" d="M494.591 679.5V682.5H491.591V679.5H494.591Z" stroke="#272C37"/>
+<path id="Path 17 Copy_38" fill-rule="evenodd" clip-rule="evenodd" d="M413.091 679.5V682.5H410.091V679.5H413.091Z" stroke="#272C37"/>
+<path id="Line 3_40" d="M491.039 681H413.643" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 6">
+<g id="Window_40" clip-path="url(#clip39)">
+<path id="Path 17_40" fill-rule="evenodd" clip-rule="evenodd" d="M697 993.399H694V990.399H697V993.399Z" stroke="#272C37"/>
+<path id="Path 17 Copy_39" fill-rule="evenodd" clip-rule="evenodd" d="M697 929.899H694V926.899H697V929.899Z" stroke="#272C37"/>
+<path id="Line 3_41" d="M695.5 989.974V930.44" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 7">
+<g id="Window_41" clip-path="url(#clip40)">
+<path id="Path 17_41" fill-rule="evenodd" clip-rule="evenodd" d="M593.3 1018.7V1015.7H596.3V1018.7H593.3Z" stroke="#272C37"/>
+<path id="Path 17 Copy_40" fill-rule="evenodd" clip-rule="evenodd" d="M611.8 1018.7V1015.7H614.8V1018.7H611.8Z" stroke="#272C37"/>
+<path id="Line 3_42" d="M596.407 1017.2H611.29" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int_2">
+<g id="Window_42" clip-path="url(#clip41)">
+<path id="Path 17_42" fill-rule="evenodd" clip-rule="evenodd" d="M1914.04 1649.5V1652.5H1911.04V1649.5H1914.04Z" stroke="#272C37"/>
+<path id="Path 17 Copy_41" fill-rule="evenodd" clip-rule="evenodd" d="M1894.54 1649.5V1652.5H1891.54V1649.5H1894.54Z" stroke="#272C37"/>
+<path id="Line 3_43" d="M1910.92 1651H1895.05" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 8">
+<g id="Window_43" clip-path="url(#clip42)">
+<path id="Path 17_43" fill-rule="evenodd" clip-rule="evenodd" d="M2078.19 1649.5V1652.5H2075.19V1649.5H2078.19Z" stroke="#272C37"/>
+<path id="Path 17 Copy_42" fill-rule="evenodd" clip-rule="evenodd" d="M2058.69 1649.5V1652.5H2055.69V1649.5H2058.69Z" stroke="#272C37"/>
+<path id="Line 3_44" d="M2075.08 1651H2059.2" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 9">
+<g id="Window_44" clip-path="url(#clip43)">
+<path id="Path 17_44" fill-rule="evenodd" clip-rule="evenodd" d="M2398.4 1649.5V1652.5H2395.4V1649.5H2398.4Z" stroke="#272C37"/>
+<path id="Path 17 Copy_43" fill-rule="evenodd" clip-rule="evenodd" d="M2378.9 1649.5V1652.5H2375.9V1649.5H2378.9Z" stroke="#272C37"/>
+<path id="Line 3_45" d="M2395.28 1651H2379.41" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 10">
+<g id="Window_45" clip-path="url(#clip44)">
+<path id="Path 17_45" fill-rule="evenodd" clip-rule="evenodd" d="M2051.9 1205.9V1208.9H2048.9V1205.9H2051.9Z" stroke="#272C37"/>
+<path id="Path 17 Copy_44" fill-rule="evenodd" clip-rule="evenodd" d="M2032.4 1205.9V1208.9H2029.4V1205.9H2032.4Z" stroke="#272C37"/>
+<path id="Line 3_46" d="M2048.78 1207.4H2032.91" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 14">
+<g id="Window_46" clip-path="url(#clip45)">
+<path id="Path 17_46" fill-rule="evenodd" clip-rule="evenodd" d="M1918 1308.29H1915V1305.29H1918V1308.29Z" stroke="#272C37"/>
+<path id="Path 17 Copy_45" fill-rule="evenodd" clip-rule="evenodd" d="M1918 1288.79H1915V1285.79H1918V1288.79Z" stroke="#272C37"/>
+<path id="Line 3_47" d="M1916.5 1305.18V1289.3" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 11">
+<g id="Window_47" clip-path="url(#clip46)">
+<path id="Path 17_47" fill-rule="evenodd" clip-rule="evenodd" d="M1915 1086.03H1918V1089.03H1915V1086.03Z" stroke="#272C37"/>
+<path id="Path 17 Copy_46" fill-rule="evenodd" clip-rule="evenodd" d="M1915 1103.53H1918V1106.53H1915V1103.53Z" stroke="#272C37"/>
+<path id="Line 3_48" d="M1916.5 1089.13V1103.03" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 15">
+<g id="Window_48" clip-path="url(#clip47)">
+<path id="Path 17_48" fill-rule="evenodd" clip-rule="evenodd" d="M1915 867H1918V870H1915V867Z" stroke="#272C37"/>
+<path id="Path 17 Copy_47" fill-rule="evenodd" clip-rule="evenodd" d="M1915 884.5H1918V887.5H1915V884.5Z" stroke="#272C37"/>
+<path id="Line 3_49" d="M1916.5 870.099V883.991" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 16">
+<g id="Window_49" clip-path="url(#clip48)">
+<path id="Path 17_49" fill-rule="evenodd" clip-rule="evenodd" d="M1915 714.584H1918V717.584H1915V714.584Z" stroke="#272C37"/>
+<path id="Path 17 Copy_48" fill-rule="evenodd" clip-rule="evenodd" d="M1915 735.084H1918V738.084H1915V735.084Z" stroke="#272C37"/>
+<path id="Line 3_50" d="M1916.5 717.704V734.572" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 19">
+<g id="Window_50" clip-path="url(#clip49)">
+<path id="Path 17_50" fill-rule="evenodd" clip-rule="evenodd" d="M2004.1 593.379V596.379H2001.1V593.379H2004.1Z" stroke="#272C37"/>
+<path id="Path 17 Copy_49" fill-rule="evenodd" clip-rule="evenodd" d="M1984.6 593.379V596.379H1981.6V593.379H1984.6Z" stroke="#272C37"/>
+<path id="Line 3_51" d="M2000.99 594.879H1985.11" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 19_2">
+<g id="Window_51" clip-path="url(#clip50)">
+<path id="Path 17_51" fill-rule="evenodd" clip-rule="evenodd" d="M1622.48 123V126H1619.48V123H1622.48Z" stroke="#272C37"/>
+<path id="Path 17 Copy_50" fill-rule="evenodd" clip-rule="evenodd" d="M1454.98 123V126H1451.98V123H1454.98Z" stroke="#272C37"/>
+<path id="Line 3_52" d="M1618.32 124.5L1455.59 124.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 19_3">
+<g id="Window_52" clip-path="url(#clip51)">
+<path id="Path 17_52" fill-rule="evenodd" clip-rule="evenodd" d="M1246.4 123V126H1243.4V123H1246.4Z" stroke="#272C37"/>
+<path id="Path 17 Copy_51" fill-rule="evenodd" clip-rule="evenodd" d="M1078.9 123V126H1075.9V123H1078.9Z" stroke="#272C37"/>
+<path id="Line 3_53" d="M1242.24 124.5L1079.51 124.5" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 12">
+<g id="Window_53" clip-path="url(#clip52)">
+<path id="Path 17_53" fill-rule="evenodd" clip-rule="evenodd" d="M1629 1064.28H1632V1067.28H1629V1064.28Z" stroke="#272C37"/>
+<path id="Path 17 Copy_52" fill-rule="evenodd" clip-rule="evenodd" d="M1629 1168.78H1632V1171.78H1629V1168.78Z" stroke="#272C37"/>
+<path id="Line 3_54" d="M1630.5 1067.99V1168.21" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 17">
+<g id="Window_54" clip-path="url(#clip53)">
+<path id="Path 17_54" fill-rule="evenodd" clip-rule="evenodd" d="M1629 857H1632V860H1629V857Z" stroke="#272C37"/>
+<path id="Path 17 Copy_53" fill-rule="evenodd" clip-rule="evenodd" d="M1629 960.5H1632V963.5H1629V960.5Z" stroke="#272C37"/>
+<path id="Line 3_55" d="M1630.5 860.708V959.933" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 18">
+<g id="Window_55" clip-path="url(#clip54)">
+<path id="Path 17_55" fill-rule="evenodd" clip-rule="evenodd" d="M1629 682.665H1632V685.665H1629V682.665Z" stroke="#272C37"/>
+<path id="Path 17 Copy_54" fill-rule="evenodd" clip-rule="evenodd" d="M1629 786.165H1632V789.165H1629V786.165Z" stroke="#272C37"/>
+<path id="Line 3_56" d="M1630.5 686.373V785.598" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 13">
+<g id="Window_56" clip-path="url(#clip55)">
+<path id="Path 17_56" fill-rule="evenodd" clip-rule="evenodd" d="M1629 1229.66H1632V1232.66H1629V1229.66Z" stroke="#272C37"/>
+<path id="Path 17 Copy_55" fill-rule="evenodd" clip-rule="evenodd" d="M1629 1334.16H1632V1337.16H1629V1334.16Z" stroke="#272C37"/>
+<path id="Line 3_57" d="M1630.5 1233.37V1333.59" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 5">
+<g id="Window_57" clip-path="url(#clip56)">
+<path id="Path 17_57" fill-rule="evenodd" clip-rule="evenodd" d="M801.221 603.091V606.091H798.221V603.091H801.221Z" stroke="#272C37"/>
+<path id="Path 17 Copy_56" fill-rule="evenodd" clip-rule="evenodd" d="M716.721 603.091V606.091H713.721V603.091H716.721Z" stroke="#272C37"/>
+<path id="Line 3_58" d="M797.648 604.591H717.276" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int_3">
+<g id="Window_58" clip-path="url(#clip57)">
+<path id="Path 17_58" fill-rule="evenodd" clip-rule="evenodd" d="M450.238 102.819V99.8194H453.238V102.819H450.238Z" stroke="#272C37"/>
+<path id="Path 17 Copy_57" fill-rule="evenodd" clip-rule="evenodd" d="M504.738 102.819V99.8194H507.738V102.819H504.738Z" stroke="#272C37"/>
+<path id="Line 3_59" d="M453.599 101.319H504.203" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy">
+<g id="Window_59" clip-path="url(#clip58)">
+<path id="Path 17_59" fill-rule="evenodd" clip-rule="evenodd" d="M504.336 105.819V102.819H507.336V105.819H504.336Z" stroke="#272C37"/>
+<path id="Path 17 Copy_58" fill-rule="evenodd" clip-rule="evenodd" d="M559.836 105.819V102.819H562.836V105.819H559.836Z" stroke="#272C37"/>
+<path id="Line 3_60" d="M507.704 104.319H559.301" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 2">
+<g id="Window_60" clip-path="url(#clip59)">
+<path id="Path 17_60" fill-rule="evenodd" clip-rule="evenodd" d="M562.923 105.819V102.819H565.923V105.819H562.923Z" stroke="#272C37"/>
+<path id="Path 17 Copy_59" fill-rule="evenodd" clip-rule="evenodd" d="M618.423 105.819V102.819H621.423V105.819H618.423Z" stroke="#272C37"/>
+<path id="Line 3_61" d="M566.292 104.319H617.888" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 3">
+<g id="Window_61" clip-path="url(#clip60)">
+<path id="Path 17_61" fill-rule="evenodd" clip-rule="evenodd" d="M617.922 102.819V99.8194H620.922V102.819H617.922Z" stroke="#272C37"/>
+<path id="Path 17 Copy_60" fill-rule="evenodd" clip-rule="evenodd" d="M671.422 102.819V99.8194H674.422V102.819H671.422Z" stroke="#272C37"/>
+<path id="Line 3_62" d="M621.275 101.319H670.888" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int_4">
+<g id="Window_62" clip-path="url(#clip61)">
+<path id="Path 17_62" fill-rule="evenodd" clip-rule="evenodd" d="M2031 121V118H2034V121H2031Z" stroke="#272C37"/>
+<path id="Path 17 Copy_61" fill-rule="evenodd" clip-rule="evenodd" d="M2085.5 121V118H2088.5V121H2085.5Z" stroke="#272C37"/>
+<path id="Line 3_63" d="M2034.36 119.5H2084.97" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy_2">
+<g id="Window_63" clip-path="url(#clip62)">
+<path id="Path 17_63" fill-rule="evenodd" clip-rule="evenodd" d="M2085.1 124V121H2088.1V124H2085.1Z" stroke="#272C37"/>
+<path id="Path 17 Copy_62" fill-rule="evenodd" clip-rule="evenodd" d="M2140.6 124V121H2143.6V124H2140.6Z" stroke="#272C37"/>
+<path id="Line 3_64" d="M2088.47 122.5H2140.06" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 2_2">
+<g id="Window_64" clip-path="url(#clip63)">
+<path id="Path 17_64" fill-rule="evenodd" clip-rule="evenodd" d="M2143.69 124V121H2146.69V124H2143.69Z" stroke="#272C37"/>
+<path id="Path 17 Copy_63" fill-rule="evenodd" clip-rule="evenodd" d="M2199.19 124V121H2202.19V124H2199.19Z" stroke="#272C37"/>
+<path id="Line 3_65" d="M2147.05 122.5H2198.65" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+<g id="Window/Int Copy 3_2">
+<g id="Window_65" clip-path="url(#clip64)">
+<path id="Path 17_65" fill-rule="evenodd" clip-rule="evenodd" d="M2198.68 121V118H2201.68V121H2198.68Z" stroke="#272C37"/>
+<path id="Path 17 Copy_64" fill-rule="evenodd" clip-rule="evenodd" d="M2252.18 121V118H2255.18V121H2252.18Z" stroke="#272C37"/>
+<path id="Line 3_66" d="M2202.04 119.5H2251.65" stroke="#272C37" stroke-width="2" stroke-linecap="square"/>
+</g>
+</g>
+</g>
+<g id="Doors">
+<g id="Door">
+<path id="Line 3_67" d="M1623.5 983.5H1561.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_66" d="M1562 984C1562 984 1567 1045 1624 1046" stroke="#272C37"/>
+</g>
+<g id="Door Copy 35">
+<path id="Line 3_68" d="M1072.5 978.5H1134.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_67" d="M1134 979C1134 979 1129 1040 1072 1041" stroke="#272C37"/>
+</g>
+<g id="Door Copy 9">
+<path id="Line 3_69" d="M1711.5 1436.5H1649.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_68" d="M1650 1437C1650 1437 1655 1498 1712 1499" stroke="#272C37"/>
+</g>
+<g id="Door Copy 25">
+<path id="Line 3_70" d="M988.5 1437.5H1050.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_69" d="M1050 1438C1050 1438 1045 1499 988 1500" stroke="#272C37"/>
+</g>
+<g id="Door Copy 10">
+<path id="Line 3_71" d="M1711.5 1562.5H1649.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_70" d="M1650 1562C1650 1562 1655 1501 1712 1500" stroke="#272C37"/>
+</g>
+<g id="Door Copy 26">
+<path id="Line 3_72" d="M988.5 1563.5H1050.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_71" d="M1050 1563C1050 1563 1045 1502 988 1501" stroke="#272C37"/>
+</g>
+<g id="Door Copy 19">
+<path id="Line 3_73" d="M1557.04 1640.57H1499.46" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_72" d="M1499.93 1640.13C1499.93 1640.13 1504.57 1587.37 1557.5 1586.5" stroke="#272C37"/>
+</g>
+<g id="Door Copy 21">
+<path id="Line 3_74" d="M1596.04 1764.43H1538.46" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_73" d="M1538.93 1764.87C1538.93 1764.87 1543.57 1817.63 1596.5 1818.5" stroke="#272C37"/>
+</g>
+<g id="Door Copy 23">
+<path id="Line 3_75" d="M1125.04 1820.07H1067.46" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_74" d="M1067.93 1819.63C1067.93 1819.63 1072.57 1766.87 1125.5 1766" stroke="#272C37"/>
+</g>
+<g id="Door Copy 27">
+<path id="Line 3_76" d="M978.464 1596.52H1036.04" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_75" d="M1035.57 1596.98C1035.57 1596.98 1030.93 1653.63 978 1654.56" stroke="#272C37"/>
+</g>
+<g id="Door Copy 22">
+<path id="Line 3_77" d="M1596.04 1834.43H1538.46" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_76" d="M1538.93 1834.87C1538.93 1834.87 1543.57 1887.63 1596.5 1888.5" stroke="#272C37"/>
+</g>
+<g id="Door Copy 24">
+<path id="Line 3_78" d="M1125.04 1890.07H1067.46" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_77" d="M1067.93 1889.63C1067.93 1889.63 1072.57 1836.87 1125.5 1836" stroke="#272C37"/>
+</g>
+<g id="Door Copy 20">
+<path id="Line 3_79" d="M1732.46 1640.57H1790.04" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_78" d="M1789.57 1640.13C1789.57 1640.13 1784.93 1587.37 1732 1586.5" stroke="#272C37"/>
+</g>
+<g id="Door Copy 8">
+<path id="Line 3_80" d="M1623.5 671.5H1561.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_79" d="M1562 671C1562 671 1567 610 1624 609" stroke="#272C37"/>
+</g>
+<g id="Door Copy 3">
+<path id="Line 3_81" d="M1703.5 459.5H1641.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_80" d="M1642 460C1642 460 1647 521 1704 522" stroke="#272C37"/>
+</g>
+<g id="Door Copy 14">
+<path id="Line 3_82" d="M987.5 458.5H1049.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_81" d="M1049 459C1049 459 1044 520 987 521" stroke="#272C37"/>
+</g>
+<g id="Door Copy 4">
+<path id="Line 3_83" d="M1703.5 584.5H1641.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_82" d="M1642 584C1642 584 1647 523 1704 522" stroke="#272C37"/>
+</g>
+<g id="Door Copy 15">
+<path id="Line 3_84" d="M987.5 583.5H1049.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_83" d="M1049 583C1049 583 1044 522 987 521" stroke="#272C37"/>
+</g>
+<g id="Door Copy 5">
+<path id="Line 3_85" d="M1823.5 400.5H1761.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_84" d="M1762 400C1762 400 1767 339 1824 338" stroke="#272C37"/>
+</g>
+<g id="Door Copy 6">
+<path id="Line 3_86" d="M1840.5 308.5V246.5" stroke="#272C37" stroke-width="3" stroke-linecap="square"/>
+<path id="Path 17_85" d="M1841 247C1841 247 1902 252 1903 309" stroke="#272C37"/>
+</g>
+<g id="Door Copy">
+<path id="Path 17_86" d="M1859.44 808.509C1859.44 808.509 1863.92 864.144 1915 865.056" stroke="#272C37"/>
+<path id="Line 3_87" d="M1914.56 808.509H1859.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_2" d="M1914.56 807.343V805.186" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_2" d="M1914.56 807.343V805.186" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_3" d="M1914.56 810.927H1860.13" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 7">
+<path id="Path 17_87" d="M1859.96 1027.95C1859.96 1027.95 1864.56 1083.59 1917 1084.5" stroke="#272C37"/>
+<path id="Line 3_88" d="M1916.54 1027.95H1859.96" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_3" d="M1916.54 1026.79V1024.63" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_3" d="M1916.54 1026.79V1024.63" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_4" d="M1916.54 1030.37H1860.66" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 12">
+<path id="Path 17_88" d="M1974.94 1148.95C1974.94 1148.95 2029.6 1153.51 2030.5 1205.5" stroke="#272C37"/>
+<path id="Line 3_89" d="M1974.94 1205.05V1148.95" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_4" d="M1973.55 1205.05H1970.67" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_4" d="M1973.55 1205.05H1970.67" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_5" d="M1977.37 1205.05V1149.65" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 16">
+<path id="Path 17_89" d="M1971.06 1709.54C1971.06 1709.54 1916.4 1704.94 1915.5 1652.5" stroke="#272C37"/>
+<path id="Line 3_90" d="M1971.06 1652.96V1709.54" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_5" d="M1972.45 1652.96H1975.33" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_5" d="M1972.45 1652.96H1975.33" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_6" d="M1968.63 1652.96V1708.84" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 28">
+<path id="Path 17_90" d="M362.306 1733.29C362.306 1733.29 307.646 1728.69 306.75 1676.25" stroke="#272C37"/>
+<path id="Line 3_91" d="M362.306 1676.71V1733.29" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_6" d="M363.701 1676.71H366.577" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_6" d="M363.701 1676.71H366.577" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_7" d="M359.88 1676.71V1732.59" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 29">
+<path id="Path 17_91" d="M761.25 1364.25C761.25 1364.25 822.742 1369.29 823.75 1426.75" stroke="#272C37"/>
+<path id="Line 3_92" d="M761.25 1426.25V1364.25" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_7" d="M761.463 1426.25H763.62" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_7" d="M761.463 1426.25H763.62" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_8" d="M763.62 1426.25V1365.02" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 31">
+<path id="Path 17_92" d="M683.444 1030.44C683.444 1030.44 687.925 1085.1 739 1086" stroke="#272C37"/>
+<path id="Line 3_93" d="M738.556 1030.44H683.444" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_8" d="M738.556 1029.05V1026.17" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_8" d="M738.556 1029.05V1026.17" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_9" d="M738.556 1032.87H684.129" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 33">
+<path id="Path 17_93" d="M751.556 847.444C751.556 847.444 747.075 902.104 696 903" stroke="#272C37"/>
+<path id="Line 3_94" d="M696.444 847.444H751.556" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_9" d="M696.444 846.049V843.173" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_9" d="M696.444 846.049V843.173" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_10" d="M696.444 849.87H750.871" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 34">
+<path id="Path 17_94" d="M888.556 660.556C888.556 660.556 833.896 656.075 833 605" stroke="#272C37"/>
+<path id="Line 3_95" d="M888.556 605.444V660.556" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_10" d="M889.951 605.444H892.827" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_10" d="M889.951 605.444H892.827" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_11" d="M886.13 605.444V659.871" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 32">
+<path id="Path 17_95" d="M673.076 949.45C673.076 949.45 618.343 953.175 616.516 1006.51" stroke="#272C37"/>
+<path id="Line 3_96" d="M672.071 1007.01L673.076 949.45" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_11" d="M673.466 1007.04L676.342 1007.09" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_11" d="M673.466 1007.04L676.342 1007.09" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_12" d="M669.645 1006.97L670.638 950.122" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 30">
+<path id="Path 17_96" d="M845.73 1402.44C845.73 1402.44 823.859 1404.4 823.5 1426.75" stroke="#272C37"/>
+<path id="Line 3_97" d="M845.73 1426.56V1402.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_12" d="M854.943 1426.56H882.264" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_12" d="M854.943 1426.56H882.264" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_13" d="M843.038 1426.56V1402.74" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 17">
+<path id="Path 17_97" d="M1999.19 1709.54C1999.19 1709.54 2053.85 1704.94 2054.75 1652.5" stroke="#272C37"/>
+<path id="Line 3_98" d="M1999.19 1652.96V1709.54" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_13" d="M1997.8 1652.96H1994.92" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_13" d="M1997.8 1652.96H1994.92" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_14" d="M2001.62 1652.96V1708.84" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 18">
+<path id="Path 17_98" d="M2319.19 1709.54C2319.19 1709.54 2373.85 1704.94 2374.75 1652.5" stroke="#272C37"/>
+<path id="Line 3_99" d="M2319.19 1652.96V1709.54" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_14" d="M2317.8 1652.96H2314.92" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_14" d="M2317.8 1652.96H2314.92" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_15" d="M2321.62 1652.96V1708.84" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 13">
+<path id="Path 17_99" d="M1924.94 651.556C1924.94 651.556 1979.6 647.075 1980.5 596" stroke="#272C37"/>
+<path id="Line 3_100" d="M1924.94 596.444V651.556" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_15" d="M1923.55 596.444H1920.67" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_15" d="M1923.55 596.444H1920.67" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_16" d="M1927.37 596.444V650.871" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 11">
+<path id="Path 17_100" d="M1859.46 1227.45C1859.46 1227.45 1864.1 1283.09 1917 1284" stroke="#272C37"/>
+<path id="Line 3_101" d="M1916.54 1227.45H1859.46" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_16" d="M1916.54 1226.29V1224.13" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_16" d="M1916.54 1226.29V1224.13" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_17" d="M1916.54 1229.87H1860.17" stroke="#272C37" stroke-linecap="square"/>
+</g>
+<g id="Door Copy 2">
+<path id="Path 17_101" d="M1859.44 794.556C1859.44 794.556 1863.92 739.896 1915 739" stroke="#272C37"/>
+<path id="Line 3_102" d="M1914.56 794.556H1859.44" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line_17" d="M1914.56 795.951V798.827" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line Copy_17" d="M1914.56 795.951V798.827" stroke="#272C37" stroke-linecap="square"/>
+<path id="Line 3 Copy_18" d="M1914.56 792.13H1860.13" stroke="#272C37" stroke-linecap="square"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="2715" height="1979" fill="white"/>
+</clipPath>
+<clipPath id="clip1">
+<rect width="15" height="86" fill="white" transform="translate(47 1254)"/>
+</clipPath>
+<clipPath id="clip2">
+<rect width="15" height="86" fill="white" transform="translate(47 1631)"/>
+</clipPath>
+<clipPath id="clip3">
+<rect width="15" height="86" fill="white" transform="translate(47 1810)"/>
+</clipPath>
+<clipPath id="clip4">
+<rect width="15" height="86" fill="white" transform="translate(234.5 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip5">
+<rect width="15" height="86" fill="white" transform="translate(436.5 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip6">
+<rect width="15" height="86" fill="white" transform="translate(674.5 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip7">
+<rect width="15" height="86" fill="white" transform="translate(1746 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip8">
+<rect width="15" height="83" fill="white" transform="translate(2217 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip9">
+<rect width="15" height="86" fill="white" transform="translate(876.5 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip10">
+<rect width="15" height="86" fill="white" transform="translate(1990 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip11">
+<rect width="15" height="86" fill="white" transform="translate(2407 1962.5) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip12">
+<rect width="15" height="86" fill="white" transform="translate(2664 1861) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip13">
+<rect width="15" height="86" fill="white" transform="translate(2664 1523) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip14">
+<rect width="15" height="87.5" fill="white" transform="translate(2664 1157) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip15">
+<rect width="15" height="86" fill="white" transform="translate(2664 765) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip16">
+<rect width="15" height="86" fill="white" transform="translate(2664 1721) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip17">
+<rect width="15" height="86" fill="white" transform="translate(2664 1339) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip18">
+<rect width="15" height="87.5" fill="white" transform="translate(2664 957) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip19">
+<rect width="15" height="86" fill="white" transform="translate(2664 551.5) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip20">
+<rect width="15" height="86" fill="white" transform="translate(2664 408) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip21">
+<rect width="15" height="86" fill="white" transform="translate(2664 225) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip22">
+<rect width="15" height="86.5" fill="white" transform="translate(2437.5 44.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip23">
+<rect width="15" height="86.5" fill="white" transform="translate(1775.5 44.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip24">
+<rect width="15" height="86.5" fill="white" transform="translate(1009.75 30) rotate(90)"/>
+</clipPath>
+<clipPath id="clip25">
+<rect width="15" height="86.5" fill="white" transform="translate(845.75 30) rotate(90)"/>
+</clipPath>
+<clipPath id="clip26">
+<rect width="15" height="86.5" fill="white" transform="translate(371.75 30) rotate(90)"/>
+</clipPath>
+<clipPath id="clip27">
+<rect width="15" height="86.5" fill="white" transform="translate(207.75 30) rotate(90)"/>
+</clipPath>
+<clipPath id="clip28">
+<rect width="15" height="86.5" fill="white" transform="translate(2600.25 44.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip29">
+<rect width="15" height="86.5" fill="white" transform="translate(1938.25 44.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip30">
+<rect width="15" height="86" fill="white" transform="translate(47 876)"/>
+</clipPath>
+<clipPath id="clip31">
+<rect width="15" height="86.5" fill="white" transform="translate(47 512.5)"/>
+</clipPath>
+<clipPath id="clip32">
+<rect width="15" height="86" fill="white" transform="translate(47 1072)"/>
+</clipPath>
+<clipPath id="clip33">
+<rect width="15" height="86" fill="white" transform="translate(47 1436)"/>
+</clipPath>
+<clipPath id="clip34">
+<rect width="15" height="86" fill="white" transform="translate(47 694)"/>
+</clipPath>
+<clipPath id="clip35">
+<rect width="15" height="88.5" fill="white" transform="translate(47 318)"/>
+</clipPath>
+<clipPath id="clip36">
+<rect width="15" height="86.5" fill="white" transform="translate(47 137)"/>
+</clipPath>
+<clipPath id="clip37">
+<rect width="3" height="85.1818" fill="white" transform="translate(327.682 679.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip38">
+<rect width="3" height="85.1818" fill="white" transform="translate(494.591 679.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip39">
+<rect width="3" height="67.3991" fill="white" transform="translate(697 993.399) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip40">
+<rect width="3" height="21.8065" fill="white" transform="translate(593.3 1018.7) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip41">
+<rect width="3" height="22.793" fill="white" transform="translate(1914.04 1649.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip42">
+<rect width="3" height="22.793" fill="white" transform="translate(2078.19 1649.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip43">
+<rect width="3" height="22.793" fill="white" transform="translate(2398.4 1649.5) rotate(90)"/>
+</clipPath>
+<clipPath id="clip44">
+<rect width="3" height="22.793" fill="white" transform="translate(2051.9 1205.9) rotate(90)"/>
+</clipPath>
+<clipPath id="clip45">
+<rect width="3" height="22.793" fill="white" transform="translate(1918 1308.29) rotate(-180)"/>
+</clipPath>
+<clipPath id="clip46">
+<rect width="3" height="20.7581" fill="white" transform="translate(1915 1086.03)"/>
+</clipPath>
+<clipPath id="clip47">
+<rect width="3" height="20.7581" fill="white" transform="translate(1915 867)"/>
+</clipPath>
+<clipPath id="clip48">
+<rect width="3" height="24.2979" fill="white" transform="translate(1915 714.584)"/>
+</clipPath>
+<clipPath id="clip49">
+<rect width="3" height="23.4824" fill="white" transform="translate(2004.1 593.379) rotate(90)"/>
+</clipPath>
+<clipPath id="clip50">
+<rect width="3" height="171.399" fill="white" transform="translate(1622.48 123) rotate(90)"/>
+</clipPath>
+<clipPath id="clip51">
+<rect width="3" height="171.399" fill="white" transform="translate(1246.4 123) rotate(90)"/>
+</clipPath>
+<clipPath id="clip52">
+<rect width="3" height="108.186" fill="white" transform="translate(1629 1064.28)"/>
+</clipPath>
+<clipPath id="clip53">
+<rect width="3" height="106.684" fill="white" transform="translate(1629 857)"/>
+</clipPath>
+<clipPath id="clip54">
+<rect width="3" height="106.566" fill="white" transform="translate(1629 682.665)"/>
+</clipPath>
+<clipPath id="clip55">
+<rect width="3" height="107.529" fill="white" transform="translate(1629 1229.66)"/>
+</clipPath>
+<clipPath id="clip56">
+<rect width="3" height="88.312" fill="white" transform="translate(801.221 603.091) rotate(90)"/>
+</clipPath>
+<clipPath id="clip57">
+<rect width="3" height="57.5261" fill="white" transform="translate(450.238 102.819) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip58">
+<rect width="3" height="58.5872" fill="white" transform="translate(504.336 105.819) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip59">
+<rect width="3" height="58.5872" fill="white" transform="translate(562.923 105.819) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip60">
+<rect width="3" height="56.6951" fill="white" transform="translate(617.922 102.819) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip61">
+<rect width="3" height="57.5261" fill="white" transform="translate(2031 121) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip62">
+<rect width="3" height="58.5872" fill="white" transform="translate(2085.1 124) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip63">
+<rect width="3" height="58.5872" fill="white" transform="translate(2143.69 124) rotate(-90)"/>
+</clipPath>
+<clipPath id="clip64">
+<rect width="3" height="56.6951" fill="white" transform="translate(2198.68 121) rotate(-90)"/>
+</clipPath>
+</defs>
+</svg>
