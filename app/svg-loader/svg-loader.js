@@ -2,31 +2,39 @@ import "../../src/components/orthographic-canvas/orthographic-canvas.js";
 //import {SVGLoader} from "./../../src/svg-to-geometry/svg-loader.js";
 import {SVGLoader} from "./../../third-party/three/external/loaders/SVGLoader.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
+import {OrbitControls} from "./../../third-party/three/external/controls/OrbitControls.js";
+import Stats from "./../../third-party/three/external/lib/stats.js";
 
 export default class SvgLoader extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
 
         this.canvas = document.querySelector("orthographic-canvas");
+        this.animateHandler = this.animate.bind(this);
+        this.stats = new Stats();
 
         const ready = async () => {
             this.canvas.camera.position.z = 10;
-            await enableOrthographicDraggable(this.canvas);
+            // await enableOrthographicDraggable(this.canvas);
+            this.orbitControls = new OrbitControls(this.canvas.camera, this.canvas.renderer.domElement);
+            this.orbitControls.update();
             await this.svgLoad();
+
+            this.element.appendChild(this.stats.dom);
         }
 
         this.canvas.addEventListener("ready", ready);
     }
 
     async disconnectedCallback() {
-        await disableOrthographicDraggable(this.canvas);
+        // await disableOrthographicDraggable(this.canvas);
         this.canvas = null;
         await super.disconnectedCallback();
     }
 
     async svgLoad() {
         const loader = new SVGLoader();
-        loader.load("/images/svg/desk.svg", async data => {
+        loader.load("/images/svg/floorplan.svg", async data => {
             const paths = data.paths;
             const group = await crs.createThreeObject("Group");
 
@@ -52,6 +60,8 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
             this.group = group;
         });
 
+        await this.animate();
+
         // const loader = new SVGLoader();
         // //const result = await loader.load(`${window.location.origin}/images/material-design-icons/action/ic_alarm_24px.svg`);
         //
@@ -65,11 +75,13 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
         // this.canvas.render();
     }
 
-    animate() {
-        requestAnimationFrame(this.animate.bind(this));
-        const time = performance.now() / 1000;
-        this.group.rotation.x = time * 0.5;
-        this.group.rotation.y = time * 0.5;
+    async animate(time) {
+        requestAnimationFrame(this.animateHandler);
+        // const time = performance.now() / 1000;
+        // this.group.rotation.x = time * 0.5;
+        // this.group.rotation.y = time * 0.5;
+        this.orbitControls.update();
+        this.stats.update();
         this.canvas.render();
     }
 
