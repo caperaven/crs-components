@@ -4,6 +4,7 @@ import {SVGLoader} from "./../../third-party/three/external/loaders/SVGLoader.js
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
 import {OrbitControls} from "./../../third-party/three/external/controls/OrbitControls.js";
 import Stats from "./../../third-party/three/external/lib/stats.js";
+import {mergeBufferGeometries} from "./../../src/threejs-helpers/buffer-geometry-utils.js";
 
 export default class SvgLoader extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -41,6 +42,7 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
             const material = await crs.createThreeObject("MeshBasicMaterial", {color: await crs.createThreeObject("Color", 0xff0090), side: crs.getThreeConstant("DoubleSide"), depthWrite: false});
             material.alphaToCoverage = true;
 
+            const geometries = [];
             for (let i = 0; i < paths.length; i++) {
                 const path = paths[i];
 
@@ -48,13 +50,14 @@ export default class SvgLoader extends crsbinding.classes.ViewBase {
                 for (let j = 0; j < shapes.length; j++) {
                     const shape = shapes[j];
                     const geometry = await crs.createThreeObject("ShapeGeometry", shape);
-                    const mesh = await crs.createThreeObject("Mesh", geometry, material);
-                    group.add(mesh);
+                    geometries.push(geometry);
                 }
             }
 
-            group.scale.set(2, 2, 2);
-            this.canvas.scene.add(group);
+            const geometry = await mergeBufferGeometries(geometries);
+            const mesh = await crs.createThreeObject("Mesh", geometry, material);
+
+            this.canvas.scene.add(mesh);
             this.canvas.render();
 
             this.group = group;
