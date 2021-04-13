@@ -8,7 +8,7 @@ export const rawShaderSchema = {
     textures: [
         {
             id: "font",
-            texture: "/fonts/opensans/OpenSans-Bold.png"
+            texture: "/images/blur-barcode.png"
         }
     ],
     materials: [

@@ -10,6 +10,7 @@ export async function loadThreeModules(root) {
     await crs.modules.add("MeshPhongMaterial", `${url}materials/MeshPhongMaterial.js`);
     await crs.modules.add("MeshPhysicalMaterial", `${url}materials/MeshPhysicalMaterial.js`);
     await crs.modules.add("MeshStandardMaterial", `${url}materials/MeshStandardMaterial.js`);
+    await crs.modules.add("MeshNormalMaterial", `${url}materials/MeshNormalMaterial.js`);
     await crs.modules.add("PointsMaterial", `${url}materials/PointsMaterial.js`);
     await crs.modules.add("RawShaderMaterial", `${url}materials/RawShaderMaterial.js`);
     await crs.modules.add("ShaderMaterial", `${url}materials/ShaderMaterial.js`);
@@ -25,6 +26,7 @@ export async function loadThreeModules(root) {
     await crs.modules.add("WireframeGeometry", `${url}geometries/WireframeGeometry.js`);
     await crs.modules.add("EdgesGeometry", `${url}geometries/EdgesGeometry.js`);
     await crs.modules.add("ShapeGeometry", `${url}geometries/ShapeGeometry.js`);
+    await crs.modules.add("ExtrudeGeometry", `${url}geometries/ExtrudeGeometry.js`);
 
     // cameras
     await crs.modules.add("OrthographicCamera", `${url}cameras/OrthographicCamera.js`);
@@ -35,16 +37,18 @@ export async function loadThreeModules(root) {
     await crs.modules.add("WebGLRenderer", `${url}renderers/WebGLRenderer.js`);
     await crs.modules.add("Mesh", `${url}objects/Mesh.js`);
     await crs.modules.add("Color", `${url}math/Color.js`);
+    await crs.modules.add("Box2", `${url}math/Box2.js`)
     await crs.modules.add("Vector2", `${url}math/Vector2.js`);
     await crs.modules.add("Vector3", `${url}math/Vector3.js`);
     await crs.modules.add("Vector4", `${url}math/Vector4.js`);
     await crs.modules.add("Matrix3", `${url}math/Matrix3.js`);
-    await crs.modules.add("ThreeConstants", `${url}/constants.js`);
-    await crs.modules.add("FileLoader", `${url}/loaders/FileLoader.js`);
-    await crs.modules.add("Loader", `${url}/loaders/Loader.js`);
-    await crs.modules.add("Path", `${url}/extras/core/Path.js`);
-    await crs.modules.add("ShapePath", `${url}/extras/core/ShapePath.js`);
-    await crs.modules.add("Shape", `${url}/extras/core/Shape.js`);
+    await crs.modules.add("ThreeConstants", `${url}constants.js`);
+    await crs.modules.add("FileLoader", `${url}loaders/FileLoader.js`);
+    await crs.modules.add("Loader", `${url}loaders/Loader.js`);
+    await crs.modules.add("Path", `${url}extras/core/Path.js`);
+    await crs.modules.add("ShapePath", `${url}extras/core/ShapePath.js`);
+    await crs.modules.add("Shape", `${url}extras/core/Shape.js`);
+    await crs.modules.add("Group", `${url}objects/Group.js`)
 
     // textures
     await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);

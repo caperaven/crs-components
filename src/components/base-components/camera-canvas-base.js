@@ -42,16 +42,16 @@ export class CameraCanvasBase extends HTMLElement {
         requestAnimationFrame(async () => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
-            this.aspect = this.width / this.height;
+            this.aspect = Math.round(this.width / this.height);
             this.scene = await crs.createThreeObject("Scene");
             this.scene.background = await crs.modules.getInstanceOf("Color", "Color", this.background);
-            this.top = this.height / 2;
-            this.left = this.width / -2;
+            this.top = Math.round(this.height / 2);
+            this.left = Math.round(this.width / -2);
 
             this.camera = await this.createCamera();
             this.scene.add(this.camera);
 
-            this.renderer = await crs.createThreeObject("WebGLRenderer", {antialias: true});
+            this.renderer = await crs.createThreeObject("WebGLRenderer", {antialias: true, precision: "highp"});
             this.renderer.setClearColor(this.background);
             this.renderer.setPixelRatio(window.devicePixelRatio);
             this.renderer.setSize(this.width, this.height);
