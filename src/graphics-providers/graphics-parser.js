@@ -6,6 +6,7 @@ import LocationsManager from "./managers/locations-manager.js";
 import ExtensionsManager from "./managers/extensions-manager.js";
 import TemplateManager from "./managers/template-manager.js";
 import ColorsManager from "./managers/colors-manager.js";
+import LayerManager from "./managers/layers-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -14,6 +15,8 @@ import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
 import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
+import LayerProvider from "./providers/layer-provider.js";
+import {Program} from "./graphics-program.js";
 
 export class GraphicsParser extends BaseParser {
     constructor() {
@@ -29,6 +32,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(ExtensionsManager);
         await this.register(TemplateManager);
         await this.register(ColorsManager);
+        await this.register(LayerManager);
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
@@ -36,6 +40,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(BoxGeometry);
         await this.register(HelpersProvider);
         await this.register(RawMaterialProvider);
+        await this.register(LayerProvider);
         await this.register(IconGeometry);
 
         for (let provider of providers || []) {
@@ -92,42 +97,4 @@ export class GraphicsParser extends BaseParser {
             await crs.modules.get(require);
         }
     }
-}
-
-class Program {
-    constructor() {
-        this._disposables = [];
-        return this;
-    }
-
-    async dispose() {
-        this._disposables = await disposeItems(this._disposables);
-        this.canvas = null;
-        return null;
-    }
-
-    async render() {
-        this.canvas.render();
-    }
-}
-
-async function disposeItems(disposables) {
-    for (let i = 0; i < disposables.length; i++) {
-        const disposable = disposables[i];
-        if (Array.isArray(disposable)) {
-            disposable.length = 0;
-        }
-        else if (disposable.constructor.name == "Map") {
-            disposable.clear();
-        }
-        else if (typeof disposable == "function") {
-            await disposable();
-        }
-        else if (disposable.dispose != null) {
-            await disposable.dispose();
-        }
-        disposables[i] = null;
-    }
-    disposables.length = 0;
-    return null;
 }

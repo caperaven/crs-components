@@ -10,8 +10,15 @@ export default class SceneProvider extends BaseProvider {
         for (let i = 0; i < item.elements.length; i++) {
             const element = item.elements[i];
             const provider = this.parser.providers.get(element.element);
+
+            if (provider == null) {
+                throw new Error(`No provider defined with key "${element.element}"`);
+            }
+
             const child = await provider.processItem(element, program);
-            program.canvas.scene.add(child);
+            if (child != null) {
+                program.canvas.scene.add(child);
+            }
         }
     }
 }

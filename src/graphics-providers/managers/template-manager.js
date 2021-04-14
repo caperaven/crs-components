@@ -7,13 +7,11 @@ export default class TemplateManager extends BaseManager {
     }
 
     async processItem(templates, program) {
-        if (program._templates == null) {
-            program._templates = templates;
-            program._disposables.push(dispose.bind(program));
-            program._templateParser = new TemplateParser();
-            await program._templateParser.initialize();
-            program.addFromTemplate = addFromTemplate.bind(program);
-        }
+        program._templates = templates;
+        program._disposables.push(dispose.bind(program));
+        program._templateParser = new TemplateParser();
+        await program._templateParser.initialize();
+        program.addFromTemplate = addFromTemplate.bind(program);
     }
 }
 

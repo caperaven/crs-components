@@ -1,38 +1,81 @@
 export const schema = {
     colors: [
         {
-            id: "primary",
-            color: "#ff0090"
+            id: "red",
+            color: "#ff0000"
+        },
+        {
+            id: "blue",
+            color: "#0000ff"
         }
     ],
     materials: [
         {
-            id: 0,
+            id: "red",
             type: "MeshBasicMaterial",
             args: {
-                color: "primary"
+                color: "red"
             }
+        },
+        {
+            id: "blue",
+            type: "MeshBasicMaterial",
+            args: {
+                color: "blue"
+            }
+        }
+    ],
+    layers: [
+        {
+            id: 0,
+            elements: [
+                {
+                    id: "red-rect",
+                    element: "PlaneGeometry",
+                    material: "red",
+                    args: {
+                        transform: {
+                            scale: {x: 200, y: 200},
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            id: 1,
+            elements: [
+                {
+                    id: "blue-rect",
+                    element: "PlaneGeometry",
+                    material: "blue",
+                    args: {
+                        transform: {
+                            position: {x: 100, y: 100, z: 0},
+                            scale: {x: 200, y: 200},
+                        }
+                    }
+                }
+            ]
         }
     ],
     context: {
         type: "orthographic",
         args: {
-            background: "#000000"
+            background: "#e8e8e8"
         }
     },
     scene: {
         elements: [
             {
-                id: "rect",
-                element: "PlaneGeometry",
-                material: 0,
-                args: {
-                    transform: {
-                        scale: {x: 200, y: 200},
-                        position: {x: 0, y: 0, z:0},
-                        rotation: {x: 0, y: 0, z:0}
-                    }
-                }
+                id: "layer0",
+                element: "layer",
+                layer: 0
+            },
+            {
+                id: "layer1",
+                element: "layer",
+                layer: 1,
+                visible: false
             }
         ]
     }
