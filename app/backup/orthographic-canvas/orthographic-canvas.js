@@ -1,13 +1,13 @@
-import "../../src/components/orthographic-canvas/orthographic-canvas.js";
+import "../../../src/components/orthographic-canvas/orthographic-canvas.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";
 import {Color} from "/node_modules/three/src/math/Color.js";
 //import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
-import {createRegularMesh} from "../../src/threejs-helpers/shape-factory.js";
+import {createRegularMesh} from "../../../src/threejs-helpers/shape-factory.js";
 //import {enableInputManager, disableInputManager} from "./../../src/graphics-helpers/graphics-input-manager.js"
-import {mergeBufferGeometries} from "./../../src/threejs-helpers/buffer-geometry-utils.js";
-import {OrbitControls} from "./../../third-party/three/external/controls/OrbitControls.js";
+import {mergeBufferGeometries} from "../../../src/threejs-helpers/buffer-geometry-utils.js";
+import {OrbitControls} from "../../../third-party/three/external/controls/OrbitControls.js";
 
 export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async connectedCallback() {

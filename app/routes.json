@@ -43,24 +43,9 @@
       "view": "grid3d"
     },
     {
-      "title": "Orthographic Camera",
-      "hash": "#orthographic-canvas",
-      "view": "orthographic-canvas"
-    },
-    {
-      "title": "Perspective Camera",
-      "hash": "#perspective-canvas",
-      "view": "perspective-canvas"
-    },
-    {
       "title": "Simple Bar Chart",
       "hash": "#simple-bar-chart",
       "view": "simple-bar-chart"
-    },
-    {
-      "title": "Virtualized Bar Chart",
-      "hash": "#virtualized-bar-chart-view",
-      "view": "virtualized-bar-chart-view"
     },
     {
       "title": "Image Card",
@@ -73,19 +58,9 @@
       "view": "monaco"
     },
     {
-      "title": "Graphics Schema",
-      "hash": "#graphics-schema",
-      "view": "graphics-schema"
-    },
-    {
-      "title": "MSDF",
-      "hash": "#msdf",
-      "view": "msdf"
-    },
-    {
-      "title": "SVG Loader",
-      "hash": "#svg-loader",
-      "view": "svg-loader"
+      "title": "Graphics Program",
+      "hash": "#graphics-program",
+      "view": "graphics-program"
     },
     {
       "title": "404",

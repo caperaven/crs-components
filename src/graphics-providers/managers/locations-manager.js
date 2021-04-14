@@ -10,6 +10,7 @@ export default class LocationsManager extends BaseManager {
             this.parser.locations = locations;
         }
 
+        // JHR: todo: this must move out of the class so that you dispose it and still keep the program working
         this.parser.processors.set(this.key, this.process.bind(this));
     }
 

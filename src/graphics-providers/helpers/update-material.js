@@ -23,9 +23,13 @@ export async function updateMaterial(material, args, program) {
     material.needsUpdate = true;
 }
 
-async function createColor(color) {
-    const value = processProperty(Number(color.replace("#", "0x")));
-    return await crs.createThreeObject("Color", value);
+async function createColor(color, program) {
+    if (color.indexOf("#") != -1) {
+        const value = processProperty(Number(color.replace("#", "0x")));
+        return await crs.createThreeObject("Color", value);
+    }
+
+    return program.colors[color];
 }
 
 function setTexture(id, program) {

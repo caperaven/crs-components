@@ -30,12 +30,10 @@ export class CameraCanvasBase extends HTMLElement {
 
     set background(newValue) {
         this._background = newValue;
-    }
 
-    render() {
-        if (this.renderer == null) return;
-        this.renderer.clear();
-        this.renderer.render(this.scene, this.camera);
+        if (this.scene != null) {
+            this.scene.background = crs.modules.getInstanceOf("Color", "Color", this.background).then(() => this.render());
+        }
     }
 
     async connectedCallback() {

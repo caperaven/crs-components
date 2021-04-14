@@ -1,10 +1,10 @@
-import "../../src/components/orthographic-canvas/orthographic-canvas.js";
+import "../../../src/components/orthographic-canvas/orthographic-canvas.js";
 //import {SVGLoader} from "./../../src/svg-to-geometry/svg-loader.js";
-import {SVGLoader} from "./../../third-party/three/external/loaders/SVGLoader.js";
-import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../src/extensions/orthographic-canvas/orthographic-draggable.js";
-import {OrbitControls} from "./../../third-party/three/external/controls/OrbitControls.js";
-import Stats from "./../../third-party/three/external/lib/stats.js";
-import {mergeBufferGeometries} from "./../../src/threejs-helpers/buffer-geometry-utils.js";
+import {SVGLoader} from "../../../third-party/three/external/loaders/SVGLoader.js";
+import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../../src/extensions/orthographic-canvas/orthographic-draggable.js";
+import {OrbitControls} from "../../../third-party/three/external/controls/OrbitControls.js";
+import Stats from "../../../third-party/three/external/lib/stats.js";
+import {mergeBufferGeometries} from "../../../src/threejs-helpers/buffer-geometry-utils.js";
 
 export default class SvgLoader extends crsbinding.classes.ViewBase {
     async connectedCallback() {

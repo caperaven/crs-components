@@ -5,6 +5,7 @@ import TextureManager from "./managers/texture-manager.js";
 import LocationsManager from "./managers/locations-manager.js";
 import ExtensionsManager from "./managers/extensions-manager.js";
 import TemplateManager from "./managers/template-manager.js";
+import ColorsManager from "./managers/colors-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -13,7 +14,6 @@ import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
 import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
-import {processProperty} from "./helpers/property-processor.js";
 
 export class GraphicsParser extends BaseParser {
     constructor() {
@@ -28,6 +28,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(TextureManager);
         await this.register(ExtensionsManager);
         await this.register(TemplateManager);
+        await this.register(ColorsManager);
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);

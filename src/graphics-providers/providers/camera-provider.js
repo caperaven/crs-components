@@ -12,12 +12,14 @@ export default class CameraProvider extends BaseProvider {
     async orthographic(item) {
         const element = document.createElement("orthographic-canvas");
         await this.setAttributes(element, item.attributes);
+        await crs.modules.get("orthographic-canvas");
         return element;
     }
 
     async perspective(item) {
         const element = document.createElement("perspective-canvas");
         await this.setAttributes(element, item.attributes);
+        await crs.modules.get("perspective-canvas");
         return element;
     }
 
