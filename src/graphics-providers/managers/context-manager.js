@@ -46,7 +46,10 @@ async function cameraPosition(args, canvas, key, program) {
 }
 
 async function createColor(args, canvas, key, program) {
-    canvas[key] = processProperty(args[key], program);
+    if (args[key].indexOf("#") != -1) {
+        return canvas[key] = args[key];
+    }
+    canvas[key] = program.colors[args[key]];
 }
 
 

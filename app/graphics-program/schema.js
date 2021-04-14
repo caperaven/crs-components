@@ -5,12 +5,6 @@ export const schema = {
             color: "#ff0090"
         }
     ],
-    context: {
-        type: "orthographic",
-        args: {
-            background: "primary"
-        }
-    },
     materials: [
         {
             id: 0,
@@ -20,6 +14,12 @@ export const schema = {
             }
         }
     ],
+    context: {
+        type: "orthographic",
+        args: {
+            background: "#000000"
+        }
+    },
     scene: {
         elements: [
             {
