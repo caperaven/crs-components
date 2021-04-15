@@ -31,7 +31,6 @@ export const schema = {
             title: "Red Layer",
             elements: [
                 {
-                    id: "red-rect",
                     element: "PlaneGeometry",
                     material: "red",
                     args: {
@@ -39,7 +38,18 @@ export const schema = {
                             scale: {x: 200, y: 200},
                         }
                     }
-                }
+                },
+                {
+                    element: "PlaneGeometry",
+                    material: "red",
+                    args: {
+                        transform: {
+                            position: {x: -100, y: -100, z: 0},
+                            scale: {x: 100, y: 100},
+                        }
+                    }
+                },
+
             ]
         },
         {
@@ -72,12 +82,6 @@ export const schema = {
                 id: "layer0",
                 element: "layer",
                 layer: 0
-            },
-            {
-                id: "layer1",
-                element: "layer",
-                layer: 1,
-                visible: false
             }
         ]
     }

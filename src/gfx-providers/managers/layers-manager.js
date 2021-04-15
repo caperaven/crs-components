@@ -7,7 +7,7 @@ export default class layersManager extends BaseManager {
     }
 
     async processItem(layers, program) {
-        program._layers = layers;
+        program._layers = JSON.parse(JSON.stringify(layers));
         program._layerParser = new LayerParser();
         program._disposables.push(dispose.bind(program));
         program.setLayerVisibility = setLayerVisibility.bind(program);
@@ -18,6 +18,7 @@ export default class layersManager extends BaseManager {
 
 async function dispose() {
     this._layers = null;
+    this._layerParser = null;
     delete this.setLayerVisibility;
     delete this.toggleLayerVisibility;
 }
@@ -34,6 +35,7 @@ async function setLayerVisibility(id, visible, layer) {
         this.canvas.scene.add(layer.group);
         delete layer.elements;
     }
+    this.render();
 }
 
 async function toggleLayerVisibility(id) {

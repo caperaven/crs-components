@@ -29,6 +29,12 @@ export async function loadModules() {
     await crs.modules.add("perspective-canvas", `${url}gfx-components/perspective-canvas/perspective-canvas.js`);
     await crs.modules.add("graphics-parser", `${url}gfx-providers/graphics-parser.js`);
 
+    // GFX Providers
+    await crs.modules.add("GraphicsParser", `${url}gfx-providers/graphics-parser.js`);
+
+    // GFX Program Components
+    await crs.modules.add("program-layers", `${url}gfx-program-components/program-layers/program-layers.js`);
+
     // Extensions
     await crs.modules.add("orthographic-draggable", `${url}extensions/orthographic-canvas/orthographic-draggable.js`);
 }
