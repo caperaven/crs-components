@@ -1,7 +1,7 @@
 import {rawShaderSchema} from "./raw-shader-schema.js";
 
-import "../../../src/components/orthographic-canvas/orthographic-canvas.js";
-import {GraphicsParser} from "../../../src/graphics-providers/graphics-parser.js";
+import "../../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
+import {GraphicsParser} from "../../../src/gfx-providers/graphics-parser.js";
 
 export default class Msdf extends crsbinding.classes.ViewBase {
     async connectedCallback() {

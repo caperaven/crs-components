@@ -1,4 +1,4 @@
-import "../../../src/components/orthographic-canvas/orthographic-canvas.js";
+import "../../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
 //import {SVGLoader} from "./../../src/svg-to-geometry/svg-loader.js";
 import {SVGLoader} from "../../../third-party/three/external/loaders/SVGLoader.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../../src/extensions/orthographic-canvas/orthographic-draggable.js";

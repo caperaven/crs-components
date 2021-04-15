@@ -28,6 +28,7 @@ export const schema = {
     layers: [
         {
             id: 0,
+            title: "Red Layer",
             elements: [
                 {
                     id: "red-rect",
@@ -43,6 +44,7 @@ export const schema = {
         },
         {
             id: 1,
+            title: "Blue Layer",
             elements: [
                 {
                     id: "blue-rect",

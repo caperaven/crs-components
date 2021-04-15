@@ -1,4 +1,4 @@
-import "../../../src/components/charts/crs-virtualized-bar.js";
+import "../../../src/gfx-components/charts/crs-virtualized-bar.js";
 import {getData} from "./data-factory.js";
 
 export default class VirtualizedBarChartView extends crsbinding.classes.ViewBase {

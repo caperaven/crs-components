@@ -1,4 +1,4 @@
-import "../orthographic-canvas/orthographic-canvas.js";
+import "../../gfx-components/orthographic-canvas/orthographic-canvas.js";
 import {disableMoveElements, enableMoveElements} from "./_move-element.js";
 import {disableGrouping, enableGrouping} from "./_grouping.js";
 import {disableColumnResize, enableColumnResize} from "./_columns-resize.js";

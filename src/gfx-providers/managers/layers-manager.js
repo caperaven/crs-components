@@ -17,7 +17,6 @@ export default class layersManager extends BaseManager {
 }
 
 async function dispose() {
-    this._layerParser = this._layerParser.dispose();
     this._layers = null;
     delete this.setLayerVisibility;
     delete this.toggleLayerVisibility;

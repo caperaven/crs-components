@@ -1,4 +1,4 @@
-import {OrthographicCanvas} from "../orthographic-canvas/orthographic-canvas.js";
+import {OrthographicCanvas} from "../../gfx-components/orthographic-canvas/orthographic-canvas.js";
 
 /**
  * Note: Gerhard, all yours, gg hf

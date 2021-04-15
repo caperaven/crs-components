@@ -1,4 +1,4 @@
-import "../../src/components/charts/bar-chart/bar-chart.js";
+import "../../src/gfx-components/charts/bar-chart/bar-chart.js";
 import {getData} from "./data-factory.js";
 
 export default class SimpleBarChart extends crsbinding.classes.ViewBase {

@@ -1,4 +1,4 @@
-import "../../../src/components/orthographic-canvas/orthographic-canvas.js";
+import "../../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
 import {PlaneGeometry} from "/node_modules/three/src/geometries/PlaneGeometry.js";
 import {MeshBasicMaterial} from "/node_modules/three/src/materials/MeshBasicMaterial.js";
 import {Mesh} from "/node_modules/three/src/objects/Mesh.js";

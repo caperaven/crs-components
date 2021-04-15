@@ -1,4 +1,4 @@
-import {CameraCanvasBase} from "../base-components/camera-canvas-base.js";
+import {CameraCanvasBase} from "../../components/base-components/camera-canvas-base.js";
 
 export class PerspectiveCanvas extends CameraCanvasBase {
     async connectedCallback() {

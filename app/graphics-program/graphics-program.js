@@ -1,5 +1,5 @@
 import {schema} from "./schema.js";
-import {GraphicsParser} from "../../src/graphics-providers/graphics-parser.js";
+import {GraphicsParser} from "../../src/gfx-providers/graphics-parser.js";
 
 export default class GraphicsProgram extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -8,6 +8,15 @@ export default class GraphicsProgram extends crsbinding.classes.ViewBase {
         const parser = new GraphicsParser();
         await parser.initialize([]);
         this._program = await parser.parse(schema, parent, {background: "#ff0050"});
+
+        const layers = [];
+        for (let layer of this._program._layers) {
+            layers.push({
+                id: layer.id,
+
+            })
+        }
+
         await parser.dispose();
     }
 

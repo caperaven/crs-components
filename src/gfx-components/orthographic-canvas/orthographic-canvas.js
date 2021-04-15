@@ -1,4 +1,4 @@
-import {CameraCanvasBase} from "../base-components/camera-canvas-base.js";
+import {CameraCanvasBase} from "../../components/base-components/camera-canvas-base.js";
 
 /**
  * The purpose of this component is to allow a optimized canvas using webgl but that works closely to canvas settings.

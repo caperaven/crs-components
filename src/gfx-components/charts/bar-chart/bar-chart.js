@@ -1,5 +1,5 @@
 import {schema} from "./bar-chart-program.js";
-import {GraphicsParser} from "./../../../graphics-providers/graphics-parser.js";
+import {GraphicsParser} from "../../../gfx-providers/graphics-parser.js";
 import {enableOrthographicDraggable, disableOrthographicDraggable} from "../../../extensions/orthographic-canvas/orthographic-draggable.js";
 
 export class BarChart extends HTMLElement {
