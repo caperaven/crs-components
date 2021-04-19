@@ -7,7 +7,7 @@ export class MsdfFont {
 
     }
 
-    async initialize(jsonFile, fontSize) {
+    async initialize(jsonFile, fontSize = 42) {
         const json = await fetch(jsonFile).then(result => result.json());
         const size = json.info.size;
         this.charSet = {};
@@ -37,5 +37,6 @@ export class MsdfFont {
         }
 
         console.log(this.charSet);
+        return this;
     }
 }

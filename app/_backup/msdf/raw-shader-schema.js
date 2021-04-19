@@ -30,8 +30,7 @@ export const rawShaderSchema = {
                     fill: {value: "#ff0090"},
                     stroke: {value: "#000000"},
                     strokeWidth: {value: 2},
-                    distanceFactor: {value:6},
-
+                    distanceFactor: {value:1.5},
                 }
             }
         }
@@ -43,7 +42,7 @@ export const rawShaderSchema = {
                 material: 0,
                 args: {
                     transform: {
-                        scale: {x: 1024, y: 512}
+                        scale: {x: 256, y: 128}
                     }
                 }
             }

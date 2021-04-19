@@ -7,6 +7,7 @@ import ExtensionsManager from "./managers/extensions-manager.js";
 import TemplateManager from "./managers/template-manager.js";
 import ColorsManager from "./managers/colors-manager.js";
 import LayerManager from "./managers/layers-manager.js";
+import FontsManager from "./managers/fonts-manager.js";
 import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
@@ -16,6 +17,7 @@ import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
 import LayerProvider from "./providers/layer-provider.js";
+import TextProvider from "./providers/text-provider.js";
 import {Program} from "./graphics-program.js";
 
 export class GraphicsParser extends BaseParser {
@@ -33,6 +35,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(TemplateManager);
         await this.register(ColorsManager);
         await this.register(LayerManager);
+        await this.register(FontsManager);
         await this.register(CameraProvider);
         await this.register(SceneProvider);
         await this.register(PlaneGeometryProvider);
@@ -41,6 +44,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(HelpersProvider);
         await this.register(RawMaterialProvider);
         await this.register(LayerProvider);
+        await this.register(TextProvider);
         await this.register(IconGeometry);
 
         for (let provider of providers || []) {

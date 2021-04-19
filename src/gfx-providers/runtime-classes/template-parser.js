@@ -1,4 +1,4 @@
-import {initializeProviders} from "./providers.js";
+import {initializeProviders} from "../providers.js";
 
 export class TemplateParser {
     async initialize() {

@@ -63,6 +63,11 @@
       "view": "graphics-program"
     },
     {
+      "title": "MSDF",
+      "hash": "#msdf",
+      "view": "msdf"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

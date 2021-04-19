@@ -1,5 +1,5 @@
 import {BaseManager} from "./base-manager.js";
-import {TemplateParser} from "./../template-parser.js";
+import {TemplateParser} from "../runtime-classes/template-parser.js";
 
 export default class TemplateManager extends BaseManager {
     get key() {

@@ -1,5 +1,5 @@
 import {BaseManager} from "./base-manager.js";
-import {LayerParser} from "../layer-parser.js";
+import {LayerParser} from "../runtime-classes/layer-parser.js";
 
 export default class layersManager extends BaseManager {
     get key() {
