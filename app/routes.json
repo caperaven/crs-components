@@ -68,6 +68,11 @@
       "view": "msdf"
     },
     {
+      "title": "_Custom",
+      "hash": "#_custom",
+      "view": "_custom"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",
