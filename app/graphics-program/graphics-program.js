@@ -13,10 +13,16 @@ export default class GraphicsProgram extends crsbinding.classes.ViewBase {
         await parser.dispose();
 
         this.setProperty("program", this._program);
+
+        this._program.render();
     }
 
     async disconnectedCallback() {
         this._program = this._program.dispose();
         await super.disconnectedCallback();
+    }
+
+    async update() {
+        this._program.render();
     }
 }

@@ -15,12 +15,13 @@ export const rawShaderSchema = {
         {
             id: 0,
             type: "RawShaderMaterial",
-            args: {
-                fragmentShader: "/app/graphics-schema/shaders/fragment-shader.glsl",
-                uniforms: {
-                    map: {type: "t", value: "font"},
-                    u_color: {value: "#ff0000"}
-                }
+            transparent: true,
+            uniforms: {
+                map: {type: "t", value: "font"},
+                fill: {value: "#ff0090"},
+                stroke: {value: "#000000"},
+                strokeWidth: {value: 2},
+                distanceFactor: {value:1.5},
             }
         }
     ],

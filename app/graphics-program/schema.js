@@ -9,6 +9,12 @@ export const schema = {
             color: "#0000ff"
         }
     ],
+    textures: [
+        {
+            id: "font",
+            texture: "/fonts/open-sans/OpenSans-Regular.png"
+        }
+    ],
     materials: [
         {
             id: "red",
@@ -19,9 +25,17 @@ export const schema = {
         },
         {
             id: "blue",
-            type: "MeshBasicMaterial",
+            type: "RawShaderMaterial",
             args: {
-                color: "blue"
+                transparent: true,
+                fragmentShader: "/shaders/msdf.frag",
+                uniforms: {
+                    map: {type: "t", value: "font"},
+                    fill: {value: "#ff0090"},
+                    stroke: {value: "#000000"},
+                    strokeWidth: {value: 2},
+                    distanceFactor: {value:3}
+                }
             }
         }
     ],
@@ -35,7 +49,7 @@ export const schema = {
                     material: "red",
                     args: {
                         transform: {
-                            scale: {x: 200, y: 200},
+                            scale: {x: 2, y: 2},
                         }
                     }
                 },
@@ -44,8 +58,8 @@ export const schema = {
                     material: "red",
                     args: {
                         transform: {
-                            position: {x: -100, y: -100, z: 0},
-                            scale: {x: 100, y: 100},
+                            position: {x: -1, y: -1, z: 0},
+                            scale: {x: 1, y: 2},
                         }
                     }
                 },
@@ -54,7 +68,7 @@ export const schema = {
         },
         {
             id: 1,
-            title: "Blue Layer",
+            title: "MSDF",
             elements: [
                 {
                     id: "blue-rect",
@@ -62,8 +76,8 @@ export const schema = {
                     material: "blue",
                     args: {
                         transform: {
-                            position: {x: 100, y: 100, z: 0},
-                            scale: {x: 200, y: 200},
+                            position: {x: 1, y: 1, z: 1},
+                            scale: {x: 2, y: 1},
                         }
                     }
                 }
@@ -71,9 +85,12 @@ export const schema = {
         }
     ],
     context: {
-        type: "orthographic",
+        type: "perspective",
         args: {
-            background: "#e8e8e8"
+            background: "#e8e8e8",
+            position: {
+                z: 5
+            }
         }
     },
     scene: {
@@ -82,6 +99,11 @@ export const schema = {
                 id: "layer0",
                 element: "layer",
                 layer: 0
+            },
+            {
+                id: "layer1",
+                element: "layer",
+                layer: 1
             }
         ]
     }

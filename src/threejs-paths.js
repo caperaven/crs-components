@@ -50,6 +50,11 @@ export async function loadThreeModules(root) {
     await crs.modules.add("Shape", `${url}extras/core/Shape.js`);
     await crs.modules.add("Group", `${url}objects/Group.js`)
 
+    // lights
+    await crs.modules.add("AmbientLight", `${url}lights/AmbientLight.js`);
+    await crs.modules.add("PointLight", `${url}lights/PointLight.js`);
+
+
     // textures
     await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);
 
