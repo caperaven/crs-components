@@ -76,7 +76,7 @@ export const schema = {
                     material: "blue",
                     args: {
                         transform: {
-                            position: {x: 1, y: 1, z: 1},
+                            position: {x: 1, y: 1, z: 0.1},
                             scale: {x: 2, y: 1},
                         }
                     }
