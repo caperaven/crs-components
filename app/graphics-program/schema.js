@@ -9,6 +9,15 @@ export const schema = {
             color: "#0000ff"
         }
     ],
+
+    geometry: [
+        {
+            id: 0,
+            vertices: [],
+            normals: []
+        }
+    ],
+
     textures: [
         {
             id: "font",
