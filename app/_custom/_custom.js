@@ -5,6 +5,8 @@ import {dataData} from "../../src/geometry-data/flowchart/dataData.js";
 import {decisionData} from "../../src/geometry-data/flowchart/decisionData.js";
 import {delayData} from "../../src/geometry-data/flowchart/delayData.js";
 import {displayData} from "../../src/geometry-data/flowchart/displayData.js";
+import {documentData} from "./../../src/geometry-data/flowchart/documentData.js";
+import {documentsData} from "./../../src/geometry-data/flowchart/documentsData.js";
 
 import {rawToGeometry} from "./../../src/gfx-helpers/raw-to-geometry.js";
 
@@ -16,7 +18,7 @@ export default class Custom extends crsbinding.classes.ViewBase {
         const ready = async () => {
             requestAnimationFrame(async () => {
                 this.canvas.removeEventListener("ready", ready);
-                this.canvas.camera.position.z = 10;
+                this.canvas.camera.position.z = 2;
 
                 await this.addFromData();
                 await this.render();
@@ -39,7 +41,7 @@ export default class Custom extends crsbinding.classes.ViewBase {
 
     async addFromData() {
         const material = await crs.createThreeObject("MeshBasicMaterial", {color: await crs.createColor("#ff0000")});
-        const result = await rawToGeometry(dataData, material);
+        const result = await rawToGeometry(documentsData, material);
         this.canvas.scene.add(result);
     }
 
