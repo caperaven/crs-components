@@ -45,7 +45,7 @@ def array_code(name, collection):
 
     result += "]"
     result = result.replace(",]", "]")
-    return result;
+    return result
     
 def save_file(code, name, folder):
     file = folder + "\\" + name + "Data.js"
