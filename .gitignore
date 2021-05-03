@@ -6,3 +6,4 @@ yarn-error.log
 /dist/
 /publish/
 /.nyc_output/
+*.blend1

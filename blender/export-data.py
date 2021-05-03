@@ -16,18 +16,14 @@ def export_mesh(id, name, folder):
     save_file(result, name, folder)
 
 def get_data(id, vertices, indices, normals):
-    vertices.append(1)
-    vertices.append(2)
-    vertices.append(3)
-
-    data = bpy.data.objects['action'].data;
+    data = bpy.data.objects[id].data;
 
     for index in range(len(data.vertices)):
         v = data.vertices[index]
         vertices.append(v.co.x)
         vertices.append(v.co.y)
         vertices.append(v.co.z)
-        
+
         normals.append(v.normal.x)
         normals.append(v.normal.y)
         normals.append(v.normal.z)
@@ -45,7 +41,7 @@ def array_code(name, collection):
 
     result += "]"
     result = result.replace(",]", "]")
-    return result
+    return result;
     
 def save_file(code, name, folder):
     file = folder + "\\" + name + "Data.js"
@@ -63,7 +59,7 @@ export_mesh("documents", "documents", "e:\exports")
 export_mesh("event", "event", "e:\exports")
 export_mesh("inputOutput", "inputOutput", "e:\exports")
 export_mesh("loopLimit", "loopLimit", "e:\exports")
-export_mesh("manual_Operations", "manual_Operations", "e:\exports")
+export_mesh("manualOperations", "manualOperations", "e:\exports")
 export_mesh("manualInput", "manualInput", "e:\exports")
 export_mesh("merge", "merge", "e:\exports")
 export_mesh("offPage", "offPage", "e:\exports")

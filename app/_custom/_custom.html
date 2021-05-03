@@ -9,6 +9,17 @@
         border: solid 1px silver;
     }
 
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        margin: 1rem;
+    }
+
+    .toolbar button {
+        margin-right: 0.5rem;
+        width: 100px;
+    }
+
     .ref {
         width: 100px;
         height: 100px;
@@ -16,4 +27,11 @@
     }
 </style>
 
+<h2>${shape}</h2>
+
 <perspective-canvas></perspective-canvas>
+
+<div class="toolbar">
+    <button click.call="previous">Previous</button>
+    <button click.call="next">Next</button>
+</div>
