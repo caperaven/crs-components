@@ -48,7 +48,8 @@ export async function loadThreeModules(root) {
     await crs.modules.add("Path", `${url}extras/core/Path.js`);
     await crs.modules.add("ShapePath", `${url}extras/core/ShapePath.js`);
     await crs.modules.add("Shape", `${url}extras/core/Shape.js`);
-    await crs.modules.add("Group", `${url}objects/Group.js`)
+    await crs.modules.add("Group", `${url}objects/Group.js`);
+    await crs.modules.add("UniformsUtils", `${url}renderers/shaders/UniformsUtils.js`);
 
     // lights
     await crs.modules.add("AmbientLight", `${url}lights/AmbientLight.js`);
@@ -59,12 +60,14 @@ export async function loadThreeModules(root) {
     await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);
 
     // objects
+    await crs.modules.add("Clock", `${url}core/Clock.js`);
     await crs.modules.add("BufferGeometry", `${url}core/BufferGeometry.js`);
     await crs.modules.add("BufferAttribute", `${url}core/BufferAttribute.js`);
     await crs.modules.add("Line", `${url}objects/Line.js`);
     await crs.modules.add("Object3D", `${url}core/Object3D.js`);
     await crs.modules.add("InstancedMesh", `${url}objects/InstancedMesh.js`);
     await crs.modules.add("Raycaster", `${url}core/Raycaster.js`);
+    await crs.modules.add("WebGLRenderTarget", `${url}renderers/WebGLRenderTarget.js`);
 }
 
 /**
