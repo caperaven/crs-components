@@ -1,7 +1,7 @@
 import "./../../src/gfx-components/perspective-canvas/perspective-canvas.js";
 import {rawToGeometry} from "./../../src/gfx-helpers/raw-to-geometry.js";
 
-export default class Custom extends crsbinding.classes.ViewBase {
+export default class FlowchartItems extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
         this.canvas = document.querySelector("perspective-canvas");
@@ -57,7 +57,6 @@ export default class Custom extends crsbinding.classes.ViewBase {
             this.sceneItems[this.currentIndex].visible = false;
             this.sceneItems[this.currentIndex -= 1].visible = true;
         }
-        this.canvas.render();
         this.setProperty("shape", this.items[this.currentIndex]);
     }
 
@@ -66,7 +65,6 @@ export default class Custom extends crsbinding.classes.ViewBase {
             this.sceneItems[this.currentIndex].visible = false;
             this.sceneItems[this.currentIndex += 1].visible = true;
         }
-        this.canvas.render();
         this.setProperty("shape", this.items[this.currentIndex]);
     }
 }

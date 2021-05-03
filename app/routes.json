@@ -68,9 +68,9 @@
       "view": "msdf"
     },
     {
-      "title": "_Custom",
-      "hash": "#_custom",
-      "view": "_custom"
+      "title": "Flowchart Items",
+      "hash": "#flowchart-items",
+      "view": "flowchart-items"
     },
     {
       "title": "404",
