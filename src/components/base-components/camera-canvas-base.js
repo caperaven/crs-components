@@ -124,24 +124,29 @@ export class CameraCanvasBase extends HTMLElement {
 
     async _enableRenderPass() {
         const renderPassModule = await import("./../../../third-party/three/external/postprocessing/render-pass.js");
-        const shaderPassModule = await import("./../../../third-party/three/external/postprocessing/shader-pass.js");
         const composerModule = await import("./../../../third-party/three/external/postprocessing/effect-composer.js");
-        const fxaaModule = await import("./../../../third-party/three/external/shaders/FXAA-shader.js");
+        // const shaderPassModule = await import("./../../../third-party/three/external/postprocessing/shader-pass.js");
+        // const fxaaModule = await import("./../../../third-party/three/external/shaders/FXAA-shader.js");
+        const smaaModule = await import("./../../../third-party/three/external/postprocessing/smaa-pass.js");
 
         const renderPass = new renderPassModule.RenderPass();
         await renderPass.initialize(this.scene, this.camera);
 
-        // This should be moved out to outside
-        const fxaaPass = new shaderPassModule.ShaderPass();
-        await fxaaPass.initialize(fxaaModule.FXAAShader);
         const pixelRatio = this.renderer.getPixelRatio();
-        fxaaPass.material.uniforms[ 'resolution' ].value.x = 1 / (this.width * pixelRatio);
-        fxaaPass.material.uniforms[ 'resolution' ].value.y = 1 / (this.height * pixelRatio);
+
+        // This should be moved out to outside
+        // const fxaaPass = new shaderPassModule.ShaderPass();
+        // await fxaaPass.initialize(fxaaModule.FxaaShader);
+        // fxaaPass.material.uniforms[ 'resolution' ].value.x = 1 / (this.width * pixelRatio);
+        // fxaaPass.material.uniforms[ 'resolution' ].value.y = 1 / (this.height * pixelRatio);
+
+        const smaaPass = new smaaModule.SMAAPass();
+        await smaaPass.initialize(this.width * pixelRatio, this.height * pixelRatio)
 
         this.composer = new composerModule.EffectComposer();
         await this.composer.initialize(this.renderer);
         this.composer.addPass(renderPass);
-        this.composer.addPass(fxaaPass);
+        this.composer.addPass(smaaPass);
 
         this.renderer.autoClear = false;
         await this.render();

@@ -58,7 +58,7 @@ export async function loadThreeModules(root) {
 
     // textures
     await crs.modules.add("TextureLoader", `${url}loaders/TextureLoader.js`);
-
+    await crs.modules.add("Texture", `${url}textures/Texture.js`);
     // objects
     await crs.modules.add("Clock", `${url}core/Clock.js`);
     await crs.modules.add("BufferGeometry", `${url}core/BufferGeometry.js`);

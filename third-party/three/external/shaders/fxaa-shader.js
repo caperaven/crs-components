@@ -10,7 +10,7 @@
  * This just provides you a access point
  */
 
-const FXAAShader = {
+const FxaaShader = {
 	uniforms: {
 		'tDiffuse': {value: null},
 		'resolution': {value: {x: 0, y: 0}}
@@ -1107,4 +1107,4 @@ const FXAAShader = {
 	].join( '\n' )
 };
 
-export {FXAAShader};
+export {FxaaShader};
