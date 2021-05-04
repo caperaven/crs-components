@@ -1,10 +1,15 @@
 import {BaseManager} from "./base-manager.js";
 import {processProperty} from "../helpers/property-processor.js";
 
-const fnMap = new Map([
-    ["position", cameraPosition],
-    ["background", createColor],
-])
+const fnMap = {
+    "position": cameraPosition,
+    "background": createColor
+}
+
+const processModules = {
+    "fxaa": "./../providers/post-processes/fxaa-provider.js",
+    "smaa": "./../providers/post-processes/smaa-provider.js"
+};
 
 export default class ContextManager extends BaseManager {
     get key() {
@@ -23,6 +28,7 @@ export default class ContextManager extends BaseManager {
                 canvas.removeEventListener("ready", isReady);
                 program.canvas = canvas;
                 await this._processArgs(canvas, program, context.args);
+                await this._processPostProcesses(canvas, program, context.postProcesses);
                 resolve();
             }
 
@@ -34,11 +40,22 @@ export default class ContextManager extends BaseManager {
         if (args == null) return;
         const keys = Object.keys(args);
         for (let key of keys) {
-            if (fnMap.has(key)) {
-                await fnMap.get(key)(args, canvas, key, program);
+            if (fnMap[key] != null) {
+                await fnMap[key](args, canvas, key, program);
             }
             else {
                 canvas[key] = args[key];
+            }
+        }
+    }
+
+    async _processPostProcesses(canvas, program, postProcesses) {
+        if (postProcesses == null) return;
+        for (let process of postProcesses) {
+            const key = process.process;
+            if (processModules[key] != null) {
+                let provider = new (await import(processModules[key])).default();
+                await provider.processItem(process, program);
             }
         }
     }

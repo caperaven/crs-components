@@ -10,7 +10,7 @@ export default class FlowchartItems extends crsbinding.classes.ViewBase {
         const ready = async () => {
             requestAnimationFrame(async () => {
                 this.canvas.removeEventListener("ready", ready);
-                this.canvas.camera.position.z = 2;
+                this.canvas.camera.position.z = 5;
 
                 await this.addFromData();
                 await this.render();

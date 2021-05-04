@@ -98,12 +98,19 @@ export const schema = {
     context: {
         type: "perspective",
         args: {
-            allowPostProcess: true,
             background: "#e8e8e8",
             position: {
                 z: 5
             }
-        }
+        },
+        postProcesses: [
+            {
+                process: "fxaa",
+                args: {
+                    // if a process needs args
+                }
+            }
+        ]
     },
     scene: {
         elements: [
