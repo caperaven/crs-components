@@ -73,6 +73,11 @@
       "view": "flowchart-items"
     },
     {
+      "title": "FXAA Test",
+      "hash": "#fxaa",
+      "view": "fxaa"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

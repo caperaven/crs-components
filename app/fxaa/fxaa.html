@@ -1,0 +1,46 @@
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 3rem 1fr;
+    }
+
+    .container h2 {
+        padding: 0;
+        margin: 0;
+    }
+
+    .canvas-parent {
+        display: block;
+    }
+
+    orthographic-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    program-layers {
+        width: 300px;
+        height: 300px;
+        background: white;
+        border: solid 1px silver;
+        position: fixed;
+        left: 1rem;
+        top: 4rem;
+    }
+
+    button {
+        position: fixed;
+        right: 1rem;
+        top: 4rem;
+    }
+</style>
+
+<div class="container">
+    <h2>${title}</h2>
+    <div class="canvas-parent"></div>
+</div>
+
+<button click.call="update">Update</button>

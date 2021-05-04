@@ -26,6 +26,14 @@ export class ShaderPass extends Pass {
 		return this;
 	}
 
+	dispose() {
+		this.textureId = null;
+		this.uniforms = null;
+		this.material = null;
+		this.fsQuad = null;
+		return null;
+	}
+
 	render(renderer, writeBuffer, readBuffer) {
 		if (this.uniforms[this.textureId]) {
 			this.uniforms[this.textureId ].value = readBuffer.texture;

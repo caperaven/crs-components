@@ -39,6 +39,23 @@ export class CameraCanvasBase extends HTMLElement {
         }
     }
 
+    get allowPostProcess() {
+        if (this._allowPostProcess == null) {
+            this._allowPostProcess = this.getAttribute("allow-postprocess") || "false";
+        }
+        return typeof this._allowPostProcess == "boolean" ? this._allowPostProcess : this._allowPostProcess.toLowerCase() == "true";
+    }
+
+    set allowPostProcess(newValue) {
+        this._allowPostProcess = newValue;
+        if (newValue == true) {
+            this._enableRenderPass();
+        }
+        else {
+            this._disableRenderPass();
+        }
+    }
+
     async connectedCallback() {
         requestAnimationFrame(async () => {
             this.width = this.offsetWidth;
@@ -56,6 +73,11 @@ export class CameraCanvasBase extends HTMLElement {
             this.renderer.setClearColor(this.background);
             this.renderer.setPixelRatio(window.devicePixelRatio);
             this.renderer.setSize(this.width, this.height);
+
+            console.log(this.allowPostProcess);
+            if (this.allowPostProcess == true) {
+                this.renderer.autoClear = false;
+            }
 
             this.appendChild(this.renderer.domElement);
 
@@ -82,8 +104,14 @@ export class CameraCanvasBase extends HTMLElement {
 
     async render() {
         if (this.renderer == null) return;
-        this.renderer.clear();
-        this.renderer.render(this.scene, this.camera);
+
+        if (this.composer != null) {
+            this.composer.render();
+        }
+        else {
+            this.renderer.clear();
+            this.renderer.render(this.scene, this.camera);
+        }
     }
 
     async resize() {
@@ -92,5 +120,35 @@ export class CameraCanvasBase extends HTMLElement {
         this.renderer.setSize(this.width, this.height);
         this.camera.aspect = this.width / this.height;
         this.camera.updateProjectionMatrix();
+    }
+
+    async _enableRenderPass() {
+        const renderPassModule = await import("./../../../third-party/three/external/postprocessing/render-pass.js");
+        const shaderPassModule = await import("./../../../third-party/three/external/postprocessing/shader-pass.js");
+        const composerModule = await import("./../../../third-party/three/external/postprocessing/effect-composer.js");
+        const fxaaModule = await import("./../../../third-party/three/external/shaders/FXAA-shader.js");
+
+        const renderPass = new renderPassModule.RenderPass();
+        await renderPass.initialize(this.scene, this.camera);
+
+        // This should be moved out to outside
+        const fxaaPass = new shaderPassModule.ShaderPass();
+        await fxaaPass.initialize(fxaaModule.FXAAShader);
+        const pixelRatio = this.renderer.getPixelRatio();
+        fxaaPass.material.uniforms[ 'resolution' ].value.x = 1 / (this.width * pixelRatio);
+        fxaaPass.material.uniforms[ 'resolution' ].value.y = 1 / (this.height * pixelRatio);
+
+        this.composer = new composerModule.EffectComposer();
+        await this.composer.initialize(this.renderer);
+        this.composer.addPass(renderPass);
+        this.composer.addPass(fxaaPass);
+
+        this.renderer.autoClear = false;
+        await this.render();
+    }
+
+    async _disableRenderPass() {
+        this.renderer.autoClear = true;
+        this.composer.dispose();
     }
 }

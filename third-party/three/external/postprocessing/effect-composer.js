@@ -1,6 +1,6 @@
 import {CopyShader} from "./../shaders/copy-shader.js";
 import {ShaderPass} from "./shader-pass.js";
-import {ClearMaskPass, MaskPass} from "three/examples/jsm/postprocessing/MaskPass.js";
+import {ClearMaskPass, MaskPass} from "./mask-pass.js";
 
 let Vector2;
 
@@ -47,6 +47,19 @@ export class EffectComposer {
 		this.copyPass = new ShaderPass();
 		await this.copyPass.initialize(CopyShader);
 		this.clock = new Clock();
+	}
+
+	dispose() {
+		this.renderer = null;
+
+		this.renderTarget1.dispose();
+		this.renderTarget2.dispose();
+
+		this.renderTarget1 = null;
+		this.renderTarget2 = null;
+		this.copyPass = this.addPass.dispose();
+		this.readBuffer = null;
+		this.writeBuffer = null;
 	}
 
 	swapBuffers () {

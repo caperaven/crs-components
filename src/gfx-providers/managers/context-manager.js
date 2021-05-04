@@ -34,7 +34,12 @@ export default class ContextManager extends BaseManager {
         if (args == null) return;
         const keys = Object.keys(args);
         for (let key of keys) {
-            await fnMap.get(key)?.(args, canvas, key, program);
+            if (fnMap.has(key)) {
+                await fnMap.get(key)(args, canvas, key, program);
+            }
+            else {
+                canvas[key] = args[key];
+            }
         }
     }
 }

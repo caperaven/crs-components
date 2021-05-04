@@ -5,10 +5,15 @@
  * http://www.glge.org/demos/fxaa/
  */
 
+/**
+ * You need to set the resolution externally
+ * This just provides you a access point
+ */
+
 const FXAAShader = {
 	uniforms: {
 		'tDiffuse': {value: null},
-		'resolution': {value: {x: 1 / 1024, y: 1 / 512}}
+		'resolution': {value: {x: 0, y: 0}}
 	},
 
 	vertexShader: [
