@@ -10,14 +10,6 @@ export const schema = {
         }
     ],
 
-    geometry: [
-        {
-            id: 0,
-            vertices: [],
-            normals: []
-        }
-    ],
-
     textures: [
         {
             id: "font",
@@ -52,6 +44,7 @@ export const schema = {
         {
             id: 0,
             title: "Red Layer",
+            material: "red",
             elements: [
                 {
                     element: "PlaneGeometry",

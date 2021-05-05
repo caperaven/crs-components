@@ -6,6 +6,9 @@ export default class SceneProvider extends BaseProvider {
     }
 
     async processItem(item, program) {
+        program._processMaterials = [];
+        const pop = await this.processMaterial(item, program);
+
         if (item == null || item.elements == null) return;
         for (let i = 0; i < item.elements.length; i++) {
             const element = item.elements[i];
@@ -20,5 +23,10 @@ export default class SceneProvider extends BaseProvider {
                 program.canvas.scene.add(child);
             }
         }
+
+        if (pop == true) {
+            program._processMaterials.pop();
+        }
+        delete program._processMaterials;
     }
 }

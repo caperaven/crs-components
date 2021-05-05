@@ -74,7 +74,6 @@ export class CameraCanvasBase extends HTMLElement {
             this.renderer.setPixelRatio(window.devicePixelRatio);
             this.renderer.setSize(this.width, this.height);
 
-            console.log(this.allowPostProcess);
             if (this.allowPostProcess == true) {
                 this.renderer.autoClear = false;
             }

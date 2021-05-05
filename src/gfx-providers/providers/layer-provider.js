@@ -6,11 +6,16 @@ export default class LayerProvider extends BaseProvider {
     }
 
     async processItem(item, program) {
+        const pop = await this.processMaterial(item, program);
         // JHR: This works a little different to the rest where it uses the program to load the content.
         // Layers are conditional loading as when when you need them and only once.
         // The program manages that internally
         if (item.visible != false) {
             await program.setLayerVisibility(item.layer);
+        }
+
+        if (pop == true) {
+            program._processMaterials.pop();
         }
     }
 }

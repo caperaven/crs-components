@@ -12,6 +12,7 @@ import SceneProvider from "./providers/scene-provider.js";
 import CameraProvider from "./providers/camera-provider.js";
 import LineGeometryProvider from "./providers/geometry/line-geometry-provider.js";
 import PlaneGeometryProvider from "./providers/geometry/plane-geometry-provider.js";
+import FlowChartProvider from "./providers/geometry/flow-chart-provider.js";
 import BoxGeometry from "./providers/geometry/box-geometry-provider.js";
 import IconGeometry from "./providers/geometry/icon-geometry-provider.js";
 import RawMaterialProvider from "./providers/materials/raw-material-provider.js";
@@ -41,6 +42,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(PlaneGeometryProvider);
         await this.register(LineGeometryProvider);
         await this.register(BoxGeometry);
+        await this.register(FlowChartProvider);
         await this.register(HelpersProvider);
         await this.register(RawMaterialProvider);
         await this.register(LayerProvider);
