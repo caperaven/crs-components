@@ -32,16 +32,20 @@ export async function loadThreeModules(root) {
     await crs.modules.add("OrthographicCamera", `${url}cameras/OrthographicCamera.js`);
     await crs.modules.add("PerspectiveCamera", `${url}cameras/PerspectiveCamera.js`);
 
-    // common
-    await crs.modules.add("Scene", `${url}scenes/Scene.js`);
-    await crs.modules.add("WebGLRenderer", `${url}renderers/WebGLRenderer.js`);
-    await crs.modules.add("Mesh", `${url}objects/Mesh.js`);
+    // math
     await crs.modules.add("Color", `${url}math/Color.js`);
     await crs.modules.add("Box2", `${url}math/Box2.js`)
     await crs.modules.add("Vector2", `${url}math/Vector2.js`);
     await crs.modules.add("Vector3", `${url}math/Vector3.js`);
     await crs.modules.add("Vector4", `${url}math/Vector4.js`);
     await crs.modules.add("Matrix3", `${url}math/Matrix3.js`);
+    await crs.modules.add("Matrix4", `${url}math/Matrix4.js`)
+    await crs.modules.add("Plane", `${url}math/Plane.js`);
+
+    // common
+    await crs.modules.add("Scene", `${url}scenes/Scene.js`);
+    await crs.modules.add("WebGLRenderer", `${url}renderers/WebGLRenderer.js`);
+    await crs.modules.add("Mesh", `${url}objects/Mesh.js`);
     await crs.modules.add("ThreeConstants", `${url}constants.js`);
     await crs.modules.add("FileLoader", `${url}loaders/FileLoader.js`);
     await crs.modules.add("Loader", `${url}loaders/Loader.js`);

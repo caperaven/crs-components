@@ -78,6 +78,11 @@
       "view": "fxaa"
     },
     {
+      "title": "Pen Tool",
+      "hash": "#pen-tool",
+      "view": "pen-tool"
+    },
+    {
       "title": "404",
       "hash": "#404",
       "view": "404",

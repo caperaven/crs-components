@@ -141,4 +141,9 @@ export class CameraCanvasBase extends HTMLElement {
         this.renderer.autoClear = true;
         this.composer?.dispose();
     }
+
+    async pixelToWorld(x, y) {
+        const result = await crs.createThreeObject("Vector3", x / this.width * 2 - 1, -y / this.height * 2 + 1, -1);
+        return result;
+    }
 }
