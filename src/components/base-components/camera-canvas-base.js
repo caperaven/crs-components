@@ -83,7 +83,7 @@ export class CameraCanvasBase extends HTMLElement {
             this.isReady = true;
             if (this.ready != null) this.ready();
             this.dispatchEvent(new CustomEvent("ready"));
-            this.render();
+            await this.render();
         });
 
         this.resizeHandler = this.resize.bind(this);
@@ -99,6 +99,7 @@ export class CameraCanvasBase extends HTMLElement {
         this.scene = null;
         this.renderer = null;
         this.camera = null;
+        this.isReady = false;
     }
 
     async render() {

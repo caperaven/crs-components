@@ -20,7 +20,7 @@ export default class PenTool extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
-        this.controls.dispose();
+        this.controls = this.controls.dispose();
         delete this.canvas;
         this._renderCallback = null;
         await super.disconnectedCallback();

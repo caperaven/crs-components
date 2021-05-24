@@ -73,6 +73,7 @@ export class DragControls extends EventDispatcher {
 		this._onTouchMoveHandler = null;
 		this._onTouchStartHandler = null;
 		this._onTouchEndHandler = null;
+		return null;
 	}
 
 	activate() {
