@@ -13,11 +13,9 @@ export default class FlowchartItems extends crsbinding.classes.ViewBase {
         this._program.render();
     }
 
-    async previous() {
-
-    }
-
-    async next() {
-
+    async disconnectedCallback() {
+        this.parent = null;
+        this._program = await this._program.dispose();
+        await super.disconnectedCallback();
     }
 }
