@@ -39,7 +39,6 @@ export class DragControls extends EventDispatcher {
 		this._intersections = [];
 
 		this._selected = null;
-		this._hovered = null;
 		this.scope = this;
 	}
 
@@ -88,6 +87,44 @@ export class DragControls extends EventDispatcher {
 		this._mouse.y = - ((event.clientY - this.rect.top) / this.rect.height) * 2 + 1;
 	}
 
+	_onPointerDown(event) {
+		if (this._objects.length == 0) return;
+		event.preventDefault();
+
+		switch ( event.pointerType ) {
+			case 'mouse':
+			case 'pen':
+				this._onMouseDown( event );
+				break;
+		}
+	}
+
+	_onMouseDown(event) {
+		event.preventDefault();
+
+		this._intersections.length = 0;
+
+		this._raycaster.setFromCamera(this._mouse, this._camera);
+		this._raycaster.intersectObjects(this._objects, true, this._intersections);
+
+		this._selected = null;
+
+		if (this._intersections.length > 0) {
+			this._selected = (this.scope.transformGroup === true ) ? this._objects[0] : this._intersections[0].object;
+			if (this._selected.parent.constructor.name == "Group") {
+				this._selected = this._selected.parent;
+			}
+
+			if (this._raycaster.ray.intersectPlane(this._plane, this._intersection)) {
+				this._inverseMatrix.copy(this._selected.parent.matrixWorld ).invert();
+				this._offset.copy(this._intersection ).sub(this._worldPosition.setFromMatrixPosition(this._selected.matrixWorld));
+			}
+
+			this._domElement.style.cursor = 'move';
+			this.scope.dispatchEvent( { type: 'dragstart', object: this._selected});
+		}
+	}
+
 	_onPointerMove(event) {
 		if (this._objects.length == 0) return;
 		event.preventDefault();
@@ -120,41 +157,6 @@ export class DragControls extends EventDispatcher {
 		if (this._intersections.length > 0) {
 			const object = this._intersections[0].object;
 			this._plane.setFromNormalAndCoplanarPoint(this._camera.getWorldDirection(this._plane.normal ), this._worldPosition.setFromMatrixPosition(object.matrixWorld));
-		}
-	}
-
-	_onPointerDown(event) {
-		if (this._objects.length == 0) return;
-		event.preventDefault();
-
-		switch ( event.pointerType ) {
-			case 'mouse':
-			case 'pen':
-				this._onMouseDown( event );
-				break;
-		}
-	}
-
-	_onMouseDown(event) {
-		event.preventDefault();
-
-		this._intersections.length = 0;
-
-		this._raycaster.setFromCamera(this._mouse, this._camera);
-		this._raycaster.intersectObjects(this._objects, true, this._intersections);
-
-		this._selected = null;
-
-		if (this._intersections.length > 0) {
-			this._selected = (this.scope.transformGroup === true ) ? this._objects[0] : this._intersections[0].object;
-
-			if (this._raycaster.ray.intersectPlane(this._plane, this._intersection)) {
-				this._inverseMatrix.copy(this._selected.parent.matrixWorld ).invert();
-				this._offset.copy(this._intersection ).sub(this._worldPosition.setFromMatrixPosition(this._selected.matrixWorld));
-			}
-
-			this._domElement.style.cursor = 'move';
-			this.scope.dispatchEvent( { type: 'dragstart', object: this._selected});
 		}
 	}
 
