@@ -57,6 +57,7 @@ export class CameraCanvasBase extends HTMLElement {
     }
 
     async connectedCallback() {
+        this.renderHandler = this.render.bind(this);
         requestAnimationFrame(async () => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
@@ -100,6 +101,7 @@ export class CameraCanvasBase extends HTMLElement {
         this.renderer = null;
         this.camera = null;
         this.isReady = false;
+        this.renderHandler = null;
     }
 
     async render() {

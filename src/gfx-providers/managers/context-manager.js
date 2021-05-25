@@ -3,7 +3,8 @@ import {processProperty} from "../helpers/property-processor.js";
 
 const fnMap = {
     "position": cameraPosition,
-    "background": createColor
+    "background": createColor,
+    "allow_drag": allowDrag,
 }
 
 const processModules = {
@@ -74,5 +75,25 @@ async function createColor(args, canvas, key, program) {
     canvas[key] = program.colors[args[key]];
 }
 
+async function allowDrag(args, canvas, key, program) {
+    if (args[key] === true) {
+        const DragControl = (await import("./../../../third-party/three/external/controls/DragControls.js")).DragControls;
+        program.dragControl = new DragControl([], canvas.camera, canvas.renderer.domElement);
+        program.dragControl.addEventListener("drag", canvas.renderHandler);
+        program._disposables.push(disposeDragControls.bind(program));
+        program.updateDragMeshes = updateDragMeshes.bind(program);
+    }
+}
 
+async function updateDragMeshes() {
+    this.dragControl._objects = this.canvas.scene.children.filter(item => {
+        const className = item.constructor.name;
+        return (className === "Mesh" || className === "Group") && item.visible === true;
+    });
+}
 
+async function disposeDragControls() {
+    this.dragControl.removeEventListener("drag", this.canvas.renderHandler);
+    this.dragControl = this.dragControl.dispose();
+    delete this.updateDragMeshes;
+}

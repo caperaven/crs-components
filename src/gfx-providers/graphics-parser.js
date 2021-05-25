@@ -87,6 +87,7 @@ export class GraphicsParser extends BaseParser {
         await this.providers.get("scene").processItem(schema.scene, program);
 
         delete program.parser;
+        program.updateDragMeshes && await program.updateDragMeshes();
         await program.render();
         return program;
     }

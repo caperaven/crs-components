@@ -89,6 +89,7 @@ export class DragControls extends EventDispatcher {
 	}
 
 	_onPointerMove(event) {
+		if (this._objects.length == 0) return;
 		event.preventDefault();
 
 		switch ( event.pointerType ) {
@@ -123,6 +124,7 @@ export class DragControls extends EventDispatcher {
 	}
 
 	_onPointerDown(event) {
+		if (this._objects.length == 0) return;
 		event.preventDefault();
 
 		switch ( event.pointerType ) {
@@ -157,6 +159,7 @@ export class DragControls extends EventDispatcher {
 	}
 
 	_onPointerCancel(event) {
+		if (this._objects.length == 0) return;
 		event.preventDefault();
 
 		switch ( event.pointerType ) {
@@ -175,6 +178,6 @@ export class DragControls extends EventDispatcher {
 			this._selected = null;
 		}
 
-		this._domElement.style.cursor = this._hovered ? 'pointer' : 'auto';
+		this._domElement.style.cursor = 'auto';
 	}
 }
