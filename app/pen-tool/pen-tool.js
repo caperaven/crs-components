@@ -1,5 +1,5 @@
 import "./../../src/gfx-components/perspective-canvas/perspective-canvas.js";
-import {DragControls} from "../../third-party/three/external/controls/DragControls.js";
+import {InputManager} from "./../../src/extensions/input-manager/input-manager.js";
 
 export default class PenTool extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -14,15 +14,14 @@ export default class PenTool extends crsbinding.classes.ViewBase {
             this.canvas.scene.add(object);
             this.canvas.render();
 
-            this.controls = new DragControls( [object], this.canvas.camera, this.canvas.renderer.domElement );
-            this.controls.addEventListener("drag", this._renderCallback);
+            await InputManager.enable(this.canvas, {allow_drag: true});
         })
     }
 
     async disconnectedCallback() {
+        await InputManager.disable(this.canvas);
         this.controls = this.controls.dispose();
         delete this.canvas;
-        this._renderCallback = null;
         await super.disconnectedCallback();
     }
 
