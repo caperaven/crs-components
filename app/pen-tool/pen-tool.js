@@ -1,6 +1,5 @@
 import "./../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
 import {InputManager} from "./../../src/extensions/input-manager/input-manager.js";
-import {OrbitControls} from "../../third-party/three/external/controls/OrbitControls.js";
 
 export default class PenTool extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -12,13 +11,13 @@ export default class PenTool extends crsbinding.classes.ViewBase {
 
             //await this.addFullScreenPlane();
 
-            await this.addDebugBox(100, 100, 100, 100);
-            await this.addDebugBox(300, 100, 50, 50);
-            await this.addDebugBox(400, 400, 150, 150);
+            await this.addDebugBox(100, 100, 100, 100, "box-100");
+            await this.addDebugBox(300, 100, 50, 50, "box-50");
+            await this.addDebugBox(400, 400, 150, 150, "box-150");
 
             this.canvas.render();
 
-            await InputManager.enable(this.canvas, {allow_drag: true});
+            await InputManager.enable(this.canvas);
         })
     }
 

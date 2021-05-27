@@ -30,11 +30,19 @@ class TransformGizmoWorker {
     }
 
     async _show(obj) {
+        // 1. Get bounding box of selected object
         const aabb = await this._getAABB(obj.selected);
+
+        // 2. Set the group position to be the same as the selected object
         this._partsGroup.position.set(obj.selected.position.x, obj.selected.position.y, obj.selected.position.z);
+
+        // 3. Set the position and scale of gizmo parts so that it fits the bounding box.
         await this._applyAABB(aabb);
 
+        // 4. Add group to scene
         this._parent.scene.add(this._partsGroup);
+
+        // 5. Refresh the scene
         this._parent.render();
     }
 
@@ -54,23 +62,22 @@ class TransformGizmoWorker {
         const py = this._partsGroup.position.y;
         const width = aabb.max.x - aabb.min.x;
         const height = aabb.max.y - aabb.min.y;
-
-        await this._applyAABBStrokes(aabb, px, py, width, height);
-        await this._applyAABBCenter(aabb, px, py, width, height);
-        await this._applyAABBCorners(aabb, px, py);
-    }
-
-    async _applyAABBCorners(aabb, px, py) {
-        this._parts.top_left.position.set(px - aabb.min.x, py - aabb.min.y, CORNER_Z);
-        this._parts.top_right.position.set(px - aabb.max.x, py - aabb.min.y, CORNER_Z);
-        this._parts.bottom_left.position.set(px - aabb.min.x, py - aabb.max.y, CORNER_Z);
-        this._parts.bottom_right.position.set(px - aabb.max.x, py - aabb.max.y, CORNER_Z);
-    }
-
-    async _applyAABBStrokes(aabb, px, py, width, height) {
         const cx = width / 2;
         const cy = height / 2;
 
+        await this._applyAABBCorners(aabb, px, py);
+        await this._applyAABBStrokes(aabb, px, py, width, height, cx, cy);
+        await this._applyAABBCenter(aabb, px, py, width, height, cx, cy);
+    }
+
+    async _applyAABBCorners(aabb, px, py) {
+        this._parts.topLeft.position.set(px - aabb.min.x, py - aabb.min.y, CORNER_Z);
+        this._parts.topRight.position.set(px - aabb.max.x, py - aabb.min.y, CORNER_Z);
+        this._parts.bottomLeft.position.set(px - aabb.min.x, py - aabb.max.y, CORNER_Z);
+        this._parts.bottomRight.position.set(px - aabb.max.x, py - aabb.max.y, CORNER_Z);
+    }
+
+    async _applyAABBStrokes(aabb, px, py, width, height, cx, cy) {
         this._parts.top.position.set(px - aabb.min.x - cx, py - aabb.min.y, STROKE_Z);
         this._parts.top.scale.set(width, 10, 1);
 
@@ -84,9 +91,7 @@ class TransformGizmoWorker {
         this._parts.left.scale.set(10, height, 1);
     }
 
-    async _applyAABBCenter(aabb, px, py, width, height) {
-        const cx = width / 2;
-        const cy = height / 2;
+    async _applyAABBCenter(aabb, px, py, width, height, cx, cy) {
         this._parts.center.position.set(px - aabb.min.x - cx, py - aabb.min.y - cy, GIZMO_Z);
         this._parts.center.scale.set(width, height, 1);
     }
@@ -98,10 +103,10 @@ class TransformGizmoWorker {
 
         this._parts = {
             // corners
-            top_left: await createNormalizedPlane(10, 10, cornerMaterial, "top_left"),
-            top_right: await createNormalizedPlane(10, 10, cornerMaterial, "top_right"),
-            bottom_left: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_left"),
-            bottom_right: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
+            topLeft: await createNormalizedPlane(10, 10, cornerMaterial, "top_left"),
+            topRight: await createNormalizedPlane(10, 10, cornerMaterial, "top_right"),
+            bottomLeft: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_left"),
+            bottomRight: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
 
             // edges
             top: await createNormalizedPlane(10, 10, edgeMaterial, "top"),
@@ -115,10 +120,10 @@ class TransformGizmoWorker {
 
         // create a group and add the parts to the group
         const group = await crs.createThreeObject("Group");
-        group.add(this._parts.top_left);
-        group.add(this._parts.top_right);
-        group.add(this._parts.bottom_left);
-        group.add(this._parts.bottom_right);
+        group.add(this._parts.topLeft);
+        group.add(this._parts.topRight);
+        group.add(this._parts.bottomLeft);
+        group.add(this._parts.bottomRight);
         group.add(this._parts.top);
         group.add(this._parts.right);
         group.add(this._parts.bottom);
