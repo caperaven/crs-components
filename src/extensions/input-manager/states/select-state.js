@@ -18,6 +18,10 @@ export class SelectState extends crs.state.StateBase {
         return this._context.canvas.scene.children;
     }
 
+    get gizmo() {
+        return this._context.canvas._transformGizmo;
+    }
+
     constructor(context) {
         super("select");
         this._context = context;
@@ -53,7 +57,7 @@ export class SelectState extends crs.state.StateBase {
         await setMouse(this._mouse, event, this._context.canvasRect);
         await this._setSelected();
 
-        crsbinding.events.emitter.emit("transform-gizmo", {
+        await this.gizmo.performAction({
             selected: this._selected?.object || null
         })
     }

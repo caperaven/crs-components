@@ -12,16 +12,24 @@ export default class PenTool extends crsbinding.classes.ViewBase {
 
             //await this.addFullScreenPlane();
 
-            const box = await crs.createThreeObject("BoxGeometry", 1, 1, 1);
-            const material = await crs.createThreeObject("MeshBasicMaterial", { color: 0xff0090 });
-            const object = await crs.createThreeObject("Mesh", box, material);
-            object.scale.set(100, 100, 1);
-            this.canvas.scene.add(object);
-            this.canvas.canvasPlace(object, 100, 100);
+            await this.addDebugBox(100, 100, 100, 100);
+            await this.addDebugBox(300, 100, 50, 50);
+            await this.addDebugBox(400, 400, 150, 150);
+
             this.canvas.render();
 
             await InputManager.enable(this.canvas, {allow_drag: true});
         })
+    }
+
+    async addDebugBox(x, y, width, height, name) {
+        const box = await crs.createThreeObject("BoxGeometry", 1, 1, 1);
+        const material = await crs.createThreeObject("MeshBasicMaterial", { color: 0xff0090 });
+        const object = await crs.createThreeObject("Mesh", box, material);
+        object.scale.set(width, height, 1);
+        object.name = name;
+        this.canvas.scene.add(object);
+        this.canvas.canvasPlace(object, x, y);
     }
 
     async disconnectedCallback() {
@@ -36,5 +44,9 @@ export default class PenTool extends crsbinding.classes.ViewBase {
         const obj = await crs.createThreeObject("Mesh", plane, material);
         obj.scale.set(30, 30, 1);
         this.canvas.scene.add(obj);
+    }
+
+    async render() {
+        this.canvas.render();
     }
 }

@@ -1,4 +1,4 @@
-export async function createNormalizedPlane(width = 1, height = 1, material = null) {
+export async function createNormalizedPlane(width = 1, height = 1, material = null, name = "") {
     const geometry = await crs.createThreeObject("PlaneGeometry", 1, 1);
 
     if (material == null) {
@@ -7,6 +7,7 @@ export async function createNormalizedPlane(width = 1, height = 1, material = nu
 
     const result = await crs.createThreeObject("Mesh", geometry, material);
     result.scale.set(width, height, 1);
+    result.name = name;
     return result;
 }
 

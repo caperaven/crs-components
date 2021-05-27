@@ -41,6 +41,7 @@ export async function loadThreeModules(root) {
     await crs.modules.add("Matrix3", `${url}math/Matrix3.js`);
     await crs.modules.add("Matrix4", `${url}math/Matrix4.js`)
     await crs.modules.add("Plane", `${url}math/Plane.js`);
+    await crs.modules.add("Box3", `${url}math/Box3.js`);
 
     // common
     await crs.modules.add("Scene", `${url}scenes/Scene.js`);
