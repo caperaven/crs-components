@@ -4,6 +4,7 @@ import {DrawRectangleState} from "./states/draw-rectangle-state.js";
 import {DrawCircleState} from "./states/draw-circle-state.js";
 import {DrawPolyState} from "./states/draw-poly-state.js";
 import {DrawImageState} from "./states/draw-image-state.js";
+import {TransformGizmo} from "./../transform-gizmo/transform-gizmo.js";
 
 class InputManagerWorker {
     constructor(canvas) {
@@ -38,11 +39,13 @@ class InputManagerWorker {
 
 export class InputManager {
     static async enable(parent) {
+        await TransformGizmo.enable(parent);
         parent._inputManager = new InputManagerWorker(parent);
         await parent._inputManager.initialize();
     }
 
     static async disable(parent) {
+        await TransformGizmo.disable(parent);
         parent._inputManager = parent._inputManager.dispose();
     }
 }

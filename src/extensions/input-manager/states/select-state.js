@@ -52,7 +52,10 @@ export class SelectState extends crs.state.StateBase {
     async _click(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
         await this._setSelected();
-        console.log(this._selected);
+
+        crsbinding.events.emitter.emit("transform-gizmo", {
+            selected: this._selected?.object || null
+        })
     }
 
     async _setSelected() {
