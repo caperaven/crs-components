@@ -74,7 +74,7 @@ export default class OrthographicCanvas extends crsbinding.classes.ViewBase {
     async render() {
         requestAnimationFrame(this.render.bind(this));
 
-        this.orbitControl.update();
+        this.controls.update();
         this.canvas.render();
     }
 }
