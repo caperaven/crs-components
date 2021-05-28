@@ -21,19 +21,41 @@ class InputManagerWorker {
             await this._states.addState(new DrawPolyState(this));
             await this._states.addState(new DrawImageState(this));
 
-            requestAnimationFrame(() => {
+            requestAnimationFrame(async () => {
                 this.canvasRect = this.canvas.renderer.domElement.getBoundingClientRect();
-                this._states.gotoState("select")
+                await this._addIntersectPlane();
+                await this._states.gotoState("select");
                 resolve();
             })
         })
     }
 
     async dispose() {
+        await this._removeIntersectPlane();
+
         this.canvas = null;
         this.canvasRect = null;
         this._states.dispose();
         return null;
+    }
+
+    async _addIntersectPlane() {
+        const geom = await crs.createThreeObject("PlaneGeometry");
+        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x0000ff});
+        const mesh = await crs.createThreeObject("Mesh", geom, material);
+        this.canvas.scene.add(mesh);
+
+        mesh.name = "intersect_plane";
+        mesh.position.set(this.canvas.camera.position.x, this.canvas.camera.position.y, -1);
+        mesh.scale.set(this.canvas.width, this.canvas.height, 1);
+
+        this._intersectPlane = mesh;
+        this.canvas.render();
+    }
+
+    async _removeIntersectPlane() {
+        this.canvas.scene.remove(this._intersectPlane);
+        this._intersectPlane = null;
     }
 }
 

@@ -74,6 +74,7 @@ export class SelectState extends crs.state.StateBase {
         this._mouseStart = new Vector2();
         this._selected = null;
         this._intersections = [];
+        this._intersectPlane = this._context.canvas.scene.getObjectByName("intersect_plane");
 
         this.currentState = SelectStates.SELECT;
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
@@ -86,6 +87,7 @@ export class SelectState extends crs.state.StateBase {
         this._mouseStart = null;
         this._selected = null;
         this._intersections = null;
+        this._intersectPlane = null;
     }
 
     /**
@@ -184,14 +186,12 @@ export class SelectState extends crs.state.StateBase {
         this._raycaster.intersectObjects(this.sceneItems, true, this._intersections);
 
         if (this._intersections.length > 0) {
-            this._selected = this._intersections[0];
+            this._selected = this._intersections[0].object === this._intersectPlane ? null : this._intersections[0];
 
-            if (this._selected.parent?.constructor?.name == "Group") {
+            if (this._selected?.parent?.constructor?.name == "Group") {
                 this._selected = this._selected.parent;
             }
         }
-
-        return this._selected != true;
     }
 
     /**
@@ -259,5 +259,6 @@ export class SelectState extends crs.state.StateBase {
      * @private
      */
     async _gizmoResize(event) {
+
     }
 }
