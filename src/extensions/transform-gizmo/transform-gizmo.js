@@ -7,6 +7,17 @@ const CORNER_Z = 1.7;
 class TransformGizmoWorker {
     constructor(parent) {
         this._parent = parent;
+        this.cursors = {
+            "top_left"     : "ne-resize",
+            "top_right"    : "nw-resize",
+            "bottom_left"  : "se-resize",
+            "bottom_right" : "sw-resize",
+            "top"          : "n-resize",
+            "right"        : "e-resize",
+            "bottom"       : "s-resize",
+            "left"         : "w-resize",
+            "center"       : "move"
+        }
     }
 
     async initialize() {
@@ -120,6 +131,7 @@ class TransformGizmoWorker {
 
         // create a group and add the parts to the group
         const group = await crs.createThreeObject("Group");
+        group.name = "transform-gizmo";
         group.add(this._parts.topLeft);
         group.add(this._parts.topRight);
         group.add(this._parts.bottomLeft);

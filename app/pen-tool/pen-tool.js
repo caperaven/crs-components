@@ -13,7 +13,7 @@ export default class PenTool extends crsbinding.classes.ViewBase {
 
             await this.addDebugBox(100, 100, 100, 100, "box-100");
             await this.addDebugBox(300, 100, 50, 50, "box-50");
-            await this.addDebugBox(400, 400, 150, 150, "box-150");
+            await this.addDebugBox(400, 400, 150, 150, "box-150", true);
 
             this.canvas.render();
 
@@ -21,7 +21,7 @@ export default class PenTool extends crsbinding.classes.ViewBase {
         })
     }
 
-    async addDebugBox(x, y, width, height, name) {
+    async addDebugBox(x, y, width, height, name, isFrozen = false) {
         const box = await crs.createThreeObject("BoxGeometry", 1, 1, 1);
         const material = await crs.createThreeObject("MeshBasicMaterial", { color: 0xff0090 });
         const object = await crs.createThreeObject("Mesh", box, material);
@@ -29,6 +29,7 @@ export default class PenTool extends crsbinding.classes.ViewBase {
         object.name = name;
         this.canvas.scene.add(object);
         this.canvas.canvasPlace(object, x, y);
+        object.isFrozen = isFrozen;
     }
 
     async disconnectedCallback() {
