@@ -1,9 +1,10 @@
 import {setMouse} from "./../helpers/pointer-functions.js";
 
 const SelectStates = Object.freeze({
-    SELECT      : 0x1,
-    GIZMO_HOVER : 0x2,
-    GIZMO_DRAG  : 0x3
+    SELECT       : 0x1,
+    GIZMO_HOVER  : 0x2,
+    GIZMO_DRAG   : 0x3,
+    GIZMO_RESIZE : 0x4
 });
 
 /**
@@ -42,6 +43,7 @@ export class SelectState extends crs.state.StateBase {
         this._moveActions = {};
         this._moveActions[SelectStates.GIZMO_HOVER] = this._gizmoHover;
         this._moveActions[SelectStates.GIZMO_DRAG] = this._gizmoDrag;
+        this._moveActions[SelectStates.GIZMO_RESIZE] = this._gizmoResize;
 
         this._downActions = {};
         this._downActions[SelectStates.SELECT] = this._pointerDownSelect;
@@ -53,6 +55,7 @@ export class SelectState extends crs.state.StateBase {
 
         this._moveActions[SelectStates.GIZMO_HOVER] = null;
         this._moveActions[SelectStates.GIZMO_DRAG] = null;
+        this._moveActions[SelectStates.GIZMO_RESIZE] = null;
 
         this._downActions[SelectStates.SELECT] = null;
         this._downActions[SelectStates.GIZMO_HOVER] = null;
@@ -86,23 +89,23 @@ export class SelectState extends crs.state.StateBase {
     async _pointerDown(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
         this._downActions[this.currentState].call(this, event);
-
-        // hover ? => Resize
-        // select ? => Drag
-
-
-
     }
 
     async _pointerDownHover(event) {
         await this._setSelected();
 
+        if (this._selected == null) {
+            await this.gizmo.performAction({ selected: null });
+            return await this._enableCursorEvents(false);
+        }
+
         // 1. Though you are hovering, you did not click on a gizmo item
         //    Go into selection state and check for selections being made
-        if (this._selected?.object?.parent?.name !== "transform-gizmo") {
-            this.currentState = SelectStates.SELECT;
+        if (this._selected.object.parent.name !== "transform-gizmo") {
             return this._pointerDownSelect();
         }
+
+        this.currentState = this._selected.object === this.gizmo._parts.center ? SelectStates.GIZMO_DRAG : SelectStates.GIZMO_RESIZE;
     }
 
     async _pointerDownSelect() {
@@ -120,6 +123,8 @@ export class SelectState extends crs.state.StateBase {
 
     async _pointerUp(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
+
+        this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
     }
 
     async _pointerMove(event) {
@@ -178,6 +183,8 @@ export class SelectState extends crs.state.StateBase {
     }
 
     async _gizmoDrag(event) {
+    }
 
+    async _gizmoResize(event) {
     }
 }
