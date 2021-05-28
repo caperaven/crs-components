@@ -71,6 +71,7 @@ export class SelectState extends crs.state.StateBase {
 
         this._raycaster = new Raycaster();
         this._mouse = new Vector2();
+        this._mouseStart = new Vector2();
         this._selected = null;
         this._intersections = [];
 
@@ -82,15 +83,30 @@ export class SelectState extends crs.state.StateBase {
         this.element.removeEventListener("pointerdown", this._pointerDownHandler);
         this._raycaster = null;
         this._mouse = null;
+        this._mouseStart = null;
         this._selected = null;
         this._intersections = null;
     }
 
+    /**
+     * Handle pointer down event based on current state.
+     * Select : check selection
+     * Hover  : check for drag or resize based on hit target
+     * @returns {Promise<void>}
+     * @private
+     */
     async _pointerDown(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
         this._downActions[this.currentState].call(this, event);
     }
 
+    /**
+     * We are in hover mode, check if we are requesting selection or resize operations.
+     * If the hit target is not the gizmo but a valid selection object, make that object the selected object and update the gizmo
+     * @param event
+     * @returns {Promise<void>}
+     * @private
+     */
     async _pointerDownHover(event) {
         await this._setSelected();
 
@@ -108,6 +124,11 @@ export class SelectState extends crs.state.StateBase {
         this.currentState = this._selected.object === this.gizmo._parts.center ? SelectStates.GIZMO_DRAG : SelectStates.GIZMO_RESIZE;
     }
 
+    /**
+     * Pointer is down, handle selection checks
+     * @returns {Promise<void>}
+     * @private
+     */
     async _pointerDownSelect() {
         await this._setSelected();
 
@@ -121,12 +142,26 @@ export class SelectState extends crs.state.StateBase {
         await this._enableCursorEvents(mesh != null);
     }
 
+    /**
+     * Update the mouse data and handle the pointer up event based on the current state
+     * @param event
+     * @returns {Promise<void>}
+     * @private
+     */
     async _pointerUp(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
-
         this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
     }
 
+    /**
+     * Update the mouse data and handle the move event based on the current state
+     * Hover  : update hover data
+     * Resize : perform resize operations
+     * Drag   : move the selected object accordingly
+     * @param event
+     * @returns {Promise<void>}
+     * @private
+     */
     async _pointerMove(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
 
@@ -135,6 +170,12 @@ export class SelectState extends crs.state.StateBase {
         await this._moveActions[this.currentState].call(this, event);
     }
 
+    /**
+     * Query the canvas and check for any hit detection.
+     * If an valid object is found, set the _selected field to that object
+     * @returns {Promise<boolean>}
+     * @private
+     */
     async _setSelected() {
         this._intersections.length = 0;
         this._selected = null;
@@ -153,6 +194,12 @@ export class SelectState extends crs.state.StateBase {
         return this._selected != true;
     }
 
+    /**
+     * A valid selection has been made, enable the other events to check for further activities.
+     * @param isGizmoVisible
+     * @returns {Promise<void>}
+     * @private
+     */
     async _enableCursorEvents(isGizmoVisible) {
         if (isGizmoVisible === false) {
             return this._disableCursorEvents();
@@ -163,12 +210,23 @@ export class SelectState extends crs.state.StateBase {
         this.element.addEventListener("pointermove", this._pointerMoveHandler);
     }
 
+    /**
+     * Disable the pointer up and move events and set the state back to selection mode
+     * @returns {Promise<void>}
+     * @private
+     */
     async _disableCursorEvents() {
         this.currentState = SelectStates.SELECT;
         this.element.removeEventListener("pointerup", this._pointerUpHandler);
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
     }
 
+    /**
+     * The gizmo is active so check for hover effects on the gizmo.
+     * Update the cursor based on the gizmo modifier you are hovering over
+     * @returns {Promise<void>}
+     * @private
+     */
     async _gizmoHover() {
         this._raycaster.setFromCamera(this._mouse, this.camera);
         this._raycaster.intersectObjects(this.transFormGizmo._partsGroup.children, false, this._intersections);
@@ -182,9 +240,24 @@ export class SelectState extends crs.state.StateBase {
         this.element.style.cursor = cursor;
     }
 
+    /**
+     * You are dragging the gizmo around and as a result the selected object.
+     * Update both the gizmo and the selected object accordingly.
+     * @param event
+     * @returns {Promise<void>}
+     * @private
+     */
     async _gizmoDrag(event) {
+
     }
 
+    /**
+     * You are resizing the gizmo.
+     * Request and update on the gizmo according to the resize operation
+     * @param event
+     * @returns {Promise<void>}
+     * @private
+     */
     async _gizmoResize(event) {
     }
 }
