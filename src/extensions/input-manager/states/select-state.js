@@ -1,10 +1,11 @@
 import {setMouse} from "./../helpers/pointer-functions.js";
+import {Transformer2D} from "../../../gfx-helpers/transformer.js";
 
 const SelectStates = Object.freeze({
     SELECT       : 0x1,
     GIZMO_HOVER  : 0x2,
-    GIZMO_DRAG   : 0x3,
-    GIZMO_RESIZE : 0x4
+    GIZMO_DRAG   : 0x4,
+    GIZMO_RESIZE : 0x8
 });
 
 /**
@@ -36,6 +37,8 @@ export class SelectState extends crs.state.StateBase {
     constructor(context) {
         super("select");
         this._context = context;
+
+        this._renderHandler = this._render.bind(this);
         this._pointerDownHandler = this._pointerDown.bind(this);
         this._pointerUpHandler = this._pointerUp.bind(this);
         this._pointerMoveHandler = this._pointerMove.bind(this);
@@ -63,6 +66,8 @@ export class SelectState extends crs.state.StateBase {
         this._pointerDownHandler = null;
         this._pointerUpHandler = null;
         this._pointerMoveHandler = null;
+
+        this._renderHandler = null;
     }
 
     async enter() {
@@ -75,6 +80,7 @@ export class SelectState extends crs.state.StateBase {
         this._selected = null;
         this._intersections = [];
         this._intersectPlane = this._context.canvas.scene.getObjectByName("intersect_plane");
+        this._transformer2D = new Transformer2D();
 
         this.currentState = SelectStates.SELECT;
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
@@ -88,6 +94,7 @@ export class SelectState extends crs.state.StateBase {
         this._selected = null;
         this._intersections = null;
         this._intersectPlane = null;
+        this._transformer2D = this._transformer2D.dispose();
     }
 
     /**
@@ -110,11 +117,12 @@ export class SelectState extends crs.state.StateBase {
      * @private
      */
     async _pointerDownHover(event) {
+        const selected = this._selected;
         await this._setSelected();
 
         if (this._selected == null) {
             await this.gizmo.performAction({ selected: null });
-            return await this._enableCursorEvents(false);
+            return await this._manageCursorEvents(false);
         }
 
         // 1. Though you are hovering, you did not click on a gizmo item
@@ -123,7 +131,14 @@ export class SelectState extends crs.state.StateBase {
             return this._pointerDownSelect();
         }
 
+        this._hoverName = this._selected.object.name;
+        this._transformer2D.startPoint = await this._getIntersectionPlanePosition();
+        this._transformer2D.startScale = selected.object.scale.clone();
+        this._transformer2D.details = this.transFormGizmo.transformDetails[this._hoverName];
+        this._transformer2D.startPosition = selected.object.position.clone();
+
         this.currentState = this._selected.object === this.gizmo._parts.center ? SelectStates.GIZMO_DRAG : SelectStates.GIZMO_RESIZE;
+        this._selected = selected;
     }
 
     /**
@@ -141,7 +156,7 @@ export class SelectState extends crs.state.StateBase {
             selected: mesh
         })
 
-        await this._enableCursorEvents(mesh != null);
+        await this._manageCursorEvents(mesh != null);
     }
 
     /**
@@ -153,6 +168,7 @@ export class SelectState extends crs.state.StateBase {
     async _pointerUp(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
         this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
+        this._startPoint = null;
     }
 
     /**
@@ -166,6 +182,7 @@ export class SelectState extends crs.state.StateBase {
      */
     async _pointerMove(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
+        this._raycaster.setFromCamera(this._mouse, this.camera);
 
         this._intersections.length = 0;
         await setMouse(this._mouse, event, this._context.canvasRect);
@@ -200,7 +217,7 @@ export class SelectState extends crs.state.StateBase {
      * @returns {Promise<void>}
      * @private
      */
-    async _enableCursorEvents(isGizmoVisible) {
+    async _manageCursorEvents(isGizmoVisible) {
         if (isGizmoVisible === false) {
             return this._disableCursorEvents();
         }
@@ -228,13 +245,12 @@ export class SelectState extends crs.state.StateBase {
      * @private
      */
     async _gizmoHover() {
-        this._raycaster.setFromCamera(this._mouse, this.camera);
         this._raycaster.intersectObjects(this.transFormGizmo._partsGroup.children, false, this._intersections);
 
         let cursor = "default";
 
         if (this._intersections.length > 0) {
-            cursor = this.transFormGizmo.cursors[this._intersections[0].object.name];
+            cursor = this.transFormGizmo.transformDetails[this._intersections[0].object.name].cursor;
         }
 
         this.element.style.cursor = cursor;
@@ -248,7 +264,8 @@ export class SelectState extends crs.state.StateBase {
      * @private
      */
     async _gizmoDrag(event) {
-
+        const point = await this._getIntersectionPlanePosition();
+        await this._transformer2D.transform(this._selected.object, this.transFormGizmo, point.x, point.y, this._renderHandler);
     }
 
     /**
@@ -259,6 +276,21 @@ export class SelectState extends crs.state.StateBase {
      * @private
      */
     async _gizmoResize(event) {
+        const point = await this._getIntersectionPlanePosition();
+        await this._transformer2D.scale(this._selected.object, this.transFormGizmo, point, this._renderHandler);
+    }
 
+    /**
+     * Check the world collision details on the intersection plane and return the collision point.
+     * @returns {Promise<*>}
+     * @private
+     */
+    async _getIntersectionPlanePosition() {
+        const intersection = this._raycaster.intersectObjects([this._intersectPlane], false, this._intersections)[0];
+        return intersection.point;
+    }
+
+    async _render() {
+        this._context.canvas.render();
     }
 }

@@ -1,4 +1,6 @@
 import {createNormalizedPlane} from "./../../../src/threejs-helpers/shape-factory.js";
+import {TransformAnchors} from "./../../gfx-helpers/transform-anchors.js";
+import {TransformAxis} from "./../../gfx-helpers/transform-axis.js";
 
 const GIZMO_Z = 1.5;
 const STROKE_Z = 1.6;
@@ -7,16 +9,17 @@ const CORNER_Z = 1.7;
 class TransformGizmoWorker {
     constructor(parent) {
         this._parent = parent;
-        this.cursors = {
-            "top_left"     : "ne-resize",
-            "top_right"    : "nw-resize",
-            "bottom_left"  : "se-resize",
-            "bottom_right" : "sw-resize",
-            "top"          : "n-resize",
-            "right"        : "e-resize",
-            "bottom"       : "s-resize",
-            "left"         : "w-resize",
-            "center"       : "move"
+
+        this.transformDetails = {
+            "top_left"      : {cursor: "ne-resize", anchor : TransformAnchors.BOTTOM_RIGHT, axis: TransformAxis.XY},
+            "top_right"     : {cursor: "nw-resize", anchor : TransformAnchors.BOTTOM_LEFT,  axis: TransformAxis.XY},
+            "bottom_left"   : {cursor: "se-resize", anchor : TransformAnchors.TOP_LEFT,     axis: TransformAxis.XY},
+            "bottom_right"  : {cursor: "sw-resize", anchor : TransformAnchors.TOP_RIGHT,    axis: TransformAxis.XY},
+            "top"           : {cursor: "n-resize",  anchor : TransformAnchors.BOTTOM_LEFT,  axis: TransformAxis.Y},
+            "right"         : {cursor: "e-resize",  anchor : TransformAnchors.TOP_LEFT,     axis: TransformAxis.X},
+            "bottom"        : {cursor: "s-resize",  anchor : TransformAnchors.TOP_LEFT,     axis: TransformAxis.Y},
+            "left"          : {cursor: "w-resize",  anchor : TransformAnchors.TOP_RIGHT,    axis: TransformAxis.X},
+            "center"        : {cursor: "move",      anchor : null,                          axis: null}
         }
     }
 
@@ -144,6 +147,11 @@ class TransformGizmoWorker {
         this._partsGroup = group;
 
         this._parent.scene.add(group);
+    }
+
+    async moveTo(x, y) {
+        this._partsGroup.position.x = x;
+        this._partsGroup.position.y = y;
     }
 }
 
