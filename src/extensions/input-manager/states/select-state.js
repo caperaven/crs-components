@@ -1,5 +1,5 @@
 import {setMouse} from "./../helpers/pointer-functions.js";
-import {Transformer2D} from "../../../gfx-helpers/transformer.js";
+import {Transformer2D} from "../../../gfx-helpers/transformer2D.js";
 
 const SelectStates = Object.freeze({
     SELECT       : 0x1,
@@ -265,7 +265,7 @@ export class SelectState extends crs.state.StateBase {
      */
     async _gizmoDrag(event) {
         const point = await this._getIntersectionPlanePosition();
-        await this._transformer2D.transform(this._selected.object, this.transFormGizmo, point.x, point.y, this._renderHandler);
+        await this._transformer2D.translate(this._selected.object, this.transFormGizmo, point.x, point.y, this._renderHandler);
     }
 
     /**
@@ -277,7 +277,8 @@ export class SelectState extends crs.state.StateBase {
      */
     async _gizmoResize(event) {
         const point = await this._getIntersectionPlanePosition();
-        await this._transformer2D.scale(this._selected.object, this.transFormGizmo, point, this._renderHandler);
+        await this._transformer2D.scale(this._selected.object, this.transFormGizmo, point);
+        this.gizmo.refresh(this._selected.object);
     }
 
     /**

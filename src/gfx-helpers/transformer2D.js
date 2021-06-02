@@ -21,10 +21,13 @@ export class Transformer2D {
         this.startScale = null;
         this.details = null;
         this.startPosition = null;
+        this.scaleFn[TransformAxis.X] = null;
+        this.scaleFn[TransformAxis.Y] = null;
+        this.scaleFn[TransformAxis.XY] = null;
         return null;
     }
 
-    async transform(mesh, gizmo, x, y, renderCallback) {
+    async translate(mesh, gizmo, x, y, renderCallback) {
         mesh.position.x = x;
         mesh.position.y = y;
 
@@ -35,20 +38,19 @@ export class Transformer2D {
         await renderCallback();
     }
 
-    async scale(mesh, gizmo, currentPoint, renderCallback) {
+    async scale(mesh, gizmo, currentPoint) {
         await this.scaleFn[this.details.axis].call(this, mesh, gizmo, currentPoint.x, currentPoint.y);
-        await renderCallback();
     }
 
     async scaleX(mesh, gizmo, x) {
         const anchor = this.details.anchor;
 
         if (anchor === TransformAnchors.TOP_LEFT || anchor === TransformAnchors.BOTTOM_LEFT) {
-            await this._scaleRightSide(mesh, gizmo, x);
+            return this._scaleRightSide(mesh, gizmo, x);
         }
 
         if (anchor === TransformAnchors.TOP_RIGHT || anchor === TransformAnchors.BOTTOM_RIGHT) {
-            await this._scaleLeftSide(mesh, gizmo, x);
+            return this._scaleLeftSide(mesh, gizmo, x);
         }
     }
 

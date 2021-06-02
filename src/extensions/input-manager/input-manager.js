@@ -41,7 +41,7 @@ class InputManagerWorker {
 
     async _addIntersectPlane() {
         const geom = await crs.createThreeObject("PlaneGeometry");
-        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x0000ff});
+        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0xffffff});
         const mesh = await crs.createThreeObject("Mesh", geom, material);
         this.canvas.scene.add(mesh);
 

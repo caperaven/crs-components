@@ -11,8 +11,8 @@ class TransformGizmoWorker {
         this._parent = parent;
 
         this.transformDetails = {
-            "top_left"      : {cursor: "ne-resize", anchor : TransformAnchors.BOTTOM_RIGHT, axis: TransformAxis.XY},
-            "top_right"     : {cursor: "nw-resize", anchor : TransformAnchors.BOTTOM_LEFT,  axis: TransformAxis.XY},
+            "top_left"      : {cursor: "nw-resize", anchor : TransformAnchors.BOTTOM_RIGHT, axis: TransformAxis.XY},
+            "top_right"     : {cursor: "ne-resize", anchor : TransformAnchors.BOTTOM_LEFT,  axis: TransformAxis.XY},
             "bottom_left"   : {cursor: "se-resize", anchor : TransformAnchors.TOP_LEFT,     axis: TransformAxis.XY},
             "bottom_right"  : {cursor: "sw-resize", anchor : TransformAnchors.TOP_RIGHT,    axis: TransformAxis.XY},
             "top"           : {cursor: "n-resize",  anchor : TransformAnchors.BOTTOM_LEFT,  axis: TransformAxis.Y},
@@ -44,17 +44,23 @@ class TransformGizmoWorker {
     }
 
     async _show(obj) {
+        await this.refresh(obj.selected, () => {
+            this._parent.scene.add(this._partsGroup);
+        })
+    }
+
+    async refresh(obj, preRenderCallback) {
         // 1. Get bounding box of selected object
-        const aabb = await this._getAABB(obj.selected);
+        const aabb = await this._getAABB(obj);
 
         // 2. Set the group position to be the same as the selected object
-        this._partsGroup.position.set(obj.selected.position.x, obj.selected.position.y, obj.selected.position.z);
+        this._partsGroup.position.set(obj.position.x, obj.position.y, obj.position.z);
 
         // 3. Set the position and scale of gizmo parts so that it fits the bounding box.
         await this._applyAABB(aabb);
 
-        // 4. Add group to scene
-        this._parent.scene.add(this._partsGroup);
+        // 4. Pre render callback
+        preRenderCallback && preRenderCallback();
 
         // 5. Refresh the scene
         this._parent.render();
@@ -62,11 +68,7 @@ class TransformGizmoWorker {
 
     async _getAABB(obj) {
         const aabb = await crs.createThreeObject("Box3");
-
-        if (obj.geometry.boundingBox == null) {
-            obj.geometry.computeBoundingBox();
-        }
-
+        obj.geometry.computeBoundingBox();
         aabb.copy(obj.geometry.boundingBox).applyMatrix4(obj.matrixWorld);
         return aabb;
     }
@@ -85,24 +87,25 @@ class TransformGizmoWorker {
     }
 
     async _applyAABBCorners(aabb, px, py) {
-        this._parts.topLeft.position.set(px - aabb.min.x, py - aabb.min.y, CORNER_Z);
-        this._parts.topRight.position.set(px - aabb.max.x, py - aabb.min.y, CORNER_Z);
+        this._parts.topLeft.position.set(px - aabb.max.x, py - aabb.min.y, CORNER_Z);
+        this._parts.topRight.position.set(px - aabb.min.x, py - aabb.min.y, CORNER_Z);
         this._parts.bottomLeft.position.set(px - aabb.min.x, py - aabb.max.y, CORNER_Z);
         this._parts.bottomRight.position.set(px - aabb.max.x, py - aabb.max.y, CORNER_Z);
     }
 
     async _applyAABBStrokes(aabb, px, py, width, height, cx, cy) {
+        const size = 3;
         this._parts.top.position.set(px - aabb.min.x - cx, py - aabb.min.y, STROKE_Z);
-        this._parts.top.scale.set(width, 10, 1);
+        this._parts.top.scale.set(width, size, 1);
 
         this._parts.right.position.set(px - aabb.min.x, py - aabb.min.y - cy, STROKE_Z);
-        this._parts.right.scale.set(10, height, 1);
+        this._parts.right.scale.set(size, height, 1);
 
         this._parts.bottom.position.set(px - aabb.min.x - cx, py - aabb.max.y, STROKE_Z);
-        this._parts.bottom.scale.set(width, 10, 1);
+        this._parts.bottom.scale.set(width, size, 1);
 
         this._parts.left.position.set(px - aabb.max.x, py - aabb.min.y - cy, STROKE_Z);
-        this._parts.left.scale.set(10, height, 1);
+        this._parts.left.scale.set(size, height, 1);
     }
 
     async _applyAABBCenter(aabb, px, py, width, height, cx, cy) {
@@ -111,9 +114,9 @@ class TransformGizmoWorker {
     }
 
     async _buildUI() {
-        const cornerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xff0000});
-        const edgeMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x0000ff});
-        const centerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00});
+        const cornerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xababab});
+        const edgeMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xdadada});
+        const centerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00, transparent: true, opacity: 0});
 
         this._parts = {
             // corners
@@ -123,13 +126,11 @@ class TransformGizmoWorker {
             bottomRight: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
 
             // edges
-            top: await createNormalizedPlane(10, 10, edgeMaterial, "top"),
-            right: await createNormalizedPlane(10, 10, edgeMaterial, "right"),
-            bottom: await createNormalizedPlane(10, 10, edgeMaterial, "bottom"),
-            left: await createNormalizedPlane(10, 10, edgeMaterial, "left"),
-
-            // center
-            center: await createNormalizedPlane(10, 10, centerMaterial, "center")
+            top: await createNormalizedPlane(5, 5, edgeMaterial, "top"),
+            right: await createNormalizedPlane(5, 5, edgeMaterial, "right"),
+            bottom: await createNormalizedPlane(5, 5, edgeMaterial, "bottom"),
+            left: await createNormalizedPlane(5, 5, edgeMaterial, "left"),
+            center: await createNormalizedPlane(5, 5, centerMaterial, "center")
         }
 
         // create a group and add the parts to the group
