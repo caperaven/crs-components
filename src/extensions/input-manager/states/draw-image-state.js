@@ -1,19 +1,35 @@
+import {BaseState} from "./base-state.js";
+
 /**
  * Draw a vector based image at the given location and size
  */
-export class DrawImageState extends crs.state.StateBase {
+export class DrawImageState extends BaseState {
     constructor(context) {
-        super("draw/image");
-        this._context = context;
+        super(context,"draw_image");
     }
 
     dispose() {
-        this._context = null;
+        super.dispose();
     }
 
     async enter() {
+        await super.enter();
     }
 
     async exit() {
+        await super.exit();
     }
+
+    async _pointerDown(event) {
+
+    }
+
+    async _pointerUp(event) {
+
+    }
+
+    async _pointerMove(event) {
+
+    }
+
 }

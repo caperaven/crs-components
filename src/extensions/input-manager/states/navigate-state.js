@@ -1,19 +1,36 @@
 /**
  * Move the camera around to navigate the scene
  */
-export class NavigateState extends crs.state.StateBase {
+
+import {BaseState} from "./base-state.js";
+
+export class NavigateState extends BaseState {
     constructor(context) {
-        super("navigate");
-        this._context = context;
+        super(context,"navigate");
     }
 
     dispose() {
-        this._context = null;
+        super.dispose();
     }
 
     async enter() {
+        await super.enter();
     }
 
     async exit() {
+        await super.exit();
     }
+
+    async _pointerDown(event) {
+
+    }
+
+    async _pointerUp(event) {
+
+    }
+
+    async _pointerMove(event) {
+
+    }
+
 }

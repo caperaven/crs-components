@@ -1,19 +1,36 @@
 /**
  * Draw polygon by clicking on canvas until you click on the first item again to close the loop
  */
-export class DrawPolyState extends crs.state.StateBase {
+
+import {BaseState} from "./base-state.js";
+
+export class DrawPolyState extends BaseState {
     constructor(context) {
-        super("draw/polygon");
-        this._context = context;
+        super(context,"draw_polygon");
     }
 
     dispose() {
-        this._context = null;
+        super.dispose();
     }
 
     async enter() {
+        await super.enter();
     }
 
     async exit() {
+        await super.exit();
     }
+
+    async _pointerDown(event) {
+
+    }
+
+    async _pointerUp(event) {
+
+    }
+
+    async _pointerMove(event) {
+
+    }
+
 }

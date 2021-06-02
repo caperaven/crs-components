@@ -1,3 +1,4 @@
+import {BaseState} from "./base-state.js";
 import {setMouse} from "./../helpers/pointer-functions.js";
 import {Transformer2D} from "../../../gfx-helpers/transformer2D.js";
 
@@ -13,36 +14,13 @@ const SelectStates = Object.freeze({
  * Select white space to remove gizmo.
  * Use event aggregation to communicate intent.
  */
-export class SelectState extends crs.state.StateBase {
-    get camera() {
-        return this._context.canvas.camera;
-    }
-
-    get element() {
-        return this._context.canvas.renderer.domElement;
-    }
-
-    get sceneItems() {
-        return this._context.canvas.scene.children;
-    }
-
-    get gizmo() {
-        return this._context.canvas._transformGizmo;
-    }
-
+export class SelectState extends BaseState {
     get transFormGizmo() {
         return this._context.canvas._transformGizmo;
     }
 
     constructor(context) {
-        super("select");
-        this._context = context;
-
-        this._renderHandler = this._render.bind(this);
-        this._pointerDownHandler = this._pointerDown.bind(this);
-        this._pointerUpHandler = this._pointerUp.bind(this);
-        this._pointerMoveHandler = this._pointerMove.bind(this);
-
+        super(context, "select");
         this._moveActions = {};
         this._moveActions[SelectStates.GIZMO_HOVER] = this._gizmoHover;
         this._moveActions[SelectStates.GIZMO_DRAG] = this._gizmoDrag;
@@ -54,8 +32,6 @@ export class SelectState extends crs.state.StateBase {
     }
 
     dispose() {
-        this._context = null;
-
         this._moveActions[SelectStates.GIZMO_HOVER] = null;
         this._moveActions[SelectStates.GIZMO_DRAG] = null;
         this._moveActions[SelectStates.GIZMO_RESIZE] = null;
@@ -63,23 +39,12 @@ export class SelectState extends crs.state.StateBase {
         this._downActions[SelectStates.SELECT] = null;
         this._downActions[SelectStates.GIZMO_HOVER] = null;
 
-        this._pointerDownHandler = null;
-        this._pointerUpHandler = null;
-        this._pointerMoveHandler = null;
-
-        this._renderHandler = null;
+        super.dispose();
     }
 
     async enter() {
-        const Raycaster = await crs.getThreePrototype("Raycaster");
-        const Vector2 = await crs.getThreePrototype("Vector2");
-
-        this._raycaster = new Raycaster();
-        this._mouse = new Vector2();
-        this._mouseStart = new Vector2();
+        await super.enter();
         this._selected = null;
-        this._intersections = [];
-        this._intersectPlane = this._context.canvas.scene.getObjectByName("intersect_plane");
         this._transformer2D = new Transformer2D();
 
         this.currentState = SelectStates.SELECT;
@@ -87,14 +52,12 @@ export class SelectState extends crs.state.StateBase {
     }
 
     async exit() {
-        this.element.removeEventListener("pointerdown", this._pointerDownHandler);
-        this._raycaster = null;
-        this._mouse = null;
-        this._mouseStart = null;
+        await this.gizmo._hide();
         this._selected = null;
         this._intersections = null;
         this._intersectPlane = null;
         this._transformer2D = this._transformer2D.dispose();
+        await super.exit();
     }
 
     /**
@@ -289,9 +252,5 @@ export class SelectState extends crs.state.StateBase {
     async _getIntersectionPlanePosition() {
         const intersection = this._raycaster.intersectObjects([this._intersectPlane], false, this._intersections)[0];
         return intersection.point;
-    }
-
-    async _render() {
-        this._context.canvas.render();
     }
 }

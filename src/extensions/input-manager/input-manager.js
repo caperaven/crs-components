@@ -6,6 +6,15 @@ import {DrawPolyState} from "./states/draw-poly-state.js";
 import {DrawImageState} from "./states/draw-image-state.js";
 import {TransformGizmo} from "./../transform-gizmo/transform-gizmo.js";
 
+export const InputStates = Object.freeze({
+    SELECT: "select",
+    NAVIGATE: "navigate",
+    DRAW_RECTANGLE: "draw_rectangle",
+    DRAW_CIRCLE: "draw_circle",
+    DRAW_POLYGON: "draw_polygon",
+    DRAW_IMAGE: "draw_image"
+});
+
 class InputManagerWorker {
     constructor(canvas) {
         this.canvas = canvas;
@@ -37,6 +46,10 @@ class InputManagerWorker {
         this.canvasRect = null;
         this._states.dispose();
         return null;
+    }
+
+    gotoState(state) {
+        this._states.gotoState(state);
     }
 
     async _addIntersectPlane() {

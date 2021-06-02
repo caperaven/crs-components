@@ -2,19 +2,35 @@
  * Draw a circle mesh at the given location and size.
  * Size widget is locked to equal width and height
  */
-export class DrawCircleState extends crs.state.StateBase {
+
+import {BaseState} from "./base-state.js";
+
+export class DrawCircleState extends BaseState {
     constructor(context) {
-        super("draw/circle");
-        this._context = context;
+        super(context,"draw_circle");
     }
 
     dispose() {
-        this._context = null;
+        super.dispose();
     }
 
     async enter() {
+        await super.enter();
     }
 
     async exit() {
+        await super.exit();
+    }
+
+    async _pointerDown(event) {
+
+    }
+
+    async _pointerUp(event) {
+
+    }
+
+    async _pointerMove(event) {
+
     }
 }

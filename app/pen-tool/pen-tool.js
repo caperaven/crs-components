@@ -1,7 +1,11 @@
 import "./../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
-import {InputManager} from "./../../src/extensions/input-manager/input-manager.js";
+import {InputManager, InputStates} from "./../../src/extensions/input-manager/input-manager.js";
 
 export default class PenTool extends crsbinding.classes.ViewBase {
+    get inputManager() {
+        return this.canvas._inputManager;
+    }
+
     async connectedCallback() {
         await super.connectedCallback();
         this.canvas = document.querySelector("orthographic-canvas");
@@ -48,5 +52,25 @@ export default class PenTool extends crsbinding.classes.ViewBase {
 
     async render() {
         this.canvas.render();
+    }
+
+    async select() {
+        this.inputManager.gotoState(InputStates.SELECT);
+    }
+
+    async drawRectangle() {
+        this.inputManager.gotoState(InputStates.DRAW_RECTANGLE);
+    }
+
+    async drawCircle() {
+        this.inputManager.gotoState(InputStates.DRAW_CIRCLE);
+    }
+
+    async drawPolygon() {
+        this.inputManager.gotoState(InputStates.DRAW_POLYGON);
+    }
+
+    async drawImage() {
+        this.inputManager.gotoState(InputStates.DRAW_IMAGE);
     }
 }
