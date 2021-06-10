@@ -4,7 +4,7 @@ import {DrawRectangleState} from "./states/draw-rectangle-state.js";
 import {DrawCircleState} from "./states/draw-circle-state.js";
 import {DrawPolyState} from "./states/draw-poly-state.js";
 import {DrawImageState} from "./states/draw-image-state.js";
-import {TransformGizmo} from "./../transform-gizmo/transform-gizmo.js";
+import {TransformGizmo} from "../../gfx-helpers/transform-gizmo.js";
 
 export const InputStates = Object.freeze({
     SELECT: "select",

@@ -1,6 +1,6 @@
-import {createNormalizedPlane} from "./../../../src/threejs-helpers/shape-factory.js";
-import {TransformAnchors} from "./../../gfx-helpers/transform-anchors.js";
-import {TransformAxis} from "./../../gfx-helpers/transform-axis.js";
+import {createNormalizedPlane} from "../threejs-helpers/shape-factory.js";
+import {TransformAnchors} from "./transform-anchors.js";
+import {TransformAxis} from "./transform-axis.js";
 
 const GIZMO_Z = 1.5;
 const STROKE_Z = 1.6;

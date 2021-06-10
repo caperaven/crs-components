@@ -54,8 +54,6 @@ export class SelectState extends BaseState {
     async exit() {
         await this.gizmo._hide();
         this._selected = null;
-        this._intersections = null;
-        this._intersectPlane = null;
         this._transformer2D = this._transformer2D.dispose();
         await super.exit();
     }
@@ -95,7 +93,7 @@ export class SelectState extends BaseState {
         }
 
         this._hoverName = this._selected.object.name;
-        this._transformer2D.startPoint = await this._getIntersectionPlanePosition();
+        this._transformer2D.startPoint = await this.getIntersectionPlanePosition();
         this._transformer2D.startScale = selected.object.scale.clone();
         this._transformer2D.details = this.transFormGizmo.transformDetails[this._hoverName];
         this._transformer2D.startPosition = selected.object.position.clone();
@@ -227,7 +225,7 @@ export class SelectState extends BaseState {
      * @private
      */
     async _gizmoDrag(event) {
-        const point = await this._getIntersectionPlanePosition();
+        const point = await this.getIntersectionPlanePosition();
         await this._transformer2D.translate(this._selected.object, this.transFormGizmo, point.x, point.y, this._renderHandler);
     }
 
@@ -239,18 +237,8 @@ export class SelectState extends BaseState {
      * @private
      */
     async _gizmoResize(event) {
-        const point = await this._getIntersectionPlanePosition();
+        const point = await this.getIntersectionPlanePosition();
         await this._transformer2D.scale(this._selected.object, this.transFormGizmo, point);
         this.gizmo.refresh(this._selected.object);
-    }
-
-    /**
-     * Check the world collision details on the intersection plane and return the collision point.
-     * @returns {Promise<*>}
-     * @private
-     */
-    async _getIntersectionPlanePosition() {
-        const intersection = this._raycaster.intersectObjects([this._intersectPlane], false, this._intersections)[0];
-        return intersection.point;
     }
 }

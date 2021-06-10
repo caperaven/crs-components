@@ -51,6 +51,18 @@ export class BaseState extends crs.state.StateBase {
         this._raycaster = null;
         this._mouse = null;
         this._mouseStart = null;
+        this._intersections = null;
+        this._intersectPlane = null;
+    }
+
+    /**
+     * Check the world collision details on the intersection plane and return the collision point.
+     * @returns {Promise<*>}
+     */
+    async getIntersectionPlanePosition() {
+        this._intersections.length = 0;
+        const intersection = this._raycaster.intersectObjects([this._intersectPlane], false, this._intersections)[0];
+        return intersection.point.clone();
     }
 
     async _render() {
