@@ -115,8 +115,7 @@ class TransformGizmoWorker {
 
     async _buildUI() {
         const cornerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xababab});
-        const edgeMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xdadada});
-        const centerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00, transparent: true, opacity: 0});
+        const clearMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00, transparent: true, opacity: 0});
 
         this._parts = {
             // corners
@@ -126,11 +125,11 @@ class TransformGizmoWorker {
             bottomRight: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
 
             // edges
-            top: await createNormalizedPlane(5, 5, edgeMaterial, "top"),
-            right: await createNormalizedPlane(5, 5, edgeMaterial, "right"),
-            bottom: await createNormalizedPlane(5, 5, edgeMaterial, "bottom"),
-            left: await createNormalizedPlane(5, 5, edgeMaterial, "left"),
-            center: await createNormalizedPlane(5, 5, centerMaterial, "center")
+            top: await createNormalizedPlane(10, 10, clearMaterial, "top"),
+            right: await createNormalizedPlane(10, 10, clearMaterial, "right"),
+            bottom: await createNormalizedPlane(5, 10, clearMaterial, "bottom"),
+            left: await createNormalizedPlane(10, 10, clearMaterial, "left"),
+            center: await createNormalizedPlane(5, 5, clearMaterial, "center")
         }
 
         // create a group and add the parts to the group
