@@ -88,6 +88,11 @@
       "view": "404",
       "html-only": true,
       "hasStyle": true
+    },
+    {
+      "title": "Radio",
+      "hash": "#radio",
+      "view": "radio"
     }
   ]
 }

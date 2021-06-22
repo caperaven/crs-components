@@ -1,0 +1,18 @@
+<style>
+    radio-group {
+        display: grid;
+        grid-template-columns: max-content max-content;
+    }
+</style>
+<h2>${title}</h2>
+
+<radio-group value.two-way="model.selectedValue" data-name="group1">
+    <radio title="Value: 10" value="10"></radio>
+    <radio title="Value: 20" value="20"></radio>
+    <radio title="Value: 30" value="30"></radio>
+</radio-group>
+
+<label>
+    <div>Selected Value</div>
+    <input value.two-way="model.selectedValue">
+</label>
