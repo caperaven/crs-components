@@ -11,9 +11,14 @@ export async function createNormalizedPlane(width = 1, height = 1, material = nu
     return result;
 }
 
-export async function createRegularMesh(material, segments, radius) {
+export async function createRegularMesh(radius, segments, material, name = "") {
+    if (material == null) {
+        material = await crs.createThreeObject("MeshBasicMaterial");
+    }
+
     const buffer = await crs.createThreeObject("CircleGeometry", radius, segments);
-    return await crs.createThreeObject("Mesh", buffer, material);
+    const mesh = await crs.createThreeObject("Mesh", buffer, material);
+    mesh.name = name;
 }
 
 export async function createCustomUVPlane(width, height, texture, tx1, tx2, ty1, ty2) {

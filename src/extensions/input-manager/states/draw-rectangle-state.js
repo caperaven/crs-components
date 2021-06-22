@@ -5,7 +5,6 @@
 import {BaseState} from "./base-state.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {setMouse} from "./../helpers/pointer-functions.js";
-import {Transformer2D} from "../../../gfx-helpers/transformer2D.js";
 
 export class DrawRectangleState extends BaseState {
     constructor(context) {
@@ -19,13 +18,11 @@ export class DrawRectangleState extends BaseState {
 
     async enter() {
         await super.enter();
-        this._transformer2D = new Transformer2D();
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
     }
 
     async exit() {
         this.element.removeEventListener("pointerdown", this._pointerDownHandler);
-        this._transformer2D = this._transformer2D.dispose();
         await super.exit();
     }
 
@@ -45,6 +42,7 @@ export class DrawRectangleState extends BaseState {
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
         const scale = this.shape.scale.clone();
         this.shape.scale.set(Math.abs(scale.x), Math.abs(scale.y), 1);
+        this.shape = null;
     }
 
     async _pointerMove(event) {

@@ -124,6 +124,7 @@ class TransformGizmoWorker {
             bottomLeft: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_left"),
             bottomRight: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
 
+
             // edges
             top: await createNormalizedPlane(10, 10, clearMaterial, "top"),
             right: await createNormalizedPlane(10, 10, clearMaterial, "right"),

@@ -134,6 +134,7 @@ export class SelectState extends BaseState {
 
         this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
         this._startPoint = null;
+        this.currentShape = null;
     }
 
     /**
