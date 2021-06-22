@@ -6,8 +6,6 @@ import {BaseState} from "./base-state.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {setMouse} from "./../helpers/pointer-functions.js";
 import {Transformer2D} from "../../../gfx-helpers/transformer2D.js";
-import {TransformAnchors} from "../../../gfx-helpers/transform-anchors.js";
-import {TransformAxis} from "../../../gfx-helpers/transform-axis.js";
 
 export class DrawRectangleState extends BaseState {
     constructor(context) {
@@ -45,6 +43,8 @@ export class DrawRectangleState extends BaseState {
     async _pointerUp(event) {
         this.element.removeEventListener("pointerup", this._pointerUpHandler);
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
+        const scale = this.shape.scale.clone();
+        this.shape.scale.set(Math.abs(scale.x), Math.abs(scale.y), 1);
     }
 
     async _pointerMove(event) {
@@ -54,7 +54,6 @@ export class DrawRectangleState extends BaseState {
         const point = await this.getIntersectionPlanePosition();
         const x = point.x - this._startPoint.x;
         const y = point.y - this._startPoint.y;
-        const pos = this.shape.position.clone();
         const cx = x / 2;
         const cy = y / 2;
 
@@ -65,7 +64,7 @@ export class DrawRectangleState extends BaseState {
     }
 
     async _createRectangle(startPoint) {
-        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0xff0000});
+        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x000000});
         this.shape = await createNormalizedPlane(1, 1, material, "rect");
         this.shape.position.set(startPoint.x, startPoint.y, 0);
         this._context.canvas.scene.add(this.shape);

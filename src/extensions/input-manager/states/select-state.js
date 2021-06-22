@@ -111,13 +111,13 @@ export class SelectState extends BaseState {
         await this._setSelected();
 
         const isFrozen = this._selected?.object.isFrozen == true;
-        const mesh = isFrozen === true ? null : this._selected?.object;
+        this.currentShape = isFrozen === true ? null : this._selected?.object;
 
         await this.gizmo.performAction({
-            selected: mesh
+            selected: this.currentShape
         })
 
-        await this._manageCursorEvents(mesh != null);
+        await this._manageCursorEvents(this.currentShape != null);
     }
 
     /**
@@ -128,6 +128,10 @@ export class SelectState extends BaseState {
      */
     async _pointerUp(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
+
+        const scale = this.currentShape.scale.clone();
+        this.currentShape.scale.set(Math.abs(scale.x), Math.abs(scale.y), 1);
+
         this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
         this._startPoint = null;
     }
