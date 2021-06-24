@@ -19,6 +19,7 @@ export async function createRegularMesh(radius, segments, material, name = "") {
     const buffer = await crs.createThreeObject("CircleGeometry", radius, segments);
     const mesh = await crs.createThreeObject("Mesh", buffer, material);
     mesh.name = name;
+    return mesh;
 }
 
 export async function createCustomUVPlane(width, height, texture, tx1, tx2, ty1, ty2) {

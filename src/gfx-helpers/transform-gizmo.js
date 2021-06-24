@@ -2,9 +2,12 @@ import {createNormalizedPlane} from "../threejs-helpers/shape-factory.js";
 import {TransformAnchors} from "./transform-anchors.js";
 import {TransformAxis} from "./transform-axis.js";
 
-const GIZMO_Z   = 1.5;
-const STROKE_Z  = 1.6;
-const CORNER_Z  = 1.7;
+const GIZMO_Z       = 1.5;
+const STROKE_Z      = 1.6;
+const CORNER_Z      = 1.7;
+
+const CORNER_SIZE   = 10;
+const EDGE_SIZE     = 20;
 
 class TransformGizmoWorker {
     constructor(parent) {
@@ -94,7 +97,7 @@ class TransformGizmoWorker {
     }
 
     async _applyAABBStrokes(aabb, px, py, width, height, cx, cy) {
-        const size = 3;
+        const size = 10;
         this._parts.top.position.set(px - aabb.min.x - cx, py - aabb.min.y, STROKE_Z);
         this._parts.top.scale.set(width, size, 1);
 
@@ -115,22 +118,21 @@ class TransformGizmoWorker {
 
     async _buildUI() {
         const cornerMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0xababab});
-        const clearMaterial = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00, transparent: true, opacity: 0});
+        const clearMaterial  = await crs.createThreeObject("MeshBasicMaterial", {color: 0x00ff00, transparent: true, opacity: 0});
 
         this._parts = {
             // corners
-            topLeft: await createNormalizedPlane(10, 10, cornerMaterial, "top_left"),
-            topRight: await createNormalizedPlane(10, 10, cornerMaterial, "top_right"),
-            bottomLeft: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_left"),
-            bottomRight: await createNormalizedPlane(10, 10, cornerMaterial, "bottom_right"),
-
+            topLeft     : await createNormalizedPlane(CORNER_SIZE, CORNER_SIZE, cornerMaterial, "top_left"),
+            topRight    : await createNormalizedPlane(CORNER_SIZE, CORNER_SIZE, cornerMaterial, "top_right"),
+            bottomLeft  : await createNormalizedPlane(CORNER_SIZE, CORNER_SIZE, cornerMaterial, "bottom_left"),
+            bottomRight : await createNormalizedPlane(CORNER_SIZE, CORNER_SIZE, cornerMaterial, "bottom_right"),
 
             // edges
-            top: await createNormalizedPlane(10, 10, clearMaterial, "top"),
-            right: await createNormalizedPlane(10, 10, clearMaterial, "right"),
-            bottom: await createNormalizedPlane(5, 10, clearMaterial, "bottom"),
-            left: await createNormalizedPlane(10, 10, clearMaterial, "left"),
-            center: await createNormalizedPlane(5, 5, clearMaterial, "center")
+            top     : await createNormalizedPlane(EDGE_SIZE, EDGE_SIZE, clearMaterial, "top"),
+            right   : await createNormalizedPlane(EDGE_SIZE, EDGE_SIZE, clearMaterial, "right"),
+            bottom  : await createNormalizedPlane(EDGE_SIZE, EDGE_SIZE, clearMaterial, "bottom"),
+            left    : await createNormalizedPlane(EDGE_SIZE, EDGE_SIZE, clearMaterial, "left"),
+            center  : await createNormalizedPlane(5, 5, clearMaterial, "center")
         }
 
         // create a group and add the parts to the group

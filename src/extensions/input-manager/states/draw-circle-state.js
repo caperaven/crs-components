@@ -5,7 +5,7 @@
 
 import {BaseState} from "./base-state.js";
 import {setMouse} from "./../helpers/pointer-functions.js";
-import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
+import {createRegularMesh} from "../../../threejs-helpers/shape-factory.js";
 
 export class DrawCircleState extends BaseState {
     constructor(context) {
@@ -53,19 +53,21 @@ export class DrawCircleState extends BaseState {
         const point = await this.getIntersectionPlanePosition();
         const x = point.x - this._startPoint.x;
         const y = point.y - this._startPoint.y;
-        const cx = x / 2;
-        const cy = y / 2;
+        const scale = x > y ? x : y;
+        const c = scale / 2;
 
-        this.shape.scale.set(x, y, 1);
-        this.shape.position.set(this._startPoint.x + cx, this._startPoint.y + cy, 0);
+        this.shape.scale.set(scale, scale, 1);
+        this.shape.position.set(this._startPoint.x + c, this._startPoint.y - c, 0);
 
         return this._render();
     }
 
     async _createCircle(startPoint) {
         const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x000000});
-        this.shape = await createNormalizedPlane(1, 1, material, "rect");
+        this.shape = await createRegularMesh(1, 5, material, "rect");
         this.shape.position.set(startPoint.x, startPoint.y, 0);
         this._context.canvas.scene.add(this.shape);
+
+        //createRegularMesh(radius, segments, material, name = "")
     }
 }
