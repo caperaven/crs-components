@@ -33,6 +33,7 @@ class Publish {
         await instance.copyRecursiveMinified("./src/components/lib/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/components/main-menu/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/components/lists/*.js", null,"./src/");
+        await instance.copyRecursiveMinified("./src/components/radio-group/*.js", null,"./src/");
         await instance.copyRecursiveMinified("./src/graphics-providers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/graphics-helpers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/extensions/**/*.js", null, "./src/");

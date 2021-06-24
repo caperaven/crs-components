@@ -60,9 +60,10 @@ export class RadioGroup extends HTMLElement {
     }
 
     async valueChanged(newValue) {
-        this._current?.removeAttribute("checked");
-        this._current = this.querySelector(`[value="${newValue}"]`);
-        this._current?.setAttribute("checked", "checked");
+        const newChecked = this.querySelector(`[value="${newValue}"]`);
+        if (newChecked != null) {
+            newChecked.checked = true;
+        }
     }
 }
 
