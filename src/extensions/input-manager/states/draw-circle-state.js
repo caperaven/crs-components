@@ -64,10 +64,8 @@ export class DrawCircleState extends BaseState {
 
     async _createCircle(startPoint) {
         const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x000000});
-        this.shape = await createRegularMesh(1, 5, material, "rect");
+        this.shape = await createRegularMesh(1, 32, material, "rect");
         this.shape.position.set(startPoint.x, startPoint.y, 0);
         this._context.canvas.scene.add(this.shape);
-
-        //createRegularMesh(radius, segments, material, name = "")
     }
 }
