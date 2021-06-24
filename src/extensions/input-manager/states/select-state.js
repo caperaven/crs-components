@@ -19,6 +19,14 @@ export class SelectState extends BaseState {
         return this._context.canvas._transformGizmo;
     }
 
+    get currentShape() {
+        return this._currentShape;
+    }
+
+    set currentShape(newValue) {
+        this._currentShape = newValue;
+    }
+
     constructor(context) {
         super(context, "select");
         this._moveActions = {};
@@ -129,8 +137,10 @@ export class SelectState extends BaseState {
     async _pointerUp(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
 
-        const scale = this.currentShape.scale.clone();
-        this.currentShape.scale.set(Math.abs(scale.x), Math.abs(scale.y), 1);
+        if (this.currentShape && this.currentState == SelectStates.GIZMO_RESIZE) {
+            const scale = this.currentShape.scale.clone();
+            this.currentShape.scale.set(Math.abs(scale.x), Math.abs(scale.y), 1);
+        }
 
         this.currentState = this._selected == null ? SelectStates.SELECT : SelectStates.GIZMO_HOVER;
         this._startPoint = null;

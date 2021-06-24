@@ -2,9 +2,9 @@ import {createNormalizedPlane} from "../threejs-helpers/shape-factory.js";
 import {TransformAnchors} from "./transform-anchors.js";
 import {TransformAxis} from "./transform-axis.js";
 
-const GIZMO_Z = 1.5;
-const STROKE_Z = 1.6;
-const CORNER_Z = 1.7;
+const GIZMO_Z   = 1.5;
+const STROKE_Z  = 1.6;
+const CORNER_Z  = 1.7;
 
 class TransformGizmoWorker {
     constructor(parent) {
@@ -28,9 +28,9 @@ class TransformGizmoWorker {
     }
 
     dispose() {
-        this._partsGroup = null;
-        this._parts = null;
-        this._parent = null;
+        this._partsGroup    = null;
+        this._parts         = null;
+        this._parent        = null;
     }
 
     async performAction(args) {
