@@ -22,14 +22,17 @@ export default class MeshLineView extends crsbinding.classes.ViewBase {
         this.points = [];
         this.points.push(-5, 0, 0, 0, 1, 0,  5, 0, 0);
 
+        const texture = await this.loadImage();
+        const blending = await crs.getThreeConstant("NormalBlending");
         const material = await MeshLineMaterial.new({
-                useMap:         false ,
-                color:          await crs.createColor("#ff0090"),
-                useAlphaMap:    1,
-                opacity:        0.5,
-                resolution:     { x: this.canvas.width, y: this.canvas.height },
+                useMap: true,
+                map: texture,
+                color: await crs.createColor("#ff0090"),
+                resolution: { x: this.canvas.width, y: this.canvas.height },
                 sizeAttenuation:false,
-                lineWidth:      20
+                blending: blending,
+                lineWidth: 20,
+                transparent: true,
             })
 
         const geometry = await MeshLine.new(material);
@@ -39,6 +42,17 @@ export default class MeshLineView extends crsbinding.classes.ViewBase {
 
         this.canvas.scene.add(this.mesh);
         this.canvas.render();
+    }
+
+    loadImage() {
+        return new Promise(async resolve => {
+            const loader = await crs.createThreeObject("TextureLoader");
+            loader.load('/app/mesh-line/images/stroke.png', async texture => {
+                const strokeTexture = texture;
+                strokeTexture.wrapS = strokeTexture.wrapT = await crs.getThreeConstant("RepeatWrapping");
+                resolve(strokeTexture);
+            });
+        })
     }
 
     animate() {
