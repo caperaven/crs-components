@@ -1,62 +1,54 @@
-import {MeshLineMaterial} from "../../third-party/three/external/meshes/mesh-line/mesh-line-material.js";
+import "../../../src/gfx-components/perspective-canvas/perspective-canvas.js";
+import {MeshLine} from "./../../third-party/three/external/meshes/mesh-line/mesh-line.js";
+import {MeshLineMaterial} from "./../../third-party/three/external/meshes/mesh-line/mesh-line-material.js";
 
-const params = {
-    curves             : true,
-    circles            : false,
-    amount             : 100,
-    lineWidth          : 10,
-    dashArray          : 0.6,
-    dashOffset         : 0,
-    dashRatio          : 0.5,
-    taper              : 'parabolic',
-    strokes            : false,
-    sizeAttenuation    : false,
-    animateWidth       : false,
-    spread             : false,
-    autoRotate         : true,
-    autoUpdate         : true,
-    animateVisibility  : false,
-    animateDashOffset  : false
-}
-
-export default class MeshLine extends crsbinding.classes.ViewBase {
+export default class MeshLineView extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
-        this.resolution = null; // canvas width and height
-        await this.initialize();
+        this.canvas = this.element.querySelector("perspective-canvas");
+        //this.animateHandler = this.animate.bind(this);
+
+        const ready = async () => {
+            this.canvas.removeEventListener("ready", ready);
+            this.canvas.camera.position.z = 5;
+            await this.initialize();
+            //this.animate();
+        }
+
+        this.canvas.addEventListener("ready", ready);
     }
 
     async initialize() {
-        const parameters = {
-            map             : await this.loadTexture(),
-            useMap          : params.strokes,
-            color           : await crs.createColor("#ffbb00"),
-            opacity         : 1,
-            dashArray       : params.dashArray,
-            dashOffset      : params.dashOffset,
-            dashRatio       : params.dashRatio,
-            resolution      : this.resolution,
-            sizeAttenuation : params.sizeAttenuation,
-            lineWidth       : params.lineWidth,
-            depthWrite      : false,
-            depthTest       : !params.strokes,
-            alphaTest       : params.strokes ? .5 : 0,
-            transparent     : true,
-            side            : await crs.getThreeConstant("DoubleSide")
-        }
+        this.points = [];
+        this.points.push(-5, 0, 0, 0, 1, 0,  5, 0, 0);
 
-        this.material = await MeshLineMaterial.new(parameters);
+        const material = await MeshLineMaterial.new({
+                useMap:         false ,
+                color:          await crs.createColor("#ff0090"),
+                opacity:        1,
+                resolution:     { x: this.canvas.width, y: this.canvas.height },
+                sizeAttenuation:false,
+                lineWidth:      10
+            })
 
-        console.log(this.material);
+        const geometry = await MeshLine.new(material);
+        await geometry.setPoints(this.points);
+
+        const mesh = await crs.createThreeObject("Mesh", geometry, material);
+
+        this.canvas.scene.add(mesh);
+        this.canvas.render();
     }
 
-    loadTexture() {
-        return new Promise(async resolve => {
-            const loader = await crs.createThreeObject("TextureLoader");
-
-            loader.load( '/app/mesh-line/images/stroke.png', function( texture ) {
-                resolve(texture);
-            });
-        })
-    }
+    // animate() {
+    //     requestAnimationFrame(this.animateHandler);
+    //     let point = this.mesh.geometry.attributes.position.array[4];
+    //     point += 0.01;
+    //     if (point > 4) {
+    //         point = -4;
+    //     }
+    //     this.mesh.geometry.attributes.position.array[4] = point;
+    //     this.mesh.geometry.attributes.position.needsUpdate = true;
+    //     this.canvas.render();
+    // }
 }

@@ -22,23 +22,26 @@ export class MeshLine extends BufferGeometry {
         this.setPoints(newValue, this.widthCallback);
     }
 
-    static async new() {
-        this.type = 'MeshLine'
-        this.positions = [];
-        this.previous = [];
-        this.next = [];
-        this.side = [];
-        this.width = [];
-        this.indices_array = [];
-        this.uvs = [];
-        this.counters = [];
-        this._points = [];
-        this._geom = null;
-        this.widthCallback = null;
-        this.isMeshLine = true
+    static async new(material) {
+        const result          = new MeshLine();
+        result.type           = 'MeshLine'
+        result.positions      = [];
+        result.previous       = [];
+        result.next           = [];
+        result.side           = [];
+        result.width          = [];
+        result.indices_array  = [];
+        result.uvs            = [];
+        result.counters       = [];
+        result._points        = [];
+        result._geom          = null;
+        result.widthCallback  = null;
+        result.isMeshLine     = true
+        result.material       = material;
 
         // Used to raycast
-        this.matrixWorld = await crs.createThreeObject("Matrix4");
+        result.matrixWorld = await crs.createThreeObject("Matrix4");
+        return result;
     }
 
     setMatrixWorld = function (matrixWorld) {
@@ -56,7 +59,7 @@ export class MeshLine extends BufferGeometry {
         }
     }
 
-    async setPoints(points, wcb) {
+    async setPoints(points, widthCallback) {
         if (!(points instanceof Float32Array) && !(points instanceof Array)) {
             console.error(
                 "ERROR: The BufferArray of points is not instancied correctly."
@@ -67,7 +70,7 @@ export class MeshLine extends BufferGeometry {
         // as the points are mutated we store them
         // for later retreival when necessary (declaritive architectures)
         this._points        = points;
-        this.widthCallback  = wcb;
+        this.widthCallback  = widthCallback;
         this.positions      = [];
         this.counters       = [];
 

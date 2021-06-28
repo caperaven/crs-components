@@ -84,7 +84,12 @@ export async function loadThreeModules(root) {
  * @returns {Promise<*>}
  */
 globalThis.crs.createThreeObject = async (className, ...args) => {
-    return await crs.modules.getInstanceOf(className, className, ...args);
+    if (className.indexOf(".") == -1) {
+        return await crs.modules.getInstanceOf(className, className, ...args);
+    }
+
+    const parts = className.split(".");
+    return await crs.modules.getInstanceOf(parts[0], parts[1], ...args);
 }
 
 /**
