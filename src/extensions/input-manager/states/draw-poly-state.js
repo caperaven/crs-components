@@ -3,6 +3,10 @@
  */
 
 import {BaseState} from "./base-state.js";
+import {setMouse} from "../helpers/pointer-functions.js";
+import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
+
+const POINT = "point";
 
 export class DrawPolyState extends BaseState {
     constructor(context) {
@@ -22,15 +26,22 @@ export class DrawPolyState extends BaseState {
     }
 
     async _pointerDown(event) {
-
+        await setMouse(this._mouse, event, this._context.canvasRect);
     }
 
     async _pointerUp(event) {
-
+        await setMouse(this._mouse, event, this._context.canvasRect);
     }
 
     async _pointerMove(event) {
-
+        await setMouse(this._mouse, event, this._context.canvasRect);
     }
 
+    async _createPoint(startPoint) {
+        const material = await crs.createThreeObject("MeshBasicMaterial", {color: 0x000000});
+        this.shape = await createNormalizedPlane(10, 10, material, "rect");
+        this.shape.type = POINT;
+        this.shape.position.set(startPoint.x, startPoint.y, 0);
+        this._context.canvas.scene.add(this.shape);
+    }
 }

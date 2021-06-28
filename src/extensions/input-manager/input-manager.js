@@ -7,12 +7,12 @@ import {DrawImageState} from "./states/draw-image-state.js";
 import {TransformGizmo} from "../../gfx-helpers/transform-gizmo.js";
 
 export const InputStates = Object.freeze({
-    SELECT: "select",
-    NAVIGATE: "navigate",
-    DRAW_RECTANGLE: "draw_rectangle",
-    DRAW_CIRCLE: "draw_circle",
-    DRAW_POLYGON: "draw_polygon",
-    DRAW_IMAGE: "draw_image"
+    SELECT          : "select",
+    NAVIGATE        : "navigate",
+    DRAW_RECTANGLE  : "draw_rectangle",
+    DRAW_CIRCLE     : "draw_circle",
+    DRAW_POLYGON    : "draw_polygon",
+    DRAW_IMAGE      : "draw_image"
 });
 
 class InputManagerWorker {
