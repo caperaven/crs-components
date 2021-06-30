@@ -98,6 +98,11 @@
       "title": "Mesh Line",
       "hash": "#mesh-line",
       "view": "mesh-line"
+    },
+    {
+      "title": "Visualizations",
+      "hash": "#visualizations",
+      "view": "visualizations"
     }
   ]
 }

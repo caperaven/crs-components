@@ -1,0 +1,46 @@
+<style>
+    percent-bar {
+        --height: 2rem;
+        --padding: 0.5rem;
+        --cl-background: #D8D8D8;
+        --cl-bar: #9B59B6;
+        --cl-title: white;
+        --cl-value: black;
+        --barwidth: 0px;
+        --value: "10";
+
+        display: block;
+        position: relative;
+        height: var(--height);
+        text-align: left;
+        padding: 0 0.5rem;
+        background: var(--cl-background);
+        color: var(--cl-title);
+    }
+
+    percent-bar:before {
+        content: attr(title);
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--barwidth);
+        padding-left: var(--padding);
+        background: var(--cl-bar);
+        line-height: var(--height);
+        vertical-align: middle;
+    }
+
+    percent-bar:after {
+        content: attr(value);
+        height: var(--height);
+        color: var(--cl-value);
+        display: block;
+        position: absolute;
+        top: 0;
+        right: var(--padding);
+        line-height: var(--height);
+        vertical-align: middle;
+    }
+</style>
