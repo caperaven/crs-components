@@ -1,5 +1,6 @@
 import "./../../src/visualization/percent-bar/percent-bar.js";
 import "./../../src/visualization/percent-bar-group/percent-bar-group.js";
+import "./../../src/visualization/pass-fail-card/pass-fail-card.js";
 
 export default class Visualizations extends crsbinding.classes.ViewBase {
     async connectedCallback() {

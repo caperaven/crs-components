@@ -1,0 +1,33 @@
+<style>
+    pass-fail-card {
+        display: block;
+        height: max-content;
+    }
+
+    pass-fail-card h2 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        display: inline-block;
+    }
+
+    pass-fail-card span {
+        font-weight: bolder;
+        font-size: 1.2rem;
+    }
+
+    pass-fail-card [data-id="pass"] {
+        --cl-bar: #2ECC71;
+    }
+
+    pass-fail-card [data-id="fail"] {
+        --cl-bar: #E34B3B;
+    }
+</style>
+
+<h2></h2>
+<span></span>
+
+<percent-bar data-id="pass"></percent-bar>
+<percent-bar data-id="fail"></percent-bar>
