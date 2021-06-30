@@ -21,12 +21,22 @@ class PassFailCard extends HTMLElement {
 
         headElement.textContent   = this.dataset.title || "";
         totalElement.textContent  = total;
+
         passElement.dataset.title = this.dataset.passtext || "Similar";
         passElement.dataset.value = passValue;
         passElement.dataset.max   = total;
+
+        const passColor = passValue === 0 ? "transparent" : "#2ECC71";
+        passElement.dataset.barcolor = passColor;
+        passElement.style.setProperty("--cl-bar", passColor, "important");
+
         failElement.dataset.title = this.dataset.failtext || "Different";
         failElement.dataset.value = failValue;
         failElement.dataset.max   = total;
+
+        const failColor = failValue === 0 ? "transparent" : "#E34B3B";
+        failElement.dataset.barcolor = failColor;
+        failElement.style.setProperty("--cl-bar", failColor, "important");
     }
 }
 

@@ -1,6 +1,7 @@
 import "./../../src/visualization/percent-bar/percent-bar.js";
 import "./../../src/visualization/percent-bar-group/percent-bar-group.js";
 import "./../../src/visualization/pass-fail-card/pass-fail-card.js";
+import "./../../src/visualization/pass-fail-group/pass-fail-group.js";
 
 export default class Visualizations extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -22,6 +23,24 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
                 title: "Item 3",
                 value: 50,
                 color: "#FF0090"
+            }
+        ]);
+
+        this.setProperty("spares", [
+            {
+                title: "Disk Breakes",
+                pass: 6,
+                fail: 3
+            },
+            {
+                title: "Rim Breaks",
+                pass: 2,
+                fail: 8
+            },
+            {
+                title: "Air Breaks",
+                pass: 0,
+                fail: 15
             }
         ])
     }
