@@ -1,5 +1,5 @@
 export class PercentBar extends HTMLElement {
-    static get observedAttributes() { return ["value", "max"]; }
+    static get observedAttributes() { return ["data-value", "data-max"]; }
 
     async connectedCallback() {
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
@@ -16,14 +16,16 @@ export class PercentBar extends HTMLElement {
 
     update(width) {
         this.width = width || this.getBoundingClientRect().width;
-        const max = Number(this.getAttribute("max"));
-        const value = Number(this.getAttribute("value"));
+        const max = Number(this.dataset.max);
+        const value = Number(this.dataset.value);
         const offset = this.width / max;
         const barWidth = offset * value;
         const color = this.width > 0 ? this._barColor : "transparent";
         this.style.setProperty("--barwidth", `${barWidth}px`);
         this.style.setProperty("--cl-bar", color);
         this.style.setProperty("--value", `(${value})`);
+        this.setAttribute("aria-label", `${this.dataset.title} ${value}`);
+        this.setAttribute("tabindex", 0);
     }
 
     attributeChangedCallback(name, oldValue, newValue) {

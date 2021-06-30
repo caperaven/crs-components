@@ -51,6 +51,7 @@ export async function reverseFocus(index) {
  * @returns {Promise<void>}
  */
 export async function setFocus(index) {
+    if (this.children[index] == null) return;
     if (this.children[index].dataset.tabstop == "false") {
         return this._direction == 1 ? await this.gotoNext() : await this.gotoPrevious();
     }
