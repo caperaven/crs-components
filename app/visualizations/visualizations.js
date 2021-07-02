@@ -2,6 +2,7 @@ import "./../../src/visualization/percent-bar/percent-bar.js";
 import "./../../src/visualization/percent-bar-group/percent-bar-group.js";
 import "./../../src/visualization/pass-fail-card/pass-fail-card.js";
 import "./../../src/visualization/pass-fail-group/pass-fail-group.js";
+import "./../../src/visualization/pie-chart/pie-chart.js";
 
 export default class Visualizations extends crsbinding.classes.ViewBase {
     async connectedCallback() {

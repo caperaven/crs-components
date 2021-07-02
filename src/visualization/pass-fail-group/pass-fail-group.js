@@ -20,6 +20,10 @@ class PassFailGroup extends HTMLElement {
         })
     }
 
+    async disconnectedCallback() {
+        this.data = null;
+    }
+
     async _clearItems() {
         const ul = this.querySelector("ul");
         while(ul.children.length > 0) {

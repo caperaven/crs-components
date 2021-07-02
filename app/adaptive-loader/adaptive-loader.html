@@ -1,0 +1,27 @@
+<style>
+    adaptive-loader {
+        --width: 1024px;
+        display: block;
+        width: var(--width);
+        border: solid 1px silver;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<label>
+    <div>Width</div>
+    <input type="range" min="600" max="1024" value="1024" change.call="changeWidth($event)"/>
+</label>
+
+<adaptive-loader
+        data-context.attr="contextId"
+        data-folder.attr="folder"
+        data-desktop="views/desktop.html"
+        data-mobile="views/mobile.html">
+</adaptive-loader>
+
+<adaptive-loader
+        data-context.attr="contextId"
+        data-schema="true">
+</adaptive-loader>

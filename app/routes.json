@@ -103,6 +103,11 @@
       "title": "Visualizations",
       "hash": "#visualizations",
       "view": "visualizations"
+    },
+    {
+      "title": "Adaptive Loader",
+      "hash": "#adaptive-loader",
+      "view": "adaptive-loader"
     }
   ]
 }
