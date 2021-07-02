@@ -1,1 +1,23 @@
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 32px 200px 100px;
+    }
+
+    .header {
+        background: silver;
+    }
+</style>
 <h3>Desktop</h3>
+
+<div class="grid">
+    <div class="header">ID</div>
+    <div class="header">TITLE</div>
+    <div class="header">VALUE</div>
+
+    <template for.once="record of data">
+        <div>${record.id}</div>
+        <div>${record.title}</div>
+        <div>${record.value}</div>
+    </template>
+</div>

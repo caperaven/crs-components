@@ -47,7 +47,7 @@ class AdaptiveLoader extends HTMLElement {
             }
 
             this.innerHTML = html;
-            await crsbinding.parsers.parseElements(this.children, this.dataset.context, {folder: this.dataset.folder});
+            await crsbinding.parsers.parseElements(this.children, Number(this.dataset.context), {folder: this.dataset.folder});
             this._isBusy = false;
         }
     }

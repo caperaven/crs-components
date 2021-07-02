@@ -6,7 +6,18 @@ export default class AdaptiveLoaderView extends crsbinding.classes.ViewBase {
     }
 
     preLoad() {
+        const data = [];
+
+        for (let i = 0; i < 10; i++) {
+            data.push({
+                id: i,
+                title: `Item ${i}`,
+                value: i + 10
+            })
+        }
+
         this.setProperty("folder", import.meta.url.replace("adaptive-loader.js", ""));
+        this.setProperty("data", data);
     }
 
     changeWidth(event) {
