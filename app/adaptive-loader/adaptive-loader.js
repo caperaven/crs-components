@@ -3,6 +3,24 @@ import "./../../src/components/adaptive-loader/adaptive-loader.js";
 export default class AdaptiveLoaderView extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
+        this._getSchemaHandler = this._getSchema.bind(this);
+        await crsbinding.events.emitter.on("adaptive-schema", this._getSchemaHandler);
+
+        crsbinding.events.emitter.postMessage("#schema-loader", {
+            action :"resize",
+            width  : "1024"
+        });
+
+
+        postMessage("all", {
+            action: "load",
+            width: "1024"
+        })
+    }
+
+    async disconnectedCallback() {
+        this._getSchemaHandler = this._getSchema.bind(this);
+        await crsbinding.events.emitter.remove("adaptive-schema", this._getSchemaHandler)
     }
 
     preLoad() {
@@ -25,5 +43,11 @@ export default class AdaptiveLoaderView extends crsbinding.classes.ViewBase {
             action :"resize",
             width  : event.target.value
         });
+    }
+
+    async _getSchema(event) {
+        const url = this.getProperty("folder");
+        const html = await fetch(`${url}/views/${event.device}.html`).then(result => result.text());
+        event.callback(html);
     }
 }

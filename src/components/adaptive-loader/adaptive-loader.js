@@ -7,8 +7,6 @@ const device = Object.freeze({
 });
 
 class AdaptiveLoader extends HTMLElement {
-    static get observedAttributes() { return ["data-folder", "data-schema"]; }
-
     get width() {
         return this._width;
     }
@@ -16,6 +14,14 @@ class AdaptiveLoader extends HTMLElement {
     set width(newValue) {
         this._width = newValue;
         this.style.width = `${newValue}px`;
+    }
+
+    connectedCallback() {
+        requestAnimationFrame(async () => {
+            await this._loadContent();
+            this.isReady = true;
+            this.dispatchEvent(new CustomEvent("isReady"));
+        })
     }
 
     disconnectedCallback() {
@@ -41,14 +47,16 @@ class AdaptiveLoader extends HTMLElement {
 
             let html = this.cache?.[this.target];
             if (html == null) {
-                html = this.dataset.schema === "true" ? await this._fromSchema() : await this._fromHTML();
+                html = this.dataset.schema != null ? await this._fromSchema() : await this._fromHTML();
                 this.cache = this.cache || {};
                 this.cache[this.target] = html;
             }
 
             this.innerHTML = html;
-            await crsbinding.parsers.parseElements(this.children, Number(this.dataset.context), {folder: this.dataset.folder});
+            const contextId = Number(this.dataset.context);
+            await crsbinding.parsers.parseElements(this.children, contextId, {folder: this.dataset.folder});
             this._isBusy = false;
+            await crsbinding.data.updateUI(contextId, this.dataset.property);
         }
     }
 
@@ -89,10 +97,6 @@ class AdaptiveLoader extends HTMLElement {
         if (args.action === "resize") {
             await this._loadContent();
         }
-    }
-
-    attributeChangedCallback() {
-        this._loadContent().catch(error => console.error(error));
     }
 }
 

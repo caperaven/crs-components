@@ -25,6 +25,7 @@
         "babel-jest": "^24.9.0",
         "crs-binding": "0.0.231",
         "crs-router": "0.0.75",
+        "d3": "^7.0.0",
         "glob": "^7.1.4",
         "html-minifier": "^4.0.0",
         "jest": "^24.9.0",
@@ -40,6 +41,7 @@
         "crs-modules": "^1.0.15",
         "crs-schema": "0.0.46",
         "crs-state-machine": "0.0.22",
+        "rollup-plugin-terser": "^7.0.2",
         "svg-mesh-3d": "^1.1.0"
     }
 }
