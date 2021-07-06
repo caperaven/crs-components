@@ -45,4 +45,15 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
             }
         ])
     }
+
+    add() {
+        const values = this.getProperty("data");
+        values.push({
+            title: "Item 4",
+            value: 60,
+            color: "red"
+        })
+
+        crsbinding.data.updateUI(this, "data");
+    }
 }

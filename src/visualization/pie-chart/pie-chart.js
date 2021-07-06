@@ -50,6 +50,7 @@ class PieChart extends HTMLElement {
         const radius = Math.min(width, height) / 2 - margin;
 
         const svgElement = this.querySelector("svg");
+        svgElement.innerHTML = "";
         const svg = select(svgElement)
             .attr("width", width)
             .attr("height", height)
