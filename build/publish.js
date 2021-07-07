@@ -22,6 +22,7 @@ class Publish {
         await instance.copyMinified("./src/svg-paths.js");
         await instance.copyMinified("./src/threejs-paths.js");
 
+        await instance.copyMinified("./src/components/adaptive-loader/adaptive-loader.js", "components/adaptive-loader/");
         await instance.copyMinified("./src/components/html-to-text/html-to-text.js", "components/html-to-text/");
         await instance.copyMinified("./src/components/monaco-editor/monaco-editor.js", "components/monaco-editor/");
         await instance.copyFiles("./src/components/monaco-editor/monaco-editor.html", "components/monaco-editor/");
@@ -38,6 +39,17 @@ class Publish {
         await instance.copyRecursiveMinified("./src/graphics-helpers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/extensions/**/*.js", null, "./src/");
 
+        // Visualizations
+        await instance.copyRecursiveMinified("./src/visualization/pass-fail-card/*.js", null,"./src/");
+        await instance.copyFiles("./src/visualization/pass-fail-card/pass-fail-card.html", "visualization/pass-fail-card/");
+        await instance.copyRecursiveMinified("./src/visualization/pass-fail-group/*.js", null,"./src/");
+        await instance.copyFiles("./src/visualization/pass-fail-group/pass-fail-group.html", "visualization/pass-fail-group/");
+        await instance.copyRecursiveMinified("./src/visualization/percent-bar/*.js", null,"./src/");
+        await instance.copyFiles("./src/visualization/percent-bar/percent-bar.html", "visualization/percent-bar/");
+        await instance.copyRecursiveMinified("./src/visualization/percent-bar-group/*.js", null,"./src/");
+        await instance.copyFiles("./src/visualization/percent-bar-group/percent-bar-group.html", "visualization/percent-bar-group/");
+        await instance.copyRecursiveMinified("./src/visualization/pie-chart/*.js", null,"./src/");
+        await instance.copyFiles("./src/visualization/pie-chart/pie-chart.html", "visualization/pie-chart/");
         await instance.copyMinified("./src/graphics-providers/managers/texture-manager.js");
 
         await instance.saveCommands();
@@ -69,8 +81,22 @@ class Publish {
         for (let file of files) {
             const target = folder != null ? `./publish/${folder}/` : `./publish/`;
             const fileName = path.basename(file);
+            const ext = path.extname(file);
+
             this.initFolder(target);
-            fs.copyFileSync(file, `${target}/${fileName}`);
+
+            if (ext == ".html") {
+                let html = fs.readFileSync(file, "utf8");
+                html = htmlMinifi(html, {
+                    minifyCSS: true,
+                    collapseWhitespace: true
+                });
+                fs.writeFileSync(`${target}${fileName}`, html, "utf8");
+            }
+            else {
+                fs.copyFileSync(file, `${target}${fileName}`);
+            }
+
             console.log(`${target}/${fileName}`);
         }
     }
