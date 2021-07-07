@@ -25,6 +25,8 @@ Requirejs is packaged with this library, so you don't need to install it.
 ### Utility
 
 1. [getRandomInt](https://github.com/caperaven/crs-components/blob/master/documents/utility/gerRandomInt.md)
+1. [horizontal key navigation](https://github.com/caperaven/crs-components/blob/master/documents/utility/horizontalKeyNavigation.md)
+1. [vertical key navigation](https://github.com/caperaven/crs-components/blob/master/documents/utility/verticalKeyNavigation.md)
 
 ## Components
 
