@@ -12,18 +12,24 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
     preLoad() {
         this.setProperty("data", [
             {
-                title: "Item 1",
-                value: 30
+                title: "Running",
+                value: 150,
+                color: "#0276C2"
             },
             {
-                title: "Item 2",
-                value: 80,
+                title: "Complete",
+                value: 75,
                 color: "#FFBB00"
             },
             {
-                title: "Item 3",
-                value: 50,
-                color: "#FF0090"
+                title: "Aborted",
+                value: 28,
+                color: "#F97825"
+            },
+            {
+                title: "Cancelled",
+                value: 15,
+                color: "#E00000"
             }
         ]);
 
@@ -44,6 +50,11 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
                 fail: 15
             }
         ])
+
+        this.setProperty("summary", {
+            count: 160,
+            title: "Summary"
+        })
     }
 
     add() {

@@ -7,12 +7,25 @@
         width: 600px;
     }
 
+    pie-chart {
+        display: block;
+        width: 300px;
+    }
+
 </style>
 <h2>${title}</h2>
 
 <h2>Pie Chart</h2>
 
-<pie-chart data.one-way="data"></pie-chart>
+<pie-chart data.one-way="data" summary.one-way="summary" id="demo-pie" data-width="150">
+    <template>
+        <div>
+            <div>${count}</div>
+            <div>${title}</div>
+        </div>
+    </template>
+</pie-chart>
+
 <button click.call="add">Add</button>
 
 <h2>Percent Bar</h2>

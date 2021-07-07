@@ -13,7 +13,22 @@ class PieChart extends HTMLElement {
         }
     }
 
+    get summary() {
+        return this._summary;
+    }
+
+    set summary(newValue) {
+        this._summary = newValue;
+        this._updateSummary(newValue);
+    }
+
     async connectedCallback() {
+        if (this.id == null) throw new Error("pie chart must have an id");
+        const template = this.querySelector("template");
+        if (template != null) {
+            crsbinding.inflationManager.register(this.id, template);
+        }
+
         this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
 
         requestAnimationFrame(() => {
@@ -23,11 +38,15 @@ class PieChart extends HTMLElement {
 
             this.isReady = true;
             this.dispatchEvent(new CustomEvent("isReady"));
-        })
+        });
     }
 
     async disconnectedCallback() {
+        crsbinding.inflationManager.unregister(this.id);
+        this.template = null;
+        this.summaryElement = null;
         delete this._data;
+        delete this._summary;
     }
 
     async _clearItems() {
@@ -44,10 +63,8 @@ class PieChart extends HTMLElement {
     }
 
     async _updateChart(data) {
-        const width = 400;
-        const height = 400;
-        const margin = this.dataset.margin || 16;
-        const radius = Math.min(width, height) / 2 - margin;
+        const width = this.dataset.width || this.dataset.height;
+        const height = width;
 
         const svgElement = this.querySelector("svg");
         svgElement.innerHTML = "";
@@ -57,6 +74,14 @@ class PieChart extends HTMLElement {
             .append("g")
             .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
+        await this._buildPie(svg, data, width, height);
+    }
+
+    async _buildPie(svg, data, width, height) {
+        const margin = this.dataset.margin || 16;
+        const radius = Math.min(width, height) / 2 - margin;
+        const innerRadius = this.dataset.innerradius || radius / 1.5;
+
         const pieShape = pie().value(d => d[1].value);
         const shapeData = pieShape(Object.entries(data));
 
@@ -65,11 +90,9 @@ class PieChart extends HTMLElement {
             .data(shapeData)
             .enter()
             .append("path")
-            .attr("d", arc().innerRadius(0).outerRadius(radius))
+            .attr("d", arc().innerRadius(innerRadius).outerRadius(radius))
             .attr("fill", d => d.data[1].color || this.dataset.color || "blue")
-            .attr("stroke", "black")
-            .style("stroke-width", "2px")
-            .style("opacity", 0.7)
+            .style("opacity", 1)
     }
 
     async _updateList(data) {
@@ -85,12 +108,19 @@ class PieChart extends HTMLElement {
             const title = record[titleField];
             const value = record[valueField];
             const instance = template.content.cloneNode(true);
-            instance.querySelector(".item-color").dataset.color = color;
+            instance.querySelector(".item-color").style.background = color;
             instance.querySelector(".item-text").textContent = title;
             instance.querySelector(".item-value").textContent = value;
             fragment.appendChild(instance);
         }
         ul.appendChild(fragment);
+    }
+
+    async _updateSummary(data) {
+        this.summaryElement = crsbinding.inflationManager.get(this.id, data, this.summaryElement);
+        if (this.summaryElement.parentElement == null) {
+            this.appendChild(this.summaryElement);
+        }
     }
 }
 
