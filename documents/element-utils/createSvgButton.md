@@ -14,3 +14,9 @@ It has the following parameters
 This function is found in "/components/lib/element-utils.js"  
 
 If you are looking something similar to use inside a clickable surface you can use (createSvgImage)[https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createSvgImage.md]
+
+## Example
+
+```js
+const button = await createSvgButton("folder", "folder", false);
+```

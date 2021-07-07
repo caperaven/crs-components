@@ -13,16 +13,32 @@ The css position is set to "fixed".
 1. location (string) - "top", "bottom", "left", "right"
 1. screenPadding (number) - How many pixels from the edge of the screen must the element be.
 
+## Example 
+
+```js
+const parent = document.querySelector(`#parent`);
+const target = document.querySelector("#target");
+await showElementRelativeTo(parent, target, "bottom", 16);
+```
+
 ## Helper functions
 
 This function makes use of other helper functions you can use directly.  
 They are also found in element-utils.js
 Place a defined element left, right, top or bottom of the parent element with the appropriate padding applied.
 
-1. placeLeft
-1. placeRight
-1. placeTop
-1. placeBottom
+```js 
+await placeLeft(parentElement, element, padding);
+```
+```js
+await placeRight(parentElement, element, padding);
+```
+```js
+await placeTop(parentElement, element, padding);
+```
+```js
+await placeBottom(parentElement, element, padding);
+```
    
 The parameters for the above functions are, parentElement, element, padding.  
 See showElementRelativeTo parameters for details.   
@@ -33,3 +49,7 @@ The parameters are:
 
 1. element - element to check
 1. screenPadding - padding to enforce on screen border
+
+```js
+await ensureOnScreen(element, 16);
+```

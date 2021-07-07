@@ -10,9 +10,13 @@ export async function disableChildTabbing(element, childRole) {
     }
 }
 
-export async function createSvgImage(name, className) {
+export async function createSvgImage(name, className = null) {
     const svg = document.createElementNS(xmlns, "svg");
-    svg.classList.add(className);
+
+    if (className != null) {
+        svg.classList.add(className);
+    }
+
     const use = document.createElementNS(xmlns, "use");
     use.setAttribute("href", `#${name}`);
     use.style.pointerEvents = "none";
