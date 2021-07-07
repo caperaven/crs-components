@@ -19,7 +19,6 @@ class PieChart extends HTMLElement {
 
     set summary(newValue) {
         this._summary = newValue;
-        this._updateSummary(newValue);
     }
 
     async connectedCallback() {
@@ -44,7 +43,6 @@ class PieChart extends HTMLElement {
     async disconnectedCallback() {
         crsbinding.inflationManager.unregister(this.id);
         this.template = null;
-        this.summaryElement = null;
         delete this._data;
         delete this._summary;
     }
@@ -70,11 +68,10 @@ class PieChart extends HTMLElement {
         svgElement.innerHTML = "";
         const svg = select(svgElement)
             .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+            .attr("height", height);
 
         await this._buildPie(svg, data, width, height);
+        await this._buildSummary(svg, this.summary, width, height);
     }
 
     async _buildPie(svg, data, width, height) {
@@ -86,6 +83,8 @@ class PieChart extends HTMLElement {
         const shapeData = pieShape(Object.entries(data));
 
         svg
+            .append("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2})`)
             .selectAll("path")
             .data(shapeData)
             .enter()
@@ -93,6 +92,17 @@ class PieChart extends HTMLElement {
             .attr("d", arc().innerRadius(innerRadius).outerRadius(radius))
             .attr("fill", d => d.data[1].color || this.dataset.color || "blue")
             .style("opacity", 1)
+    }
+
+    async _buildSummary(svg, data, width, height) {
+        if (data == null) return;
+        const summaryElement = crsbinding.inflationManager.get(this.id, data).children[0];
+        svg
+            .append("foreignObject")
+            .attr("width", width)
+            .attr("height", height)
+
+        this.querySelector("foreignObject").appendChild(summaryElement);
     }
 
     async _updateList(data) {
@@ -114,13 +124,6 @@ class PieChart extends HTMLElement {
             fragment.appendChild(instance);
         }
         ul.appendChild(fragment);
-    }
-
-    async _updateSummary(data) {
-        this.summaryElement = crsbinding.inflationManager.get(this.id, data, this.summaryElement);
-        if (this.summaryElement.parentElement == null) {
-            this.appendChild(this.summaryElement);
-        }
     }
 }
 
