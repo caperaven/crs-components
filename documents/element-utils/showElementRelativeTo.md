@@ -2,7 +2,6 @@
 
 ## Introduction 
 This function places an element relative to another element.  
-This function is found in "/components/lib/element-utils.js"  
 
 The css position is set to "fixed".
 
@@ -53,3 +52,6 @@ The parameters are:
 ```js
 await ensureOnScreen(element, 16);
 ```
+
+## Location
+"/components/lib/element-utils.js"

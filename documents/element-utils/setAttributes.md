@@ -8,8 +8,6 @@ Parameters are
 1. element (HTMLElement) - the element who's children to affect.
 1. args (object) - attribute and values to set. See example.
 
-This function is found in "/components/lib/element-utils.js"
-
 ## Example
 
 ```js
@@ -23,3 +21,6 @@ await setAttributes(svg, {
     "aria-label": "additional items"
 })
 ```
+
+## Location
+"/components/lib/element-utils.js"

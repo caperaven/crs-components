@@ -11,11 +11,12 @@ Parameters are
 1. element (HTMLElement) - the element who's children to affect.
 1. childRole (string) - the role value to set on the role attribute of the children.
 
-This function is found in "/components/lib/element-utils.js"
-
 ## Example
 
 ```js
 const element = document.querySelector("#target");
 await disableChildTabbing(element, "button");
 ```
+
+## Location
+"/components/lib/element-utils.js"
