@@ -1,4 +1,4 @@
-# gerRandomInt
+# getRandomInt
 
 ## Introduction
 This function generates a random value between min and max values defined.

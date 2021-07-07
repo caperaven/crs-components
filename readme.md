@@ -22,6 +22,10 @@ Requirejs is packaged with this library, so you don't need to install it.
 1. [setAttributes](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/setAttributes.md)
 1. [setStyleProperties](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/setStyleProperties.md)
 
+### Utility
+
+1. [getRandomInt](https://github.com/caperaven/crs-components/blob/master/documents/utility/gerRandomInt.md)
+
 ## Components
 
 1. [html-to-text](https://github.com/caperaven/crs-components/blob/master/documents/components/html-to-text.md)
