@@ -16,6 +16,7 @@ There are two main sections
 1. icons
 
 You can use [rawToGeometry](/documents/3d/rawToGeometry.md) to generate a threejs mesh object using a geometry data object.
+Geometry data was exported from blender using a [python script](https://github.com/caperaven/crs-components/blob/master/blender/export-data.py).
 
 ## Flowchart items
 

@@ -38,6 +38,14 @@ export const schema = {
                 }
             },
             {
+                element: "icon",
+                shape: "fireExtinguisher"
+            },
+            {
+                element: "icon",
+                shape: "fireHose"
+            },
+            {
                 element: "flow-chart",
                 shape: "data"
             },
