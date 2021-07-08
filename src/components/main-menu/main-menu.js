@@ -11,6 +11,8 @@ class MainMenu extends OrderedList {
     }
 
     async setSelection(element) {
+        const selected = this.querySelector("[aria-current]");
+        selected?.removeAttribute("aria-current");
         element.setAttribute("aria-current", "page");
     }
 }

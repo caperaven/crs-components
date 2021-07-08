@@ -30,11 +30,12 @@ Requirejs is packaged with this library, so you don't need to install it.
 
 ## Components
 
-1. [html-to-text](/documents/components/html-to-text.md)
-1. [monaco-editor](/documents/components/monaco-editor.md)
-1. [adaptive loader](/documents/components/adaptive-loader.md)
-1. [lists]()
-1. [radio group]()
+1. [html-to-text](/documents/components/html-to-text.md)  
+1. [monaco-editor](/documents/components/monaco-editor.md)  
+1. [adaptive loader](/documents/components/adaptive-loader.md)  
+1. [lists](/documents/components/lists.md)  
+1. [main menu](/documents/components/main-menu.md)
+1. [radio group](/documents/components/radio-group.md)
 1. [toolbars]()
 
 ## Visualization

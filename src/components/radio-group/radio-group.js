@@ -9,6 +9,7 @@ export class RadioGroup extends HTMLElement {
     }
 
     async connectedCallback() {
+        this.setAttribute("role", "radiogroup");
         crsbinding.dom.enableEvents(this);
         this._changedHandler = this._changed.bind(this);
         const radios = this.querySelectorAll("radio");
