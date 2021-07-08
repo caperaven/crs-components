@@ -38,6 +38,12 @@ class Publish {
         await instance.copyRecursiveMinified("./src/graphics-providers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/graphics-helpers/**/*.js", null, "./src/");
         await instance.copyRecursiveMinified("./src/extensions/**/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/geometry-data/**/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/gfx-helpers/**/*.js", null, "./src/");
+        await instance.copyRecursiveMinified("./src/gfx-providers/**/*.js", null, "./src/");
+
+        await instance.copyRecursiveMinified("./src/gfx-program-components/program-layers/program-layers.js", null, "./src/gfx-program-components/program-layers");
+        await instance.copyFiles("./src/gfx-program-components/program-layers/program-layers.html", null, "./src/gfx-program-components/program-layers");
 
         // Visualizations
         await instance.copyRecursiveMinified("./src/visualization/pass-fail-card/*.js", null,"./src/");
