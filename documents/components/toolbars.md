@@ -61,7 +61,7 @@ The overflow has a class of "back" and "overflow-toolbar-ul" that you can style.
 }
 ```
 
-Similarly it does not ship with the overflow image.
+Similarly, it does not ship with the overflow image.
 You will need to have a svg [symbols collection](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol).
 This collection should have a symbol with id "ellipse"
 

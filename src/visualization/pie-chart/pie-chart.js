@@ -96,7 +96,9 @@ class PieChart extends HTMLElement {
 
     async _buildSummary(svg, data, width, height) {
         if (data == null) return;
-        const summaryElement = crsbinding.inflationManager.get(this.id, data).children[0];
+        const summaryElement = crsbinding.inflationManager.get(this.id, data)?.children[0];
+        if (summaryElement == null) return;
+
         svg
             .append("foreignObject")
             .attr("width", width)

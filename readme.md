@@ -40,11 +40,11 @@ Requirejs is packaged with this library, so you don't need to install it.
 
 ## Visualization
 
-1. [percent bar]()
-1. [pass fail group]()
-1. [pass fail card]()
-1. [percent bar group]()
-1. [pie chart]()
+1. [percent bar](/documents/visualizations/percent-bar.md)
+1. [percent bar group](/documents/visualizations/percent-bar-group.md)
+1. [pass fail card](/documents/visualizations/pass-fail-card.md)
+1. [pass fail group](/documents/visualizations/pass-fail-group.md)
+1. [pie / donut chart](/documents/visualizations/pie-chart.md)
 
 ## Graphics Schema
 1. [getting started](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/01.%20getting-started.md)
