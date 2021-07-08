@@ -8,7 +8,7 @@ export class PercentBarGroup extends HTMLElement {
     set data(newValue) {
         this._data = newValue;
 
-        if (this.isReady == true) {
+        if (this.isReady == true && newValue != null) {
             this._drawItems(newValue);
         }
     }

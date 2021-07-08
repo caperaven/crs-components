@@ -47,12 +47,11 @@ Requirejs is packaged with this library, so you don't need to install it.
 1. [pie / donut chart](/documents/visualizations/pie-chart.md)
 
 ## Graphics Schema
-1. [getting started](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/01.%20getting-started.md)
-1. [layers](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/02.%20layers.md)
-1. [colors, materials and textures](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/03.%20colors%20materials%20and%20textures.md)
+1. [getting started](/documents/graphics-schema/01.%20getting-started.md)
+1. [layers](/documents/graphics-schema/02.%20layers.md)
+1. [colors, materials and textures](/documents/graphics-schema/03.%20colors%20materials%20and%20textures.md)
 1. [program Layers Component]()
 
 ## 3D
-
-1. [geometry data]()
+1. [geometry data](/documents/3d/geometry-data.md)
 1. [raw geometry]()

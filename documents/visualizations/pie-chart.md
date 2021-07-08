@@ -52,3 +52,6 @@ Set the `summary` property of the chart with the data you want to use in the sum
     </template>
 </pie-chart>
 ```
+
+## Location
+/components/visualization/pie-chart/pie-chart.js
