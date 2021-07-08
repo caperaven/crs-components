@@ -54,4 +54,4 @@ Requirejs is packaged with this library, so you don't need to install it.
 
 ## 3D
 1. [geometry data](/documents/3d/geometry-data.md)
-1. [raw geometry](/documents/3d/rawToGeometry.md);
+1. [raw geometry](/documents/3d/rawToGeometry.md)
