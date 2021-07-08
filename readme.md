@@ -14,19 +14,19 @@ Requirejs is packaged with this library, so you don't need to install it.
 
 ### Element Utils
 
-1. [showElementRelativeTo](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/showElementRelativeTo.md)
-1. [createDragCanvas](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createDragCanvas.md)
-1. [createSvgButton](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createSvgButton.md)
-1. [createSvgImage](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createSvgImage.md)
-1. [disableChildTabbing](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/disableChildTabbing.md)
-1. [setAttributes](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/setAttributes.md)
-1. [setStyleProperties](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/setStyleProperties.md)
+1. [showElementRelativeTo](/documents/element-utils/showElementRelativeTo.md)
+1. [createDragCanvas](/documents/element-utils/createDragCanvas.md)
+1. [createSvgButton](/documents/element-utils/createSvgButton.md)
+1. [createSvgImage](/documents/element-utils/createSvgImage.md)
+1. [disableChildTabbing](/documents/element-utils/disableChildTabbing.md)
+1. [setAttributes](/documents/element-utils/setAttributes.md)
+1. [setStyleProperties](/documents/element-utils/setStyleProperties.md)
 
 ### Utility
 
-1. [getRandomInt](https://github.com/caperaven/crs-components/blob/master/documents/utility/gerRandomInt.md)
-1. [horizontal key navigation](https://github.com/caperaven/crs-components/blob/master/documents/utility/horizontalKeyNavigation.md)
-1. [vertical key navigation](https://github.com/caperaven/crs-components/blob/master/documents/utility/verticalKeyNavigation.md)
+1. [getRandomInt](/documents/utility/gerRandomInt.md)
+1. [horizontal key navigation](/documents/utility/horizontalKeyNavigation.md)
+1. [vertical key navigation](/documents/utility/verticalKeyNavigation.md)
 
 ## Components
 
