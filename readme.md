@@ -30,12 +30,28 @@ Requirejs is packaged with this library, so you don't need to install it.
 
 ## Components
 
-1. [html-to-text](https://github.com/caperaven/crs-components/blob/master/documents/components/html-to-text.md)
-1. [monaco-editor](https://github.com/caperaven/crs-components/blob/master/documents/components/monaco-editor.md)
+1. [html-to-text](/documents/components/html-to-text.md)
+1. [monaco-editor](/documents/components/monaco-editor.md)
+1. [adaptive loader](/documents/components/adaptive-loader.md)
+1. [lists]()
+1. [radio group]()
+1. [toolbars]()
 
 ## Visualization
 
+1. [percent bar]()
+1. [pass fail group]()
+1. [pass fail card]()
+1. [percent bar group]()
+1. [pie chart]()
+
 ## Graphics Schema
-1. [Getting started](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/01.%20getting-started.md)
-1. [Layers](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/02.%20layers.md)
-1. [Colors, materials and textures](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/03.%20colors%20materials%20and%20textures.md)
+1. [getting started](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/01.%20getting-started.md)
+1. [layers](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/02.%20layers.md)
+1. [colors, materials and textures](https://github.com/caperaven/crs-components/blob/master/documents/graphics-schema/03.%20colors%20materials%20and%20textures.md)
+1. [program Layers Component]()
+
+## 3D
+
+1. [geometry data]()
+1. [raw geometry]()
