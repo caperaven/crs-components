@@ -15,7 +15,7 @@ There are two main sections
 1. flowchart
 1. icons
 
-You can use `rawToGeometry` to generate a threejs mesh object using a geometry data object.
+You can use [rawToGeometry](/documents/3d/rawToGeometry.md) to generate a threejs mesh object using a geometry data object.
 
 ## Flowchart items
 
