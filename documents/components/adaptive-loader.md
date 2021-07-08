@@ -86,3 +86,6 @@ crsbinding.events.emitter.postMessage("adaptive-loader", {
     width  : event.target.value
 });
 ```
+
+## Location
+"/components/adaptive-loader/adaptive-loader.js"

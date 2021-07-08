@@ -7,3 +7,6 @@ This makes it easier to reuse code snippets throughout different parts of your a
 <html-to-text src="/templates/html-example.html"></html-to-text>
 ```
 Found at "/components/html-to-text/html-to-text.js"
+
+## Location
+"/components/html-to-text/html-to-text.js"

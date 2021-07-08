@@ -31,4 +31,5 @@ The parameters are:
 2. modified
 3. language // if not set it uses the editor's set language
 
-Located at: "/components/monaco-editor/monaco-editor.js"
+## Location
+"/components/monaco-editor/monaco-editor.js"
