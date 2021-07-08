@@ -36,7 +36,7 @@ Requirejs is packaged with this library, so you don't need to install it.
 1. [lists](/documents/components/lists.md)  
 1. [main menu](/documents/components/main-menu.md)
 1. [radio group](/documents/components/radio-group.md)
-1. [toolbars]()
+1. [toolbars](/documents/components/toolbars.md)
 
 ## Visualization
 

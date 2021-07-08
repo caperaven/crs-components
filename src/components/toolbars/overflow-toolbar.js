@@ -97,6 +97,7 @@ class OverflowToolbar extends HTMLElement {
         this.dropdown = await createVerticalList();
         this.dropdown.style.position = "fixed";
         this.dropdown.classList.add("back");
+        this.dropdown.classList.add("overflow-toolbar-ul");
 
         for (let overflowItem of this.overflowItems) {
             const element = await createListItem(overflowItem);
