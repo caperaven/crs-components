@@ -11,7 +11,7 @@ It has the following parameters
 1. id (string) - id value to use for the button
 1. hasPopup (boolean - default true) - indicates if the button shows a popup.
 
-If you are looking something similar to use inside a clickable surface you can use (createSvgImage)[https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createSvgImage.md]
+If you are looking something similar to use inside a clickable surface you can use [createSvgImage](https://github.com/caperaven/crs-components/blob/master/documents/element-utils/createSvgImage.md)
 
 ## Example
 
