@@ -2,7 +2,10 @@ export class PercentBar extends HTMLElement {
     static get observedAttributes() { return ["data-value", "data-max"]; }
 
     async connectedCallback() {
-        this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
+        const url = import.meta.url.replace(".js", ".html");
+        const template = await crsbinding.templates.load("PercentBar", url);
+        this.appendChild(template.content.cloneNode(true));
+
         requestAnimationFrame(() => {
             this.getBarColor();
             this.update();

@@ -1,6 +1,11 @@
 class PassFailCard extends HTMLElement {
     async connectedCallback() {
-        this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
+        const path = crsbinding.utils.relativePathFrom(import.meta.url, "./../percent-bar/percent-bar.html");
+        await crsbinding.templates.load("PercentBar", path);
+
+        const url = import.meta.url.replace(".js", ".html");
+        const template = await crsbinding.templates.load("PassFailCard", url);
+        this.appendChild(template.content.cloneNode(true));
 
         requestAnimationFrame(() => {
             this.update();

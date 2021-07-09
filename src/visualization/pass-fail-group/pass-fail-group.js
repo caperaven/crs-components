@@ -11,7 +11,13 @@ class PassFailGroup extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
+        const path = crsbinding.utils.relativePathFrom(import.meta.url, "./../pass-fail-card/pass-fail-card.html");
+        await crsbinding.templates.load("PassFailCard", path);
+
+        const url = import.meta.url.replace(".js", ".html");
+        const template = await crsbinding.templates.load("PassFailGroup", url);
+        this.appendChild(template.content.cloneNode(true));
+
         requestAnimationFrame(async () => {
             await this._drawItems(this.data);
             this.setAttribute("tabindex", 0);

@@ -14,7 +14,9 @@ export class PercentBarGroup extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.innerHTML = await fetch(import.meta.url.replace(".js", ".html")).then(result => result.text());
+        const url = import.meta.url.replace(".js", ".html");
+        const template = await crsbinding.templates.load("PercentBarGroup", url);
+        this.appendChild(template.content.cloneNode(true));
 
         requestAnimationFrame(() => {
             this._drawItems(this.data);
