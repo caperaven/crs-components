@@ -1,5 +1,7 @@
 # Pie chart
 
+![piechart][/documents/images/piechart.jpg]
+
 ## Introduction
 
 This component requires crs-binding
