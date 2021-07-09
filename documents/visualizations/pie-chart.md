@@ -1,6 +1,6 @@
 # Pie chart
 
-![piechart][/documents/images/piechart.jpg]
+![piechart](/documents/images/piechart.jpg)
 
 ## Introduction
 
@@ -25,7 +25,7 @@ There are two data properties on the component.
 1. data - array of items
 1. summary - summary object - see summary section for more detail
 
-The data collection objects hould have three properties.
+The data collection objects should have three properties.
 
 1. title
 1. value

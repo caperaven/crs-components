@@ -1,5 +1,8 @@
 <style>
     pass-fail-card {
+        --cl-pass: #2ECC71;
+        --cl-fail: #E34B3B;
+
         box-sizing: border-box;
         display: block;
         height: max-content;
@@ -20,11 +23,11 @@
     }
 
     pass-fail-card [data-id="pass"] {
-        --cl-bar: #2ECC71;
+        --cl-bar: var(--cl-pass);
     }
 
     pass-fail-card [data-id="fail"] {
-        --cl-bar: #E34B3B;
+        --cl-bar: var(--cl-fail);
     }
 </style>
 

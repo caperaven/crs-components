@@ -31,7 +31,7 @@ class PassFailCard extends HTMLElement {
         passElement.dataset.value = passValue;
         passElement.dataset.max   = total;
 
-        const passColor = passValue === 0 ? "transparent" : "#2ECC71";
+        const passColor = passValue === 0 ? "transparent" : this.dataset.passcolor || "#2ECC71";
         passElement.dataset.barcolor = passColor;
         passElement.style.setProperty("--cl-bar", passColor, "important");
 
@@ -39,7 +39,7 @@ class PassFailCard extends HTMLElement {
         failElement.dataset.value = failValue;
         failElement.dataset.max   = total;
 
-        const failColor = failValue === 0 ? "transparent" : "#E34B3B";
+        const failColor = failValue === 0 ? "transparent" : this.dataset.failcolor || "#E34B3B";
         failElement.dataset.barcolor = failColor;
         failElement.style.setProperty("--cl-bar", failColor, "important");
     }
