@@ -23,4 +23,7 @@ You can set the color to be used in the pass bar using `data-passcolor`.
 It will default to `#2ECC71` if not defined.  
 
 You can set the color to be used in the fail bar using `data-failcolor`.  
-It will default to `#E34B3B` if not defined.  
+It will default to `#E34B3B` if not defined.
+
+## Location
+/components/visualization/pass-fail-card/pass-fail-card.js

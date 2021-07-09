@@ -24,4 +24,7 @@ While on the subject of css variables, you can configure the component using the
 1. --cl-title (white);
 1. --cl-value (black);
 
-You can also set the bar color using the `data-barcolor` attribute. 
+You can also set the bar color using the `data-barcolor` attribute.
+
+## Location
+/components/visualization/percent-bar/percent-bar.js

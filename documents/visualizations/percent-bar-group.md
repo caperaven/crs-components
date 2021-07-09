@@ -37,3 +37,6 @@ this.setProperty("data", [
     }
 ]);
 ```
+
+## Location
+/components/visualization/percent-bar-group/percent-bar-group.js
