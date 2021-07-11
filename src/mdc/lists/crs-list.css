@@ -1,0 +1,42 @@
+.crs-list {
+    padding: 0;
+    list-style: none;
+}
+
+.crs-list li {
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+    position: relative;
+    padding: var(--crs-item-padding);
+    user-select: none;
+}
+
+.crs-list li:before, .crs-list li:after {
+    font-family: "Material Icons";
+    font-size: 1.5rem;
+}
+
+.crs-list li:before {
+    content: attr(data-left);
+    margin-right: 0.25rem;
+}
+
+.crs-list li:after {
+    content: attr(data-right);
+    position: absolute;
+    right:0;
+}
+
+.crs-list li:hover {
+    background: #6495edb0;
+    color: black;
+}
+
+.crs-list li:hover:before {
+    color: var(--crs-before-hover);
+}
+
+.crs-list li:hover:after {
+    color: var(--crs-after-hover);
+}

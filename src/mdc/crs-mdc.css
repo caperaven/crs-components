@@ -5,8 +5,15 @@
     --crs-surface        : white;          /* surface color      */
     --crs-on-surface     : black;          /* color on surface   */
 
+    /* Hover */
+    --crs-hover          : #6495edb0; /* when you hover over a item */;
+    --crs-on-hover       : black;          /* color of text on hover item */
+    --crs-before-hover   : white;
+    --crs-after-hover    : white;
+
     /* Layout */
     --crs-padding        : 0.5rem;
+    --crs-item-padding   : 0.5rem;
 
     /* Animations */
     --show-time          : 0.3s;

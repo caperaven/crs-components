@@ -1,3 +1,9 @@
+<!--
+Material icons can be seen here
+https://fonts.google.com/icons
+
+Use crs-100 as a container for overflow of drawer
+-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
@@ -5,6 +11,8 @@
     @import "/src/mdc/header/crs-header.css";
     @import "/src/mdc/buttons/crs-icon-button.css";
     @import "/src/mdc/drawers/crs-drawer.css";
+    @import "/src/mdc/icons/crs-icon.css";
+    @import "/src/mdc/lists/crs-list.css";
 </style>
 
 <!--<div class="crs-header" is="crs-header">-->
@@ -20,5 +28,10 @@
 
     <div class="crs-drawer" data-open.one-way="$globals.drawerOpen" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">
         <h2>Menu</h2>
+        <ul class="crs-list">
+            <li data-left="turned_in" data-right="chevron_right">search</li>
+            <li data-left="turned_in" data-right="chevron_right">search for</li>
+            <li data-left="turned_in" data-right="chevron_right">home</li>
+        </ul>
     </div>
 </div>
