@@ -32,7 +32,7 @@
 }
 
 .crs-list li:hover {
-    background: #6495ed30;
+    background: var(--crs-hover);
     color: var(--crs-on-hover);
 }
 

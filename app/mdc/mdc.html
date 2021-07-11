@@ -11,6 +11,7 @@ Use crs-100 as a container for overflow of drawer
     @import "/src/mdc/layout/crs-zero.css";
     @import "/src/mdc/header/crs-header.css";
     @import "/src/mdc/buttons/crs-icon-button.css";
+    @import "/src/mdc/buttons/crs-hover-circle.css";
     @import "/src/mdc/drawers/crs-drawer.css";
     @import "/src/mdc/icons/crs-icon.css";
     @import "/src/mdc/lists/crs-list.css";
@@ -20,11 +21,11 @@ Use crs-100 as a container for overflow of drawer
 
 <div class="crs-100">
     <div class="crs-header">
-        <button class="crs-icon-button" aria-label="Open navigation menu" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">menu</button>
+        <button class="crs-icon-button crs-hover-circle" aria-label="Open navigation menu" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">menu</button>
         <h2>${title}</h2>
-        <button class="crs-icon-button" aria-label="Favorite">favorite</button>
-        <button class="crs-icon-button" aria-label="Search">search</button>
-        <button class="crs-icon-button" aria-label="Options">more_vert</button>
+        <button class="crs-icon-button crs-hover-circle" aria-label="Favorite">favorite</button>
+        <button class="crs-icon-button crs-hover-circle" aria-label="Search">search</button>
+        <button class="crs-icon-button crs-hover-circle" aria-label="Options">more_vert</button>
     </div>
 
     <div class="crs-drawer" data-open.one-way="$globals.drawerOpen" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">

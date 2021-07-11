@@ -12,6 +12,7 @@
     box-shadow: 0 0 10px #00000060;
     transform: translateX(-120%);
     transition: transform var(--show-time) ease-out;
+    z-index: 999999999999999999;
 }
 
 .crs-drawer[data-open="true"] {
@@ -26,7 +27,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: transparent;
+    background: #fa0f0f00;
     z-index: -1;
 }
 
