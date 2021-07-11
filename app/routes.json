@@ -18,6 +18,11 @@
       "hasStyle": true
     },
     {
+      "title": "Material Design",
+      "hash": "#mdc",
+      "view": "mdc"
+    },
+    {
       "title": "Relative Placement",
       "hash": "#relative-placement",
       "view": "relative-placement"

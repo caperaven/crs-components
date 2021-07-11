@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<style>
+    @import "/src/mdc/layout/crs-100.css";
+    @import "/src/mdc/header/crs-header.css";
+    @import "/src/mdc/buttons/crs-icon-button.css";
+    @import "/src/mdc/drawers/crs-drawer.css";
+</style>
+
+<!--<div class="crs-header" is="crs-header">-->
+
+<div class="crs-100">
+    <div class="crs-header">
+        <button class="crs-icon-button" aria-label="Open navigation menu" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">menu</button>
+        <h2>${title}</h2>
+        <button class="crs-icon-button" aria-label="Favorite">favorite</button>
+        <button class="crs-icon-button" aria-label="Search">search</button>
+        <button class="crs-icon-button" aria-label="Options">more_vert</button>
+    </div>
+
+    <div class="crs-drawer" data-open.one-way="$globals.drawerOpen" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">
+        <h2>Menu</h2>
+    </div>
+</div>

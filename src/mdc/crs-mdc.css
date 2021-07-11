@@ -1,0 +1,24 @@
+:root {
+    /* Colors */
+    --crs-primary        : cornflowerblue; /* primary background */
+    --crs-on-primary     : white;          /* color on primary   */
+    --crs-surface        : white;          /* surface color      */
+    --crs-on-surface     : black;          /* color on surface   */
+
+    /* Layout */
+    --crs-padding        : 0.5rem;
+
+    /* Animations */
+    --show-time          : 0.3s;
+}
+
+:root * {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

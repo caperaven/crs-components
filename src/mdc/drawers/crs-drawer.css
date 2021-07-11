@@ -1,0 +1,35 @@
+.crs-drawer {
+    --max-width: 400px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding: var(--crs-padding);
+    max-width: var(--max-width);
+    background: var(--crs-surface);
+    color: var(--crs-on-surface);
+    box-shadow: 0 0 10px #00000060;
+    transform: translateX(-120%);
+    transition: transform var(--show-time) ease-out;
+}
+
+.crs-drawer[data-open="true"] {
+    transform: translateX(0);
+}
+
+.crs-drawer[data-open="true"]::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: -1;
+}
+
+.crs-drawer h2 {
+    margin: 0;
+}
