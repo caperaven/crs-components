@@ -8,6 +8,7 @@ Use crs-100 as a container for overflow of drawer
 
 <style>
     @import "/src/mdc/layout/crs-100.css";
+    @import "/src/mdc/layout/crs-zero.css";
     @import "/src/mdc/header/crs-header.css";
     @import "/src/mdc/buttons/crs-icon-button.css";
     @import "/src/mdc/drawers/crs-drawer.css";
@@ -28,6 +29,8 @@ Use crs-100 as a container for overflow of drawer
 
     <div class="crs-drawer" data-open.one-way="$globals.drawerOpen" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">
         <h2>Menu</h2>
+        <p class="crs-zero">submenu items to show some of the features</p>
+        <hr/>
         <ul class="crs-list">
             <li data-left="turned_in" data-right="chevron_right">search</li>
             <li data-left="turned_in" data-right="chevron_right">search for</li>

@@ -3,13 +3,13 @@
     --crs-primary        : cornflowerblue; /* primary background */
     --crs-on-primary     : white;          /* color on primary   */
     --crs-surface        : white;          /* surface color      */
-    --crs-on-surface     : black;          /* color on surface   */
+    --crs-on-surface     : #4c4c4c;          /* color on surface   */
 
     /* Hover */
-    --crs-hover          : #6495edb0; /* when you hover over a item */;
-    --crs-on-hover       : black;          /* color of text on hover item */
-    --crs-before-hover   : white;
-    --crs-after-hover    : white;
+    --crs-hover          : #6495ed30; /* when you hover over a item */
+    --crs-on-hover       : cornflowerblue;          /* color of text on hover item */
+    --crs-before-hover   : cornflowerblue;
+    --crs-after-hover    : cornflowerblue;
 
     /* Layout */
     --crs-padding        : 0.5rem;

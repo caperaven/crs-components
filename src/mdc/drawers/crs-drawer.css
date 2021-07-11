@@ -33,3 +33,7 @@
 .crs-drawer h2 {
     margin: 0;
 }
+
+.crs-drawer li {
+    cursor: pointer;
+}

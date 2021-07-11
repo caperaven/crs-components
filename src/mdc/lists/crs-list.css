@@ -1,6 +1,9 @@
 .crs-list {
     padding: 0;
+    margin: 0;
     list-style: none;
+    background: var(--crs-surface);
+    color: var(--crs-on-surface);
 }
 
 .crs-list li {
@@ -29,8 +32,8 @@
 }
 
 .crs-list li:hover {
-    background: #6495edb0;
-    color: black;
+    background: #6495ed30;
+    color: var(--crs-on-hover);
 }
 
 .crs-list li:hover:before {
