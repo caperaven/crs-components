@@ -34,5 +34,6 @@
 .crs-button:active {
     background: var(--crs-hover);
     color: var(--crs-on-hover);
+    border: solid 1px var(--crs-on-hover);
     box-shadow: inherit;
 }

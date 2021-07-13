@@ -1,15 +1,15 @@
 :root {
     /* Colors */
-    --crs-primary        : cornflowerblue; /* primary background */
-    --crs-on-primary     : white;          /* color on primary   */
-    --crs-surface        : white;          /* surface color      */
-    --crs-on-surface     : #4c4c4c;          /* color on surface   */
+    --crs-primary        : #2196f3;
+    --crs-on-primary     : white;
+    --crs-surface        : white;
+    --crs-on-surface     : #4c4c4c;
 
     /* Hover */
-    --crs-hover          : #6495ed30; /* when you hover over a item */
-    --crs-on-hover       : cornflowerblue;          /* color of text on hover item */
-    --crs-before-hover   : cornflowerblue;
-    --crs-after-hover    : cornflowerblue;
+    --crs-hover          : #ebebeb;
+    --crs-on-hover       : #0062af;
+    --crs-before-hover   : #0062af;
+    --crs-after-hover    : #0062af;
 
     /* Border */
     --crs-border         : #dedede;
