@@ -15,11 +15,26 @@ Use crs-100 as a container for overflow of drawer
     @import "/src/mdc/drawers/crs-drawer.css";
     @import "/src/mdc/icons/crs-icon.css";
     @import "/src/mdc/lists/crs-list.css";
+    @import "/src/mdc/toolbars/crs-toolbar.css";
+    @import "/src/mdc/buttons/crs-button.css";
 </style>
 
 <!--<div class="crs-header" is="crs-header">-->
 
 <div class="crs-100">
+    <crs-header id="header1" view.one-way="$globals.state">
+        <template data-id="main" data-default="true">
+            <button class="crs-icon-button crs-hover-circle" aria-label="Open navigation menu" click.setValue="$globals.state = 'context'">menu</button>
+            <h2>Main</h2>
+        </template>
+
+        <template data-id="context">
+            <button class="crs-icon-button crs-hover-circle" aria-label="Open navigation menu" click.setValue="$globals.state = 'main'">chevron_left</button>
+            <h2>Context</h2>
+            <button class="crs-icon-button crs-hover-circle" aria-label="Search">search</button>
+        </template>
+    </crs-header>
+
     <div class="crs-header">
         <button class="crs-icon-button crs-hover-circle" aria-label="Open navigation menu" click.setValue="$globals.drawerOpen = !$globals.drawerOpen">menu</button>
         <h2>${title}</h2>
@@ -37,5 +52,11 @@ Use crs-100 as a container for overflow of drawer
             <li data-left="turned_in" data-right="chevron_right">search for</li>
             <li data-left="turned_in" data-right="chevron_right">home</li>
         </ul>
+    </div>
+
+    <div class="crs-toolbar">
+        <button data-left="settings" class="crs-button"></button>
+        <button data-left="code" class="crs-button">CODE</button>
+        <button data-left="build" class="crs-button">BUILD</button>
     </div>
 </div>

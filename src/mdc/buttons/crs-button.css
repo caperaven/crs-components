@@ -1,0 +1,31 @@
+.crs-button {
+    background: var(--crs-primary);
+    color: var(--crs-on-primary);
+    border-radius: 5px;
+    border: none;
+    height: 2.25rem;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 0 2px 0 rgb(0 0 0 / 14%), 0 0 1px -2px rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 12%);
+}
+
+.crs-button:before {
+    content: attr(data-left);
+    font-family: "Material Icons";
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    display: block;
+}
+
+.crs-button:hover {
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.crs-button:active {
+    background: var(--crs-hover);
+    color: var(--crs-on-hover);
+    box-shadow: inherit;
+}
