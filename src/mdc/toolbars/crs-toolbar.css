@@ -4,3 +4,7 @@
     flex-direction: row;
     gap: 0.5rem;
 }
+
+.crs-toolbar.underline {
+    border-bottom: solid 1px var(--crs-border);
+}

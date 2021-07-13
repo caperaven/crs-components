@@ -11,6 +11,9 @@
     --crs-before-hover   : cornflowerblue;
     --crs-after-hover    : cornflowerblue;
 
+    /* Border */
+    --crs-border         : #dedede;
+
     /* Layout */
     --crs-padding        : 0.5rem;
     --crs-item-padding   : 0.5rem;

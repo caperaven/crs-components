@@ -7,8 +7,9 @@
 }
 
 .crs-header h2 {
-    margin: 0;
     flex: 1;
-    display: flex;
-    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: auto;
 }

@@ -10,17 +10,13 @@
     justify-content: center;
     font-weight: bold;
     box-shadow: 0 0 2px 0 rgb(0 0 0 / 14%), 0 0 1px -2px rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 12%);
+    user-select: none;
 }
 
 .crs-button.outline {
     background: transparent;
     color: var(--crs-primary);
     border: solid 1px var(--crs-primary);
-}
-
-.crs-button-outline {
-    background: transparent;
-    border: solid var(--crs-primary) 1px;
 }
 
 .crs-button:before {
