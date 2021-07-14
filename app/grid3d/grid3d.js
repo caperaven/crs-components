@@ -1,15 +1,18 @@
-import "../../src/components/data-grid-3d/data-grid-3d.js"
-import {createData, createGroupedData} from "./datafactory.js";
-import {columnsDef} from "./columns-def.js";
+import {createData} from "./datafactory.js";
+import "./../../src/components/data-grid/data-grid.js";
+import {columns} from "./columns.js";
 
 export default class Grid extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
-        this.grid = document.querySelector("data-grid-3d");
+        this.grid = document.querySelector("data-grid");
 
-        this.grid.addEventListener("ready", async () => {
-            await this.grid.initialize(columnsDef);
-            this.grid.data = createData(1000);
+        this.grid.addEventListener("isReady", () => {
+            const data = createData(1000);
+            this.grid.initialize({
+                columns: columns,
+                data: data
+            })
         })
     }
 

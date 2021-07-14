@@ -1,0 +1,12 @@
+data-grid {
+    display: grid;
+    background: white;
+    grid-template-rows: auto 1fr auto;
+}
+
+data-grid .body {
+    display: grid;
+    overflow: auto;
+    grid-template-rows: auto auto;
+    min-height: 300px;
+}
