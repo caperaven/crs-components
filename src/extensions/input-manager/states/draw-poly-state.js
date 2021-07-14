@@ -19,10 +19,12 @@ export class DrawPolyState extends BaseState {
 
     async enter() {
         await super.enter();
+        this._points = [];
     }
 
     async exit() {
         await super.exit();
+        this._points.length = 0;
     }
 
     async _pointerDown(event) {

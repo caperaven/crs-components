@@ -1,3 +1,5 @@
+import {Materials} from "./../../gfx-helpers/materials.js";
+
 export class CameraCanvasBase extends HTMLElement {
     get nearPlane() {
         if (this._nearPlane == null) {
@@ -58,6 +60,8 @@ export class CameraCanvasBase extends HTMLElement {
 
     async connectedCallback() {
         this.renderHandler = this.render.bind(this);
+        this.materials = new Materials();
+
         requestAnimationFrame(async () => {
             this.width = this.offsetWidth;
             this.height = this.offsetHeight;
@@ -96,6 +100,7 @@ export class CameraCanvasBase extends HTMLElement {
         this.resizeHandler = null;
 
         this.renderer && this.renderer.dispose();
+        this.materials = this.materials.dispose();
 
         this.scene = null;
         this.renderer = null;

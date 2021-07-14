@@ -5,6 +5,7 @@
 import {BaseState} from "./base-state.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {setMouse} from "./../helpers/pointer-functions.js";
+import {MaterialType} from "./../../../gfx-helpers/materials.js";
 
 export class DrawRectangleState extends BaseState {
     constructor(context) {

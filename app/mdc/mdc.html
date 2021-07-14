@@ -17,6 +17,7 @@ Use crs-100 as a container for overflow of drawer
     @import "/src/mdc/lists/crs-list.css";
     @import "/src/mdc/toolbars/crs-toolbar.css";
     @import "/src/mdc/buttons/crs-button.css";
+    @import "/src/mdc/cards/crs-card.css";
 </style>
 
 <!--<div class="crs-header" is="crs-header">-->
@@ -58,5 +59,21 @@ Use crs-100 as a container for overflow of drawer
         <button data-left="settings" class="crs-button"></button>
         <button data-left="code" class="crs-button">CODE</button>
         <button data-left="build" class="crs-button outline">BUILD</button>
+
+<!--        <button data-left="code" class="crs-button" is="process-button">CODE</button>-->
+<!--        <button data-left="code" class="crs-button" is="menu-button" data-position="top">CODE</button>-->
+<!--        <button data-left="code" class="crs-button" is="toggle-button">CODE</button>-->
     </div>
+
+    <section class="crs-card padded" style="width: 400px">
+        <h2>Personal Information</h2>
+        <input type="text" data-label="First Name" class="crs-input" required>
+        <input type="text" data-label="Last Name" class="crs-input" required>
+        <input type="text" data-label="Age" class="crs-input" required>
+
+        <div class="crs-toolbar upperline" data-align="right">
+            <button data-left="cancel" class="crs-button outline">Cancel</button>
+            <button data-left="save" class="crs-button">Save</button>
+        </div>
+    </section>
 </div>

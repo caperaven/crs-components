@@ -13,13 +13,14 @@
 
     /* Border */
     --crs-border         : #dedede;
+    --crs-border-radius  : 4px;
 
     /* Layout */
     --crs-padding        : 0.5rem;
     --crs-item-padding   : 0.5rem;
 
     /* Animations */
-    --show-time          : 0.3s;
+    --show-time: 0.3s;
 }
 
 :root * {
