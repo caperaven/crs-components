@@ -16,15 +16,16 @@
     --crs-on-readonly    : gray;
 
     /* Required */
-    --crs-required       : #ffffc5;
+    --crs-required       : #fffbea;
+    --crs-on-required    : #ffcf01;
 
     /* Invalid */
-    --crs-invalid        : #ffbcbc;
+    --crs-invalid        : #ffe0e0f7;
     --crs-on-invalid     : red;
 
     /* Border */
     --crs-border         : #dedede;
-    --crs-border-radius  : 4px;
+    --crs-border-radius: 4px;
 
     /* Layout */
     --crs-padding        : 0.5rem;
@@ -46,10 +47,11 @@ html, body {
 }
 
 :required {
-    background: var(--crs-required);
+    background: var(--crs-required) !important;
+    border: solid 2px var(--crs-on-required) !important;
 }
 
 :invalid {
-    background: var(--crs-invalid);
-    color: var(--crs-on-invalid);
+    background: var(--crs-invalid) !important;
+    border: solid 2px var(--crs-on-invalid) !important;
 }

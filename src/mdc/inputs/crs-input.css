@@ -1,7 +1,7 @@
 .crs-input {
     font-size: 1rem;
     margin-bottom: 1rem;
-    color: var(--crs-primary);
+    color: var(--crs-on-surface);
 }
 
 .crs-input input {
