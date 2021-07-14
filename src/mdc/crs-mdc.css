@@ -11,6 +11,17 @@
     --crs-before-hover   : #0062af;
     --crs-after-hover    : #0062af;
 
+    /* Read Only */
+    --crs-readonly       : #dedede;
+    --crs-on-readonly    : gray;
+
+    /* Required */
+    --crs-required       : #ffffc5;
+
+    /* Invalid */
+    --crs-invalid        : #ffbcbc;
+    --crs-on-invalid     : red;
+
     /* Border */
     --crs-border         : #dedede;
     --crs-border-radius  : 4px;
@@ -32,4 +43,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+:required {
+    background: var(--crs-required);
+}
+
+:invalid {
+    background: var(--crs-invalid);
+    color: var(--crs-on-invalid);
 }

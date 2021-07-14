@@ -1,0 +1,15 @@
+.crs-text {
+    display: block;
+    position: relative;
+    border-radius: var(--crs-border-radius);
+    height: 2rem;
+    outline: none;
+    border: solid 1px var(--crs-border);
+    padding: 0 0.5rem;
+    width: 100%;
+}
+
+.crs-text:read-only {
+    background: var(--crs-readonly);
+    color: var(--crs-on-readonly);
+}

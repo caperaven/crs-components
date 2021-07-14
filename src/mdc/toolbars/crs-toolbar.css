@@ -8,3 +8,11 @@
 .crs-toolbar.underline {
     border-bottom: solid 1px var(--crs-border);
 }
+
+.crs-toolbar.upperline {
+    border-top: solid 1px var(--crs-border);
+}
+
+.crs-toolbar.right {
+    justify-content: flex-end;
+}
