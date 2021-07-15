@@ -15,9 +15,19 @@ export class Columns {
 
 async function createColumns(grid, columns) {
     const fragment = document.createDocumentFragment();
-
+    let sticky = 0;
     for (let column of columns) {
-        fragment.appendChild(await createColumn(column));
+        const element = await createColumn(column);
+
+        if (column.sticky == true) {
+            column.left = sticky;
+            element.style.position = "sticky";
+            element.style.left = `${sticky}px`;
+            element.style.zIndex = 2;
+            sticky += column.width;
+        }
+
+        fragment.appendChild(element);
     }
 
     grid.bodyElement.appendChild(fragment);

@@ -1,9 +1,19 @@
 data-grid {
     --padding: 0.5rem;
+    --cl-cell: white;
+    --cl-sticky: #ededed;
+    --cl-border: silver;
 
     display: grid;
     background: white;
     grid-template-rows: auto 1fr auto;
+    border: solid 1px var(--cl-border);
+    box-sizing: border-box;
+    user-select: none;
+}
+
+data-grid * {
+    box-sizing: border-box;
 }
 
 data-grid .body {
@@ -19,8 +29,18 @@ data-grid .column-header {
     background: #dadada;
     position: sticky;
     top: 0;
+    border-left: solid 1px var(--cl-border);
+    border-bottom: solid 1px var(--cl-border);
 }
 
 data-grid [role="gridcell"] {
     padding: var(--padding);
+    background: var(--cl-cell);
+    border-left: solid 1px var(--cl-border);
+    border-bottom: solid 1px var(--cl-border);
+}
+
+data-grid .sticky {
+    position: sticky;
+    background: var(--cl-sticky);
 }

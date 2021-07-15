@@ -3,13 +3,15 @@ export const columns = [
         title: "Id",
         field: "id",
         width: 50,
-        type: "number"
+        type: "number",
+        sticky: true
     },
     {
         title: "Code",
         field: "code",
         width: 100,
-        type: "text"
+        type: "text",
+        sticky: true
     },
     {
         title: "Description",

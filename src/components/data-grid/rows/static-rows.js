@@ -29,6 +29,13 @@ async function createCells(grid, row, fragment) {
         const element = document.createElement("div");
         element.setAttribute("role", "gridcell");
         element.textContent = row[column.field];
+
+        if (column.sticky == true) {
+            element.classList.add("sticky");
+            element.style.left = `${column.left}px`;
+            element.style.zIndex = 1;
+        }
+
         fragment.appendChild(element);
     }
 }
