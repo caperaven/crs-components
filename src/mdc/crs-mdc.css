@@ -6,10 +6,10 @@
     --crs-on-surface     : #4c4c4c;
 
     /* Hover */
-    --crs-hover          : #ebebeb;
-    --crs-on-hover       : #0062af;
-    --crs-before-hover   : #0062af;
-    --crs-after-hover    : #0062af;
+    --crs-hover          : #ecf7ff;
+    --crs-on-hover       : #0276C2;
+    --crs-before-hover   : #0276C2;
+    --crs-after-hover    : #0276C2;
 
     /* Read Only */
     --crs-readonly       : #dedede;
