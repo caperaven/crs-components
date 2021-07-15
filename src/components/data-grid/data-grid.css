@@ -3,6 +3,7 @@ data-grid {
     --cl-cell: white;
     --cl-sticky: #ededed;
     --cl-border: silver;
+    --cl-column-group: #ededed;
 
     display: grid;
     background: white;
@@ -43,4 +44,10 @@ data-grid [role="gridcell"] {
 data-grid .sticky {
     position: sticky;
     background: var(--cl-sticky);
+}
+
+data-grid .column-group {
+    padding: var(--padding);
+    background: var(--cl-column-group);
+    border-left: solid 1px var(--cl-border);
 }

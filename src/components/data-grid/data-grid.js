@@ -39,19 +39,27 @@ export class DataGrid extends HTMLElement {
 
     async initialize(args) {
         this.settings = args;
-        await this._initColumns(args.columns);
-        await this._initRows(args.type, args.data);
+        await this._initHeaders();
+        await this._initColumns();
+        await this._initRows();
         delete this.settings.columns;
         delete this.settings.data;
     }
 
-    async _initColumns(columns) {
-        await Columns.enable(this, columns);
+    async _initHeaders() {
+        if (this.settings.headers != null) {
+            const headers = (await import("./headers/headers.js")).Headers;
+            await headers.enable(this);
+        }
     }
 
-    async _initRows(type, data) {
-        this.renderer = (await import(paths[type])).default;
-        await this.renderer.enable(this, data);
+    async _initColumns() {
+        await Columns.enable(this, this.settings.columns);
+    }
+
+    async _initRows() {
+        this.renderer = (await import(paths[this.settings.type])).default;
+        await this.renderer.enable(this, this.settings.data);
     }
 }
 
