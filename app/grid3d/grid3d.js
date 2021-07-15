@@ -11,7 +11,9 @@ export default class Grid extends crsbinding.classes.ViewBase {
             const data = createData(1000);
             this.grid.initialize({
                 columns: columns,
-                data: data
+                data: data,
+                type: "static",
+                pageSize: 20
             })
         })
     }

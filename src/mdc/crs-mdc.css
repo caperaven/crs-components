@@ -13,7 +13,7 @@
 
     /* Read Only */
     --crs-readonly       : #dedede;
-    --crs-on-readonly    : gray;
+    --crs-on-readonly    : #808080;
 
     /* Required */
     --crs-required       : #fffbea;
@@ -22,6 +22,10 @@
     /* Invalid */
     --crs-invalid        : #ffe0e0f7;
     --crs-on-invalid     : red;
+
+    /* Focused */
+    --crs-focused        : #ecf7ff;
+    --crs-on-focused     : #0276C2;
 
     /* Border */
     --crs-border         : #dedede;

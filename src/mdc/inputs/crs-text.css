@@ -12,4 +12,39 @@
 .crs-text:read-only {
     background: var(--crs-readonly);
     color: var(--crs-on-readonly);
+    border: solid 2px var(--crs-on-readonly);
+}
+
+.crs-text:focus {
+    background: var(--crs-focused) !important;
+    border: solid 2px var(--crs-on-focused) !important;
+}
+
+.crs-text:required {
+    padding-left: 2rem;
+}
+
+.crs-text:required + i {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.crs-text:invalid + i:before {
+    content: "close";
+    font-family: "Material Icons";
+    color: var(--crs-on-invalid);
+    position: absolute;
+    left: 0.5rem;
+    top: -24px;
+    z-index: 1;
+}
+
+.crs-text:valid + i:before {
+    content: "done";
+    font-family: "Material Icons";
+    position: absolute;
+    left: 0.5rem;
+    top: -24px;
+    z-index: 1;
 }
