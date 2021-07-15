@@ -12,7 +12,7 @@
 .crs-text:read-only {
     background: var(--crs-readonly);
     color: var(--crs-on-readonly);
-    border: solid 2px var(--crs-on-readonly);
+    border: solid 2px var(--crs-readonly-border);
 }
 
 .crs-text:focus {

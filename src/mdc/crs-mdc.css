@@ -13,7 +13,8 @@
 
     /* Read Only */
     --crs-readonly       : #dedede;
-    --crs-on-readonly    : #808080;
+    --crs-on-readonly    : black;
+    --crs-readonly-border: #808080;
 
     /* Required */
     --crs-required       : #fffbea;
