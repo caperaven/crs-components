@@ -2,6 +2,7 @@ import {createData} from "./datafactory.js";
 import "./../../src/components/data-grid/data-grid.js";
 import {columns} from "./columns.js";
 import {headers} from "./headers.js";
+import StaticRows from "./../../src/components/data-grid/rows/static-rows.js";
 
 export default class Grid extends crsbinding.classes.ViewBase {
     async connectedCallback() {
@@ -15,12 +16,20 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 headers: headers,
                 data: data,
                 type: "static",
-                pageSize: 20
+                pageSize: 100
             })
         })
     }
 
     async disconnectedCallback() {
         this.grid = null;
+    }
+
+    async next() {
+        await StaticRows.nextPage(this.grid);
+    }
+
+    async previous() {
+        await StaticRows.previousPage(this.grid);
     }
 }

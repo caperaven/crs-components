@@ -1,8 +1,8 @@
 export class Columns {
-    static async enable(grid, def) {
-        grid._columns = def;
-        await createColumnCSS(grid, def.length);
-        await createColumns(grid, def);
+    static async enable(grid, columns) {
+        grid._columns = columns;
+        await createColumnCSS(grid, columns.length);
+        await createColumns(grid, columns);
     }
 
     static async disable(grid) {

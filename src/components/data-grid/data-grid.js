@@ -42,7 +42,9 @@ export class DataGrid extends HTMLElement {
         await this._initHeaders();
         await this._initColumns();
         await this._initRows();
+        await this._initFeatures();
         delete this.settings.columns;
+        delete this.settings.headers;
         delete this.settings.data;
     }
 
@@ -60,6 +62,10 @@ export class DataGrid extends HTMLElement {
     async _initRows() {
         this.renderer = (await import(paths[this.settings.type])).default;
         await this.renderer.enable(this, this.settings.data);
+    }
+
+    async _initFeatures() {
+        // read settings and initialize.
     }
 }
 

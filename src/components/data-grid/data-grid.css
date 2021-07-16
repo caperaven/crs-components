@@ -23,6 +23,7 @@ data-grid .body {
     grid-template-rows: auto auto;
     min-height: 300px;
     content-visibility: auto;
+    will-change: transform;
 }
 
 data-grid .column-header {
@@ -39,6 +40,7 @@ data-grid [role="gridcell"] {
     background: var(--cl-cell);
     border-left: solid 1px var(--cl-border);
     border-bottom: solid 1px var(--cl-border);
+    height: max-content;
 }
 
 data-grid .sticky {
