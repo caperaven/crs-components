@@ -52,3 +52,14 @@ data-grid .column-group {
     background: var(--cl-column-group);
     border-left: solid 1px var(--cl-border);
 }
+
+data-grid .grouping-header {
+    height: 3rem;
+    background: var(--cl-column-group);
+    border-bottom: solid 1px var(--cl-border);
+    color: #6a6a6a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--padding);
+}
