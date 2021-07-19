@@ -16,7 +16,7 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 headers: headers,
                 data: data,
                 type: "static",
-                pageSize: 100
+                pageSize: 4
             })
         })
     }

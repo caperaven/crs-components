@@ -38,7 +38,7 @@ async function createColumnCSS(grid, length) {
     for (let i = 0; i < length; i++) {
         width.push("auto");
     }
-    grid.bodyElement.style.gridTemplateColumns = width.join(" ");
+    grid.bodyElement.style.gridTemplateColumns = `repeat(${length}, auto)`;
 }
 
 async function createColumn(column) {

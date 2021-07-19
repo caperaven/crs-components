@@ -40,7 +40,6 @@ data-grid [role="gridcell"] {
     background: var(--cl-cell);
     border-left: solid 1px var(--cl-border);
     border-bottom: solid 1px var(--cl-border);
-    height: max-content;
 }
 
 data-grid .sticky {

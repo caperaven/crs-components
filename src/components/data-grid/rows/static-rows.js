@@ -5,6 +5,10 @@ export default class StaticRows {
         grid.settings.pageSize = grid.settings.pageSize || 20;
         grid.settings.page = 0;
         grid.settings.lastPage = Math.ceil(data.length / grid.settings.pageSize);
+
+        const rowSize = grid.settings.pageSize + (grid.settings.headers == null ? 1 : 2);
+        grid.bodyElement.style.gridTemplateRows = `repeat(${rowSize}, 2.5rem)`;
+
         await createRows(grid, data);
     }
 
