@@ -1,4 +1,5 @@
 import {Columns} from "./columns/columns-factory.js";
+import {InputManager} from "./input-manager.js";
 
 export const RowRenderer = Object.freeze({
     STATIC      : "static",
@@ -30,7 +31,14 @@ export class DataGrid extends HTMLElement {
     }
 
     async disconnectedCallback() {
+        await InputManager.disable(this);
         await Columns.disable(this);
+
+        this._group && await this._group.disable(this);
+        this._sort && await this._sort.disable(this);
+        this._resize && await this._resize.disable(this);
+        this._move && await this._move.disable(this);
+
         this.renderer = this.renderer.disable(this);
         this.headerElement = null;
         this.bodyElement = null;
@@ -49,10 +57,7 @@ export class DataGrid extends HTMLElement {
         delete this.settings.data;
         delete this.settings.features;
 
-        this._group && await this._group.disable(this);
-        this._sort && await this._sort.disable(this);
-        this._resize && await this._resize.disable(this);
-        this._move && await this._move.disable(this);
+        await InputManager.enable(this);
     }
 
     async _initHeaders() {
