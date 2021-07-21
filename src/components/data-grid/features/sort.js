@@ -4,7 +4,7 @@ export default class Sort {
     }
 
     static async disable(grid) {
-        delete grid._sort;
+        delete grid.sort;
     }
 
     static async perform(target) {

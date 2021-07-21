@@ -7,8 +7,6 @@ const mouseEvents = Object.freeze({
 
 export class InputManager {
     static async enable(grid) {
-        grid._inputManager = new InputManager();
-
         grid._events = {
             [mouseEvents.CLICK.key]: click.bind(grid)
         };
@@ -57,11 +55,14 @@ async function mouseDown(event) {
     this._input.start = performance.now();
     this._input.startPosition.x = event.clientX;
     this._input.startPosition.y = event.clientY;
+    this._feature = this[event.target.dataset?.feature];
+    await this._feature?.mouseDown?.(this, event, this._input);
 }
 
 async function mouseMove(event) {
     this._input.position.x = event.clientX;
     this._input.position.y = event.clientY;
+    await this._feature?.mouseMove?.(this, event, this._input);
 }
 
 async function mouseUp(event) {
@@ -73,6 +74,9 @@ async function mouseUp(event) {
     if (this._input.time < 300 && this._input.offset < 5) {
         this._events[mouseEvents.CLICK.key](event);
     }
+
+    await this._feature?.mouseUp?.(this, event, this._input);
+    delete this._feature;
 }
 
 async function click(event) {

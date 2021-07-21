@@ -5,7 +5,7 @@ export default class Group {
 
     static async disable(grid) {
         delete grid._groupBar;
-        delete grid._group;
+        delete grid.group;
     }
 }
 

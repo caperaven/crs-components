@@ -4,7 +4,7 @@ export default class Resize {
     }
 
     static async disable(grid) {
-        delete grid._resize;
+        delete grid.resize;
     }
 
     async mouseDown(event) {

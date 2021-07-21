@@ -4,6 +4,7 @@ data-grid {
     --cl-sticky: #ededed;
     --cl-border: silver;
     --cl-column-group: #ededed;
+    --cl-placeholder: whitesmoke;
 
     display: grid;
     background: white;
@@ -62,4 +63,26 @@ data-grid .grouping-header {
     flex-direction: row;
     align-items: center;
     padding: var(--padding);
+}
+
+data-grid .placeholder {
+    position: relative;
+    background: var(--cl-placeholder);
+}
+
+data-grid .placeholder:before {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    left: 0.25rem;
+    border: dashed 1px var(--cl-border);
+}
+
+.clone {
+    padding: 0.5rem;
+    background: silver;
+    box-shadow: 0 0 5px #000000b0;
+    will-change: transform;
 }

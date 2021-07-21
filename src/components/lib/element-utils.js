@@ -252,7 +252,8 @@ export async function createDragCanvas() {
         width: "100vw",
         height: "100vh",
         background: "transparent",
-        zIndex: 9999999
+        zIndex: 9999999,
+        pointerEvents: "none"
     })
     document.body.appendChild(element);
     return element;
@@ -287,6 +288,21 @@ export async function createPlaceholder(element, datasetFields) {
             }
         }
     }
-    placeholder.dataset.placeholder = "true";
+    placeholder.classList.add("placeholder");
+
+    if(element._rect != null) {
+        placeholder.style.width = `${element._rect.width}px`;
+    }
+
     return placeholder;
+}
+
+export async function cloneForMoving(element) {
+    element._rect = element._rect || element.getBoundingClientRect();
+    const result = document.createElement("div");
+    result.textContent = element.textContent;
+    result.style.width = `${element._rect.width}px`;
+    result.style.height = `${element._rect.height}px`;
+    result.classList.add("clone");
+    return result;
 }

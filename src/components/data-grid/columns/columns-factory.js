@@ -33,19 +33,20 @@ async function createColumns(grid, columns) {
     grid.bodyElement.appendChild(fragment);
 }
 
-async function createColumnCSS(grid, length) {
-    const width = [];
-    for (let i = 0; i < length; i++) {
-        width.push("auto");
-    }
-    grid.bodyElement.style.gridTemplateColumns = `repeat(${length}, auto)`;
-}
-
 async function createColumn(column) {
     const element = document.createElement("div");
     element.classList.add("column-header");
     element.textContent = column.title;
     element.element = element;
     element.style.width = `${column.width}px`;
+    element.dataset.feature = "move";
     return element;
+}
+
+async function createColumnCSS(grid, length) {
+    const width = [];
+    for (let i = 0; i < length; i++) {
+        width.push("auto");
+    }
+    grid.bodyElement.style.gridTemplateColumns = `repeat(${length}, auto)`;
 }

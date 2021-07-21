@@ -80,23 +80,23 @@ export class DataGrid extends HTMLElement {
         if (this.settings.features == null) return;
 
         if (this.settings.features.group == true) {
-            this._group = (await import("./features/group.js")).default;
-            await this._group.enable(this);
+            this.group = (await import("./features/group.js")).default;
+            await this.group.enable(this);
         }
 
         if (this.settings.features.move == true) {
-            this._move = (await import("./features/move.js")).default;
-            await this._move.enable(this);
+            this.move = (await import("./features/move.js")).default;
+            await this.move.enable(this);
         }
 
         if (this.settings.features.sort == true) {
-            this._sort = (await import("./features/sort.js")).default;
-            await this._sort.enable(this);
+            this.sort = (await import("./features/sort.js")).default;
+            await this.sort.enable(this);
         }
 
         if (this.settings.features.resize == true) {
-            this._resize = (await import("./features/resize.js")).default;
-            await this._resize.enable(this);
+            this.resize = (await import("./features/resize.js")).default;
+            await this.resize.enable(this);
         }
     }
 }
