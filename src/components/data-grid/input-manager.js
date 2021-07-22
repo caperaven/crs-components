@@ -51,6 +51,14 @@ async function disableEvents(grid, ...events) {
 }
 
 async function mouseDown(event) {
+    if (this._isMoving == true) {
+        return;
+    }
+
+    if (event.button == 2) {
+        return context(event);
+    }
+
     await enableEvents(this, mouseEvents.UP, mouseEvents.MOVE);
     this._input.start = performance.now();
     this._input.startPosition.x = event.clientX;
@@ -83,4 +91,8 @@ async function click(event) {
     if (event.target.classList.contains("column-header")) {
         await this._sort?.perform(event.target);
     }
+}
+
+async function context(event) {
+
 }

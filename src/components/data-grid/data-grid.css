@@ -12,6 +12,7 @@ data-grid {
     border: solid 1px var(--cl-border);
     box-sizing: border-box;
     user-select: none;
+    position: relative;
 }
 
 data-grid * {
@@ -80,9 +81,36 @@ data-grid .placeholder:before {
     border: dashed 1px var(--cl-border);
 }
 
+data-grid .left-hanger, data-grid .right-hanger {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2rem;
+    background: red;
+    z-index: 99999;
+}
+
+data-grid .left-hanger {
+    left: 0;
+}
+
+data-grid .right-hanger {
+    right: 0;
+}
+
 .clone {
     padding: 0.5rem;
     background: silver;
     box-shadow: 0 0 5px #000000b0;
     will-change: transform;
+}
+
+data-grid .top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    background: transparent;
+    pointer-events: none;
 }

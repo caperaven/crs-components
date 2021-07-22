@@ -25,6 +25,7 @@ export class DataGrid extends HTMLElement {
             this.headerElement = this.querySelector(".header");
             this.bodyElement = this.querySelector(".body");
             this.footerElement = this.querySelector(".footer");
+            this.rect = this.getBoundingClientRect();
             this.isReady = true;
             this.dispatchEvent(new CustomEvent("isReady"));
         })
@@ -43,6 +44,7 @@ export class DataGrid extends HTMLElement {
         this.headerElement = null;
         this.bodyElement = null;
         this.footerElement = null;
+        this.topElement = null;
     }
 
     async initialize(args) {
