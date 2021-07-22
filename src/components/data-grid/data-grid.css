@@ -99,6 +99,7 @@ data-grid .right-hanger {
 }
 
 .clone {
+    position: absolute;
     padding: 0.5rem;
     background: silver;
     box-shadow: 0 0 5px #000000b0;

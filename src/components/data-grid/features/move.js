@@ -16,9 +16,8 @@ export default class Move {
         }
 
         if (grid.moveArgs != null) {
-            grid.moveArgs.clone.style.transform = `translate(${input.position.x}px, ${input.position.y}px)`;
             grid.moveArgs.target = event.target;
-            grid.moveArgs.x = event.clientX;
+            grid.moveArgs.currentX = event.currentX;
         }
     }
 
@@ -98,7 +97,11 @@ async function checkScroll() {
 
     requestAnimationFrame(this.moveArgs.checkScrollHandler);
 
-    const x = this.moveArgs.x;
+    if (this.moveArgs != null) {
+        this.moveArgs.clone.style.transform = `translate(${this._input.position.x}px, ${this._input.position.y}px)`;
+    }
+
+    const x = this._input.position.x;
 
     if (x > this.rect.right - 32) {
         this.bodyElement.scrollBy({left: this.settings.scrollSpeed});
