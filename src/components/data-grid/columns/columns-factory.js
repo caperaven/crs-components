@@ -16,8 +16,9 @@ export class Columns {
 async function createColumns(grid, columns) {
     const fragment = document.createDocumentFragment();
     let sticky = 0;
+    let index = 1;
     for (let column of columns) {
-        const element = await createColumn(column);
+        const element = await createColumn(column, index++);
 
         if (column.sticky == true) {
             column.left = sticky;
@@ -33,13 +34,16 @@ async function createColumns(grid, columns) {
     grid.bodyElement.appendChild(fragment);
 }
 
-async function createColumn(column) {
+async function createColumn(column, index) {
+    console.log(column);
+    console.log(index);
     const element = document.createElement("div");
     element.classList.add("column-header");
     element.classList.add(column.align || "left");
     element.textContent = column.title;
     element.element = element;
     element.style.width = `${column.width}px`;
+    element.style.gridColumnStart = index;
     element.dataset.feature = "move";
     return element;
 }

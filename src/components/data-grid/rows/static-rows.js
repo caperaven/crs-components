@@ -58,12 +58,14 @@ async function createRows(grid, data) {
 }
 
 async function createCells(grid, row, fragment) {
+    let index = 1;
     for (let column of grid._columns) {
         const element = document.createElement("div");
         element.setAttribute("role", "gridcell");
         element.textContent = row[column.field];
         element.dataset.field = column.field;
         element.classList.add(column.align || "left");
+        element.style.gridColumnStart = index++;
 
         if (column.sticky == true) {
             element.classList.add("sticky");
