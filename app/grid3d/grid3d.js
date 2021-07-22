@@ -16,7 +16,7 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 headers: headers,
                 data: data,
                 type: "static",
-                pageSize: 20 ,
+                pageSize: 100 ,
                 scrollSpeed: 10,
                 features: {
                     group: true,
@@ -41,5 +41,9 @@ export default class Grid extends crsbinding.classes.ViewBase {
 
     async previous() {
         await StaticRows.previousPage(this.grid);
+    }
+
+    async moveRight() {
+        this.grid.moveColumns(2, 10);
     }
 }

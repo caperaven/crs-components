@@ -39,6 +39,33 @@ export default class Move {
         delete grid.animationLayer;
         delete input._isMoving;
     }
+
+    static async moveColumn(grid, start, end) {
+        const buffer = [
+            {
+                elements: grid.bodyElement.querySelectorAll(`[data-col="${start}"]`),
+                start: start,
+                end: end
+            }
+        ];
+
+        // 1. Create buffer of affected elements
+        for (let i = start + 1; i <= end; i++) {
+            buffer.push({
+                elements: grid.bodyElement?.querySelectorAll(`[data-col="${i}"]`),
+                start: i,
+                end: i-1
+            })
+        }
+
+        // 2. Apply changes
+        for (let item of buffer) {
+            for (let element of item.elements) {
+                element.dataset.col = item.end;
+                element.style.gridColumnStart = item.end;
+            }
+        }
+    }
 }
 
 class AutoScroller {

@@ -49,15 +49,17 @@ async function createRows(grid, data) {
     const start = grid.settings.page * grid.settings.pageSize;
     let end = Math.min(start + grid.settings.pageSize, data.length);
 
+    let index = 0;
     for (let i = start; i < end; i++) {
         const row = data[i];
-        await createCells(grid, row, fragment);
+        await createCells(grid, row, fragment, grid._startRowIndex + index);
+        index++;
     }
 
     grid.bodyElement.appendChild(fragment);
 }
 
-async function createCells(grid, row, fragment) {
+async function createCells(grid, row, fragment, rowIndex) {
     let index = 1;
     for (let column of grid._columns) {
         const element = document.createElement("div");
@@ -65,7 +67,9 @@ async function createCells(grid, row, fragment) {
         element.textContent = row[column.field];
         element.dataset.field = column.field;
         element.classList.add(column.align || "left");
+        element.dataset.col = index;
         element.style.gridColumnStart = index++;
+        element.style.gridRowStart = rowIndex;
 
         if (column.sticky == true) {
             element.classList.add("sticky");

@@ -72,6 +72,7 @@ export class DataGrid extends HTMLElement {
     }
 
     async _initColumns() {
+        this._startRowIndex = this.settings.headers != null ? 3 : 2;
         await Columns.enable(this, this.settings.columns);
     }
 
@@ -102,6 +103,10 @@ export class DataGrid extends HTMLElement {
             this.resize = (await import("./features/resize.js")).default;
             await this.resize.enable(this);
         }
+    }
+
+    async moveColumns(start, end) {
+        await this.move?.moveColumn(this, start, end);
     }
 }
 

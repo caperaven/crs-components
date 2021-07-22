@@ -17,8 +17,11 @@ async function createColumns(grid, columns) {
     const fragment = document.createDocumentFragment();
     let sticky = 0;
     let index = 1;
+
+    const rowIndex = grid._startRowIndex - 1;
+
     for (let column of columns) {
-        const element = await createColumn(column, index++);
+        const element = await createColumn(column, index++, rowIndex);
 
         if (column.sticky == true) {
             column.left = sticky;
@@ -34,9 +37,7 @@ async function createColumns(grid, columns) {
     grid.bodyElement.appendChild(fragment);
 }
 
-async function createColumn(column, index) {
-    console.log(column);
-    console.log(index);
+async function createColumn(column, index, rowIndex) {
     const element = document.createElement("div");
     element.classList.add("column-header");
     element.classList.add(column.align || "left");
@@ -44,6 +45,8 @@ async function createColumn(column, index) {
     element.element = element;
     element.style.width = `${column.width}px`;
     element.style.gridColumnStart = index;
+    element.style.gridRowStart = rowIndex;
+    element.dataset.col = index;
     element.dataset.feature = "move";
     return element;
 }
