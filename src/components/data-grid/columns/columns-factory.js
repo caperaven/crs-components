@@ -36,6 +36,7 @@ async function createColumns(grid, columns) {
 async function createColumn(column) {
     const element = document.createElement("div");
     element.classList.add("column-header");
+    element.classList.add(column.align || "left");
     element.textContent = column.title;
     element.element = element;
     element.style.width = `${column.width}px`;

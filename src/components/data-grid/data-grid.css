@@ -114,3 +114,15 @@ data-grid .top {
     background: transparent;
     pointer-events: none;
 }
+
+data-grid .left {
+    text-align: left;
+}
+
+data-grid .right {
+    text-align: right;
+}
+
+data-grid .center {
+    text-align: center;
+}

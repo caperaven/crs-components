@@ -63,6 +63,7 @@ async function createCells(grid, row, fragment) {
         element.setAttribute("role", "gridcell");
         element.textContent = row[column.field];
         element.dataset.field = column.field;
+        element.classList.add(column.align || "left");
 
         if (column.sticky == true) {
             element.classList.add("sticky");

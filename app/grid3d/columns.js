@@ -17,63 +17,74 @@ export const columns = [
         title: "Description",
         field: "description",
         width: 300,
-        type: "memo"
+        type: "memo",
     },
     {
         title: "Is Active",
         field: "isActive",
         width: 100,
-        type: "boolean"
+        type: "boolean",
+        align: "right"
     },
     {
         title: "Field 1",
         field: "field1",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 2",
         field: "field2",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 3",
         field: "field3",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 4",
         field: "field4",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 5",
         field: "field5",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 6",
         field: "field6",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 7",
         field: "field7",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 8",
         field: "field8",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 9",
         field: "field9",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 10",
         field: "field10",
-        width: 100
+        width: 100,
+        align: "center"
     },
     {
         title: "Field 11",
