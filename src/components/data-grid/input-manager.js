@@ -1,8 +1,9 @@
 const mouseEvents = Object.freeze({
-    DOWN    : { key: "mousedown", fn: mouseDown },
-    UP      : { key: "mouseup",   fn: mouseUp },
-    MOVE    : { key: "mousemove", fn: mouseMove },
-    CLICK   : { key: "click",     fn: click }
+    LEAVE   : { key: "mouseleave", fn: mouseLeave},
+    DOWN    : { key: "mousedown",  fn: mouseDown },
+    UP      : { key: "mouseup",    fn: mouseUp },
+    MOVE    : { key: "mousemove",  fn: mouseMove },
+    CLICK   : { key: "click",      fn: click }
 })
 
 export class InputManager {
@@ -59,7 +60,7 @@ async function mouseDown(event) {
         return context(event);
     }
 
-    await enableEvents(this, mouseEvents.UP, mouseEvents.MOVE);
+    await enableEvents(this, mouseEvents.UP, mouseEvents.MOVE, mouseEvents.LEAVE);
     this._input.start = performance.now();
     this._input.startPosition.x = event.clientX;
     this._input.startPosition.y = event.clientY;
@@ -77,7 +78,7 @@ async function mouseUp(event) {
     this._input.end = performance.now();
     this._input.position.x = event.clientX;
     this._input.position.y = event.clientY;
-    await disableEvents(this, mouseEvents.UP, mouseEvents.MOVE);
+    await disableEvents(this, mouseEvents.UP, mouseEvents.MOVE, mouseEvents.LEAVE);
 
     if (this._input.time < 300 && this._input.offset < 5) {
         this._events[mouseEvents.CLICK.key](event);
@@ -91,6 +92,10 @@ async function click(event) {
     if (event.target.classList.contains("column-header")) {
         await this._sort?.perform(event.target);
     }
+}
+
+async function mouseLeave(event) {
+    return this._events[mouseEvents.UP.key](event);
 }
 
 async function context(event) {

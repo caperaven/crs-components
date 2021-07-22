@@ -49,6 +49,8 @@ export class DataGrid extends HTMLElement {
 
     async initialize(args) {
         this.settings = args;
+        this.settings.scrollSpeed = this.settings.scrollSpeed || 5;
+
         await this._initHeaders();
         await this._initColumns();
         await this._initRows();

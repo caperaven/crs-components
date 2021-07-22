@@ -74,10 +74,10 @@ async function checkScroll() {
     const x = this.moveArgs.x;
 
     if (x > this.rect.right - 32) {
-        this.bodyElement.scrollBy({left: 5});
+        this.bodyElement.scrollBy({left: this.settings.scrollSpeed});
     }
 
     if (x < this.rect.left + 32) {
-        this.bodyElement.scrollBy({left: -5});
+        this.bodyElement.scrollBy({left: -this.settings.scrollSpeed});
     }
 }
