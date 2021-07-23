@@ -17,7 +17,7 @@ export class Materials {
     async get(type, color) {
         let material = this.materials[type][color];
         if (material == null) {
-            await material = this[type](color);
+            material = this[type](color);
             this.materials[type][color] = material;
         }
         return material;

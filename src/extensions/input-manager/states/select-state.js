@@ -60,7 +60,7 @@ export class SelectState extends BaseState {
     }
 
     async exit() {
-        await this.gizmo._hide();
+        await this.gizmo?._hide();
         this._selected = null;
         this._transformer2D = this._transformer2D.dispose();
         await super.exit();

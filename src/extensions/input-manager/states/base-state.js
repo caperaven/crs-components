@@ -1,18 +1,18 @@
 export class BaseState extends crs.state.StateBase {
     get camera() {
-        return this._context.canvas.camera;
+        return this._context?.canvas?.camera;
     }
 
     get element() {
-        return this._context.canvas.renderer.domElement;
+        return this._context?.canvas?.renderer?.domElement;
     }
 
     get sceneItems() {
-        return this._context.canvas.scene.children;
+        return this._context?.canvas?.scene?.children;
     }
 
     get gizmo() {
-        return this._context.canvas._transformGizmo;
+        return this._context?.canvas?._transformGizmo;
     }
 
     constructor(context, state) {
@@ -45,9 +45,9 @@ export class BaseState extends crs.state.StateBase {
     }
 
     async exit() {
-        this.element.removeEventListener("pointerup", this._pointerUpHandler);
-        this.element.removeEventListener("pointermove", this._pointerMoveHandler);
-        this.element.removeEventListener("pointerdown", this._pointerDownHandler);
+        this.element?.removeEventListener("pointerup", this._pointerUpHandler);
+        this.element?.removeEventListener("pointermove", this._pointerMoveHandler);
+        this.element?.removeEventListener("pointerdown", this._pointerDownHandler);
         this._raycaster = null;
         this._mouse = null;
         this._mouseStart = null;

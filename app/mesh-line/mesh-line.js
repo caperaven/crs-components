@@ -57,6 +57,7 @@ export default class MeshLineView extends crsbinding.classes.ViewBase {
     }
 
     animate() {
+        if (this.animateHandler == null) return;
         requestAnimationFrame(this.animateHandler);
         let point = this.points[4];
         point += 0.01;
