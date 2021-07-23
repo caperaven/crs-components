@@ -1,6 +1,6 @@
 {
     "name": "crs-components",
-    "version": "0.0.70",
+    "version": "0.0.71",
     "description": "component library",
     "main": "index.js",
     "directories": {

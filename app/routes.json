@@ -113,6 +113,11 @@
       "title": "Adaptive Loader",
       "hash": "#adaptive-loader",
       "view": "adaptive-loader"
+    },
+    {
+      "title": "Curves",
+      "hash": "#curves",
+      "view": "curves"
     }
   ]
 }

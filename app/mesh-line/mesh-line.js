@@ -31,7 +31,7 @@ export default class MeshLineView extends crsbinding.classes.ViewBase {
                 resolution: { x: this.canvas.width, y: this.canvas.height },
                 sizeAttenuation:false,
                 blending: blending,
-                lineWidth: 20,
+                lineWidth: 15,
                 transparent: true,
                 repeat: await crs.createThreeObject("Vector2", 10, 1)
             })
@@ -48,7 +48,7 @@ export default class MeshLineView extends crsbinding.classes.ViewBase {
     loadImage() {
         return new Promise(async resolve => {
             const loader = await crs.createThreeObject("TextureLoader");
-            loader.load('/app/mesh-line/images/stroke2.png', async texture => {
+            loader.load('/app/mesh-line/images/triangle.png', async texture => {
                 const strokeTexture = texture;
                 strokeTexture.wrapS = strokeTexture.wrapT = await crs.getThreeConstant("RepeatWrapping");
                 resolve(strokeTexture);

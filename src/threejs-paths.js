@@ -28,6 +28,9 @@ export async function loadThreeModules(root) {
     await crs.modules.add("ShapeGeometry",          `${url}geometries/ShapeGeometry.js`);
     await crs.modules.add("ExtrudeGeometry",        `${url}geometries/ExtrudeGeometry.js`);
 
+    // curves
+    await crs.modules.add("CatmullRomCurve3",        `${url}extras/curves/CatmullRomCurve3.js`);
+
     // cameras
     await crs.modules.add("OrthographicCamera",     `${url}cameras/OrthographicCamera.js`);
     await crs.modules.add("PerspectiveCamera",      `${url}cameras/PerspectiveCamera.js`);
