@@ -8,7 +8,7 @@ export class PerspectiveCanvas extends CameraCanvasBase {
 
     get fov() {
         if (this._fov == null) {
-            this._fov = Number(this.getAttribute("fov") || 75);
+            this._fov = Number(this.getAttribute("fov") || 60);
         }
         return this._fov;
     }
