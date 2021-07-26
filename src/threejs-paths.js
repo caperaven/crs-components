@@ -28,8 +28,15 @@ export async function loadThreeModules(root) {
     await crs.modules.add("ShapeGeometry",          `${url}geometries/ShapeGeometry.js`);
     await crs.modules.add("ExtrudeGeometry",        `${url}geometries/ExtrudeGeometry.js`);
 
-    // curves
+    // curvesCubicBezierCurve3
     await crs.modules.add("CatmullRomCurve3",        `${url}extras/curves/CatmullRomCurve3.js`);
+    await crs.modules.add("Path",                    `${url}extras/core/Path.js`);
+    await crs.modules.add("ShapePath",               `${url}extras/core/ShapePath.js`);
+    await crs.modules.add("LineCurve3",              `${url}extras/curves/LineCurve3.js`);
+    await crs.modules.add("CurvePath",               `${url}extras/core/CurvePath.js`);
+    await crs.modules.add("QuadraticBezierCurve3",   `${url}extras/curves/QuadraticBezierCurve3.js`);
+    await crs.modules.add("CubicBezierCurve3",       `${url}extras/curves/CubicBezierCurve3.js`);
+
 
     // cameras
     await crs.modules.add("OrthographicCamera",     `${url}cameras/OrthographicCamera.js`);
@@ -53,8 +60,6 @@ export async function loadThreeModules(root) {
     await crs.modules.add("ThreeConstants",         `${url}constants.js`);
     await crs.modules.add("FileLoader",             `${url}loaders/FileLoader.js`);
     await crs.modules.add("Loader",                 `${url}loaders/Loader.js`);
-    await crs.modules.add("Path",                   `${url}extras/core/Path.js`);
-    await crs.modules.add("ShapePath",              `${url}extras/core/ShapePath.js`);
     await crs.modules.add("Shape",                  `${url}extras/core/Shape.js`);
     await crs.modules.add("Group",                  `${url}objects/Group.js`);
     await crs.modules.add("UniformsUtils",          `${url}renderers/shaders/UniformsUtils.js`);
