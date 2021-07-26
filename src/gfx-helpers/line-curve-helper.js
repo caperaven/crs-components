@@ -1,20 +1,37 @@
 export class LineCurveHelper {
-    static async new(mesh) {
+    static async new(xScale, yScale, gapSize, material, scene, name) {
         const curvePath         = await crs.createThreeObject("CurvePath");
         const Vector3           = await crs.getThreePrototype("Vector3");
+        const dummy             = await crs.createThreeObject("Object3D");
 
-        const instance  = new LineCurveHelper(curvePath, Vector3);
+        const instance  = new LineCurveHelper(curvePath, Vector3, dummy, xScale, yScale, gapSize, material, scene, name);
         return instance;
     }
 
-    constructor(curvePath, Vector3, CubicBezierCurve3) {
+    constructor(curvePath, Vector3, dummy, xScale, yScale, gapSize, material, scene, name) {
+        this.mesh?.dispose();
+        this.mesh = null;
         this.curvePath = curvePath;
         this.Vector3 = Vector3;
+        this.dummy = dummy;
+        this.xScale = xScale;
+        this.yScale = yScale;
+        this.gapSize = gapSize;
+        this.material = material;
+        this.scene = scene;
+        this.name = name;
     }
 
     dispose() {
         delete this.curvePath;
         delete this.Vector3;
+        delete this.dummy;
+        delete this.xScale;
+        delete this.yScale;
+        delete this.gapSize;
+        delete this.material;
+        delete this.scene;
+        delete this.name;
     }
 
     async addLine(p1, p2) {
@@ -60,14 +77,19 @@ export class LineCurveHelper {
         return line;
     }
 
-    async drawDashes(xScale, yScale, gapSize, material, scene) {
-        const PlaneGeometry = await crs.getThreePrototype("PlaneGeometry");
-        const Mesh          = await crs.getThreePrototype("Mesh");
-        const length        = this.curvePath.getLength();
-        const size          = xScale + gapSize;
-        const count         = Math.round(length / size);
-        const up            = new this.Vector3( 0, 1, 0 );
-        const axis          = new this.Vector3();
+    async drawDashes() {
+        const InstancedMesh     = await crs.getThreePrototype("InstancedMesh");
+        const PlaneGeometry     = await crs.getThreePrototype("PlaneGeometry");
+        const DynamicDrawUsage  = await crs.getThreeConstant("DynamicDrawUsage");
+        const length            = this.curvePath.getLength();
+        const size              = this.yScale + this.gapSize;
+        const count             = Math.round(length / size);
+        const up                = new this.Vector3( 0, 1, 0 );
+        const axis              = new this.Vector3();
+
+        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, count);
+        this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
+        this.mesh.name = name;
 
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
@@ -75,12 +97,42 @@ export class LineCurveHelper {
             axis.crossVectors(up, tangent).normalize();
             const radians = Math.acos(up.dot(tangent));
             const point = this.curvePath.getPointAt(norm);
-            const plane = new PlaneGeometry();
-            const mesh = new Mesh(plane, material);
-            mesh.position.copy(point);
-            mesh.scale.set(xScale, yScale, 1);
-            mesh.quaternion.setFromAxisAngle(axis, radians);
-            scene.add(mesh);
+
+            this.dummy.position.copy(point);
+            this.dummy.scale.set(this.xScale, this.yScale, 1);
+            this.dummy.quaternion.setFromAxisAngle(axis, radians);
+            this.dummy.updateMatrix();
+
+            this.mesh.setMatrixAt(i, this.dummy.matrix);
+        }
+
+        this.mesh.instanceMatrix.needsUpdate = true;
+        this.scene.add(this.mesh);
+    }
+
+    async update() {
+        this.curvePath.needsUpdate = true;
+        this.curvePath.updateArcLengths();
+
+        const length            = this.curvePath.getLength();
+        const size              = this.yScale + this.gapSize;
+        const count             = Math.round(length / size);
+        const up                = new this.Vector3( 0, 1, 0 );
+        const axis              = new this.Vector3();
+
+        for (let i = 0; i <= count; i++) {
+            const norm = i / count;
+            const tangent = this.curvePath.getTangent(norm);
+            axis.crossVectors(up, tangent).normalize();
+            const radians = Math.acos(up.dot(tangent));
+            const point = this.curvePath.getPointAt(norm);
+
+            this.dummy.position.copy(point);
+            this.dummy.scale.set(this.xScale, this.yScale, 1);
+            this.dummy.quaternion.setFromAxisAngle(axis, radians);
+            this.dummy.updateMatrix();
+
+            this.mesh.setMatrixAt(i, this.dummy.matrix);
         }
     }
 
