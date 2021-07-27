@@ -52,6 +52,8 @@ export default class Curves extends crsbinding.classes.ViewBase {
         await curve.addLine({x: 300, y: -100}, {x: 400, y: -100});
         await curve.addCubicBezier({x: 400, y: -100}, {x: 400, y: -400}, {x: 100, y: -400},{x: 100, y: -100});
 
+        this.mainJoint = new LineCurve3Joint(curve, 0, 1);
+
         await curve.drawDashes();
     }
 
@@ -75,7 +77,7 @@ export default class Curves extends crsbinding.classes.ViewBase {
     }
 
     async update() {
-        await this.setValue(2);
+        await this.setValue(0.5);
     }
 
     async setValue(value) {
@@ -86,7 +88,7 @@ export default class Curves extends crsbinding.classes.ViewBase {
         }
 
         this.joint.update(null, yValue);
-        await this.dynamicCurve.update();
+        //this.mainJoint.update(null, yValue);
         this.canvas.render();
     }
 }

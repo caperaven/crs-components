@@ -37,5 +37,6 @@ export class LineCurve3Joint {
 
         c1.updateArcLengths();
         c2.updateArcLengths();
+        this._curve.update();
     }
 }
