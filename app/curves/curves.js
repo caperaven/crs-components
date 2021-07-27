@@ -81,13 +81,20 @@ export default class Curves extends crsbinding.classes.ViewBase {
     }
 
     async update() {
-        const v = this.dynamicCurve.curvePath.curves[0].v2;
-        v.v2.y += 100;
-        v.v2.needsUpdate = true;
-
-        this.dynamicCurve.curvePath.curves[0].updateArcLengths();
+        this.setValue(100);
 
         await this.dynamicCurve.update();
         this.canvas.render();
+    }
+
+    setValue(value) {
+        const c1 = this.dynamicCurve.curvePath.curves[0];
+        const c2 = this.dynamicCurve.curvePath.curves[1];
+
+        c1.v2.y += value;
+        c1.updateArcLengths();
+
+        c2.v1.y += value;
+        c2.updateArcLengths();
     }
 }

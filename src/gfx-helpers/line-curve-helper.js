@@ -94,6 +94,7 @@ export class LineCurveHelper {
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
             const tangent = this.curvePath.getTangent(norm);
+
             axis.crossVectors(up, tangent).normalize();
             const radians = Math.acos(up.dot(tangent));
             const point = this.curvePath.getPointAt(norm);
@@ -111,29 +112,9 @@ export class LineCurveHelper {
     }
 
     async update() {
-        this.curvePath.needsUpdate = true;
         this.curvePath.updateArcLengths();
-
-        const length            = this.curvePath.getLength();
-        const size              = this.yScale + this.gapSize;
-        const count             = Math.round(length / size);
-        const up                = new this.Vector3( 0, 1, 0 );
-        const axis              = new this.Vector3();
-
-        for (let i = 0; i <= count; i++) {
-            const norm = i / count;
-            const tangent = this.curvePath.getTangent(norm);
-            axis.crossVectors(up, tangent).normalize();
-            const radians = Math.acos(up.dot(tangent));
-            const point = this.curvePath.getPointAt(norm);
-
-            this.dummy.position.copy(point);
-            this.dummy.scale.set(this.xScale, this.yScale, 1);
-            this.dummy.quaternion.setFromAxisAngle(axis, radians);
-            this.dummy.updateMatrix();
-
-            this.mesh.setMatrixAt(i, this.dummy.matrix);
-        }
+        this.scene.remove(this.mesh);
+        await this.drawDashes();
     }
 
     async drawLine(material, scene) {
