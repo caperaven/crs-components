@@ -44,7 +44,7 @@ export default class Curves extends crsbinding.classes.ViewBase {
         const MeshBasicMaterial = await crs.getThreePrototype("MeshBasicMaterial");
         const planMaterial      = new MeshBasicMaterial({color : 0xff0090});
 
-        const curve = await LineCurveHelper.new(5, 10, 5, planMaterial, this.canvas.scene, "static curve");
+        const curve = await LineCurveHelper.new(2, 5, 2, planMaterial, this.canvas.scene, "static curve");
         await curve.addLine({x: 100, y: -100}, {x: 200, y: -100});
         await curve.addLine({x: 200, y: -100}, {x: 200, y: -200});
         await curve.addQuadraticBezier({x: 200, y: -200}, {x: 250, y:-250}, {x: 300, y: -200});
@@ -60,9 +60,14 @@ export default class Curves extends crsbinding.classes.ViewBase {
     async dynamic() {
         const MeshBasicMaterial = await crs.getThreePrototype("MeshBasicMaterial");
         const planMaterial      = new MeshBasicMaterial({color : 0x0000ff});
-        this.dynamicCurve       = await LineCurveHelper.new(5, 10, 5, planMaterial, this.canvas.scene, "dynamic curve");
+        this.dynamicCurve       = await LineCurveHelper.new(2, 5, 2, planMaterial, this.canvas.scene, "dynamic curve");
         await this.dynamicCurve.addLine({x: 100, y: -100}, {x: 250, y: -300});
         await this.dynamicCurve.addLine({x: 250, y: -300}, {x: 400, y: -100});
+
+        await this.dynamicCurve.addLine({x: 400, y: -100}, {x: 600, y: -600});
+
+        await this.dynamicCurve.addLine({x: 600, y: -600}, {x: 200, y: -500});
+        await this.dynamicCurve.addLine({x: 200, y: -500}, {x: 100, y: -100});
         await this.dynamicCurve.drawDashes(5, 10, 5, planMaterial, this.canvas.scene, "my curve");
 
         this.joint = new LineCurve3Joint(this.dynamicCurve, 0, 1);
@@ -88,7 +93,7 @@ export default class Curves extends crsbinding.classes.ViewBase {
         }
 
         this.joint.update(null, yValue);
-        //this.mainJoint.update(null, yValue);
+        this.mainJoint.update(null, yValue);
         this.canvas.render();
     }
 }

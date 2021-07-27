@@ -90,7 +90,7 @@ export class LineCurveHelper {
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
 
-        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, count);
+        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, 300);
         this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
         this.mesh.name = name;
 
@@ -123,7 +123,7 @@ export class LineCurveHelper {
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
 
-        this.mesh.count = count;
+        //this.mesh.count = count;
 
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
