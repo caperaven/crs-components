@@ -1,3 +1,6 @@
+/**
+ * This class provides a way to define curved shapes where you can use instance meshes along a path.
+ */
 export class LineCurveHelper {
     static async new(xScale, yScale, gapSize, material, scene, name) {
         const curvePath         = await crs.createThreeObject("CurvePath");
@@ -113,8 +116,32 @@ export class LineCurveHelper {
 
     async update() {
         this.curvePath.updateArcLengths();
-        this.scene.remove(this.mesh);
-        await this.drawDashes();
+
+        const length            = this.curvePath.getLength();
+        const size              = this.yScale + this.gapSize;
+        const count             = Math.round(length / size);
+        const up                = new this.Vector3( 0, 1, 0 );
+        const axis              = new this.Vector3();
+
+        this.mesh.count = count;
+
+        for (let i = 0; i <= count; i++) {
+            const norm = i / count;
+            const tangent = this.curvePath.getTangent(norm);
+
+            axis.crossVectors(up, tangent).normalize();
+            const radians = Math.acos(up.dot(tangent));
+            const point = this.curvePath.getPointAt(norm);
+
+            this.dummy.position.copy(point);
+            this.dummy.scale.set(this.xScale, this.yScale, 1);
+            this.dummy.quaternion.setFromAxisAngle(axis, radians);
+            this.dummy.updateMatrix();
+
+            this.mesh.setMatrixAt(i, this.dummy.matrix);
+        }
+
+        this.mesh.instanceMatrix.needsUpdate = true;
     }
 
     async drawLine(material, scene) {

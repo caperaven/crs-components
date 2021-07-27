@@ -1,6 +1,7 @@
 import "../../../src/gfx-components/orthographic-canvas/orthographic-canvas.js";
 import {OrbitControls} from "../../../third-party/three/external/controls/OrbitControls.js";
 import {LineCurveHelper} from "./../../src/gfx-helpers/line-curve-helper.js";
+import {LineCurve3Joint} from "./../../src/gfx-helpers/line-curve3-joint.js";
 
 /**
  * https://stackoverflow.com/questions/49604847/object-rotating-while-travelling-along-a-curve-path
@@ -19,12 +20,6 @@ export default class Curves extends crsbinding.classes.ViewBase {
             this.canvas.zeroBottomLeft();
             this.canvas.camera.position.z = 10;
 
-            const Vector3 = await crs.getThreePrototype("Vector3");
-
-            this.line = await crs.createThreeObject("LineCurve3", new Vector3(1, 1, 1), new Vector3(4, 1, 1));
-            this.curvePath = await crs.createThreeObject("CurvePath");
-            this.curvePath.add(this.line);
-
             // this.orbitControl = new OrbitControls(this.canvas.camera, this.canvas.renderer.domElement);
             // this.orbitControl.update();
 
@@ -35,16 +30,18 @@ export default class Curves extends crsbinding.classes.ViewBase {
         this.canvas.addEventListener("ready", ready);
     }
 
+    async disconnectedCallback() {
+        await super.disconnectedCallback();
+        this.joint = this.joint.dispose();
+    }
+
     async initialize() {
         await this.catMull();
         await this.dynamic();
     }
 
     async catMull() {
-        const LineBasicMaterial = await crs.getThreePrototype("LineBasicMaterial");
         const MeshBasicMaterial = await crs.getThreePrototype("MeshBasicMaterial");
-
-        const material          = new LineBasicMaterial({color : 0xff0000});
         const planMaterial      = new MeshBasicMaterial({color : 0xff0090});
 
         const curve = await LineCurveHelper.new(5, 10, 5, planMaterial, this.canvas.scene, "static curve");
@@ -55,8 +52,6 @@ export default class Curves extends crsbinding.classes.ViewBase {
         await curve.addLine({x: 300, y: -100}, {x: 400, y: -100});
         await curve.addCubicBezier({x: 400, y: -100}, {x: 400, y: -400}, {x: 100, y: -400},{x: 100, y: -100});
 
-        // await curve.drawLine(material, this.canvas.scene);
-        // await curve.drawDashes(5, 10, 5, planMaterial, this.canvas.scene);
         await curve.drawDashes();
     }
 
@@ -67,34 +62,31 @@ export default class Curves extends crsbinding.classes.ViewBase {
         await this.dynamicCurve.addLine({x: 100, y: -100}, {x: 250, y: -300});
         await this.dynamicCurve.addLine({x: 250, y: -300}, {x: 400, y: -100});
         await this.dynamicCurve.drawDashes(5, 10, 5, planMaterial, this.canvas.scene, "my curve");
+
+        this.joint = new LineCurve3Joint(this.dynamicCurve, 0, 1);
     }
 
     async render() {
         requestAnimationFrame(this.render.bind(this));
         //this.orbitControl.update();
 
-        // for (let mesh of this.meshes) {
-        //     mesh.rotation.z += 0.01;
-        // }
-
+        await this.update();
         this.canvas.render();
     }
 
     async update() {
-        this.setValue(100);
-
-        await this.dynamicCurve.update();
-        this.canvas.render();
+        await this.setValue(2);
     }
 
-    setValue(value) {
-        const c1 = this.dynamicCurve.curvePath.curves[0];
-        const c2 = this.dynamicCurve.curvePath.curves[1];
+    async setValue(value) {
+        let yValue = this.joint.point.y + value;
 
-        c1.v2.y += value;
-        c1.updateArcLengths();
+        if (yValue >= 0) {
+            yValue = -300;
+        }
 
-        c2.v1.y += value;
-        c2.updateArcLengths();
+        this.joint.update(null, yValue);
+        await this.dynamicCurve.update();
+        this.canvas.render();
     }
 }
