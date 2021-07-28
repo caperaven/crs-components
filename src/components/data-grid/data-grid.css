@@ -106,6 +106,14 @@ data-grid .right-hanger {
     will-change: transform;
 }
 
+.marker {
+    position: absolute;
+    width: 0.5rem;
+    height: 2.5rem;
+    background: var(--cl-marker);
+    opacity: 0.7;
+}
+
 data-grid .top {
     position: absolute;
     left: 0;
@@ -126,4 +134,8 @@ data-grid .right {
 
 data-grid .center {
     text-align: center;
+}
+
+.drag-layer {
+    --cl-marker: #0080ff;
 }

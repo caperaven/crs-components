@@ -27,12 +27,25 @@ export default class Move {
         await AutoScroller.disable(grid);
 
         grid.animationLayer.removeChild(grid.moveArgs.clone);
+        grid.animationLayer.removeChild(grid.moveArgs.marker);
+
         await grid.animationLayer.parentElement.removeChild(grid.animationLayer);
+
+        if (grid.moveArgs.target.classList.contains("column-header")) {
+            const position  = Number(grid.moveArgs.marker.dataset.position);
+            const fromIndex = Number(grid.moveArgs.element.dataset.col);
+            const toIndex   = Number(grid.moveArgs.target.dataset.col) + position;
+
+            if (fromIndex !== toIndex) {
+                await this.moveColumn(grid, fromIndex, toIndex);
+            }
+        }
 
         delete grid.moveArgs.placeholder;
         delete grid.moveArgs.element;
         delete grid.moveArgs.clone;
         delete grid.moveArgs.target;
+        delete grid.moveArgs.marker;
         delete grid.moveArgs;
 
         delete grid.animationLayer;
@@ -80,15 +93,23 @@ class AutoScroller {
 
 async function startMove(grid, event) {
     grid.animationLayer = await createDragCanvas();
+
     const clone = await cloneForMoving(event.target);
     grid.animationLayer.appendChild(clone);
+
     const placeholder = await createPlaceholder(event.target);
     event.target.parentElement.replaceChild(placeholder, event.target);
+
+    const marker = document.createElement("div");
+    marker.classList.add("marker");
+
+    grid.animationLayer.append(marker);
 
     grid.moveArgs = {
         placeholder : placeholder,
         element     : event.target,
-        clone       : clone
+        clone       : clone,
+        marker      : marker
     }
 }
 
@@ -97,11 +118,12 @@ async function checkScroll() {
 
     requestAnimationFrame(this.moveArgs.checkScrollHandler);
 
+    const x = this._input.position.x;
+
     if (this.moveArgs != null) {
         this.moveArgs.clone.style.transform = `translate(${this._input.position.x}px, ${this._input.position.y}px)`;
+        await updateMarker(this.moveArgs.target, this.moveArgs.marker, x);
     }
-
-    const x = this._input.position.x;
 
     if (x > this.rect.right - 32) {
         this.bodyElement.scrollBy({left: this.settings.scrollSpeed});
@@ -109,5 +131,24 @@ async function checkScroll() {
 
     if (x < this.rect.left + 32) {
         this.bodyElement.scrollBy({left: -this.settings.scrollSpeed});
+    }
+}
+
+async function updateMarker(target, marker, x) {
+    if (target == null) return;
+    const isColumn = target.classList.contains("column-header");
+    const isPlaceholder = target.classList.contains("placeholder");
+
+    if (isColumn === false && isPlaceholder === false) return;
+
+    const rect = target.getBoundingClientRect();
+
+    if (x < rect.left + (rect.width / 2)) {
+        marker.style.transform = `translate(${rect.left - 4}px, ${rect.top}px)`;
+        marker.dataset.position = -1;
+    }
+    else {
+        marker.style.transform = `translate(${rect.right - 4}px, ${rect.top}px)`;
+        marker.dataset.position = 0;
     }
 }
