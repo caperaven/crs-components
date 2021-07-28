@@ -22,6 +22,8 @@ export default class Move {
     }
 
     static async mouseUp(grid, event, input) {
+        if (grid.moveArgs == null) return;
+
         grid.moveArgs.placeholder.parentElement.replaceChild(grid.moveArgs.element, grid.moveArgs.placeholder);
 
         await AutoScroller.disable(grid);
@@ -34,7 +36,15 @@ export default class Move {
         if (grid.moveArgs.target.classList.contains("column-header")) {
             const position  = Number(grid.moveArgs.marker.dataset.position);
             const fromIndex = Number(grid.moveArgs.element.dataset.col);
-            const toIndex   = Number(grid.moveArgs.target.dataset.col) + position;
+            let toIndex   = Number(grid.moveArgs.target.dataset.col);
+
+            if (toIndex > fromIndex) {
+                toIndex += position;
+            }
+            else {
+                toIndex += position == -1 ? 0 : 1;
+            }
+
             if (fromIndex !== toIndex) {
                 await this.moveColumn(grid, fromIndex, toIndex);
             }
