@@ -5,16 +5,12 @@ export const schema = {
             color: "#ff0000"
         },
         {
+            id: "green",
+            color: "#00ff00"
+        },
+        {
             id: "blue",
             color: "#0000ff"
-        }
-    ],
-
-    geometry: [
-        {
-            id: 0,
-            vertices: [],
-            normals: []
         }
     ],
 
@@ -30,6 +26,13 @@ export const schema = {
             type: "MeshBasicMaterial",
             args: {
                 color: "red"
+            }
+        },
+        {
+            id: "green",
+            type: "MeshBasicMaterial",
+            args: {
+                color: "green"
             }
         },
         {
@@ -65,14 +68,14 @@ export const schema = {
                 {
                     element: "PlaneGeometry",
                     material: "red",
+
                     args: {
                         transform: {
                             position: {x: -1, y: -1, z: 0},
                             scale: {x: 1, y: 2},
                         }
                     }
-                },
-
+                }
             ]
         },
         {
@@ -88,6 +91,23 @@ export const schema = {
                             position: {x: 1, y: 1, z: 0.1},
                             scale: {x: 2, y: 1},
                         }
+                    }
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: "Curves",
+            elements: [
+                {
+                    id: "main-curve",
+                    element: "CurveGeometry",
+                    material: "green",
+                    args: {
+                        icon: "arrow_right",
+                        transform: "s,10,20,1",
+                        gap: 10,
+                        data: "l,100,-100,0,200,-100,0,l,200,-100,0,200,-200,0,q,200,-200,0,250,-250,0,300,-200,0,l,300,-200,0,300,-100,0,l,300,-100,0,400,-100,0,c,400,-100,0,400,-400,0,100,-400,0,100,-100,0"
                     }
                 }
             ]
@@ -114,6 +134,11 @@ export const schema = {
                 id: "layer1",
                 element: "layer",
                 layer: 1
+            },
+            {
+                id: "layer3",
+                element: "layer",
+                layer: 2
             }
         ]
     }

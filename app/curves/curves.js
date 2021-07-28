@@ -31,6 +31,7 @@ export default class Curves extends crsbinding.classes.ViewBase {
     }
 
     async disconnectedCallback() {
+        this.disposed = true;
         await super.disconnectedCallback();
         this.joint = this.joint.dispose();
     }
@@ -52,28 +53,28 @@ export default class Curves extends crsbinding.classes.ViewBase {
         await curve.addLine({x: 300, y: -100}, {x: 400, y: -100});
         await curve.addCubicBezier({x: 400, y: -100}, {x: 400, y: -400}, {x: 100, y: -400},{x: 100, y: -100});
 
-        this.mainJoint = new LineCurve3Joint(curve, 0, 1);
+        this.mainJoint = new LineCurve3Joint(curve, 0);
 
-        await curve.drawDashes();
+        await curve.drawDashes(100);
     }
 
     async dynamic() {
         const MeshBasicMaterial = await crs.getThreePrototype("MeshBasicMaterial");
         const planMaterial      = new MeshBasicMaterial({color : 0x0000ff});
-        this.dynamicCurve       = await LineCurveHelper.new(2, 5, 2, planMaterial, this.canvas.scene, "dynamic curve");
+        this.dynamicCurve       = await LineCurveHelper.new(15, 10, 10, planMaterial, this.canvas.scene, "dynamic curve");
         await this.dynamicCurve.addLine({x: 100, y: -100}, {x: 250, y: -300});
         await this.dynamicCurve.addLine({x: 250, y: -300}, {x: 400, y: -100});
-
         await this.dynamicCurve.addLine({x: 400, y: -100}, {x: 600, y: -600});
-
         await this.dynamicCurve.addLine({x: 600, y: -600}, {x: 200, y: -500});
         await this.dynamicCurve.addLine({x: 200, y: -500}, {x: 100, y: -100});
-        await this.dynamicCurve.drawDashes(5, 10, 5, planMaterial, this.canvas.scene, "my curve");
+        await this.dynamicCurve.drawDashes(1000);
 
-        this.joint = new LineCurve3Joint(this.dynamicCurve, 0, 1);
+        this.joint = new LineCurve3Joint(this.dynamicCurve, 0);
     }
 
     async render() {
+        if (this.disposed == true) return;
+
         requestAnimationFrame(this.render.bind(this));
         //this.orbitControl.update();
 

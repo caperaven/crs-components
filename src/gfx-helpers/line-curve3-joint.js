@@ -2,10 +2,10 @@
  * This class updates joint positions between to touching LineCurve3 objects
  */
 export class LineCurve3Joint {
-    constructor(curve, index1, index2) {
+    constructor(curve, index1) {
         this._curve   = curve;
         this._index1  = index1;
-        this._index2  = index2;
+        this._index2  = index1 + 1;
 
         const vector = curve.curvePath.curves[index1].v2;
         this.point = {x: vector.x, y: vector.y, z: vector.z};

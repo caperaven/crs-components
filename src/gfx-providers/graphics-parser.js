@@ -19,6 +19,7 @@ import RawMaterialProvider from "./providers/materials/raw-material-provider.js"
 import HelpersProvider from "./providers/helpers/helpers-provider.js";
 import LayerProvider from "./providers/layer-provider.js";
 import TextProvider from "./providers/text-provider.js";
+import CurveProvider from "./providers/geometry/curve-geometry-provider.js";
 import {Program} from "./graphics-program.js";
 
 export class GraphicsParser extends BaseParser {
@@ -48,6 +49,7 @@ export class GraphicsParser extends BaseParser {
         await this.register(LayerProvider);
         await this.register(TextProvider);
         await this.register(IconGeometry);
+        await this.register(CurveProvider);
 
         for (let provider of providers || []) {
             await this.register(provider);

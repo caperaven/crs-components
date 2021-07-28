@@ -4,6 +4,7 @@ export async function initializeProviders() {
     await load(crs.gfx.providers,"BoxGeometry", "./providers/geometry/box-geometry-provider.js");
     await load(crs.gfx.providers,"LineGeometry", "./providers/geometry/line-geometry-provider.js");
     await load(crs.gfx.providers,"PlaneGeometry", "./providers/geometry/plane-geometry-provider.js");
+    await load(crs.gfx.providers, "CurveGeometry", "./providers/geometry/curve-geometry-provider.js");
 }
 
 async function load(target, name, file) {

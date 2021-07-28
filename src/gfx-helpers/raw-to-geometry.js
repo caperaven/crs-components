@@ -6,7 +6,7 @@
  * @returns {Promise<*>}
  */
 export async function rawToGeometry (def, material) {
-    const Float32BufferAttribute = await crs.modules.getPrototype("BufferAttribute", "Float32BufferAttribute");
+    const Float32BufferAttribute = await crs.threeModules.getPrototype("BufferAttribute", "Float32BufferAttribute");
 
     const geometry = await crs.createThreeObject("BufferGeometry");
     const positions = def.vertices.slice(0);

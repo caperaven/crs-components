@@ -80,7 +80,7 @@ export class LineCurveHelper {
         return line;
     }
 
-    async drawDashes() {
+    async drawDashes(maxDashCount = 300) {
         const InstancedMesh     = await crs.getThreePrototype("InstancedMesh");
         const PlaneGeometry     = await crs.getThreePrototype("PlaneGeometry");
         const DynamicDrawUsage  = await crs.getThreeConstant("DynamicDrawUsage");
@@ -90,7 +90,7 @@ export class LineCurveHelper {
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
 
-        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, 300);
+        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, maxDashCount);
         this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
         this.mesh.name = name;
 
@@ -122,8 +122,6 @@ export class LineCurveHelper {
         const count             = Math.round(length / size);
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
-
-        //this.mesh.count = count;
 
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
