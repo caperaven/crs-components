@@ -9,7 +9,7 @@ export default class Move {
     }
 
     static async mouseMove(grid, event, input) {
-        if (input._isMoving !== true && input.offset > 5) {
+        if (input._isMoving !== true && (input.offset > 5 || input.offset < -5)) {
             input._isMoving = true;
             await startMove(grid, event, input);
             await AutoScroller.enable(grid);
