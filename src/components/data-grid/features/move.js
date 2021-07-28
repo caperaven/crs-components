@@ -35,7 +35,6 @@ export default class Move {
             const position  = Number(grid.moveArgs.marker.dataset.position);
             const fromIndex = Number(grid.moveArgs.element.dataset.col);
             const toIndex   = Number(grid.moveArgs.target.dataset.col) + position;
-
             if (fromIndex !== toIndex) {
                 await this.moveColumn(grid, fromIndex, toIndex);
             }
