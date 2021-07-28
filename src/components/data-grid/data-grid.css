@@ -104,6 +104,7 @@ data-grid .right-hanger {
     background: silver;
     box-shadow: 0 0 5px #000000b0;
     will-change: transform;
+    z-index: 999999;
 }
 
 .marker {

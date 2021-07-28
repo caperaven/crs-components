@@ -16,7 +16,9 @@ export class InputManager {
             position: {x: 0, y: 0},
 
             get time() { return this.end - this.start },
-            get offset() { return Math.max(this.position.x - this.startPosition.x, this.position.y - this.startPosition.y) }
+            get offset() { return Math.max(this.position.x - this.startPosition.x, this.position.y - this.startPosition.y) },
+            get xOffset() { return this.position.x - this.startPosition.x },
+            get yOffset() { return this.position.y - this.startPosition.y }
         };
 
         await enableEvents(grid, mouseEvents.DOWN);

@@ -9,10 +9,23 @@ export default class Move {
     }
 
     static async mouseMove(grid, event, input) {
-        if (input._isMoving !== true && (input.offset > 5 || input.offset < -5)) {
+        if (event.target.classList.contains("grouping-header")) {
+            return grid.group.mouseMove(grid, event, input);
+        }
+
+        if (input._isMoving !== true && ((input.xOffset > 5 || input.xOffset < -5) || (input.yOffset > 5 || input.yOffset < -5))) {
             input._isMoving = true;
             await startMove(grid, event, input);
             await AutoScroller.enable(grid);
+        }
+
+        if (grid.moveArgs?.groupPlaceholder != null) {
+            grid._groupBar.removeChild(grid.moveArgs.groupPlaceholder);
+            delete grid.moveArgs.groupPlaceholder;
+
+            if (grid._groupBar.children.length === 0) {
+                grid._groupBar.textContent = grid.settings?.translations?.groupText || "drop here to group";
+            }
         }
 
         if (grid.moveArgs != null) {
@@ -23,6 +36,10 @@ export default class Move {
 
     static async mouseUp(grid, event, input) {
         if (grid.moveArgs == null) return;
+
+        if (event.target.classList.contains("grouping-header")) {
+            await grid.group.mouseUp(grid, event, input);
+        }
 
         grid.moveArgs.placeholder.parentElement.replaceChild(grid.moveArgs.element, grid.moveArgs.placeholder);
 

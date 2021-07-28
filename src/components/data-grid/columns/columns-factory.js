@@ -48,6 +48,7 @@ async function createColumn(column, index, rowIndex) {
     element.style.gridRowStart = rowIndex;
     element.dataset.col = index;
     element.dataset.feature = "move";
+    element.dataset.field = column.field;
     return element;
 }
 

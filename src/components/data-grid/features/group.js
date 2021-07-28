@@ -7,6 +7,25 @@ export default class Group {
         delete grid._groupBar;
         delete grid.group;
     }
+
+    static async mouseMove(grid, event, input) {
+        if (grid.moveArgs?.groupPlaceholder == null) {
+            if (grid._groupBar.textContent.length > 0) {
+                grid._groupBar.textContent = "";
+            }
+
+            const placeholder = document.createElement("div");
+            placeholder.style.width = "100px";
+            placeholder.style.height = "2rem";
+            placeholder.classList.add("placeholder");
+            grid._groupBar.appendChild(placeholder);
+            grid.moveArgs.groupPlaceholder = placeholder;
+        }
+    }
+
+    static async mouseUp(grid, event, input) {
+        grid._groupBar.removeChild(grid.moveArgs.groupPlaceholder);
+    }
 }
 
 async function createGroupBar(grid) {
@@ -14,4 +33,5 @@ async function createGroupBar(grid) {
     element.classList.add("grouping-header");
     element.textContent = grid.settings?.translations?.groupText || "drop here to group";
     grid.headerElement.appendChild(element);
+    return element;
 }
