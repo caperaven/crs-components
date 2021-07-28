@@ -140,3 +140,12 @@ data-grid .center {
 .drag-layer {
     --cl-marker: #0080ff;
 }
+
+data-grid .group-item {
+    width: 100px;
+    border: solid 1px var(--cl-border);
+    padding: 0 0.5rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: black;
+}

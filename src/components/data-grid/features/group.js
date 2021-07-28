@@ -10,7 +10,7 @@ export default class Group {
 
     static async mouseMove(grid, event, input) {
         if (grid.moveArgs?.groupPlaceholder == null) {
-            if (grid._groupBar.textContent.length > 0) {
+            if (grid._groupBar.textContent.length > 0 && grid._groupBar.children.length == 0) {
                 grid._groupBar.textContent = "";
             }
 
@@ -24,7 +24,13 @@ export default class Group {
     }
 
     static async mouseUp(grid, event, input) {
-        grid._groupBar.removeChild(grid.moveArgs.groupPlaceholder);
+        const element = document.createElement("div");
+        element.classList.add("group-item");
+        const field = grid.moveArgs.element.dataset.field;
+        element.textContent = await grid.getCaption(field);
+
+        grid._groupBar.replaceChild(element, grid.moveArgs.groupPlaceholder);
+        delete grid.moveArgs.groupPlaceholder;
     }
 }
 

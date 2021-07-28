@@ -108,6 +108,11 @@ export class DataGrid extends HTMLElement {
     async moveColumns(start, end) {
         await this.move?.moveColumn(this, start, end);
     }
+
+    async getCaption(field) {
+        const column = this._columns.find(item => item.field === field);
+        return column.title;
+    }
 }
 
 customElements.define("data-grid", DataGrid);
