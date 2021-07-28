@@ -60,21 +60,38 @@ export default class Move {
             }
         ];
 
-        // 1. Create buffer of affected elements
+        if (start < end) {
+            await this.moveRight(grid, start, end, buffer);
+        }
+        else {
+            await this.moveLeft(grid, start, end, buffer);
+        }
+
+        for (let item of buffer) {
+            for (let element of item.elements) {
+                element.dataset.col = item.end;
+                element.style.gridColumnStart = item.end;
+            }
+        }
+    }
+
+    static async moveLeft(grid, start, end, buffer) {
+        for (let i = end; i < start; i++) {
+            buffer.push({
+                elements: grid.bodyElement?.querySelectorAll(`[data-col="${i}"]`),
+                start: i,
+                end: i+1
+            })
+        }
+    }
+
+    static async moveRight(grid, start, end, buffer) {
         for (let i = start + 1; i <= end; i++) {
             buffer.push({
                 elements: grid.bodyElement?.querySelectorAll(`[data-col="${i}"]`),
                 start: i,
                 end: i-1
             })
-        }
-
-        // 2. Apply changes
-        for (let item of buffer) {
-            for (let element of item.elements) {
-                element.dataset.col = item.end;
-                element.style.gridColumnStart = item.end;
-            }
         }
     }
 }
