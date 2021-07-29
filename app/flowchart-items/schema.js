@@ -56,75 +56,75 @@ export const schema = {
                 element: "icon",
                 shape: "home"
             },
-            // {
-            //     element: "flow-chart",
-            //     shape: "action",
-            //     args: {
-            //         transform: {
-            //             position: {x: 3}
-            //         }
-            //     }
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "data"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "decision"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "delay"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "document"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "documents"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "event"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "inputOutput"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "loopLimit"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "manualInput"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "manualOperations"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "merge"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "offPage"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "predefinedProcesses"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "preparation"
-            // },
-            // {
-            //     element: "flow-chart",
-            //     shape: "start"
-            // }
+            {
+                element: "flow-chart",
+                shape: "action",
+                args: {
+                    transform: {
+                        position: {x: 3}
+                    }
+                }
+            },
+            {
+                element: "flow-chart",
+                shape: "data"
+            },
+            {
+                element: "flow-chart",
+                shape: "decision"
+            },
+            {
+                element: "flow-chart",
+                shape: "delay"
+            },
+            {
+                element: "flow-chart",
+                shape: "document"
+            },
+            {
+                element: "flow-chart",
+                shape: "documents"
+            },
+            {
+                element: "flow-chart",
+                shape: "event"
+            },
+            {
+                element: "flow-chart",
+                shape: "inputOutput"
+            },
+            {
+                element: "flow-chart",
+                shape: "loopLimit"
+            },
+            {
+                element: "flow-chart",
+                shape: "manualInput"
+            },
+            {
+                element: "flow-chart",
+                shape: "manualOperations"
+            },
+            {
+                element: "flow-chart",
+                shape: "merge"
+            },
+            {
+                element: "flow-chart",
+                shape: "offPage"
+            },
+            {
+                element: "flow-chart",
+                shape: "predefinedProcesses"
+            },
+            {
+                element: "flow-chart",
+                shape: "preparation"
+            },
+            {
+                element: "flow-chart",
+                shape: "start"
+            }
         ]
     }
 }

@@ -11,6 +11,10 @@ export const schema = {
         {
             id: "blue",
             color: "#0000ff"
+        },
+        {
+            id: "custom",
+            color: "#0090ff"
         }
     ],
 
@@ -33,6 +37,13 @@ export const schema = {
             type: "MeshBasicMaterial",
             args: {
                 color: "green"
+            }
+        },
+        {
+            id: "custom",
+            type: "MeshBasicMaterial",
+            args: {
+                color: "custom"
             }
         },
         {
@@ -61,18 +72,17 @@ export const schema = {
                     material: "red",
                     args: {
                         transform: {
-                            scale: {x: 2, y: 2},
+                            scale: {x: -200, y: 200},
                         }
                     }
                 },
                 {
                     element: "PlaneGeometry",
                     material: "red",
-
                     args: {
                         transform: {
-                            position: {x: -1, y: -1, z: 0},
-                            scale: {x: 1, y: 2},
+                            position: {x: -200, y: -100, z: 0},
+                            scale: {x: 100, y: 200},
                         }
                     }
                 }
@@ -88,8 +98,8 @@ export const schema = {
                     material: "blue",
                     args: {
                         transform: {
-                            position: {x: 1, y: 1, z: 0.1},
-                            scale: {x: 2, y: 1},
+                            position: {x: -300, y: 100, z: 0.1},
+                            scale: {x: 400, y: 200},
                         }
                     }
                 }
@@ -104,17 +114,28 @@ export const schema = {
                     element: "CurveGeometry",
                     material: "green",
                     args: {
-                        icon: "arrow_right",
-                        transform: "s,10,20,1",
-                        gap: 10,
+                        icon: "circle",
+                        transform: "s,5,5,1",
+                        gap: 20,
                         data: "l,100,-100,0,200,-100,0,l,200,-100,0,200,-200,0,q,200,-200,0,250,-250,0,300,-200,0,l,300,-200,0,300,-100,0,l,300,-100,0,400,-100,0,c,400,-100,0,400,-400,0,100,-400,0,100,-100,0"
+                    }
+                },
+                {
+                    id: "lines-curve",
+                    element: "CurveGeometry",
+                    material: "custom",
+                    args: {
+                        icon: "triangle",
+                        transform: "s,10,10,1",
+                        gap: 20,
+                        data: "l,-200,-200,0,0,200,0,l,0,200,0,200,-200,0"
                     }
                 }
             ]
         }
     ],
     context: {
-        type: "perspective",
+        type: "orthographic",
         args: {
             background: "#e8e8e8",
             position: {
@@ -125,16 +146,16 @@ export const schema = {
     },
     scene: {
         elements: [
-            {
-                id: "layer0",
-                element: "layer",
-                layer: 0
-            },
-            {
-                id: "layer1",
-                element: "layer",
-                layer: 1
-            },
+            // {
+            //     id: "layer0",
+            //     element: "layer",
+            //     layer: 0
+            // },
+            // {
+            //     id: "layer1",
+            //     element: "layer",
+            //     layer: 1
+            // },
             {
                 id: "layer3",
                 element: "layer",
