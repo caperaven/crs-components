@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<style>
+    @import "/src/mdc/buttons/crs-icon-button.css";
+    @import "/src/mdc/icons/crs-icon.css";
+    @import "/src/mdc/toolbars/crs-toolbar.css";
+    @import "/src/mdc/buttons/crs-button.css";
+</style>
+
+<style>
+    crs-router {
+        padding: 0;
+    }
+
+    .form {
+        display: grid;
+        grid-template-rows: 3rem 1fr;
+        grid-template-columns: 15rem 1fr;
+        width: 100%;
+        height: 100%;
+    }
+
+    .crs-toolbar {
+        grid-column: 1 / 3;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+    }
+
+    .crs-toolbar h2 {
+        margin: 0;
+        padding: 0;
+        flex: 1;
+    }
+
+    .canvas-parent {
+        grid-column: 2;
+        grid-row:2;
+        border-left: solid 1px var(--crs-border);
+    }
+
+    .crs-icon-button {
+        color: black;
+        border-radius: 4px;
+    }
+
+    .crs-icon-button.dropdown {
+        --cl-border: #0276C2;
+        --crs-surface: #ecf7ff;
+    }
+
+
+</style>
+<div class="form">
+    <div class="crs-toolbar underline">
+        <h2>POC Interactive Graphics</h2>
+        <button class="crs-icon-button dropdown">home</button>
+        <button class="crs-icon-button">code</button>
+        <button class="crs-icon-button">build</button>
+        <button class="crs-icon-button">settings</button>
+        <button class="crs-icon-button">code</button>
+        <button class="crs-icon-button">build</button>
+    </div>
+    <div class="canvas-parent"></div>
+</div>

@@ -11,6 +11,11 @@
       "hasStyle": true
     },
     {
+      "title": "Interactive Graphics",
+      "hash": "#interactive-graphics",
+      "view": "interactive-graphics"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
