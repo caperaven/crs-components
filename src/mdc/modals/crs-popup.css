@@ -1,0 +1,22 @@
+.crs-popup {
+    display: block;
+    background: var(--crs-surface);
+    border: solid 1px var(--crs-border);
+    border-radius: 4px;
+    padding: 0.5rem;
+    list-style: none;
+}
+
+.crs-popup ul {
+    padding: 0;
+}
+
+.crs-popup:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: transparent;
+}

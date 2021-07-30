@@ -13,5 +13,6 @@ async function handleVerticalKeys(event) {
         case "Space": return this.activate && await this.activate(event);
         case "Home": return this.gotoFirst && await this.gotoFirst(event);
         case "End": return this.gotoLast && await this.gotoLast(event);
+        case "Escape": return this.cancel && await this.cancel(event);
     }
 }

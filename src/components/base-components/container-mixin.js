@@ -20,27 +20,30 @@ export async function enableContainerFeatures(target) {
         }
     });
 
-    target.init = init.bind(target);
-    target.dispose = dispose.bind(target);
-    target.gotoNext = gotoNext.bind(target);
+    target.init         = init.bind(target);
+    target.dispose      = dispose.bind(target);
+    target.gotoNext     = gotoNext.bind(target);
     target.gotoPrevious = gotoPrevious.bind(target);
-    target.gotoFirst = gotoFirst.bind(target);
-    target.gotoLast = gotoLast.bind(target);
-    target.activate = activate.bind(target);
-    target.expand = expand.bind(target);
-    target.collapse = collapse.bind(target);
-    target._focusIn = _focusIn.bind(target);
-    target._focusOut = _focusOut.bind(target);
+    target.gotoFirst    = gotoFirst.bind(target);
+    target.gotoLast     = gotoLast.bind(target);
+    target.activate     = activate.bind(target);
+    target.expand       = expand.bind(target);
+    target.collapse     = collapse.bind(target);
+    target.cancel       = cancel.bind(target);
+    target._focusIn     = _focusIn.bind(target);
+    target._focusOut    = _focusOut.bind(target);
 }
 
 async function init(role, childRole) {
     crsbinding.dom.enableEvents(this);
-    this.registerEvent(this,"focusin", this._focusIn);
+    this.registerEvent(this, "focusin",  this._focusIn);
     this.registerEvent(this, "focusout", this._focusOut);
+    this.registerEvent(this, "click",    this.activate);
 
     if (role != null) {
         this.setAttribute("role", role);
     }
+
     this.setAttribute("tabindex", "0");
     await disableChildTabbing(this, childRole);
     this.focusedIndex = 0;
@@ -84,6 +87,10 @@ async function expand(event) {
 
 async function collapse(event) {
     this._collapse && this._collapse(event);
+}
+
+async function cancel() {
+    this.dispatchEvent(new CustomEvent("cancel"));
 }
 
 async function _focusIn(event) {
