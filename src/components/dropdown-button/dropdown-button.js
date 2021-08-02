@@ -15,7 +15,7 @@ export class DropdownButton extends HTMLButtonElement {
     }
 
     async active() {
-        const template = this.querySelector(`#${this.dataset.items}`);
+        const template = this.querySelector(this.dataset.items ? `#${this.dataset.items}` : "template");
         const element = template.content.cloneNode(true).children[0];
         element.classList.add("crs-popup");
         document.body.appendChild(element);

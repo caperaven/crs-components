@@ -11,7 +11,8 @@
         "copy-three": "node build/build-three.js",
         "bundle": "rollup -c",
         "build-publish": "node build/publish.js",
-        "dev-server": "browser-sync start --server --files '.'"
+        "dev-server": "browser-sync start --server --files '.'",
+        "reformat": "node build/reformat-svg.js"
     },
     "keywords": [],
     "author": "",

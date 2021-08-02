@@ -13,6 +13,13 @@
     position: relative;
     padding: var(--crs-item-padding);
     user-select: none;
+    outline: none;
+}
+
+.crs-list li[tabindex="0"] {
+    border-radius: 4px;
+    background: var(--crs-focused);
+    border: solid 1px var(--crs-on-focused);
 }
 
 .crs-list li:before, .crs-list li:after {

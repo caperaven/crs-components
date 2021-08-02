@@ -1,4 +1,6 @@
 <style>
+    @import "./../../src/mdc/lists/crs-list.css";
+
     .button-list li {
         display: flex;
         flex-direction: row;
@@ -15,7 +17,7 @@
     <h2>Menu</h2>
 
     <nav id="example-nav" aria-label="example navigation">
-        <ol is="main-menu" changed.call="menuChanged($event)" id="example-nav-list">
+        <ol is="main-menu" changed.call="menuChanged($event)" id="example-nav-list" class="crs-list">
             <li>Menu Item 1</li>
             <li>Menu Item 2</li>
             <li>Menu Item 3</li>
@@ -29,7 +31,7 @@
 <section>
     <h2>Unordered List</h2>
 
-    <ul is="ul-list" id="unordered-list" data-persist="true">
+    <ul is="ul-list" id="unordered-list" data-persist="true" class="crs-list">
         <li>List Item 1</li>
         <li>List Item 2</li>
         <li>List Item 3</li>
@@ -42,7 +44,7 @@
 <section>
     <h2>Ordered List</h2>
 
-    <ol is="ol-list" id="ordered-list">
+    <ol is="ol-list" id="ordered-list" class="crs-list">
         <li>List Item 1</li>
         <li>List Item 2</li>
         <li>List Item 3</li>
@@ -56,7 +58,7 @@
     <h2>Unordered List With Buttons</h2>
 
     <!-- todo: PR - go research the item button tab navigation best practice -->
-    <ul is="ul-list" class="button-list" id="buttons-list">
+    <ul is="ul-list" class="button-list" id="buttons-list" class="crs-list">
         <li>
             <div>List Item 1</div>
             <button>Click</button>

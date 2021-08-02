@@ -1,0 +1,5 @@
+{
+  "inputDir": "./images/material-design-icons/alert",
+  "outputDir": "./images/",
+  "fontTypes": ["ttf", "woff", "woff2"]
+}
