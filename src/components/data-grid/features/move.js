@@ -46,7 +46,9 @@ export default class Move {
             await grid.group.mouseUp(grid, event, input);
         }
 
-        grid.moveArgs.placeholder.parentElement.replaceChild(grid.moveArgs.element, grid.moveArgs.placeholder);
+        if (grid.moveArgs.placeholder != null) {
+            grid.moveArgs.placeholder.parentElement.replaceChild(grid.moveArgs.element, grid.moveArgs.placeholder);
+        }
 
         await AutoScroller.disable(grid);
 
@@ -145,8 +147,16 @@ async function startMove(grid, event) {
     const clone = await cloneForMoving(event.target);
     grid.animationLayer.appendChild(clone);
 
-    const placeholder = await createPlaceholder(event.target);
+    let placeholder = await createPlaceholder(event.target);
     event.target.parentElement.replaceChild(placeholder, event.target);
+
+    let groupPlaceholder;
+
+    if (event.target.classList == "group-item") {
+        placeholder.style.height = "2rem";
+        groupPlaceholder = placeholder;
+        placeholder = null;
+    }
 
     const marker = document.createElement("div");
     marker.classList.add("marker");
@@ -154,10 +164,11 @@ async function startMove(grid, event) {
     grid.animationLayer.append(marker);
 
     grid.moveArgs = {
-        placeholder : placeholder,
-        element     : event.target,
-        clone       : clone,
-        marker      : marker
+        placeholder      : placeholder,
+        element          : event.target,
+        clone            : clone,
+        marker           : marker,
+        groupPlaceholder : groupPlaceholder
     }
 }
 

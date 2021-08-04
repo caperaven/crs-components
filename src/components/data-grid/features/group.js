@@ -26,9 +26,12 @@ export default class Group {
     }
 
     static async mouseUp(grid, event, input) {
+        const field = grid.moveArgs.element.dataset.field;
+
         const element = document.createElement("div");
         element.classList.add("group-item");
-        const field = grid.moveArgs.element.dataset.field;
+        element.dataset.feature = "move";
+        element.dataset.field = field;
         element.textContent = await grid.getCaption(field);
 
         if (event.target == grid._groupBar) {
