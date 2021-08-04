@@ -146,16 +146,16 @@ export const schema = {
     },
     scene: {
         elements: [
-            // {
-            //     id: "layer0",
-            //     element: "layer",
-            //     layer: 0
-            // },
-            // {
-            //     id: "layer1",
-            //     element: "layer",
-            //     layer: 1
-            // },
+            {
+                id: "layer0",
+                element: "layer",
+                layer: 0
+            },
+            {
+                id: "layer1",
+                element: "layer",
+                layer: 1
+            },
             {
                 id: "layer3",
                 element: "layer",

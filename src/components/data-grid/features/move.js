@@ -1,4 +1,5 @@
 import {createDragCanvas, cloneForMoving, createPlaceholder} from "./../../lib/element-utils.js";
+import {position as layoutPosition} from "./position.js";
 
 export default class Move {
     static async enable(grid) {
@@ -9,7 +10,9 @@ export default class Move {
     }
 
     static async mouseMove(grid, event, input) {
-        if (event.target.classList.contains("grouping-header")) {
+        const classes = event.target.classList;
+
+        if (classes.contains("grouping-header")) {
             return grid.group.mouseMove(grid, event, input);
         }
 
@@ -20,11 +23,13 @@ export default class Move {
         }
 
         if (grid.moveArgs?.groupPlaceholder != null) {
-            grid._groupBar.removeChild(grid.moveArgs.groupPlaceholder);
-            delete grid.moveArgs.groupPlaceholder;
+            if (classes.contains("group-item") == false && classes.contains("placeholder") == false) {
+                grid._groupBar.removeChild(grid.moveArgs.groupPlaceholder);
+                delete grid.moveArgs.groupPlaceholder;
 
-            if (grid._groupBar.children.length === 0) {
-                grid._groupBar.textContent = grid.settings?.translations?.groupText || "drop here to group";
+                if (grid._groupBar.children.length === 0) {
+                    grid._groupBar.textContent = grid.settings?.translations?.groupText || "drop here to group";
+                }
             }
         }
 
@@ -37,7 +42,7 @@ export default class Move {
     static async mouseUp(grid, event, input) {
         if (grid.moveArgs == null) return;
 
-        if (event.target.classList.contains("grouping-header")) {
+        if (event.target == grid._groupBar || event.target.parentElement == grid._groupBar) {
             await grid.group.mouseUp(grid, event, input);
         }
 
@@ -59,7 +64,7 @@ export default class Move {
                 toIndex += position;
             }
             else {
-                toIndex += position == -1 ? 0 : 1;
+                toIndex += position == layoutPosition.BEFORE ? 0 : 1;
             }
 
             if (fromIndex !== toIndex) {
@@ -179,8 +184,9 @@ async function checkScroll() {
 
 async function updateMarker(target, marker, x) {
     if (target == null) return;
-    const isColumn = target.classList.contains("column-header");
-    const isPlaceholder = target.classList.contains("placeholder");
+    const classes = target.classList;
+    const isColumn = classes.contains("column-header") || classes.contains("group-item");
+    const isPlaceholder = classes.contains("placeholder");
 
     if (isColumn === false && isPlaceholder === false) return;
 
@@ -188,10 +194,10 @@ async function updateMarker(target, marker, x) {
 
     if (x < rect.left + (rect.width / 2)) {
         marker.style.transform = `translate(${rect.left - 4}px, ${rect.top}px)`;
-        marker.dataset.position = -1;
+        marker.dataset.position = layoutPosition.BEFORE;
     }
     else {
         marker.style.transform = `translate(${rect.right - 4}px, ${rect.top}px)`;
-        marker.dataset.position = 0;
+        marker.dataset.position = layoutPosition.AFTER;
     }
 }

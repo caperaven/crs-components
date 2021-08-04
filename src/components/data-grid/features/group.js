@@ -1,3 +1,5 @@
+import {position} from "./position.js";
+
 export default class Group {
     static async enable(grid) {
         grid._groupBar = await createGroupBar(grid);
@@ -29,7 +31,23 @@ export default class Group {
         const field = grid.moveArgs.element.dataset.field;
         element.textContent = await grid.getCaption(field);
 
-        grid._groupBar.replaceChild(element, grid.moveArgs.groupPlaceholder);
+        if (event.target == grid._groupBar) {
+            grid._groupBar.appendChild(element);
+        }
+        else if (grid.moveArgs.marker.dataset.position == position.BEFORE)
+        {
+            grid._groupBar.insertBefore(element, event.target);
+        }
+        else {
+            if (event.target == grid._groupBar.lastChild) {
+                grid._groupBar.appendChild(element);
+            }
+            else {
+                grid._groupBar.insertBefore(element, event.target.nextSibling);
+            }
+        }
+
+        grid.moveArgs.groupPlaceholder.parentElement.removeChild(grid.moveArgs.groupPlaceholder);
         delete grid.moveArgs.groupPlaceholder;
     }
 }
