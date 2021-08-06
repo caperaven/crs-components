@@ -56,7 +56,7 @@ data-grid .column-group {
 }
 
 data-grid .grouping-header {
-    height: 3rem;
+    min-height: 3rem;
     background: var(--cl-column-group);
     border-bottom: solid 1px var(--cl-border);
     color: #6a6a6a;
@@ -64,6 +64,8 @@ data-grid .grouping-header {
     flex-direction: row;
     align-items: center;
     padding: var(--padding);
+    height: max-content;
+    flex-wrap: wrap;
 }
 
 data-grid .placeholder {
