@@ -52,9 +52,9 @@ export class DataGrid extends HTMLElement {
         this.settings.scrollSpeed = this.settings.scrollSpeed || 5;
 
         await this._initHeaders();
+        await this._initFeatures();
         await this._initColumns();
         await this._initRows();
-        await this._initFeatures();
 
         delete this.settings.columns;
         delete this.settings.headers;

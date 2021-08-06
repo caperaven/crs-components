@@ -31,6 +31,8 @@ async function createColumns(grid, columns) {
             sticky += column.width;
         }
 
+        grid.resize?.decorate(element);
+
         fragment.appendChild(element);
     }
 
@@ -39,7 +41,9 @@ async function createColumns(grid, columns) {
     for (let i = 0; i < headers.length; i++) {
         const toIndex = headers[i].span + offset;
         for (let j = offset; j < toIndex; j++) {
-            grid._columns[j].element.dataset.group = i;
+            const element = grid._columns[j].element;
+            element.dataset.group = i;
+            element.querySelectorAll("div").forEach(el => el.dataset.group = i);
         }
         offset = toIndex;
     }
@@ -55,7 +59,6 @@ async function createColumn(column, index, rowIndex) {
     const element = document.createElement("div");
     element.classList.add("column-header");
     element.classList.add(column.align || "left");
-    element.textContent = column.title;
     element.style.width = `${column.width}px`;
     element.style.gridColumnStart = index;
     element.style.gridRowStart = rowIndex;
@@ -63,6 +66,11 @@ async function createColumn(column, index, rowIndex) {
     element.dataset.feature = "move";
     element.dataset.field = column.field;
     column.element = element;
+
+    const content = document.createElement("span");
+    content.textContent = column.title;
+    element.appendChild(content);
+
     return element;
 }
 

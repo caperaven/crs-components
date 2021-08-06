@@ -35,6 +35,12 @@ data-grid .column-header {
     top: 0;
     border-left: solid 1px var(--cl-border);
     border-bottom: solid 1px var(--cl-border);
+    display: flex;
+}
+
+data-grid .column-header span {
+    flex: 1;
+    pointer-events: none;
 }
 
 data-grid [role="gridcell"] {
@@ -114,7 +120,9 @@ data-grid .right-hanger {
     width: 0.5rem;
     height: 2.5rem;
     background: var(--cl-marker);
+    border: solid 2px var(--cl-on-marker);
     opacity: 0.7;
+    pointer-events: none;
 }
 
 data-grid .top {
@@ -141,6 +149,7 @@ data-grid .center {
 
 .drag-layer {
     --cl-marker: #0080ff;
+    --cl-on-marker: #0080ff3d;
 }
 
 data-grid .group-item {
@@ -150,4 +159,18 @@ data-grid .group-item {
     height: 2rem;
     line-height: 2rem;
     color: black;
+}
+
+data-grid .resize {
+    background: transparent;
+    width: 0.5rem;
+    height: 2.5rem;
+    cursor: col-resize;
+    margin-right: -0.5rem;
+    margin-top: -0.5rem;
+}
+
+.resize-clone {
+    border: var(--cl-marker) solid 2px;
+    background: var(--cl-on-marker);
 }
