@@ -290,19 +290,19 @@ export async function createPlaceholder(element, datasetFields) {
     }
     placeholder.classList.add("placeholder");
 
-    if(element._rect != null) {
-        placeholder.style.width = `${element._rect.width}px`;
-    }
+    const rect = element.getBoundingClientRect();
+    placeholder.style.width = `${rect.width}px`;
 
     return placeholder;
 }
 
 export async function cloneForMoving(element) {
-    element._rect = element._rect || element.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
     const result = document.createElement("div");
     result.textContent = element.textContent;
-    result.style.width = `${element._rect.width}px`;
-    result.style.height = `${element._rect.height}px`;
+    result.style.width = `max-content`;
+    result.style.height = `${rect.height}px`;
+    result.style.minWidth = "100px";
     result.classList.add("clone");
     return result;
 }

@@ -147,7 +147,12 @@ async function startMove(grid, event) {
     const clone = await cloneForMoving(event.target);
     grid.animationLayer.appendChild(clone);
 
-    let placeholder = await createPlaceholder(event.target);
+    let placeholder             = await createPlaceholder(event.target);
+    const st                    = event.target.style;
+    placeholder.style.zIndex    = st.zIndex;
+    placeholder.style.left      = st.left;
+    placeholder.style.position  = st.position;
+
     event.target.parentElement.replaceChild(placeholder, event.target);
 
     let groupPlaceholder;
