@@ -160,6 +160,7 @@ async function startMove(grid, event) {
 
     const marker = document.createElement("div");
     marker.classList.add("marker");
+    marker.dataset.group = event.target.dataset.group;
 
     grid.animationLayer.append(marker);
 
@@ -195,6 +196,13 @@ async function checkScroll() {
 
 async function updateMarker(target, marker, x) {
     if (target == null) return;
+    marker.style.opacity = 1;
+
+    const group = target.dataset.group;
+    if (group != marker.dataset.group && group != -1){
+        marker.style.opacity = 0;
+    };
+
     const classes = target.classList;
     const isColumn = classes.contains("column-header") || classes.contains("group-item");
     const isPlaceholder = classes.contains("placeholder");

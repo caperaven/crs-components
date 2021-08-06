@@ -32,6 +32,7 @@ export default class Group {
         element.classList.add("group-item");
         element.dataset.feature = "move";
         element.dataset.field = field;
+        element.dataset.group = -1;
         element.textContent = await grid.getCaption(field);
 
         if (event.target == grid._groupBar) {
