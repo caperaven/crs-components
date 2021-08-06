@@ -82,8 +82,6 @@ async function autoSizeColumn(grid, column) {
     elements.forEach(element => {
         const width = ctx.measureText(element.textContent).width;
         max = Math.max(max, width);
-
-        console.log(element.textContent, width, max);
     });
     max += 18;
 
