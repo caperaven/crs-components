@@ -3,10 +3,12 @@ import {position} from "./position.js";
 export default class Group {
     static async enable(grid) {
         grid._groupBar = await createGroupBar(grid);
+        grid._grouping = new Set();
     }
 
     static async disable(grid) {
         delete grid._groupBar;
+        delete grid._grouping;
         delete grid.group;
     }
 
@@ -28,27 +30,32 @@ export default class Group {
     static async mouseUp(grid, event, input) {
         const field = grid.moveArgs.element.dataset.field;
 
-        const element = document.createElement("div");
-        element.classList.add("group-item");
-        element.dataset.feature = "move";
-        element.dataset.field = field;
-        element.dataset.group = -1;
-        element.textContent = await grid.getCaption(field);
+        const classes = grid.moveArgs.element.classList;
+        if (grid._grouping.has(field) == false || classes.contains("group-item")) {
+            const element = document.createElement("div");
+            element.classList.add("group-item");
+            element.dataset.feature = "move";
+            element.dataset.field = field;
+            element.dataset.group = -1;
+            element.textContent = await grid.getCaption(field);
 
-        if (event.target == grid._groupBar) {
-            grid._groupBar.appendChild(element);
-        }
-        else if (grid.moveArgs.marker.dataset.position == position.BEFORE)
-        {
-            grid._groupBar.insertBefore(element, event.target);
-        }
-        else {
-            if (event.target == grid._groupBar.lastChild) {
+            if (event.target == grid._groupBar) {
                 grid._groupBar.appendChild(element);
             }
-            else {
-                grid._groupBar.insertBefore(element, event.target.nextSibling);
+            else if (grid.moveArgs.marker.dataset.position == position.BEFORE)
+            {
+                grid._groupBar.insertBefore(element, event.target);
             }
+            else {
+                if (event.target == grid._groupBar.lastChild) {
+                    grid._groupBar.appendChild(element);
+                }
+                else {
+                    grid._groupBar.insertBefore(element, event.target.nextSibling);
+                }
+            }
+
+            grid._grouping.add(field);
         }
 
         grid.moveArgs.groupPlaceholder.parentElement.removeChild(grid.moveArgs.groupPlaceholder);
