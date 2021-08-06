@@ -2,7 +2,8 @@ const mouseEvents = Object.freeze({
     DOWN    : { key: "mousedown",  fn: mouseDown },
     UP      : { key: "mouseup",    fn: mouseUp },
     MOVE    : { key: "mousemove",  fn: mouseMove },
-    CLICK   : { key: "click",      fn: click }
+    CLICK   : { key: "click",      fn: click },
+    DBLCLICK: { key: "dblclick",   fn: dblClick }
 })
 
 export class InputManager {
@@ -21,11 +22,11 @@ export class InputManager {
             get yOffset() { return this.position.y - this.startPosition.y }
         };
 
-        await enableEvents(grid, mouseEvents.DOWN);
+        await enableEvents(grid, mouseEvents.DOWN, mouseEvents.DBLCLICK);
     }
 
     static async disable(grid) {
-        await disableEvents(grid, mouseEvents.DOWN);
+        await disableEvents(grid, mouseEvents.DOWN, mouseEvents.DBLCLICK);
 
         delete grid._events[mouseEvents.DOWN.key];
         delete grid._events[mouseEvents.UP.key];
@@ -92,5 +93,12 @@ async function mouseUp(event) {
 async function click(event) {
     if (event.target.classList.contains("column-header")) {
         await this._sort?.perform(event.target);
+    }
+}
+
+async function dblClick(event) {
+    const classes = event.target.classList;
+    if (classes.contains("column-header")) {
+        this.resize?.autoSize(this, event.target);
     }
 }

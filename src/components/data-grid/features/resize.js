@@ -16,6 +16,10 @@ export default class Resize {
         column.appendChild(element);
     }
 
+    static async autoSize(grid, column) {
+        await autoSizeColumn(grid, column);
+    }
+
     static async mouseDown(grid, event, input) {
         const source = event.target.parentElement;
         const rect = source.getBoundingClientRect();
@@ -62,4 +66,27 @@ async function createResizeUI(source, rect) {
     element.style.cursor        = "col-resize";
     element.classList.add("resize-clone");
     return element;
+}
+
+async function autoSizeColumn(grid, column) {
+    const col = column.dataset.col;
+    const elements = grid.querySelectorAll(`[role="gridcell"][data-col="${col}"]`);
+    const font = getComputedStyle(grid).font;
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.style.font = font;
+    ctx.font = font;
+
+    let max = ctx.measureText(column.firstChild.textContent).width;
+    elements.forEach(element => {
+        const width = ctx.measureText(element.textContent).width;
+        max = Math.max(max, width);
+
+        console.log(element.textContent, width, max);
+    });
+    max += 18;
+
+    grid._columns.find(item => item.element === column).width = max;
+    column.style.width = `${max}px`;
 }
