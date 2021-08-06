@@ -34,6 +34,20 @@ async function createColumns(grid, columns) {
         fragment.appendChild(element);
     }
 
+    const headers = grid.settings.headers || [];
+    let offset = 0;
+    for (let i = 0; i < headers.length; i++) {
+        const toIndex = headers[i].span + offset;
+        for (let j = offset; j < toIndex; j++) {
+            grid._columns[j].element.dataset.group = i;
+        }
+        offset = toIndex;
+    }
+
+    for (let i = offset; i < grid._columns.length; i++) {
+        grid._columns[i].element.dataset.group = headers.length;
+    }
+
     grid.bodyElement.appendChild(fragment);
 }
 
@@ -42,13 +56,13 @@ async function createColumn(column, index, rowIndex) {
     element.classList.add("column-header");
     element.classList.add(column.align || "left");
     element.textContent = column.title;
-    element.element = element;
     element.style.width = `${column.width}px`;
     element.style.gridColumnStart = index;
     element.style.gridRowStart = rowIndex;
     element.dataset.col = index;
     element.dataset.feature = "move";
     element.dataset.field = column.field;
+    column.element = element;
     return element;
 }
 
