@@ -1,3 +1,20 @@
+import {getRandomInt} from "./../../src/components/lib/random-number.js";
+
+export const months = Object.freeze({
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+})
+
 export function createData(rowCount) {
     const result = [];
 
@@ -6,9 +23,9 @@ export function createData(rowCount) {
             id: i,
             code: `code ${i}`,
             description: `description of row item ${i}`,
-            isActive: true,
-            field1: "field 1",
-            field2: "field 2",
+            isActive: getRandomInt(0, 10) < 5 ? false : true,
+            value: getRandomInt(0, 100),
+            month: months[getRandomInt(1, 12)],
             field3: "field 3",
             field4: "field 4",
             field5: "field 5",

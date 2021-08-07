@@ -27,16 +27,16 @@ export const columns = [
         align: "right"
     },
     {
-        title: "Field 1",
-        field: "field1",
+        title: "Value",
+        field: "value",
         width: 100,
-        align: "center"
+        align: "right"
     },
     {
-        title: "Field 2",
-        field: "field2",
+        title: "Month",
+        field: "month",
         width: 100,
-        align: "center"
+        align: "left"
     },
     {
         title: "Field 3",
