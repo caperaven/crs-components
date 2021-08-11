@@ -1,9 +1,10 @@
 import {position} from "./position.js";
+import {getGroupDescriptor} from "./../../../lib/data-utils/group-descriptor.js"
 
 export default class Group {
     static async enable(grid) {
         grid._groupBar = await createGroupBar(grid);
-        grid._grouping = new Set();
+        grid._grouping = new Set(grid.settings.grouping || []);
     }
 
     static async disable(grid) {
@@ -60,6 +61,9 @@ export default class Group {
 
         grid.moveArgs.groupPlaceholder.parentElement.removeChild(grid.moveArgs.groupPlaceholder);
         delete grid.moveArgs.groupPlaceholder;
+
+        grid.groupDescriptor = getGroupDescriptor(grid._grouping, grid._data);
+        await grid.renderer.redraw(grid);
     }
 }
 

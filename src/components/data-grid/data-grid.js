@@ -1,5 +1,6 @@
 import {Columns} from "./columns/columns-factory.js";
 import {InputManager} from "./input-manager.js";
+import {getGroupDescriptor} from "./../../lib/data-utils/group-descriptor.js";
 
 export const RowRenderer = Object.freeze({
     STATIC      : "static",
@@ -50,6 +51,7 @@ export class DataGrid extends HTMLElement {
     async initialize(args) {
         this.settings = args;
         this.settings.scrollSpeed = this.settings.scrollSpeed || 5;
+        this.grouping = args.grouping;
 
         await this._initHeaders();
         await this._initFeatures();
@@ -62,6 +64,10 @@ export class DataGrid extends HTMLElement {
         delete this.settings.features;
 
         await InputManager.enable(this);
+
+        this.headerElement.style.display = "";
+        this.bodyElement.style.display = "";
+        this.footerElement.style.display = "";
     }
 
     async _initHeaders() {
@@ -77,6 +83,11 @@ export class DataGrid extends HTMLElement {
     }
 
     async _initRows() {
+        if (this.settings.grouping != null) {
+            this.groupDescriptor = getGroupDescriptor(this.settings.grouping, this.settings.data);
+            delete this.settings.grouping;
+        }
+
         this.renderer = (await import(paths[this.settings.type])).default;
         await this.renderer.enable(this, this.settings.data);
     }

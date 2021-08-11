@@ -71,19 +71,14 @@ export const schema = {
                     element: "PlaneGeometry",
                     material: "red",
                     args: {
-                        transform: {
-                            scale: {x: -200, y: 200},
-                        }
+                        transform: "s,-200,200,1"
                     }
                 },
                 {
                     element: "PlaneGeometry",
                     material: "red",
                     args: {
-                        transform: {
-                            position: {x: -200, y: -100, z: 0},
-                            scale: {x: 100, y: 200},
-                        }
+                        transform: "p,-200,-100,0,s,100,200,1"
                     }
                 }
             ]
@@ -97,10 +92,7 @@ export const schema = {
                     element: "PlaneGeometry",
                     material: "blue",
                     args: {
-                        transform: {
-                            position: {x: -300, y: 100, z: 0.1},
-                            scale: {x: 400, y: 200},
-                        }
+                        transform: "p,-300,100,0.1,s,400,200,1"
                     }
                 }
             ]
@@ -164,8 +156,3 @@ export const schema = {
         ]
     }
 }
-
-// program.setColor("primary", "#ff0000");
-// program.setMaterialColor(0, "primary");
-// program.setMaterialProperty(0, "color", "#ff00ff");
-

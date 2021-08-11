@@ -5,6 +5,7 @@ const fnMap = {
     "position": cameraPosition,
     "background": createColor,
     "allow_drag": allowDrag,
+    "interactive": makeInteractive,
 }
 
 const processModules = {
@@ -85,6 +86,15 @@ async function allowDrag(args, canvas, key, program) {
     }
 }
 
+async function makeInteractive(args, canvas, key, program) {
+    if (args[key] === true) {
+        const inputManager = (await import("./../../extensions/input-manager/input-manager.js")).InputManager;
+        program.inputManager = inputManager;
+        await program.inputManager.enable(program.canvas);
+        program._disposables.push(disposeInputManager.bind(program));
+    }
+}
+
 async function updateDragMeshes() {
     this.dragControl._objects = this.canvas.scene.children.filter(item => {
         const className = item.constructor.name;
@@ -96,4 +106,9 @@ async function disposeDragControls() {
     this.dragControl.removeEventListener("drag", this.canvas.renderHandler);
     this.dragControl = this.dragControl.dispose();
     delete this.updateDragMeshes;
+}
+
+async function disposeInputManager() {
+    await this.inputManager.disable(this.canvas);
+    delete this.inputManager;
 }

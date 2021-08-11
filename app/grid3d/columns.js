@@ -10,8 +10,7 @@ export const columns = [
         title: "Code",
         field: "code",
         width: 100,
-        type: "text",
-        sticky: true
+        type: "text"
     },
     {
         title: "Description",
@@ -24,7 +23,8 @@ export const columns = [
         field: "isActive",
         width: 100,
         type: "boolean",
-        align: "right"
+        align: "right",
+        sticky: true
     },
     {
         title: "Value",
@@ -48,7 +48,8 @@ export const columns = [
         title: "Field 4",
         field: "field4",
         width: 100,
-        align: "center"
+        align: "center",
+        sticky: true
     },
     {
         title: "Field 5",

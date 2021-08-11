@@ -9,7 +9,7 @@ export default class StaticRows {
         const rowSize = grid.settings.pageSize + (grid.settings.headers == null ? 1 : 2);
         grid.bodyElement.style.gridTemplateRows = `repeat(${rowSize}, 2.5rem)`;
 
-        await createRows(grid, data);
+        await this.redraw(grid, data);
     }
 
     static async disable(grid) {
@@ -41,6 +41,14 @@ export default class StaticRows {
     static async gotoPage(grid, page) {
         grid.settings.page = page > 0 && page < grid.settings.pageSize ? page : grid.settings.pageSize;
         await updateRows(grid);
+    }
+
+    static async redraw(grid, data) {
+        if (grid.groupDescriptor != null) {
+            return await createRootGroups(grid);
+        }
+
+        await createRows(grid, data);
     }
 }
 
@@ -101,4 +109,8 @@ async function updateRow(grid, row, index) {
     for (let i = 0; i < length; i++) {
         grid._cells[cIndex + i].textContent = row[grid._columns[i].field];
     }
+}
+
+async function createRootGroups() {
+
 }

@@ -8,7 +8,7 @@ export class ShapeBaseProvider extends BaseProvider {
 
         const mesh = await crs.createThreeObject("Mesh", geometry, material);
         const args = item.args || {};
-        updateTransform(mesh, args.transform, data);
+        await updateTransform(mesh, args.transform, data);
         return mesh;
     }
 }

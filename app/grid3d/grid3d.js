@@ -12,13 +12,13 @@ export default class Grid extends crsbinding.classes.ViewBase {
         this.grid = document.querySelector("data-grid");
 
         this.grid.addEventListener("isReady", () => {
-            const data = createData(100000);
+            const data = createData(1000);
             this.grid.initialize({
                 columns: columns,
                 headers: headers,
                 data: data,
                 type: "static",
-                pageSize: 100 ,
+                pageSize: 100,
                 scrollSpeed: 10,
                 features: {
                     group: true,
@@ -28,7 +28,8 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 },
                 translations: {
                     groupText: "drop here to group..."
-                }
+                },
+//                grouping: ["month", "isActive", "Value"]
             })
         })
     }
