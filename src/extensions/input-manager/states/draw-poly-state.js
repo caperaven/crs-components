@@ -7,7 +7,6 @@ import {setMouse} from "../helpers/pointer-functions.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {MaterialType} from "../../../gfx-helpers/materials.js";
 import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
-import {LineCurve3Joint} from "../../../gfx-helpers/line-curve3-joint.js";
 
 const POINT = "point";
 
@@ -25,7 +24,7 @@ export class DrawPolyState extends BaseState {
         this._points    = [];
 
         const planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
-        this._curve         = await LineCurveHelper.new(2, 5, 2, planeMaterial, this._context.canvas.scene, "path-outline");
+        this._curve         = await LineCurveHelper.new(10, 10, 10, planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         await this._render();
     }
