@@ -81,18 +81,14 @@ export class LineCurveHelper {
     }
 
     async drawDashes(maxDashCount = 300) {
-        const InstancedMesh     = await crs.getThreePrototype("InstancedMesh");
-        const PlaneGeometry     = await crs.getThreePrototype("PlaneGeometry");
-        const DynamicDrawUsage  = await crs.getThreeConstant("DynamicDrawUsage");
         const length            = this.curvePath.getLength();
         const size              = this.yScale + this.gapSize;
         const count             = Math.round(length / size);
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
+        this.maxDashCount       = maxDashCount;
 
-        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, maxDashCount);
-        this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
-        this.mesh.name = name;
+        await this._rebuildInstanceMesh(maxDashCount);
 
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
@@ -109,7 +105,25 @@ export class LineCurveHelper {
 
             this.mesh.setMatrixAt(i, this.dummy.matrix);
         }
+    }
 
+    async _rebuildInstanceMesh(count) {
+        if (this.mesh != null) {
+            this.scene.remove(this.mesh);
+            this.mesh.dispose();
+        }
+
+        if (this.maxDashCount < count) {
+            this.maxDashCount = count + 100;
+        }
+
+        const InstancedMesh     = await crs.getThreePrototype("InstancedMesh");
+        const PlaneGeometry     = await crs.getThreePrototype("PlaneGeometry");
+        const DynamicDrawUsage  = await crs.getThreeConstant("DynamicDrawUsage");
+
+        this.mesh = new InstancedMesh(new PlaneGeometry(), this.material, this.maxDashCount);
+        this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
+        this.mesh.name = name;
         this.mesh.instanceMatrix.needsUpdate = true;
         this.scene.add(this.mesh);
     }
@@ -125,6 +139,10 @@ export class LineCurveHelper {
         const count             = Math.round(length / size);
         const up                = new this.Vector3( 0, 1, 0 );
         const axis              = new this.Vector3();
+
+        if (count > this.maxDashCount) {
+            await this._rebuildInstanceMesh(count);
+        }
 
         for (let i = 0; i <= count; i++) {
             const norm = i / count;
