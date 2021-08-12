@@ -17,4 +17,20 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
         console.log(this._program);
     }
+
+    async state_select() {
+        this._program.canvas._inputManager.gotoState(this._program.inputStates.SELECT);
+    }
+
+    async state_rectangle() {
+        this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_RECTANGLE);
+    }
+
+    async state_circle() {
+        this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_CIRCLE);
+    }
+
+    async state_polygon() {
+        this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_POLYGON);
+    }
 }
