@@ -118,6 +118,9 @@ export class LineCurveHelper {
         this.curvePath.updateArcLengths();
 
         const length            = this.curvePath.getLength();
+
+        if (length == 0) return;
+
         const size              = this.yScale + this.gapSize;
         const count             = Math.round(length / size);
         const up                = new this.Vector3( 0, 1, 0 );

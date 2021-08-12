@@ -6,6 +6,8 @@ import {BaseState} from "./base-state.js";
 import {setMouse} from "../helpers/pointer-functions.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {MaterialType} from "../../../gfx-helpers/materials.js";
+import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
+import {LineCurve3Joint} from "../../../gfx-helpers/line-curve3-joint.js";
 
 const POINT = "point";
 
@@ -20,13 +22,22 @@ export class DrawPolyState extends BaseState {
 
     async enter() {
         await super.enter();
-        this._points = [];
+        this._points    = [];
+
+        const planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
+        this._curve         = await LineCurveHelper.new(2, 5, 2, planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
+        await this._render();
     }
 
     async exit() {
         this.element.removeEventListener("pointerdown", this._pointerDownHandler);
         this._points.length = 0;
+        this._curve = this._curve.dispose();
+
+        delete this._points;
+        delete this._curve;
+
         await super.exit();
     }
 
@@ -54,7 +65,11 @@ export class DrawPolyState extends BaseState {
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
 
         await setMouse(this._mouse, event, this._context.canvasRect);
-        this._points.push(this.shape)
+        this._points.push(this.shape);
+        await this._setCurvePath();
+        delete this.shape;
+
+        await this._render();
     }
 
     async _pointerMove(event) {
@@ -72,6 +87,21 @@ export class DrawPolyState extends BaseState {
         this.shape.type = POINT;
         this.shape.position.set(startPoint.x, startPoint.y, 0);
         this._context.canvas.scene.add(this.shape);
+    }
+
+    async _setCurvePath() {
+        if (this._points.length == 1) return;
+        const point     = this._points[this._points.length - 2].position;
+        const lastPoint = this._points[this._points.length - 1].position;
+
+        await this._curve.addLine({x: point.x, y: point.y}, {x: lastPoint.x, y: lastPoint.y});
+
+        if (this._curve.mesh == null) {
+            await this._curve.drawDashes();
+        }
+        else {
+            await this._curve.update();
+        }
     }
 
     async _closePath() {
