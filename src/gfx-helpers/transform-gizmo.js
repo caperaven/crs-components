@@ -162,6 +162,7 @@ export class TransformGizmo {
     static async enable(parent) {
         parent._transformGizmo = new TransformGizmoWorker(parent);
         await parent._transformGizmo.initialize();
+        await parent._transformGizmo._hide();
     }
 
     static async disable(parent) {

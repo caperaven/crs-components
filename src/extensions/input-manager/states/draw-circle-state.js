@@ -48,6 +48,9 @@ export class DrawCircleState extends BaseState {
 
     async _pointerMove(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
+
+        if (this.shape == null) return;
+
         this._raycaster.setFromCamera(this._mouse, this.camera);
 
         const point = await this.getIntersectionPlanePosition();
