@@ -87,6 +87,10 @@ export default class Curves extends crsbinding.classes.ViewBase {
     }
 
     async setValue(value) {
+        if (this.joint == null) {
+            return this.disposed = true;
+        }
+
         let yValue = this.joint.point.y + value;
 
         if (yValue >= 0) {

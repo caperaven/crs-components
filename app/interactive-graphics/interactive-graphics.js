@@ -14,8 +14,11 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
         await parser.initialize([]);
         this._program = await parser.parse(schema, parent, {background: "#ff0050"});
         await parser.dispose();
+    }
 
-        console.log(this._program);
+    async disconnectedCallback() {
+        this._program = this._program.dispose();
+        await super.disconnectedCallback();
     }
 
     async state_select() {
