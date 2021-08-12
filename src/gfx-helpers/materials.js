@@ -24,7 +24,7 @@ export class Materials {
     }
 
     async [MaterialType.BASIC](color) {
-        return {type: "color"}
+        return await crs.createThreeObject("MeshBasicMaterial", {color: color});
     }
 
     async [MaterialType.LINE](color) {
