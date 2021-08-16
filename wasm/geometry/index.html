@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import init, {tessellate_polygon} from "/bin/geometry.js";
+
+        async function run() {
+            await init();
+
+            console.log(tessellate_polygon([-100.0, -100.0, 100.0, -100.0, 100.0, 100.0, -100.0, 100.0]));
+
+            // console.log(test());
+            // console.log(array_test());
+            // console.log(array_test2());
+            // console.log(print_array([1,2,3,4,5]));
+            // console.log(print_vec([6,7,8,9,10]));
+        }
+
+        run();
+    </script>
+</body>
+</html>

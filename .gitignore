@@ -7,3 +7,10 @@ yarn-error.log
 /publish/
 /.nyc_output/
 *.blend1
+/wasm/*/Cargo.lock
+/wasm/*/target/
+/wasm/*/bin/
+.idea/crs-starter.iml
+.idea/runConfigurations.xml
+.idea/crs-starter.iml
+.idea/crs-starter.iml

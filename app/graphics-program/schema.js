@@ -106,7 +106,7 @@ export const schema = {
                     element: "CurveGeometry",
                     material: "green",
                     args: {
-                        icon: "circle",
+                        icon: "home",
                         transform: "s,10,10,1",
                         gap: 20,
                         data: "l,100,-100,0,200,-100,0,l,200,-100,0,200,-200,0,q,200,-200,0,250,-250,0,300,-200,0,l,300,-200,0,300,-100,0,l,300,-100,0,400,-100,0,c,400,-100,0,400,-400,0,100,-400,0,100,-100,0"
@@ -117,7 +117,7 @@ export const schema = {
                     element: "CurveGeometry",
                     material: "custom",
                     args: {
-                        icon: "triangle",
+                        icon: "arrow_top",
                         transform: "s,10,10,1",
                         gap: 20,
                         data: "l,-200,-200,0,0,200,0,l,0,200,0,200,-200,0"
