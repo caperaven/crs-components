@@ -119,18 +119,9 @@ export class DrawPolyState extends BaseState {
         })
 
 
-        const p1 = performance.now();
-        const result = tessellate_polygon(points, true, true, 50);
-        const p2 = performance.now();
-
-        await this._createFill(result.fill);
+        const result = tessellate_polygon(points, true, true, 20);
+        //await this._createFill(result.fill);
         await this._createStroke(result.stroke);
-
-        const p3 = performance.now();
-
-        console.log(`tess: ${p2 - p1}`);
-        console.log(`js: ${p3 - p2}`);
-        console.log(`total: ${p3 - p1}`);
 
         this._points.length = 0;
         await this._curve.dispose();

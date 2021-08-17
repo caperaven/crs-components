@@ -5,7 +5,7 @@ use lyon::path::Path;
 use lyon::path::math::{point, Point};
 use lyon::tessellation::geometry_builder::{simple_builder, VertexBuffers};
 use lyon::tessellation::{FillTessellator, FillOptions, StrokeTessellator, StrokeOptions};
-use lyon::lyon_tessellation::LineJoin;
+use lyon::lyon_tessellation::{LineJoin, LineCap};
 
 type PolyBuffer = VertexBuffers<Point, u16>;
 

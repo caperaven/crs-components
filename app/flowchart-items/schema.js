@@ -60,9 +60,7 @@ export const schema = {
                 element: "flow-chart",
                 shape: "action",
                 args: {
-                    transform: {
-                        position: {x: 3}
-                    }
+                    transform: "p,3,0,0"
                 }
             },
             {
