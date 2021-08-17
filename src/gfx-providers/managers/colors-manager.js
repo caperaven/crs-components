@@ -12,9 +12,13 @@ export default class ColorsManager extends BaseManager {
                 program.colors[color.id] = await crs.createColor(color.color);
             }
 
-            program.setColor = setColor.bind(program);
-            program._disposables.push(dispose.bind(program));
+            await ColorsManager.enable(program);
         }
+    }
+
+    static async enable(program) {
+        program.setColor = setColor.bind(program);
+        program._disposables.push(dispose.bind(program));
     }
 }
 
