@@ -36,4 +36,8 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
     async state_polygon() {
         this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_POLYGON);
     }
+
+    async refresh() {
+        this._program.render();
+    }
 }

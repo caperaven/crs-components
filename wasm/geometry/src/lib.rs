@@ -5,6 +5,7 @@ use lyon::path::Path;
 use lyon::path::math::{point, Point};
 use lyon::tessellation::geometry_builder::{simple_builder, VertexBuffers};
 use lyon::tessellation::{FillTessellator, FillOptions, StrokeTessellator, StrokeOptions};
+use lyon::lyon_tessellation::LineJoin;
 
 type PolyBuffer = VertexBuffers<Point, u16>;
 
@@ -18,7 +19,8 @@ fn create_path(points: Vec<f32>) -> Path {
         builder.line_to(point(points[i], points[i + 1]));
         i += 2;
     }
-    builder.close();
+    builder.end(true);
+
     return builder.build();
 }
 
@@ -44,7 +46,7 @@ fn populate_from_buffer(buffers: &PolyBuffer) -> js_sys::Object {
 }
 
 #[wasm_bindgen]
-pub fn tessellate_polygon(points: Vec<f32>, fill: bool, stroke: bool) -> js_sys::Object {
+pub fn tessellate_polygon(points: Vec<f32>, fill: bool, stroke: bool, stroke_width: f32) -> js_sys::Object {
     let path = create_path(points);
 
     let result = js_sys::Object::new();
@@ -74,7 +76,7 @@ pub fn tessellate_polygon(points: Vec<f32>, fill: bool, stroke: bool) -> js_sys:
 
             tessellator.tessellate_path(
                 &path,
-                &StrokeOptions::default(),
+                &StrokeOptions::default().with_line_width(stroke_width).with_line_join(LineJoin::Round),
                 &mut vertex_builder
             ).ok();
         }

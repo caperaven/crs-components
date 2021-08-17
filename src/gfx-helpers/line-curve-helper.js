@@ -12,8 +12,6 @@ export class LineCurveHelper {
     }
 
     constructor(curvePath, Vector3, dummy, xScale, yScale, gapSize, material, scene, name) {
-        this.mesh?.dispose();
-        this.mesh = null;
         this.curvePath = curvePath;
         this.Vector3 = Vector3;
         this.dummy = dummy;
@@ -26,6 +24,11 @@ export class LineCurveHelper {
     }
 
     dispose() {
+        this.scene.remove(this.mesh);
+
+        this.mesh?.dispose();
+        this.mesh = null;
+
         delete this.curvePath;
         delete this.Vector3;
         delete this.dummy;
@@ -161,11 +164,6 @@ export class LineCurveHelper {
         }
 
         this.mesh.instanceMatrix.needsUpdate = true;
-    }
-
-    async drawLine(material, scene) {
-        const mesh = await this.getLineMesh(material);
-        scene.add(mesh);
     }
 
     _createVector(point) {

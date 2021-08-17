@@ -7,7 +7,10 @@ import {setMouse} from "../helpers/pointer-functions.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {MaterialType} from "../../../gfx-helpers/materials.js";
 import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
+import init, {tessellate_polygon} from "./../../../../wasm/geometry/bin/geometry.js";
+import {rawToGeometry} from "./../../../gfx-helpers/raw-to-geometry.js";
 
+init();
 const POINT = "point";
 
 export class DrawPolyState extends BaseState {
@@ -23,8 +26,8 @@ export class DrawPolyState extends BaseState {
         await super.enter();
         this._points    = [];
 
-        const planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
-        this._curve         = await LineCurveHelper.new(10, 10, 10, planeMaterial, this._context.canvas.scene, "path-outline");
+        this._planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
+        this._curve         = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         await this._render();
     }
@@ -36,6 +39,7 @@ export class DrawPolyState extends BaseState {
 
         delete this._points;
         delete this._curve;
+        delete this._planeMaterial;
 
         await super.exit();
     }
@@ -84,7 +88,7 @@ export class DrawPolyState extends BaseState {
         this.shape = await createNormalizedPlane(10, 10, material, "rect");
         this.shape.name = "path-point";
         this.shape.type = POINT;
-        this.shape.position.set(startPoint.x, startPoint.y, 0);
+        this.shape.position.set(startPoint.x, startPoint.y, 1);
         this._context.canvas.scene.add(this.shape);
     }
 
@@ -107,10 +111,51 @@ export class DrawPolyState extends BaseState {
         this.element.removeEventListener("pointerup", this._pointerUpHandler);
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
 
+        const points = [];
         this._points.forEach(point => {
             this._context.canvas.scene.remove(point);
+            points.push(point.position.x);
+            points.push(point.position.y);
         })
 
+
+        const p1 = performance.now();
+        const result = tessellate_polygon(points, true, true, 50);
+        const p2 = performance.now();
+
+        await this._createFill(result.fill);
+        await this._createStroke(result.stroke);
+
+        const p3 = performance.now();
+
+        console.log(`tess: ${p2 - p1}`);
+        console.log(`js: ${p3 - p2}`);
+        console.log(`total: ${p3 - p1}`);
+
+        this._points.length = 0;
+        await this._curve.dispose();
+        this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
+
         await this._render();
+    }
+
+    async _createFill(fill) {
+        const material = await this._context.canvas.materials.get(MaterialType.BASIC, 0x000000);
+        material.side = await crs.getThreeConstant("DoubleSide");
+
+        const polygon = await rawToGeometry(fill, material);
+        polygon.name = "fill-polygon";
+        this._context.canvas.scene.add(polygon);
+    }
+
+    async _createStroke(stroke) {
+        const material = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0090);
+        material.side = await crs.getThreeConstant("DoubleSide");
+
+        const polygon = await rawToGeometry(stroke, material);
+        polygon.name = "stroke-polygon";
+        polygon.position.z = 1;
+
+        this._context.canvas.scene.add(polygon);
     }
 }
