@@ -4,7 +4,9 @@ extern crate lyon;
 use lyon::path::Path;
 use lyon::path::math::{point, Point};
 use lyon::tessellation::geometry_builder::{simple_builder, VertexBuffers};
-use lyon::tessellation::{FillTessellator, FillOptions};
+use lyon::tessellation::{FillTessellator, FillOptions, StrokeTessellator, StrokeOptions};
+
+type PolyBuffer = VertexBuffers<Point, u16>;
 
 fn create_path(points: Vec<f32>) -> Path {
     let mut builder = Path::builder();
@@ -20,54 +22,66 @@ fn create_path(points: Vec<f32>) -> Path {
     return builder.build();
 }
 
-fn create_buffers(path: Path) -> VertexBuffers<Point, u16> {
-    let mut buffers: VertexBuffers<Point, u16> = VertexBuffers::new();
-    {
-        let mut vertex_builder = simple_builder(&mut buffers);
-        let mut tessellator = FillTessellator::new();
-
-        let result = tessellator.tessellate_path(
-            &path,
-            &FillOptions::default(),
-            &mut vertex_builder
-        );
-
-        assert!(result.is_ok());
-    }
-
-    return buffers;
-}
-
-#[wasm_bindgen]
-pub fn tessellate_polygon(points: Vec<f32>) -> js_sys::Object {
-    let path = create_path(points);
-    let buffers = create_buffers(path);
-
+fn populate_from_buffer(buffers: &PolyBuffer) -> js_sys::Object {
+    let result = js_sys::Object::new();
     let vertices = js_sys::Array::new();
     let indices = js_sys::Array::new();
 
     for point in buffers.vertices.iter() {
-        //addToArray!(vertices => point.x, point.y);
-
         vertices.push(&JsValue::from(point.x));
         vertices.push(&JsValue::from(point.y));
+        vertices.push(&0.into());
     }
 
     for &ind in buffers.indices.iter() {
-        // addToArray!(indicies => ind);
         indices.push(&JsValue::from(ind));
     }
 
-    // return create_object!(
-    //     vertices => &vertices.into(),
-    //     indicies => &indicies.into()
-    // );
-
-    let result = js_sys::Object::new();
     js_sys::Reflect::set(&result, &"vertices".into(), &vertices.into()).ok();
     js_sys::Reflect::set(&result, &"indices".into(), &indices.into()).ok();
 
     return result;
 }
 
-// 127k
+#[wasm_bindgen]
+pub fn tessellate_polygon(points: Vec<f32>, fill: bool, stroke: bool) -> js_sys::Object {
+    let path = create_path(points);
+
+    let result = js_sys::Object::new();
+
+    if fill {
+        let mut buffers: PolyBuffer = VertexBuffers::new();
+        {
+            let mut vertex_builder = simple_builder(&mut buffers);
+            let mut tessellator = FillTessellator::new();
+
+            tessellator.tessellate_path(
+                &path,
+                &FillOptions::default(),
+                &mut vertex_builder
+            ).ok();
+        }
+
+        let fill = populate_from_buffer(&buffers);
+        js_sys::Reflect::set(&result, &"fill".into(), &fill).ok();
+    }
+
+    if stroke {
+        let mut buffers: PolyBuffer = VertexBuffers::new();
+        {
+            let mut vertex_builder = simple_builder(&mut buffers);
+            let mut tessellator = StrokeTessellator::new();
+
+            tessellator.tessellate_path(
+                &path,
+                &StrokeOptions::default(),
+                &mut vertex_builder
+            ).ok();
+        }
+
+        let stroke = populate_from_buffer(&buffers);
+        js_sys::Reflect::set(&result, &"stroke".into(), &stroke).ok();
+    }
+
+    return result;
+}

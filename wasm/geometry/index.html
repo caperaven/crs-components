@@ -9,12 +9,19 @@
 </head>
 <body>
     <script type="module">
-        import init, {tessellate_polygon} from "/bin/geometry.js";
+        // import init, {tessellate_polygon} from "/bin/geometry.js";
+
 
         async function run() {
-            await init();
+            const module = await import("/bin/geometry.js");
+            await module.default();
 
-            console.log(tessellate_polygon([-100.0, -100.0, 100.0, -100.0, 100.0, 100.0, -100.0, 100.0]));
+            const p1 = performance.now();
+            const result = module.tessellate_polygon([-100.0, -100.0, 100.0, -100.0, 100.0, 100.0, -100.0, 100.0], true, true)
+            const p2 = performance.now();
+
+            console.log(result);
+            console.log(`performance: ${p2 - p1}`);
 
             // console.log(test());
             // console.log(array_test());
