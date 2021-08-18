@@ -7,11 +7,11 @@ import {setMouse} from "../helpers/pointer-functions.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {MaterialType} from "../../../gfx-helpers/materials.js";
 import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
-import init, {tessellate_polygon} from "./../../../../wasm/geometry/bin/geometry.js";
+import init, {fill, stroke} from "./../../../../wasm/geometry/bin/geometry.js";
 import {rawToGeometry} from "./../../../gfx-helpers/raw-to-geometry.js";
 
-init();
 const POINT = "point";
+init();
 
 export class DrawPolyState extends BaseState {
     constructor(context) {
@@ -111,17 +111,17 @@ export class DrawPolyState extends BaseState {
         this.element.removeEventListener("pointerup", this._pointerUpHandler);
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
 
-        const points = [];
-        this._points.forEach(point => {
-            this._context.canvas.scene.remove(point);
-            points.push(point.position.x);
-            points.push(point.position.y);
-        })
+        const points = ["m", parseInt(this._points[0].position.x), parseInt(this._points[0].position.y)];
+        for (let i = 1; i < this._points.length; i++) {
+            points.push("l", parseInt(this._points[i].position.x), parseInt(this._points[i].position.y));
+        }
+        points.push("z");
+        const pstr = points.join(",");
+        const fill_data = fill(pstr);
+        const stroke_data = stroke(pstr, 10);
 
-
-        const result = tessellate_polygon(points, true, true, 20);
-        //await this._createFill(result.fill);
-        await this._createStroke(result.stroke);
+        await this._createFill(fill_data);
+        await this._createStroke(stroke_data);
 
         this._points.length = 0;
         await this._curve.dispose();
