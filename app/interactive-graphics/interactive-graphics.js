@@ -13,6 +13,7 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
         const parser = await crs.modules.getInstanceOf("GraphicsParser");
         await parser.initialize([]);
         this._program = await parser.parse(schema, parent, {background: "#ff0050"});
+        console.log(this._program);
         await parser.dispose();
     }
 

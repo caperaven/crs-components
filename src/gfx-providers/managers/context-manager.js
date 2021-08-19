@@ -44,8 +44,7 @@ export default class ContextManager extends BaseManager {
         for (let key of keys) {
             if (fnMap[key] != null) {
                 await fnMap[key](args, canvas, key, program);
-            }
-            else {
+            } else {
                 canvas[key] = args[key];
             }
         }
@@ -93,6 +92,41 @@ async function makeInteractive(args, canvas, key, program) {
         program.inputStates = module.InputStates;
         await module.InputManager.enable(program.canvas);
         program._disposables.push(disposeInputManager.bind(program));
+
+        program.drawing = {
+            lineJoinOptions: Object.freeze({
+                ROUND: "round",
+                MITER: "miter",
+                BEVEL: "bevel"
+            }),
+            capOptions: Object.freeze({
+                ROUND: "round",
+                SQUARE: "square",
+                BEVEL: "bevel"
+            }),
+            strokeTypeOptions: Object.freeze({
+                SOLID: "solid",
+                DOTTED: "dotted"
+            }),
+            fill: {
+                enabled: true,
+                color: 0x000000
+            },
+            stroke: {
+                enabled: false,
+                type: "solid",
+                color: 0x000000,
+                lineJoin: null,
+                startCap: null,
+                endCap: null,
+                dots: {
+                    icon: "",
+                    xScale: 1,
+                    yScale: 1,
+                    gap: 0
+                }
+            }
+        }
     }
 }
 
