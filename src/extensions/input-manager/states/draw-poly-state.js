@@ -91,7 +91,7 @@ export class DrawPolyState extends BaseState {
     }
 
     async _keyUp(event) {
-        if (event.code === "Escape") {
+        if (event.code === "Escape" || event.code === "Backspace") {
             await this._clearMarkers();
         }
 
@@ -149,6 +149,8 @@ export class DrawPolyState extends BaseState {
             const options = drawingSettings.stroke.toSoldString();
             const stroke_data = stroke(pstr, drawingSettings.stroke.lineWidth, options);
             await this._createStroke(stroke_data, group);
+
+            console.log(stroke_data);
         }
 
         this._context.canvas.scene.add(group);
