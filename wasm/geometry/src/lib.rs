@@ -18,9 +18,8 @@ pub fn fill(data: &str) -> js_sys::Object {
 }
 
 #[wasm_bindgen]
-pub fn stroke(data: &str, width: f32) -> js_sys::Object {
+pub fn stroke(data: &str, line_width: f32, options: JsValue) -> js_sys::Object {
     let path = path_utils::create_path(data);
-    let buffer = path_utils::extrude_path(path, width);
+    let buffer = path_utils::extrude_path(path, line_width, options);
     return utils::populate_from_buffer(&buffer);
 }
-

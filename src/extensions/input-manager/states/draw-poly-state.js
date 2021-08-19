@@ -118,7 +118,9 @@ export class DrawPolyState extends BaseState {
         points.push("z");
         const pstr = points.join(",");
         const fill_data = fill(pstr);
-        const stroke_data = stroke(pstr, 10);
+        const stroke_data = stroke(pstr, 50, "lj:round");
+
+        console.log(stroke_data);
 
         await this._createFill(fill_data);
         await this._createStroke(stroke_data);
