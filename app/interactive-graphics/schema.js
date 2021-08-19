@@ -7,7 +7,6 @@ export const schema = {
                 z: 5
             },
             interactive: true,
-            workflow: true
         }
     },
 

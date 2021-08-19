@@ -8,13 +8,32 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
         await this.initialize();
     }
 
+    preLoad() {
+        this.setProperty("context", this._dataId);
+    }
+
     async initialize() {
         const parent = document.querySelector(".canvas-parent");
         const parser = await crs.modules.getInstanceOf("GraphicsParser");
         await parser.initialize([]);
         this._program = await parser.parse(schema, parent, {background: "#ff0050"});
+
         console.log(this._program);
+
+        await this.initProperties();
+
         await parser.dispose();
+    }
+
+    async initProperties() {
+        const drawing = this._program.drawing;
+        this.setProperty("fillEnabled", drawing.fill.enabled);
+        this.setProperty("fillColor", drawing.fill.color);
+        this.setProperty("strokeEnabled", drawing.stroke.enabled);
+        this.setProperty("strokeColor", drawing.stroke.color);
+        this.setProperty("strokeType", drawing.stroke.type);
+        this.setProperty("strokeWidth", drawing.stroke.lineWidth);
+        this.setProperty("strokeJoint", drawing.stroke.lineJoin);
     }
 
     async disconnectedCallback() {
@@ -24,21 +43,53 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async state_select() {
         this._program.canvas._inputManager.gotoState(this._program.inputStates.SELECT);
+        document.querySelector("#properties-panel").view = "none";
     }
 
     async state_rectangle() {
         this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_RECTANGLE);
+        document.querySelector("#properties-panel").view = "pen";
     }
 
     async state_circle() {
         this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_CIRCLE);
+        document.querySelector("#properties-panel").view = "pen";
     }
 
     async state_polygon() {
         this._program.canvas._inputManager.gotoState(this._program.inputStates.DRAW_POLYGON);
+        document.querySelector("#properties-panel").view = "pen";
     }
 
     async refresh() {
         this._program.render();
+    }
+
+    async fillEnabledChanged(newValue) {
+        this._program.drawing.fill.enabled = newValue;
+    }
+
+    async fillColorChanged(newValue) {
+        this._program.drawing.fill.color = newValue;
+    }
+
+    async strokeEnabledChanged(newValue) {
+        this._program.drawing.stroke.enabled = newValue;
+    }
+
+    async strokeColorChanged(newValue) {
+        this._program.drawing.stroke.color = newValue;
+    }
+
+    async strokeTypeChanged(newValue) {
+        this._program.drawing.stroke.type = newValue;
+    }
+
+    async strokeWidthChanged(newValue) {
+        this._program.drawing.stroke.lineWidth = newValue;
+    }
+
+    async strokeJointChanged(newValue) {
+        this._program.drawing.stroke.lineJoin = newValue;
     }
 }

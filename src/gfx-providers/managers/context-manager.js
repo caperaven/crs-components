@@ -90,7 +90,7 @@ async function makeInteractive(args, canvas, key, program) {
         const module = await import("./../../extensions/input-manager/input-manager.js");
         program.inputManager = module.InputManager;
         program.inputStates = module.InputStates;
-        await module.InputManager.enable(program.canvas);
+        await module.InputManager.enable(program.canvas, program);
         program._disposables.push(disposeInputManager.bind(program));
 
         program.drawing = {
@@ -110,20 +110,35 @@ async function makeInteractive(args, canvas, key, program) {
             }),
             fill: {
                 enabled: true,
-                color: 0x000000
+                color: "#000000"
             },
             stroke: {
                 enabled: false,
                 type: "solid",
-                color: 0x000000,
-                lineJoin: null,
+                color: "#ff0000",
+                lineWidth: 10,
+                lineJoin: "miter",
                 startCap: null,
                 endCap: null,
-                dots: {
+                dotted: {
                     icon: "",
                     xScale: 1,
                     yScale: 1,
-                    gap: 0
+                    gap: 0,
+                    rotation: 0
+                },
+                toSoldString() {
+                    const values = [];
+                    if (this.lineJoin != null) {
+                        values.push(`lj:${this.lineJoin}`);
+                    }
+                    if (this.startCap != null) {
+                        value.push(`sc:${this.startCap}`)
+                    }
+                    if (this.endCap != null) {
+                        value.push(`ec:${this.endCap}`)
+                    }
+                    return values.join(",");
                 }
             }
         }
@@ -147,4 +162,5 @@ async function disposeInputManager() {
     await this.inputManager.disable(this.canvas);
     delete this.inputManager;
     delete this.inputStates;
+    delete this.drawing;
 }

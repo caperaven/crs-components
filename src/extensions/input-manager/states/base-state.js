@@ -22,6 +22,7 @@ export class BaseState extends crs.state.StateBase {
         this._pointerDownHandler = this._pointerDown.bind(this);
         this._pointerUpHandler = this._pointerUp.bind(this);
         this._pointerMoveHandler = this._pointerMove.bind(this);
+        this._keyUpHandler = this._keyUp.bind(this);
     }
 
     dispose() {
@@ -30,6 +31,7 @@ export class BaseState extends crs.state.StateBase {
         this._pointerUpHandler = null;
         this._pointerMoveHandler = null;
         this._renderHandler = null;
+        this._keyUpHandler = null;
     }
 
     async enter() {
@@ -67,5 +69,9 @@ export class BaseState extends crs.state.StateBase {
 
     async _render() {
         this._context.canvas.render();
+    }
+
+    async _keyUp(event) {
+        return;
     }
 }

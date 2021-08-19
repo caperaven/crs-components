@@ -17,13 +17,13 @@
     .form {
         display: grid;
         grid-template-rows: 3rem 1fr;
-        grid-template-columns: 15rem 1fr;
+        grid-template-columns: 15rem 1fr 15rem;
         width: 100%;
         height: 100%;
     }
 
     .crs-toolbar {
-        grid-column: 1 / 3;
+        grid-column: 1 / 4;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -41,6 +41,29 @@
         grid-row:2;
         border-left: solid 1px var(--crs-border);
     }
+
+    .properties {
+        border-left: solid 1px var(--crs-border);
+        grid-row: 2;
+        grid-column: 3;
+        padding: 0.5rem;
+    }
+
+    .properties h2 {
+        padding: 0;
+        margin: 0 0 1rem 0;
+    }
+
+    .properties input[type="color"], .properties input[type="number"], .properties select {
+        width: 100%;
+        height: 2rem;
+    }
+
+    .properties label {
+        display:block;
+        margin-bottom: 1rem;
+    }
+
 </style>
 <div class="form">
     <div class="crs-toolbar underline">
@@ -55,4 +78,59 @@
         <button>color</button>
     </div>
     <div class="canvas-parent"></div>
+    <div class="properties">
+        <perspective-element id="properties-panel" data-store="ig-properties" view.bind="none" context.once="context">
+            <template data-id="none" data-default="true">
+                <div>No Properties</div>
+            </template>
+
+            <template data-id="pen">
+                <h2>Fill</h2>
+                <label>
+                    <input type="checkbox" checked.bind="fillEnabled">
+                    <span>Enabled</span>
+                </label>
+
+                <label>
+                    <div>Color</div>
+                    <input type="color" value.bind="fillColor">
+                </label>
+
+                <h2>Stroke</h2>
+
+                <label>
+                    <input type="checkbox" checked.bind="strokeEnabled">
+                    <span>Enabled</span>
+                </label>
+
+                <label>
+                    <div>Color</div>
+                    <input type="color" value.bind="strokeColor">
+                </label>
+
+                <label>
+                    <div>Type</div>
+                    <select value.bind="strokeType">
+                        <option value="solid">Solid</option>
+                        <option value="dotted">Dotted</option>
+                    </select>
+                </label>
+
+                <label>
+                    <div>Width</div>
+                    <input type="number" value.bind="strokeWidth">
+                </label>
+
+                <label>
+                    <div>Joint</div>
+                    <select value.bind="strokeJoint">
+                        <option value="miter">Miter</option>
+                        <option value="round">Round</option>
+                        <option value="bevel">Bevel</option>
+                    </select>
+                </label>
+
+            </template>
+        </perspective-element>
+    </div>
 </div>

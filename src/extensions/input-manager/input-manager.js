@@ -73,14 +73,16 @@ class InputManagerWorker {
 }
 
 export class InputManager {
-    static async enable(parent) {
+    static async enable(parent, program) {
         await TransformGizmo.enable(parent);
         parent._inputManager = new InputManagerWorker(parent);
+        parent._inputManager.program = program;
         await parent._inputManager.initialize();
     }
 
     static async disable(parent) {
         await TransformGizmo.disable(parent);
+        delete parent._inputManager.program;
         parent._inputManager = parent._inputManager.dispose();
     }
 }

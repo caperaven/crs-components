@@ -139,7 +139,7 @@ mod test {
 
     #[test]
     fn stroke_options() {
-        let options = create_stroke_options(10.0, "lj:round,sc:round,ec:round,sc:round".into());
+        let options = create_stroke_options(10.0, "lj:round,sc:round,ec:round".into());
         assert_eq!(options.line_width, 10.0);
         assert_eq!(options.line_join, LineJoin::Round);
         assert_eq!(options.start_cap, LineCap::Round);
