@@ -1,3 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="expand" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+    </symbol>
+</svg>
+
+<template id="group">
+    <div class="grouped-row">
+        <div class="content">
+            <div class="text"></div>
+            <div class="count"></div>
+            <svg class="chevron-svg" data-action="expand">
+                <use href="#expand"></use>
+            </svg>
+        </div>
+    </div>
+</template>
+
 <div class="header" style="display:none"></div>
 <div class="body" style="display:none"></div>
 <div class="footer" style="display:none"></div>

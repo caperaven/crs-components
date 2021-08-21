@@ -29,7 +29,7 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 translations: {
                     groupText: "drop here to group..."
                 },
-//                grouping: ["month", "isActive", "Value"]
+                grouping: ["month", "isActive", "value"]
             })
         })
     }

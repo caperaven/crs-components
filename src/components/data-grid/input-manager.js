@@ -92,7 +92,11 @@ async function mouseUp(event) {
 
 async function click(event) {
     if (event.target.classList.contains("column-header")) {
-        await this._sort?.perform(event.target);
+        return await this._sort?.perform(event.target);
+    }
+
+    if (event.target.dataset.action === "expand") {
+        this.renderer.expand(this, event.target.dataset.path);
     }
 }
 

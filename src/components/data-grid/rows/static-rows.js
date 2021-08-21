@@ -50,6 +50,10 @@ export default class StaticRows {
 
         await createRows(grid, data);
     }
+
+    static async expand(grid, path) {
+        await expand(grid, path);
+    }
 }
 
 async function createRows(grid, data) {
@@ -111,6 +115,79 @@ async function updateRow(grid, row, index) {
     }
 }
 
-async function createRootGroups() {
+async function createRootGroups(grid) {
+    const template = grid.querySelector("#group");
+    const width = grid.rect.width - 8;
+    const keys = Object.keys(grid.groupDescriptor);
+    const fragment = document.createDocumentFragment();
 
+    const grouping = grid.grouping[0];
+    const column = grid._columns.find(item => item.field == grouping);
+    const title = column.title;
+
+    for (let key of keys) {
+        const descriptor = grid.groupDescriptor[key];
+        await createGroupedRow(template, `${title}: ${key}`, key, descriptor._count, 0, grid._columns.length, width, fragment);
+    }
+
+    grid.bodyElement.appendChild(fragment);
+}
+
+async function createGroupedRow(template, text, path, count, level, length, width, fragment) {
+    if (text.indexOf("_count") != -1) return;
+
+    const instance          = template.content.cloneNode(true);
+    const contentElement    = instance.querySelector(".content");
+    const textElement       = instance.querySelector(".text");
+    const countElement      = instance.querySelector(".count");
+    const chevronElement    = instance.querySelector(".chevron-svg");
+
+    contentElement.style.width = `${width}px`;
+
+    textElement.style.marginLeft = `${level * 16}px`;
+    textElement.textContent = text;
+    countElement.textContent = `Count: ${count}`;
+    chevronElement.dataset.path = path;
+
+    instance.children[0].style.gridColumn = `1 / span ${length}`;
+
+    fragment.appendChild(instance);
+}
+
+async function expand(grid, path) {
+    const items = crsbinding.utils.getValueOnPath(grid.groupDescriptor, path);
+    const level = path.split(".").length;
+    const fragment = document.createDocumentFragment();
+    const target = grid.bodyElement.querySelector(`[data-path="${path}"]`).parentElement.parentElement;
+
+    if (items.ind == null) {
+        const template = grid.querySelector("#group");
+        const width = grid.rect.width - 8;
+        const grouping = grid.grouping[level];
+        const column = grid._columns.find(item => item.field == grouping);
+        const title = column.title;
+
+        for (let key of Object.keys(items)) {
+            let count = items[key]._count;
+
+            if (items[key].ind != null) {
+                count = items[key].ind.length;
+            }
+
+            await createGroupedRow(template, `${title}: ${key}`, `${path}.${key}`, count, level, grid._columns.length, width, fragment);
+        }
+    }
+    else {
+        for (let index of items.ind) {
+            const row = grid._data[index];
+            await createCells(grid, row, fragment, index);
+        }
+    }
+
+    if (target.nextSibling == null) {
+        target.parentElement.appendChild(fragment);
+    }
+    else {
+        target.parentElement.insertBefore(fragment, target.nextSibling);
+    }
 }
