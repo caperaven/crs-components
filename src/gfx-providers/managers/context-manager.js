@@ -112,8 +112,13 @@ async function makeInteractive(args, canvas, key, program) {
                 POLYGON: "polygon",
                 PEN: "pen"
             }),
+            drawOperationOptions: Object.freeze({
+                CONTINUES: "continues",
+                SINGLE: "single"
+            }),
             pen: {
-                type: "polygon"
+                type: "polygon",
+                drawOperation: "continues"
             },
             fill: {
                 enabled: true,

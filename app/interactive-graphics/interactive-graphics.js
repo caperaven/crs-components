@@ -34,7 +34,13 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
         this.setProperty("strokeType",      drawing.stroke.type);
         this.setProperty("strokeWidth",     drawing.stroke.lineWidth);
         this.setProperty("strokeJoint",     drawing.stroke.lineJoin);
+        this.setProperty("image",           drawing.stroke.dotted.icon);
+        this.setProperty("xScale",          drawing.stroke.dotted.xScale);
+        this.setProperty("yScale",          drawing.stroke.dotted.yScale);
+        this.setProperty("gap",             drawing.stroke.dotted.gap);
+        this.setProperty("rotation",        drawing.stroke.dotted.rotation);
         this.setProperty("penType",         drawing.pen.type);
+        this.setProperty("drawOperation",   drawing.pen.drawOperation);
     }
 
     async disconnectedCallback() {
@@ -96,5 +102,29 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async penTypeChanged(newValue) {
         this._program.drawing.pen.type = newValue;
+    }
+
+    async imageChanged(newValue) {
+        this._program.drawing.stroke.dotted.icon = newValue;
+    }
+
+    async xScaleChanged(newValue) {
+        this._program.drawing.stroke.dotted.xScale = newValue;
+    }
+
+    async yScaleChanged(newValue) {
+        this._program.drawing.stroke.dotted.yScale = newValue;
+    }
+
+    async gapChanged(newValue) {
+        this._program.drawing.stroke.dotted.gap = newValue;
+    }
+
+    async rotationChanged(newValue) {
+        this._program.drawing.stroke.dotted.rotation = newValue;
+    }
+
+    async drawOperationChanged(newValue) {
+        this._program.drawing.pen.drawOperation = newValue;
     }
 }

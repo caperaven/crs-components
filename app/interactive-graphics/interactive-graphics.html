@@ -94,6 +94,16 @@
                     </select>
                 </label>
 
+                <div hidden.if="penType != 'pen'">
+                    <label>
+                        <div>Draw Operation</div>
+                        <select value.bind="drawOperation">
+                            <option value="continues">Continues</option>
+                            <option value="single">Single</option>
+                        </select>
+                    </label>
+                </div>
+
                 <div hidden.if="penType == 'pen'">
                     <h2>Fill</h2>
                     <label>
@@ -132,14 +142,42 @@
                     <input type="number" value.bind="strokeWidth">
                 </label>
 
-                <label>
-                    <div>Joint</div>
-                    <select value.bind="strokeJoint">
-                        <option value="miter">Miter</option>
-                        <option value="round">Round</option>
-                        <option value="bevel">Bevel</option>
-                    </select>
-                </label>
+                <div hidden.if="strokeType != 'solid'">
+                    <label>
+                        <div>Joint</div>
+                        <select value.bind="strokeJoint">
+                            <option value="miter">Miter</option>
+                            <option value="round">Round</option>
+                            <option value="bevel">Bevel</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div hidden.if="strokeType != 'dotted'">
+                    <label>
+                        <div>Image</div>
+                        <select value.bind="image">
+                            <option value="home">Home</option>
+                            <option value="arrow_top">Arrow</option>
+                        </select>
+                    </label>
+                    <label>
+                        <div>X Scale</div>
+                        <input type="number" value.bind="xScale">
+                    </label>
+                    <label>
+                        <div>Y Scale</div>
+                        <input type="number" value.bind="yScale">
+                    </label>
+                    <label>
+                        <div>Gap</div>
+                        <input type="number" value.bind="gap">
+                    </label>
+                    <label>
+                        <div>Rotation</div>
+                        <input type="number" value.bind="rotation">
+                    </label>
+                </div>
 
             </template>
         </perspective-element>

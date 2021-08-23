@@ -26,6 +26,9 @@ export class DrawPolyState extends BaseState {
         await super.enter();
         this._points = [];
 
+        this._pointerMovePenHandler = this._pointerMovePen.bind(this);
+        this._pointerUpPenHandler = this._pointerUpPen.bind(this);
+
         this._planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
         this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
@@ -42,6 +45,9 @@ export class DrawPolyState extends BaseState {
 
         this._points.length = 0;
         this._curve = this._curve.dispose();
+
+        this._pointerMovePenHandler = null;
+        this._pointerUpPenHandler = null;
 
         delete this._points;
         delete this._curve;
@@ -62,11 +68,29 @@ export class DrawPolyState extends BaseState {
             return await this._closePath();
         }
 
-        this.element.addEventListener("pointerup", this._pointerUpHandler);
-        this.element.addEventListener("pointermove", this._pointerMoveHandler);
         this._startPoint = await this.getIntersectionPlanePosition();
+        this._endPoint = this._startPoint;
 
         await this._createPoint(this._startPoint);
+
+        if (this._context.program.drawing.pen.drawOperation == this._context.program.drawing.drawOperationOptions.CONTINUES) {
+            this.element.addEventListener("pointerup", this._pointerUpHandler);
+            this.element.addEventListener("pointermove", this._pointerMoveHandler);
+        }
+        else {
+            this.element.addEventListener("pointerup", this._pointerUpPenHandler);
+            this.element.addEventListener("pointermove", this._pointerMovePenHandler);
+            await this._createPoint(this._endPoint);
+        }
+
+        await this._render();
+    }
+
+    async _pointerMove(event) {
+        await setMouse(this._mouse, event, this._context.canvasRect);
+        this._raycaster.setFromCamera(this._mouse, this.camera);
+        const pos = await this.getIntersectionPlanePosition();
+        this.shape.position.set(pos.x, pos.y, 0);
         await this._render();
     }
 
@@ -82,13 +106,15 @@ export class DrawPolyState extends BaseState {
         await this._render();
     }
 
-    async _pointerMove(event) {
-        await setMouse(this._mouse, event, this._context.canvasRect);
-        this._raycaster.setFromCamera(this._mouse, this.camera);
-        const pos = await this.getIntersectionPlanePosition();
-        this.shape.position.set(pos.x, pos.y, 0);
-        await this._render();
+    async _pointerMovePen(event) {
+        await this._pointerMove(event);
+    };
+
+    async _pointerUpPen(event) {
+        this.element.removeEventListener("pointerup", this._pointerUpPenHandler);
+        this.element.removeEventListener("pointermove", this._pointerMovePenHandler);
     }
+
 
     async _keyUp(event) {
         if (event.code === "Escape" || event.code === "Backspace") {
@@ -150,9 +176,14 @@ export class DrawPolyState extends BaseState {
         }
 
         if (isPolygon == false || drawingSettings.stroke.enabled == true) {
-            const options = drawingSettings.stroke.toSoldString();
-            const stroke_data = stroke(pstr, drawingSettings.stroke.lineWidth, options);
-            await this._createStroke(stroke_data, group, isPolygon);
+            if (drawingSettings.stroke.type == drawingSettings.strokeTypeOptions.SOLID) {
+                const options = drawingSettings.stroke.toSoldString();
+                const stroke_data = stroke(pstr, drawingSettings.stroke.lineWidth, options);
+                await this._createStroke(stroke_data, group, isPolygon);
+            }
+            else {
+
+            }
         }
 
         this._context.canvas.scene.add(group);
