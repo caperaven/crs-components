@@ -94,7 +94,7 @@ export class LineCurveHelper {
         await this._rebuildInstanceMesh(maxDashCount);
 
         for (let i = 0; i <= count; i++) {
-            const norm = i / count;
+            const norm = count > 0 ? i / count : 0;
             const tangent = this.curvePath.getTangent(norm);
 
             axis.crossVectors(up, tangent).normalize();
@@ -148,7 +148,7 @@ export class LineCurveHelper {
         }
 
         for (let i = 0; i <= count; i++) {
-            const norm = i / count;
+            const norm = count > 0 ? i / count : 0;
             const tangent = this.curvePath.getTangent(norm);
 
             axis.crossVectors(up, tangent).normalize();

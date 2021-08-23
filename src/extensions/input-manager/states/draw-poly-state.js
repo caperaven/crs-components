@@ -89,8 +89,8 @@ export class DrawPolyState extends BaseState {
     async _pointerMove(event) {
         await setMouse(this._mouse, event, this._context.canvasRect);
         this._raycaster.setFromCamera(this._mouse, this.camera);
-        const pos = await this.getIntersectionPlanePosition();
-        this.shape.position.set(pos.x, pos.y, 0);
+        this._endPoint = await this.getIntersectionPlanePosition();
+        this.shape.position.set(this._endPoint.x, this._endPoint.y, 0);
         await this._render();
     }
 
@@ -99,7 +99,6 @@ export class DrawPolyState extends BaseState {
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
 
         await setMouse(this._mouse, event, this._context.canvasRect);
-        this._points.push(this.shape);
         await this._setCurvePath();
         delete this.shape;
 
@@ -108,11 +107,15 @@ export class DrawPolyState extends BaseState {
 
     async _pointerMovePen(event) {
         await this._pointerMove(event);
+        await this._updatePenCurvePath();
     };
 
     async _pointerUpPen(event) {
         this.element.removeEventListener("pointerup", this._pointerUpPenHandler);
         this.element.removeEventListener("pointermove", this._pointerMovePenHandler);
+
+        await this._pointerUp(event);
+        await this._closePath()
     }
 
 
@@ -135,6 +138,23 @@ export class DrawPolyState extends BaseState {
         this.shape.type = POINT;
         this.shape.position.set(startPoint.x, startPoint.y, 1);
         this._context.canvas.scene.add(this.shape);
+        this._points.push(this.shape);
+    }
+
+    async _updatePenCurvePath() {
+        if (this._curve.curvePath.curves.length == 0) {
+            if (this._startPoint.x === this._endPoint.x) return;
+
+            await this._curve.addLine({x: this._startPoint.x, y: this._startPoint.y}, {x: this._endPoint.x, y: this._endPoint.y});
+            await this._curve.drawDashes();
+            return;
+        }
+
+        const curve = this._curve.curvePath.curves[0];
+        curve.v2.x = this._endPoint.x;
+        curve.v2.y = this._endPoint.y;
+        curve.updateArcLengths();
+        this._curve.update();
     }
 
     async _setCurvePath() {
@@ -189,7 +209,6 @@ export class DrawPolyState extends BaseState {
         this._context.canvas.scene.add(group);
 
         await this._clearMarkers();
-
         await this._render();
     }
 
