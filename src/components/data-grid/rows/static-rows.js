@@ -81,7 +81,10 @@ async function createCells(grid, row, fragment, rowIndex) {
         element.classList.add(column.align || "left");
         element.dataset.col = index;
         element.style.gridColumnStart = index++;
-        element.style.gridRowStart = rowIndex;
+
+        if (rowIndex != null) {
+            element.style.gridRowStart = rowIndex;
+        }
 
         if (column.sticky == true) {
             element.classList.add("sticky");
@@ -180,14 +183,14 @@ async function expand(grid, path) {
     else {
         for (let index of items.ind) {
             const row = grid._data[index];
-            await createCells(grid, row, fragment, index);
+            await createCells(grid, row, fragment);
         }
     }
 
-    if (target.nextSibling == null) {
+    if (target.nextElementSibling == null) {
         target.parentElement.appendChild(fragment);
     }
     else {
-        target.parentElement.insertBefore(fragment, target.nextSibling);
+        target.parentElement.insertBefore(fragment, target.nextElementSibling);
     }
 }
