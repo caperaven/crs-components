@@ -27,13 +27,14 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async initProperties() {
         const drawing = this._program.drawing;
-        this.setProperty("fillEnabled", drawing.fill.enabled);
-        this.setProperty("fillColor", drawing.fill.color);
-        this.setProperty("strokeEnabled", drawing.stroke.enabled);
-        this.setProperty("strokeColor", drawing.stroke.color);
-        this.setProperty("strokeType", drawing.stroke.type);
-        this.setProperty("strokeWidth", drawing.stroke.lineWidth);
-        this.setProperty("strokeJoint", drawing.stroke.lineJoin);
+        this.setProperty("fillEnabled",     drawing.fill.enabled);
+        this.setProperty("fillColor",       drawing.fill.color);
+        this.setProperty("strokeEnabled",   drawing.stroke.enabled);
+        this.setProperty("strokeColor",     drawing.stroke.color);
+        this.setProperty("strokeType",      drawing.stroke.type);
+        this.setProperty("strokeWidth",     drawing.stroke.lineWidth);
+        this.setProperty("strokeJoint",     drawing.stroke.lineJoin);
+        this.setProperty("penType",         drawing.pen.type);
     }
 
     async disconnectedCallback() {
@@ -91,5 +92,9 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async strokeJointChanged(newValue) {
         this._program.drawing.stroke.lineJoin = newValue;
+    }
+
+    async penTypeChanged(newValue) {
+        this._program.drawing.pen.type = newValue;
     }
 }

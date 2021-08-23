@@ -85,16 +85,27 @@
             </template>
 
             <template data-id="pen">
-                <h2>Fill</h2>
+                <h2>Type</h2>
                 <label>
-                    <input type="checkbox" checked.bind="fillEnabled">
-                    <span>Enabled</span>
+                    <div>Type</div>
+                    <select value.bind="penType">
+                        <option value="polygon">Polygon</option>
+                        <option value="pen">Pen</option>
+                    </select>
                 </label>
 
-                <label>
-                    <div>Color</div>
-                    <input type="color" value.bind="fillColor">
-                </label>
+                <div hidden.if="penType == 'pen'">
+                    <h2>Fill</h2>
+                    <label>
+                        <input type="checkbox" checked.bind="fillEnabled">
+                        <span>Enabled</span>
+                    </label>
+
+                    <label>
+                        <div>Color</div>
+                        <input type="color" value.bind="fillColor">
+                    </label>
+                </div>
 
                 <h2>Stroke</h2>
 

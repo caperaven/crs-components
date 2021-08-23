@@ -108,6 +108,13 @@ async function makeInteractive(args, canvas, key, program) {
                 SOLID: "solid",
                 DOTTED: "dotted"
             }),
+            penTypeOptions: Object.freeze({
+                POLYGON: "polygon",
+                PEN: "pen"
+            }),
+            pen: {
+                type: "polygon"
+            },
             fill: {
                 enabled: true,
                 color: "#000000"

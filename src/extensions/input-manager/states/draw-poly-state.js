@@ -129,28 +129,30 @@ export class DrawPolyState extends BaseState {
         this.element.removeEventListener("pointerup", this._pointerUpHandler);
         this.element.removeEventListener("pointermove", this._pointerMoveHandler);
 
+        const drawingSettings = this._context.program.drawing;
+        const group = await crs.createThreeObject("Group");
+        const isPolygon = drawingSettings.pen.type == drawingSettings.penTypeOptions.POLYGON;
+
         const points = ["m", parseInt(this._points[0].position.x), parseInt(this._points[0].position.y)];
         for (let i = 1; i < this._points.length; i++) {
             points.push("l", parseInt(this._points[i].position.x), parseInt(this._points[i].position.y));
         }
-        points.push("z");
+
+        if (isPolygon === true) {
+            points.push("z");
+        }
+
         const pstr = points.join(",");
 
-        const drawingSettings = this._context.program.drawing;
-
-        const group = await crs.createThreeObject("Group");
-
-        if (drawingSettings.fill.enabled == true) {
+        if (isPolygon && drawingSettings.fill.enabled == true) {
             const fill_data = fill(pstr);
             await this._createFill(fill_data, group);
         }
 
-        if (drawingSettings.stroke.enabled == true) {
+        if (isPolygon == false || drawingSettings.stroke.enabled == true) {
             const options = drawingSettings.stroke.toSoldString();
             const stroke_data = stroke(pstr, drawingSettings.stroke.lineWidth, options);
-            await this._createStroke(stroke_data, group);
-
-            console.log(stroke_data);
+            await this._createStroke(stroke_data, group, isPolygon);
         }
 
         this._context.canvas.scene.add(group);
