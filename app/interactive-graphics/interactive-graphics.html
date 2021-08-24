@@ -151,6 +151,24 @@
                             <option value="bevel">Bevel</option>
                         </select>
                     </label>
+
+                    <label>
+                        <div>Start Cap</div>
+                        <select value.bind="startCap">
+                            <option value="square">Square</option>
+                            <option value="round">Round</option>
+                            <option value="butt">Butt</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <div>End Cap</div>
+                        <select value.bind="endCap">
+                            <option value="square">Square</option>
+                            <option value="round">Round</option>
+                            <option value="butt">Butt</option>
+                        </select>
+                    </label>
                 </div>
 
                 <div hidden.if="strokeType != 'dotted'">

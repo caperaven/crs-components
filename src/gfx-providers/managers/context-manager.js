@@ -102,7 +102,7 @@ async function makeInteractive(args, canvas, key, program) {
             capOptions: Object.freeze({
                 ROUND: "round",
                 SQUARE: "square",
-                BEVEL: "bevel"
+                BUTT: "butt"
             }),
             strokeTypeOptions: Object.freeze({
                 SOLID: "solid",
@@ -130,8 +130,8 @@ async function makeInteractive(args, canvas, key, program) {
                 color: "#ff0000",
                 lineWidth: 10,
                 lineJoin: "miter",
-                startCap: null,
-                endCap: null,
+                startCap: "butt",
+                endCap: "butt",
                 dotted: {
                     icon: "",
                     xScale: 1,
@@ -145,10 +145,10 @@ async function makeInteractive(args, canvas, key, program) {
                         values.push(`lj:${this.lineJoin}`);
                     }
                     if (this.startCap != null) {
-                        value.push(`sc:${this.startCap}`)
+                        values.push(`sc:${this.startCap}`)
                     }
                     if (this.endCap != null) {
-                        value.push(`ec:${this.endCap}`)
+                        values.push(`ec:${this.endCap}`)
                     }
                     return values.join(",");
                 }

@@ -34,6 +34,8 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
         this.setProperty("strokeType",      drawing.stroke.type);
         this.setProperty("strokeWidth",     drawing.stroke.lineWidth);
         this.setProperty("strokeJoint",     drawing.stroke.lineJoin);
+        this.setProperty("startCap",        drawing.stroke.startCap);
+        this.setProperty("endCap",          drawing.stroke.endCap);
         this.setProperty("image",           drawing.stroke.dotted.icon);
         this.setProperty("xScale",          drawing.stroke.dotted.xScale);
         this.setProperty("yScale",          drawing.stroke.dotted.yScale);
@@ -98,6 +100,14 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async strokeJointChanged(newValue) {
         this._program.drawing.stroke.lineJoin = newValue;
+    }
+
+    async startCapChanged(newValue) {
+        this._program.drawing.stroke.startCap = newValue;
+    }
+
+    async endCapChanged(newValue) {
+        this._program.drawing.stroke.endCap = newValue;
     }
 
     async penTypeChanged(newValue) {
