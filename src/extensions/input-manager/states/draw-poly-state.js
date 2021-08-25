@@ -31,7 +31,7 @@ export class DrawPolyState extends BaseState {
         this._pointerUpPenHandler = this._pointerUpPen.bind(this);
 
         this._planeMaterial = await this._context.program.materials.get(MaterialType.BASIC, 0xff0000);
-        this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
+        this._curve = await LineCurveHelper.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         document.addEventListener("keyup", this._keyUpHandler);
         await this._render();
@@ -214,11 +214,12 @@ export class DrawPolyState extends BaseState {
                         icon: dotted.icon,
                         transform: `s,${dotted.xScale},${dotted.yScale},1`,
                         gap: dotted.gap,
+                        rotation: dotted.rotation
                     }
                 }, this._context.program);
                 mesh.position.z = 1;
                 group.add(mesh);
-                provider.dispose();
+                await provider.dispose();
             }
         }
 
@@ -233,7 +234,7 @@ export class DrawPolyState extends BaseState {
 
         this._points.length = 0;
         await this._curve.dispose();
-        this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
+        this._curve = await LineCurveHelper.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
     }
 
     async _createFill(fill, group) {

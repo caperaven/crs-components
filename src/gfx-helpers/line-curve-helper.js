@@ -2,21 +2,22 @@
  * This class provides a way to define curved shapes where you can use instance meshes along a path.
  */
 export class LineCurveHelper {
-    static async new(xScale, yScale, gapSize, material, scene, name) {
+    static async new(xScale, yScale, gapSize, angle, material, scene, name) {
         const curvePath         = await crs.createThreeObject("CurvePath");
         const Vector3           = await crs.getThreePrototype("Vector3");
         const dummy             = await crs.createThreeObject("Object3D");
 
-        const instance  = new LineCurveHelper(curvePath, Vector3, dummy, xScale, yScale, gapSize, material, scene, name);
+        const instance  = new LineCurveHelper(curvePath, Vector3, dummy, xScale, yScale, gapSize, angle, material, scene, name);
         return instance;
     }
 
-    constructor(curvePath, Vector3, dummy, xScale, yScale, gapSize, material, scene, name) {
+    constructor(curvePath, Vector3, dummy, xScale, yScale, gapSize, angle, material, scene, name) {
         this.curvePath = curvePath;
         this.Vector3 = Vector3;
         this.dummy = dummy;
         this.xScale = xScale;
         this.yScale = yScale;
+        this.angle = angle;
         this.gapSize = gapSize;
         this.material = material;
         this.scene = scene;

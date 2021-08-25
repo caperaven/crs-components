@@ -17,6 +17,7 @@ export default class CurveGeometryProvider extends BaseProvider {
         const geometry  = await rawToGeometry(data);
         const material  = await this.getMaterial(item.material, program);
         const scale     = await createVector(item.args.transform.split(","), 0);
+        const rotation  = (item.args.rotation || 0) / 100;
         const gap       = Number(item.args.gap || 0);
         const length    = curvePath.getLength();
         const size      = scale.y + gap;
