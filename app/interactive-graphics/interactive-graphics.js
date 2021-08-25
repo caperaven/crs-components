@@ -27,6 +27,8 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async initProperties() {
         const drawing = this._program.drawing;
+        drawing.stroke.dotted.icon = "star";
+
         this.setProperty("fillEnabled",     drawing.fill.enabled);
         this.setProperty("fillColor",       drawing.fill.color);
         this.setProperty("strokeEnabled",   drawing.stroke.enabled);

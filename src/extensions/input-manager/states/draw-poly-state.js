@@ -9,6 +9,7 @@ import {MaterialType} from "../../../gfx-helpers/materials.js";
 import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
 import init, {fill, stroke} from "./../../../../wasm/geometry/bin/geometry.js";
 import {rawToGeometry} from "./../../../gfx-helpers/raw-to-geometry.js";
+import CurveGeometryProvider from "./../../../gfx-providers/providers/geometry/curve-geometry-provider.js";
 
 const POINT = "point";
 init();
@@ -154,7 +155,7 @@ export class DrawPolyState extends BaseState {
         curve.v2.x = this._endPoint.x;
         curve.v2.y = this._endPoint.y;
         curve.updateArcLengths();
-        this._curve.update();
+        await this._curve.update();
     }
 
     async _setCurvePath() {
@@ -179,9 +180,9 @@ export class DrawPolyState extends BaseState {
         const group = await crs.createThreeObject("Group");
         const isPolygon = drawingSettings.pen.type == drawingSettings.penTypeOptions.POLYGON;
 
-        const points = ["m", parseInt(this._points[0].position.x), parseInt(this._points[0].position.y)];
+        const points = ["m", parseInt(this._points[0].position.x), parseInt(this._points[0].position.y), 0];
         for (let i = 1; i < this._points.length; i++) {
-            points.push("l", parseInt(this._points[i].position.x), parseInt(this._points[i].position.y));
+            points.push("l", parseInt(this._points[i].position.x), parseInt(this._points[i].position.y), 0);
         }
 
         if (isPolygon === true) {
@@ -202,7 +203,19 @@ export class DrawPolyState extends BaseState {
                 await this._createStroke(stroke_data, group, isPolygon);
             }
             else {
-
+                const dotted = drawingSettings.stroke.dotted;
+                const provider = new CurveGeometryProvider();
+                const mesh = await provider.processItem({
+                    material: "blue", //JHR: todo, this needs to be replaced with a proper setting.
+                    args: {
+                        data: pstr,
+                        icon: dotted.icon,
+                        transform: `s,${dotted.xScale},${dotted.xScale},1`,
+                        gap: dotted.gap,
+                    }
+                }, this._context.program);
+                group.add(mesh);
+                provider.dispose();
             }
         }
 

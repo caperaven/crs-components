@@ -16,7 +16,7 @@ export default class CurveGeometryProvider extends BaseProvider {
         const data      = (await import(`./../../../geometry-data/icons/${iconName}.js`))[iconName];
         const geometry  = await rawToGeometry(data);
         const material  = await this.getMaterial(item.material, program);
-        const scale     = await CurvesParser.createVector(item.args.transform.split(","), 1);
+        const scale     = await createVector(item.args.transform.split(","), 0);
         const gap       = Number(item.args.gap || 0);
         const length    = curvePath.getLength();
         const size      = scale.y + gap;
@@ -49,45 +49,69 @@ export default class CurveGeometryProvider extends BaseProvider {
 }
 
 async function dataToCurvePath(curvePath, data) {
-    const dataParts = data.split(",");
-
-    let i = 0;
-    while (i < dataParts.length) {
-        const char = dataParts[i].trim().toLowerCase();
-        i = await CurvesParser[char](dataParts, i, curvePath);
-    }
+    const curveBuilder = new CurvesBuilder(data, curvePath);
+    await curveBuilder.process();
+    curveBuilder.dispose();
 }
 
-class CurvesParser {
-    static async l(data, i, curvePath) {
-        const p1 = await this.createVector(data,i + 1);
-        const p2 = await this.createVector(data, i + 4);
-        const curve = await crs.createThreeObject("LineCurve3", p1, p2);
-        curvePath.add(curve);
-        return i + 7;
+class CurvesBuilder {
+    constructor(data, curvePath) {
+        this.data = data.split(",");
+        this.curvePath = curvePath;
+        return this;
     }
 
-    static async c(data, i, curvePath) {
-        const p1  = await this.createVector(data,i + 1);
-        const cp1 = await this.createVector(data, i + 4);
-        const cp2 = await this.createVector(data, i + 7);
-        const p2  = await this.createVector(data, i + 10);
-        const curve = await crs.createThreeObject("CubicBezierCurve3", p1, cp1, cp2, p2);
-        curvePath.add(curve);
-        return i + 13;
+    dispose() {
+        delete this.data;
     }
 
-    static async q(data, i, curvePath) {
-        const p1  = await this.createVector(data,i + 1);
-        const cp1 = await this.createVector(data, i + 4);
-        const p2  = await this.createVector(data,i + 7);
-        const curve = await crs.createThreeObject("QuadraticBezierCurve3", p1, cp1, p2);
-        curvePath.add(curve);
+    async process() {
+        let i = 0;
+        while (i < this.data.length) {
+            const char = this.data[i].trim().toLowerCase();
+
+            i = await this[char](i);
+        }
+    }
+
+    async m (i) {
+        this._p1 = await createVector(this.data, i);
+        return i + 4;
+    }
+
+    async l (i) {
+        const p2 = await createVector(this.data, i);
+        const curve = await crs.createThreeObject("LineCurve3", this._p1, p2);
+        this.curvePath.add(curve);
+
+        this._p1 = p2;
+        return i + 4;
+    }
+
+    async c (i) {
+        const cp1 = await createVector(this.data, i + 1);
+        const cp2 = await createVector(this.data, i + 4);
+        const p2  = await createVector(this.data, i + 7);
+        const curve = await crs.createThreeObject("CubicBezierCurve3", this._p1, cp1, cp2, p2);
+        this.curvePath.add(curve);
+        this._p1 = p2;
         return i + 10;
     }
 
-    static async createVector(data, i) {
-        return await crs.createThreeObject("Vector3", Number(data[i]), Number(data[i + 1]), Number(data[i + 2]));
+    async q(i) {
+        const cp1 = await createVector(this.data, i);
+        const p2  = await createVector(this.data,i + 4);
+        const curve = await crs.createThreeObject("QuadraticBezierCurve3", this._p1, cp1, p2);
+        this.curvePath.add(curve);
+        this._p1 = p2;
+        return i + 7;
+    }
+
+    async z(i) {
+        return i + 1;
     }
 }
 
+async function createVector(data, i) {
+    return await crs.createThreeObject("Vector3", Number(data[i + 1]), Number(data[i + 2]), Number(data[i + 3]));
+}

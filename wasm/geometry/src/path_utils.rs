@@ -30,11 +30,11 @@ pub fn create_path(data: &str) -> Path {
         match char {
             "m" => {
                 builder.begin(to_point!(parts, i));
-                i += 3;
+                i += 4;
             }
             "l" => {
                 builder.line_to(to_point!(parts, i));
-                i += 3;
+                i += 4;
             },
             "z" => {
                 close = true;

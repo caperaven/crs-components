@@ -11,16 +11,21 @@
       "hasStyle": true
     },
     {
-      "title": "Interactive Graphics",
-      "hash": "#interactive-graphics",
-      "view": "interactive-graphics"
-    },
-    {
       "title": "About",
       "hash": "#about",
       "view": "about",
       "html-only": true,
       "hasStyle": true
+    },
+    {
+      "title": "Interactive Graphics",
+      "hash": "#interactive-graphics",
+      "view": "interactive-graphics"
+    },
+    {
+      "title": "Graphics Program",
+      "hash": "#graphics-program",
+      "view": "graphics-program"
     },
     {
       "title": "Material Design",
@@ -68,11 +73,6 @@
       "view": "monaco"
     },
     {
-      "title": "Graphics Program",
-      "hash": "#graphics-program",
-      "view": "graphics-program"
-    },
-    {
       "title": "MSDF",
       "hash": "#msdf",
       "view": "msdf"
@@ -86,11 +86,6 @@
       "title": "FXAA Test",
       "hash": "#fxaa",
       "view": "fxaa"
-    },
-    {
-      "title": "Pen Tool",
-      "hash": "#pen-tool",
-      "view": "pen-tool"
     },
     {
       "title": "404",
@@ -118,11 +113,6 @@
       "title": "Adaptive Loader",
       "hash": "#adaptive-loader",
       "view": "adaptive-loader"
-    },
-    {
-      "title": "Curves",
-      "hash": "#curves",
-      "view": "curves"
     }
   ]
 }

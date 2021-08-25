@@ -1,4 +1,21 @@
 export const schema = {
+    colors: [
+        {
+            id: "blue",
+            color: "#0000ff"
+        }
+    ],
+
+    materials: [
+        {
+            id: "blue",
+            type: "MeshBasicMaterial",
+            args: {
+                color: "blue"
+            }
+        }
+    ],
+
     context: {
         type: "orthographic",
         args: {
