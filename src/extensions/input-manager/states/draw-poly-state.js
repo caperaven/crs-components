@@ -214,6 +214,7 @@ export class DrawPolyState extends BaseState {
                         gap: dotted.gap,
                     }
                 }, this._context.program);
+                mesh.position.z = 1;
                 group.add(mesh);
                 provider.dispose();
             }
