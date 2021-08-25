@@ -210,7 +210,7 @@ export class DrawPolyState extends BaseState {
                     args: {
                         data: pstr,
                         icon: dotted.icon,
-                        transform: `s,${dotted.xScale},${dotted.xScale},1`,
+                        transform: `s,${dotted.xScale},${dotted.yScale},1`,
                         gap: dotted.gap,
                     }
                 }, this._context.program);

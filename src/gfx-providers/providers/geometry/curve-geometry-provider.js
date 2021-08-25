@@ -108,6 +108,9 @@ class CurvesBuilder {
     }
 
     async z(i) {
+        const p2 = await createVector(this.data, 0);
+        const line = await crs.createThreeObject("LineCurve3", this._p1, p2);
+        this.curvePath.add(line);
         return i + 1;
     }
 }

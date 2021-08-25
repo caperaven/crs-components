@@ -134,9 +134,9 @@ async function makeInteractive(args, canvas, key, program) {
                 endCap: "butt",
                 dotted: {
                     icon: "",
-                    xScale: 1,
-                    yScale: 1,
-                    gap: 0,
+                    xScale: 10,
+                    yScale: 10,
+                    gap: 10,
                     rotation: 0
                 },
                 toSoldString() {
