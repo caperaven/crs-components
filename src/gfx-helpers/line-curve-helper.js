@@ -132,6 +132,8 @@ export class LineCurveHelper {
     }
 
     async update() {
+        if (this.mesh == null) return;
+
         this.curvePath.updateArcLengths();
 
         const length            = this.curvePath.getLength();
