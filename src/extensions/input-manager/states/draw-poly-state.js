@@ -208,7 +208,7 @@ export class DrawPolyState extends BaseState {
                 const dotted = drawingSettings.stroke.dotted;
                 const provider = new CurveGeometryProvider();
                 const mesh = await provider.processItem({
-                    material: color, //JHR: todo, this needs to be replaced with a proper setting.
+                    material: color,
                     args: {
                         data: pstr,
                         icon: dotted.icon,
