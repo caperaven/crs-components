@@ -30,9 +30,7 @@ export class DrawPolyState extends BaseState {
         this._pointerMovePenHandler = this._pointerMovePen.bind(this);
         this._pointerUpPenHandler = this._pointerUpPen.bind(this);
 
-// this._context.program.materials.
-
-        this._planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
+        this._planeMaterial = await this._context.program.materials.get(MaterialType.BASIC, 0xff0000);
         this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         document.addEventListener("keyup", this._keyUpHandler);
@@ -135,7 +133,7 @@ export class DrawPolyState extends BaseState {
     }
 
     async _createPoint(startPoint) {
-        this._pointMaterial = this._pointMaterial || await this._context.canvas.materials.get(MaterialType.BASIC, 0x000000);
+        this._pointMaterial = this._pointMaterial || await this._context.program.materials.get(MaterialType.BASIC, 0x000000);
         this.shape = await createNormalizedPlane(10, 10, this._pointMaterial, "rect");
         this.shape.name = "path-point";
         this.shape.type = POINT;
@@ -205,10 +203,12 @@ export class DrawPolyState extends BaseState {
                 await this._createStroke(stroke_data, group, isPolygon);
             }
             else {
+                const color = this._context.program.drawing.stroke.color;
+                await this._context.program.materials.get(MaterialType.BASIC, color);
                 const dotted = drawingSettings.stroke.dotted;
                 const provider = new CurveGeometryProvider();
                 const mesh = await provider.processItem({
-                    material: "blue", //JHR: todo, this needs to be replaced with a proper setting.
+                    material: color, //JHR: todo, this needs to be replaced with a proper setting.
                     args: {
                         data: pstr,
                         icon: dotted.icon,
@@ -238,7 +238,7 @@ export class DrawPolyState extends BaseState {
 
     async _createFill(fill, group) {
         const color = this._context.program.drawing.fill.color;
-        const material = await this._context.canvas.materials.get(MaterialType.BASIC, color);
+        const material = await this._context.program.materials.get(MaterialType.BASIC, color);
         material.side = await crs.getThreeConstant("DoubleSide");
 
         const polygon = await rawToGeometry(fill, material);
@@ -248,7 +248,7 @@ export class DrawPolyState extends BaseState {
 
     async _createStroke(stroke, group) {
         const color = this._context.program.drawing.stroke.color;
-        const material = await this._context.canvas.materials.get(MaterialType.BASIC, color);
+        const material = await this._context.program.materials.get(MaterialType.BASIC, color);
         material.side = await crs.getThreeConstant("DoubleSide");
 
         const polygon = await rawToGeometry(stroke, material);

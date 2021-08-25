@@ -31,7 +31,7 @@ export class Materials {
     async get(type, color) {
         let material = this.materials[type]?.[color];
         if (material == null) {
-            material = this[type](color);
+            material = await this[type](color);
             this.materials[type][color] = material;
         }
         return material;
@@ -54,7 +54,7 @@ export class Materials {
     }
 
     async [MaterialType.BASIC](color) {
-        return await crs.createThreeObject("MeshBasicMaterial", {color: color});
+        return await crs.createThreeObject("MeshBasicMaterial", {color: await crs.createColor(color)});
     }
 
     async [MaterialType.LINE](color) {
