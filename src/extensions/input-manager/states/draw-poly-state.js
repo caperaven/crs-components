@@ -30,6 +30,8 @@ export class DrawPolyState extends BaseState {
         this._pointerMovePenHandler = this._pointerMovePen.bind(this);
         this._pointerUpPenHandler = this._pointerUpPen.bind(this);
 
+// this._context.program.materials.
+
         this._planeMaterial = await this._context.canvas.materials.get(MaterialType.BASIC, 0xff0000);
         this._curve = await LineCurveHelper.new(2, 5, 2, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);

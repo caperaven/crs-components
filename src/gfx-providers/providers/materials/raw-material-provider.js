@@ -21,7 +21,7 @@ export default class RawMaterialProvider extends BaseProvider {
             glslVersion: version
         });
 
-        program.materials.set(item.id, material);
+        await program.materials.set(program.MaterialType.SHADER, item.id, material);
     }
 
     async _loadShader(file) {

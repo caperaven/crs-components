@@ -12,13 +12,13 @@ export class BaseProvider {
             return false;
         }
 
-        program._processMaterials.push(program.materials.get(item.material));
+        program._processMaterials.push(program.materials.getById(item.material));
         return true;
     }
 
     async getMaterial(material, program) {
         if (material != null) {
-            return await program.materials.get(material);
+            return await program.materials.getById(material);
         }
 
         if (program._processMaterials.length > 0) {

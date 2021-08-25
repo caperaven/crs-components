@@ -1,5 +1,6 @@
 import {updateMaterial} from "../helpers/update-material.js";
 import {BaseManager} from "./base-manager.js";
+import {Materials, MaterialType} from "./../../gfx-helpers/materials.js";
 
 export default class MaterialManager extends BaseManager {
     get key() {
@@ -10,21 +11,32 @@ export default class MaterialManager extends BaseManager {
         if (materials == null) return;
 
         if (program.materials == null) {
-            program.materials = new Map();
-            program._disposables.push(program.materials)
+            this.enable(program);
         }
 
         for (let material of materials) {
-            if (program.materials.has(material.id) == false) {
+            if (await program.materials.has(material.type, material.id) == false) {
                 if (this.parser.providers.has(material.type) == true) {
                     await this.parser.providers.get(material.type).processItem(material, program);
                 }
                 else {
                     const result = await crs.createThreeObject(material.type);
                     await updateMaterial(result, material.args, program);
-                    program.materials.set(material.id, result);
+                    await program.materials.set(material.type, material.id, result);
                 }
             }
         }
     }
+
+    enable(program) {
+        program.MaterialType = MaterialType;
+        program.materials = new Materials();
+        program._disposables.push(dispose.bind(program));
+    }
+}
+
+async function dispose() {
+    this.materials.dispose();
+    delete this.MaterialType;
+    delete this.materials;
 }
