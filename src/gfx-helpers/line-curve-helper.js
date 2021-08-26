@@ -66,6 +66,7 @@ export class LineCurveHelper {
 
         const curve = await crs.createThreeObject("QuadraticBezierCurve3", p1v, cp1v, p2v);
         this.curvePath.add(curve);
+        return curve;
     }
 
     async getPoints(count) {

@@ -116,10 +116,15 @@ async function makeInteractive(args, canvas, key, program) {
                 CONTINUES: "continues",
                 SINGLE: "single"
             }),
+            segmentTypeOptions: Object.freeze({
+                LINE: "line",
+                CURVE: "curve"
+            }),
             pen: {
                 type: "polygon",
                 drawOperation: "continues"
             },
+            segmentType: "line",
             fill: {
                 enabled: true,
                 color: "#000000"

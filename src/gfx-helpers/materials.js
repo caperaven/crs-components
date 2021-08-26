@@ -58,6 +58,6 @@ export class Materials {
     }
 
     async [MaterialType.LINE](color) {
-        return {type: "line"}
+        return await crs.createThreeObject("LineBasicMaterial", {color: await crs.createColor(color)});
     }
 }

@@ -36,6 +36,10 @@ pub fn create_path(data: &str) -> Path {
                 builder.line_to(to_point!(parts, i));
                 i += 4;
             },
+            "q" => {
+                builder.quadratic_bezier_to(to_point!(parts, i), to_point!(parts, i + 3));
+                i += 7;
+            },
             "z" => {
                 close = true;
                 break;

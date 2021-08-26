@@ -29,19 +29,22 @@ export class DrawPolyState extends BaseState {
 
         this._pointerMovePenHandler = this._pointerMovePen.bind(this);
         this._pointerUpPenHandler = this._pointerUpPen.bind(this);
+        this._pointerMoveCurveHandler = this._pointerMoveCurve.bind(this);
+        this._pointerUpCurveHandler = this._pointerUpCurve.bind(this);
 
         this._planeMaterial = await this._context.program.materials.get(MaterialType.BASIC, 0xff0000);
         this._curve = await LineCurveHelper.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         document.addEventListener("keyup", this._keyUpHandler);
+        document.addEventListener("keydown", this._keyDownHandler);
         await this._render();
     }
 
     async exit() {
         this.element.removeEventListener("pointerdown", this._pointerDownHandler);
         document.removeEventListener("keyup", this._keyUpHandler);
+        document.removeEventListener("keydown", this._keyDownHandler);
 
-        this._pointMaterial.dispose();
         this._planeMaterial.dispose();
 
         this._points.length = 0;
@@ -53,7 +56,6 @@ export class DrawPolyState extends BaseState {
         delete this._points;
         delete this._curve;
         delete this._planeMaterial;
-        delete this._pointMaterial;
 
         await super.exit();
     }
@@ -74,7 +76,23 @@ export class DrawPolyState extends BaseState {
 
         await this._createPoint(this._startPoint);
 
-        if (this._context.program.drawing.pen.drawOperation == this._context.program.drawing.drawOperationOptions.CONTINUES) {
+        if (this._context.program.drawing.segmentType === this._context.program.drawing.segmentTypeOptions.CURVE) {
+            this._cp1 = {x: 0, y:0};
+            this.element.addEventListener("pointerup", this._pointerUpCurveHandler);
+            this.element.addEventListener("pointermove", this._pointerMoveCurveHandler);
+
+            await this._createPoint(this._startPoint, "#ff0090", "cp1", false);
+            this._cpShape1 = this.shape;
+            await this._createPoint(this._startPoint, "#ff0090", "cp2", false);
+            this._cpShape2 = this.shape;
+
+            const p1 = this._points[this._points.length - 2].position;
+            const p2 = this._points[this._points.length - 1].position;
+            const cp1 = p2.clone();
+
+            this._curveShape = await this._curve.addQuadraticBezier(p1, cp1, p2);
+        }
+        else if (this._context.program.drawing.pen.drawOperation == this._context.program.drawing.drawOperationOptions.CONTINUES) {
             this.element.addEventListener("pointerup", this._pointerUpHandler);
             this.element.addEventListener("pointermove", this._pointerMoveHandler);
         }
@@ -119,6 +137,45 @@ export class DrawPolyState extends BaseState {
         await this._closePath()
     }
 
+    async _pointerMoveCurve(event) {
+        await setMouse(this._mouse, event, this._context.canvasRect);
+        this._raycaster.setFromCamera(this._mouse, this.camera);
+        this._endPoint = await this.getIntersectionPlanePosition();
+        this._cpShape1.position.set(this._endPoint.x, this._endPoint.y, 0);
+
+        const oX = this._endPoint.x - this._startPoint.x;
+        const oY = this._endPoint.y - this._startPoint.y;
+
+        this._cp1.x = this._startPoint.x - oX;
+        this._cp1.y = this._startPoint.y - oY;
+
+        this._cpShape2.position.set(this._cp1.x, this._cp1.y, 0);
+        this._curveShape.v1.x = this._cp1.x;
+        this._curveShape.v1.y = this._cp1.y;
+
+        await this._update();
+        await this._render();
+    }
+
+    async _pointerUpCurve(event) {
+        this.element.removeEventListener("pointerup", this._pointerUpCurveHandler);
+        this.element.removeEventListener("pointermove", this._pointerMoveCurveHandler);
+
+        this._cp1 = null;
+
+        this._context.canvas.scene.remove(this._cpShape1);
+        this._context.canvas.scene.remove(this._cpShape2);
+
+        delete this._cpShape1;
+        delete this._cpShape2;
+        delete this._curveShape;
+    }
+
+    async _keyDown(event) {
+        if (event.code === "ControlLeft" || event.code === "ControlRight") {
+            this._context.program.drawing.segmentType = this._context.program.drawing.segmentTypeOptions.CURVE;
+        }
+    }
 
     async _keyUp(event) {
         if (event.code === "Escape" || event.code === "Backspace") {
@@ -129,17 +186,22 @@ export class DrawPolyState extends BaseState {
             await this._closePath();
         }
 
+        this._context.program.drawing.segmentType = this._context.program.drawing.segmentTypeOptions.LINE;
         await this._render();
     }
 
-    async _createPoint(startPoint) {
-        this._pointMaterial = this._pointMaterial || await this._context.program.materials.get(MaterialType.BASIC, 0x000000);
-        this.shape = await createNormalizedPlane(10, 10, this._pointMaterial, "rect");
-        this.shape.name = "path-point";
+    async _createPoint(startPoint, color, name, addToPoints = true) {
+        color = color || "#000000";
+        const material = await this._context.program.materials.get(MaterialType.BASIC, color);
+        this.shape = await createNormalizedPlane(10, 10, material, "rect");
+        this.shape.name = name || "path-point";
         this.shape.type = POINT;
         this.shape.position.set(startPoint.x, startPoint.y, 1);
         this._context.canvas.scene.add(this.shape);
-        this._points.push(this.shape);
+
+        if (addToPoints === true) {
+            this._points.push(this.shape);
+        }
     }
 
     async _updatePenCurvePath() {
@@ -164,7 +226,10 @@ export class DrawPolyState extends BaseState {
         const lastPoint = this._points[this._points.length - 1].position;
 
         await this._curve.addLine({x: point.x, y: point.y}, {x: lastPoint.x, y: lastPoint.y});
+        await this._update();
+    }
 
+    async _update() {
         if (this._curve.mesh == null) {
             await this._curve.drawDashes();
         } else {
@@ -180,9 +245,17 @@ export class DrawPolyState extends BaseState {
         const group = await crs.createThreeObject("Group");
         const isPolygon = drawingSettings.pen.type == drawingSettings.penTypeOptions.POLYGON;
 
-        const points = ["m", parseInt(this._points[0].position.x), parseInt(this._points[0].position.y), 0];
-        for (let i = 1; i < this._points.length; i++) {
-            points.push("l", parseInt(this._points[i].position.x), parseInt(this._points[i].position.y), 0);
+        const curves = this._curve.curvePath.curves;
+        const v1 = curves[0].v0 || curves[0].v1;
+        const points = ["m", parseInt(v1.x), parseInt(v1.y), 0];
+
+        for (let i = 0; i < curves.length; i++) {
+            if (curves[i].constructor.name === "LineCurve3") {
+                points.push("l", parseInt(curves[i].v2.x), parseInt(curves[i].v2.y), 0)
+            }
+            else if (curves[i].constructor.name === "QuadraticBezierCurve3") {
+                points.push("q", parseInt(curves[i].v1.x), parseInt(curves[i].v1.y), 0, parseInt(curves[i].v2.x), parseInt(curves[i].v2.y), 0);
+            }
         }
 
         if (isPolygon === true) {

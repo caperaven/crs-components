@@ -23,6 +23,7 @@ export class BaseState extends crs.state.StateBase {
         this._pointerUpHandler = this._pointerUp.bind(this);
         this._pointerMoveHandler = this._pointerMove.bind(this);
         this._keyUpHandler = this._keyUp.bind(this);
+        this._keyDownHandler = this._keyDown.bind(this);
     }
 
     dispose() {
@@ -72,6 +73,10 @@ export class BaseState extends crs.state.StateBase {
     }
 
     async _keyUp(event) {
+        return;
+    }
+
+    async _keyDown(event) {
         return;
     }
 }
