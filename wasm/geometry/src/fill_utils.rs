@@ -3,14 +3,14 @@ use lyon::path::Path;
 use lyon::tessellation::geometry_builder::{simple_builder, VertexBuffers};
 use lyon::tessellation::{FillOptions, FillTessellator};
 
-pub fn create_fill(path: Path) -> PolyBuffer {
+pub fn create_fill(path: &Path) -> PolyBuffer {
     let mut buffer: PolyBuffer = VertexBuffers::new();
     {
         let mut vertex_builder = simple_builder(&mut buffer);
         let mut tessellator = FillTessellator::new();
 
         tessellator
-            .tessellate_path(&path, &FillOptions::default(), &mut vertex_builder)
+            .tessellate_path(path, &FillOptions::default(), &mut vertex_builder)
             .ok();
     }
     return buffer;
@@ -23,8 +23,9 @@ mod test {
 
     #[test]
     fn simple_shape() {
-        let path = create_path("m,-100,-100,l,100,-100,l,100,100,l,-100,100,z");
-        let buffer = create_fill(path);
+        let path = create_path("m,-100,-100,0.0,l,100,-100,0.0,l,100,100,0.0,l,-100,100,0.0,z");
+
+        let buffer = create_fill(&path);
 
         println!("{:?}", buffer.vertices);
         println!("{:?}", buffer.indices);
@@ -35,8 +36,8 @@ mod test {
 
     #[test]
     fn normal() {
-        let path = create_path("m,-199,431,l,184,241,l,-137,205,l,-199,43,z");
-        let buffer = create_fill(path);
+        let path = create_path("m,-199,431,0.0,l,184,241,0.0,l,-137,205,0.0,l,-199,43,0.0,z");
+        let buffer = create_fill(&path);
 
         println!("{:?}", buffer.vertices);
         println!("{:?}", buffer.indices);

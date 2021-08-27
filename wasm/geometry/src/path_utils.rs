@@ -1,12 +1,20 @@
 extern crate lyon;
 
 use crate::PolyBuffer;
-use lyon::path::Path;
-use lyon::path::math::{point};
+use wasm_bindgen::JsValue;
+
 use lyon::tessellation::geometry_builder::{simple_builder, VertexBuffers};
 use lyon::tessellation::{StrokeTessellator, StrokeOptions, LineCap};
 use lyon::lyon_tessellation::LineJoin;
-use wasm_bindgen::JsValue;
+
+use lyon::path::{Path};
+use lyon::path::math::{point, Point};
+
+use lyon::algorithms::walk::{RegularPattern, walk_along_path};
+use lyon::algorithms::math::Vector;
+use lyon::algorithms::path::path::Builder;
+use lyon::algorithms::path::iterator::PathIterator;
+use lyon::math::Rect;
 
 macro_rules! to_point {
     ($list:expr, $index:expr) => ({
@@ -16,7 +24,7 @@ macro_rules! to_point {
     });
 }
 
-pub fn create_path(data: &str) -> Path {
+pub fn create_builder(data: &str) -> Builder {
     let value = String::from(data.replace(" ", ""));
     let parts: Vec<&str> = value.split(",").collect();
     let length = parts.len();
@@ -49,6 +57,11 @@ pub fn create_path(data: &str) -> Path {
     }
 
     builder.end(close);
+    return builder;
+}
+
+pub fn create_path(data: &str) -> Path {
+    let builder = create_builder(data);
     return builder.build();
 }
 
@@ -57,7 +70,7 @@ pub fn create_path(data: &str) -> Path {
     sc: start_cap b,s,r Butt, Square, Round
     ec: end_cap
  */
-pub fn extrude_path(path: Path, line_width: f32, options: JsValue) -> PolyBuffer {
+pub fn extrude_path(path: &Path, line_width: f32, options: JsValue) -> PolyBuffer {
     let mut buffer: PolyBuffer = VertexBuffers::new();
     {
         let mut vertex_builder = simple_builder(&mut buffer);
@@ -66,12 +79,16 @@ pub fn extrude_path(path: Path, line_width: f32, options: JsValue) -> PolyBuffer
         let options = create_stroke_options(line_width, options);
 
         tessellator.tessellate_path (
-            &path,
+            path,
             &options,
             &mut vertex_builder
         ).ok();
     }
     return buffer;
+}
+
+pub fn get_aabb(path: &Path) -> Rect {
+    return lyon::algorithms::aabb::bounding_rect(path.iter());
 }
 
 fn create_stroke_options(line_width: f32, options: JsValue) -> StrokeOptions {
@@ -116,43 +133,54 @@ fn get_cap(value: &str) -> LineCap {
     }
 }
 
+pub struct PatternResult {
+    pub position: Point,
+    pub tangent: Vector,
+    pub distance: f32
+}
+
+pub fn path_pattern(builder: Builder, interval: f32, tolerance: f32) -> Vec<PatternResult> {
+    // https://docs.rs/lyon_algorithms/0.17.4/lyon_algorithms/walk/index.html
+    let mut result: Vec<PatternResult> = Vec::new();
+
+    let mut pattern = RegularPattern {
+        callback: &mut |position: Point, tangent: Vector, distance: f32| {
+            result.push(PatternResult{position, tangent, distance});
+            true
+        },
+        interval
+    };
+
+    let path = builder.build();
+    let start_offset = 0.0;
+    walk_along_path(path.iter().flattened(tolerance), start_offset, &mut pattern);
+
+    return result;
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn simple_line() {
-        let path = create_path("m,-100,-100,l,100,-100,l,100,100,l,-100,100,z");
-        let buffer = extrude_path(path, 10.0, JsValue::undefined());
-
-        assert_eq!(buffer.vertices.len(), 8);
-        assert_eq!(buffer.indices.len(), 24);
+        let builder = create_builder("m,-100,-100,0,l,100,-100,0,l,100,100,0,l,-100,100,0,z");
+        let result: Vec<PatternResult> = path_pattern(builder, 3.0, 0.01);
+        assert_eq!(result.len(), 267);
     }
 
     #[test]
-    fn normal() {
-        let path = create_path("m,-199,431,l,184,241,l,-137,205,l,-199,43,z");
-        let buffer = extrude_path(path, 10.0, JsValue::undefined());
-
-        println!("{:?}", buffer.vertices);
-        println!("{:?}", buffer.indices);
-
-        assert_eq!(buffer.vertices.len(), 10);
-        assert_eq!(buffer.indices.len(), 30);
+    fn curve_line() {
+        let builder = create_builder("m,0,0,0,q,100,100,0,200,0,0");
+        let result: Vec<PatternResult> = path_pattern(builder, 3.0, 0.01);
+        assert_eq!(result.len(), 77);
     }
 
     #[test]
-    fn stroke_options() {
-        let options = create_stroke_options(10.0, "lj:round,sc:round,ec:round".into());
-        assert_eq!(options.line_width, 10.0);
-        assert_eq!(options.line_join, LineJoin::Round);
-        assert_eq!(options.start_cap, LineCap::Round);
-        assert_eq!(options.end_cap, LineCap::Round);
-
-        let options = create_stroke_options(20.0, "lj:bevel,sc:butt,ec:square".into());
-        assert_eq!(options.line_width, 20.0);
-        assert_eq!(options.line_join, LineJoin::Bevel);
-        assert_eq!(options.start_cap, LineCap::Butt);
-        assert_eq!(options.end_cap, LineCap::Square);
+    fn length() {
+        let path: Path = create_path("m,-100,-100,0,l,100,-100,0,l,100,100,0,l,-100,100,0,z");
+        let aabb = get_aabb(&path);
+        assert_eq!(aabb.size.width, 200.0);
+        assert_eq!(aabb.size.height, 200.0);
     }
 }

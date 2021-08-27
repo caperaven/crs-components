@@ -17,11 +17,11 @@
             await module.default();
 
             const p1 = performance.now();
-            const result = module.fill("m,-100.0,-100.0,l,100.0,-100.0,l,100.0,100.0,l,-100.0, 100.0,z");
+            const result = module.fill("m,-100.0,-100.0,0.0,l,100.0,-100.0,0.0,l,100.0,100.0,0.0,l,-100.0, 100.0,0.0,z");
             const p2 = performance.now();
 
             const p3 = performance.now();
-            const result2 = module.stroke("m,-100.0,-100.0,l,100.0,-100.0,l,100.0,100.0,l,-100.0, 100.0,z", 10);
+            const result2 = module.stroke("m,-100.0,-100.0,0.0,l,100.0,-100.0,0.0,l,100.0,100.0,0.0,l,-100.0, 100.0,0.0,z", 10);
             const p4 = performance.now();
 
 
