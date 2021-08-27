@@ -27,12 +27,8 @@ pub fn stroke(data: &str, line_width: f32, options: JsValue) -> js_sys::Object {
 }
 
 #[wasm_bindgen]
-pub fn pattern(_data: &str, _scale: f32, _gap:f32, _tolerance: f32) -> js_sys::Object {
-    return js_sys::Object::new();
+pub fn pattern(data: &str, interval: f32, tolerance: f32) -> js_sys::Array {
+    let builder = path_utils::create_builder(data);
+    let result: Vec<path_utils::PatternResult> = path_utils::path_pattern(builder, interval, tolerance);
+    return utils::pattern_to_export(result);
 }
-
-
-// #[wasm_bindgen]
-// pub fn flat_path(data: &str) -> js_sys::Object {
-//     let path = path_utils::create_path(data);
-// }

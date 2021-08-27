@@ -24,10 +24,16 @@
             const result2 = module.stroke("m,-100.0,-100.0,0.0,l,100.0,-100.0,0.0,l,100.0,100.0,0.0,l,-100.0, 100.0,0.0,z", 10);
             const p4 = performance.now();
 
+            const p5 = performance.now();
+            const result3 = module.pattern("m,-100.0,-100.0,0.0,l,100.0,-100.0,0.0,l,100.0,100.0,0.0,l,-100.0, 100.0,0.0,z", 3.0, 0.01);
+            const p6 = performance.now();
+
 
             console.log(result);
             console.log(result2);
-            console.log(`performance: ${p2 - p1} / ${p4 - p3}`);
+            console.log(result3);
+
+            console.log(`performance: ${p2 - p1} / ${p4 - p3} / ${p6 - p5}`);
 
             // console.log(test());
             // console.log(array_test());

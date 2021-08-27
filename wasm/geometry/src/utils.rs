@@ -2,6 +2,7 @@ use crate::PolyBuffer;
 use wasm_bindgen::prelude::JsValue;
 use js_sys::{Object, Array};
 use lyon::math::Rect;
+use crate::path_utils::PatternResult;
 
 pub fn populate_from_buffer(buffers: &PolyBuffer, aabb: &Rect) -> Object {
     let result = Object::new();
@@ -28,6 +29,24 @@ pub fn populate_from_buffer(buffers: &PolyBuffer, aabb: &Rect) -> Object {
     js_sys::Reflect::set(&result, &"vertices".into(), &vertices.into()).ok();
     js_sys::Reflect::set(&result, &"indices".into(), &indices.into()).ok();
     js_sys::Reflect::set(&result, &"aabb".into(), &aa_result.into()).ok();
+
+    return result;
+}
+
+pub fn pattern_to_export(pattern: Vec<PatternResult>) -> Array {
+    let result = Array::new();
+
+    let iter = pattern.iter();
+
+    for item in iter {
+        let obj = Object::new();
+        js_sys::Reflect::set(&obj, &"px".into(), &item.position.x.into()).ok();
+        js_sys::Reflect::set(&obj, &"py".into(), &item.position.y.into()).ok();
+        js_sys::Reflect::set(&obj, &"tx".into(), &item.tangent.x.into()).ok();
+        js_sys::Reflect::set(&obj, &"ty".into(), &item.tangent.y.into()).ok();
+        js_sys::Reflect::set(&obj, &"distance".into(), &item.distance.into()).ok();
+        result.push(&obj);
+    }
 
     return result;
 }
