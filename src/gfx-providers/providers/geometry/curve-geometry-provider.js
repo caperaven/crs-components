@@ -7,9 +7,16 @@ export default class CurveGeometryProvider extends BaseProvider {
     }
 
     async processItem(item, program) {
-        const curvePath = await crs.createThreeObject("CurvePath");
 
-        await dataToCurvePath(curvePath, item.args.data);
+        let curvePath;
+        if (typeof item.args.data === "string") {
+            curvePath = await crs.createThreeObject("CurvePath");
+            await dataToCurvePath(curvePath, item.args.data);
+        }
+        else {
+            curvePath = item.args.data;
+        }
+
 
         const iconName = `${item.args.icon}Data`;
 
@@ -112,6 +119,7 @@ class CurvesBuilder {
         const p2 = await createVector(this.data, 0);
         const line = await crs.createThreeObject("LineCurve3", this._p1, p2);
         this.curvePath.add(line);
+        this.curvePath.autoClose = true;
         return i + 1;
     }
 }

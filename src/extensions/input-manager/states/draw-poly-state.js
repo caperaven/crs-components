@@ -283,7 +283,7 @@ export class DrawPolyState extends BaseState {
                 const mesh = await provider.processItem({
                     material: color,
                     args: {
-                        data: pstr,
+                        data: this._curve.curvePath,
                         icon: dotted.icon,
                         transform: `s,${dotted.xScale},${dotted.yScale},1`,
                         gap: dotted.gap,
