@@ -45,6 +45,7 @@ pub fn pattern_to_export(pattern: Vec<PatternResult>) -> Array {
         js_sys::Reflect::set(&obj, &"tx".into(), &item.tangent.x.into()).ok();
         js_sys::Reflect::set(&obj, &"ty".into(), &item.tangent.y.into()).ok();
         js_sys::Reflect::set(&obj, &"distance".into(), &item.distance.into()).ok();
+        js_sys::Reflect::set(&obj, &"radians".into(), &item.radians.into()).ok();
         result.push(&obj);
     }
 

@@ -11,7 +11,7 @@ use lyon::path::{Path};
 use lyon::path::math::{point, Point};
 
 use lyon::algorithms::walk::{RegularPattern, walk_along_path};
-use lyon::algorithms::math::Vector;
+use lyon::algorithms::math::{Vector};
 use lyon::algorithms::path::path::Builder;
 use lyon::algorithms::path::iterator::PathIterator;
 use lyon::math::Rect;
@@ -136,7 +136,8 @@ fn get_cap(value: &str) -> LineCap {
 pub struct PatternResult {
     pub position: Point,
     pub tangent: Vector,
-    pub distance: f32
+    pub distance: f32,
+    pub radians: f32
 }
 
 pub fn path_pattern(builder: Builder, interval: f32, tolerance: f32) -> Vec<PatternResult> {
@@ -145,7 +146,11 @@ pub fn path_pattern(builder: Builder, interval: f32, tolerance: f32) -> Vec<Patt
 
     let mut pattern = RegularPattern {
         callback: &mut |position: Point, tangent: Vector, distance: f32| {
-            result.push(PatternResult{position, tangent, distance});
+            let tangent = Vector::new(tangent.x, tangent.y);
+            let up = Vector::new(0., 1.);
+            let radians = up.dot(tangent).acos();
+
+            result.push(PatternResult{position, tangent, distance, radians});
             true
         },
         interval
@@ -161,6 +166,7 @@ pub fn path_pattern(builder: Builder, interval: f32, tolerance: f32) -> Vec<Patt
 #[cfg(test)]
 mod test {
     use super::*;
+    use lyon::algorithms::path::geom::euclid::{Vector2D, Vector3D};
 
     #[test]
     fn simple_line() {
@@ -177,7 +183,7 @@ mod test {
     }
 
     #[test]
-    fn length() {
+    fn aabb_size() {
         let path: Path = create_path("m,-100,-100,0,l,100,-100,0,l,100,100,0,l,-100,100,0,z");
         let aabb = get_aabb(&path);
         assert_eq!(aabb.size.width, 200.0);

@@ -9,7 +9,8 @@ export class Materials {
     constructor() {
         this.materials = {
             [MaterialType.BASIC]: {},
-            [MaterialType.LINE]: {}
+            [MaterialType.LINE]: {},
+            [MaterialType.INSTANCE]: {}
         };
     }
 
@@ -59,5 +60,9 @@ export class Materials {
 
     async [MaterialType.LINE](color) {
         return await crs.createThreeObject("LineBasicMaterial", {color: await crs.createColor(color)});
+    }
+
+    async [MaterialType.INSTANCE](color) {
+        return this[MaterialType.BASIC](color);
     }
 }
