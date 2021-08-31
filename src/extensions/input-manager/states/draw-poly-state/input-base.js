@@ -10,7 +10,7 @@ export class InputBase {
     constructor(program) {
         this._program = program;
         this.points = [];
-        this.pointColor = "#ff0000";
+        this.pointColor = "#000090";
     }
 
     dispose() {

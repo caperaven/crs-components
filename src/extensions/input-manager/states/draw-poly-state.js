@@ -50,12 +50,11 @@ export class DrawPolyState extends BaseState {
         this._raycaster.intersectObjects(this.points, true, this._intersections);
 
         if (this._intersections.length > 0) {
-            return await this._closePath();
+            return await this.closePath();
         }
 
         const startPoint = await this.getIntersectionPlanePosition();
         await this.guide.pointerDown(startPoint);
-
         await this._render();
     }
 
@@ -68,7 +67,6 @@ export class DrawPolyState extends BaseState {
         const point = await this.getIntersectionPlanePosition();
 
         await this.guide.pointerUp(point);
-
         await this._render();
     }
 
@@ -80,10 +78,6 @@ export class DrawPolyState extends BaseState {
 
         await this.guide.pointerMove(point);
         await this._render();
-    }
-
-    async _clearMarkers() {
-
     }
 
     async closePath() {

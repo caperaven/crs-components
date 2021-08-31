@@ -21,6 +21,10 @@ export class InputGuideRenderer {
         this._input = newValue == this._program.drawing.drawOperationOptions.CONTINUES ? new InputContinue(this._program) : new InputSingle(this._program);
     }
 
+    get scene() {
+        return this._program.canvas.scene;
+    }
+
     constructor(program) {
         this._program = program;
 
@@ -45,15 +49,36 @@ export class InputGuideRenderer {
 
     static async new(program) {
         const guide = new InputGuideRenderer(program);
+        this.color = "#ff0090";
 
-        guide.material  = await program.materials.get(MaterialType.BASIC, "#ff0000");
-        guide.geometry  = await crs.createThreeObject("PlaneGeometry", 1, 1);
-        guide.mesh      = await crs.createThreeObject("InstancedMesh", guide.geometry, guide.material, 1000);
-        guide.dummy     = await crs.createThreeObject("Object3D");
-        guide.axis      = await crs.createThreeObject("Vector3");
-        guide.up        = await crs.createThreeObject("Vector3", 0, 1, 0 );
+        guide.instanceMaterial  = await program.materials.get(MaterialType.INSTANCE, this.color);
+        guide.material          = await program.materials.get(MaterialType.BASIC, this.color);
+        guide.dummy             = await crs.createThreeObject("Object3D");
+        guide.axis              = await crs.createThreeObject("Vector3");
+        guide.up                = await crs.createThreeObject("Vector3", 0, 1, 0 );
+
+        await guide._rebuildInstanceMesh(100);
 
         return guide;
+    }
+
+    async _rebuildInstanceMesh(count) {
+        this.maxCount = count;
+
+        if (this.mesh != null) {
+            this.scene.remove(this.mesh);
+            this.mesh.dispose();
+        }
+
+        const InstancedMesh     = await crs.getThreePrototype("InstancedMesh");
+        const PlaneGeometry     = await crs.getThreePrototype("PlaneGeometry");
+        const DynamicDrawUsage  = await crs.getThreeConstant("DynamicDrawUsage");
+
+        this.mesh = new InstancedMesh(new PlaneGeometry(), this.instanceMaterial, count);
+        this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
+        this.mesh.name = name;
+        this.mesh.instanceMatrix.needsUpdate = true;
+        this.scene.add(this.mesh);
     }
 
     dispose() {
@@ -67,9 +92,11 @@ export class InputGuideRenderer {
         this._program.canvas.scene.remove(this.mesh);
 
         this.material.dispose();
+        this.instanceMaterial.dispose();
         this.mesh.dispose();
 
         delete this.material;
+        delete this.instanceMaterial;
         delete this.geometry;
         delete this.mesh;
         delete this.dummy;
@@ -105,23 +132,27 @@ export class InputGuideRenderer {
     }
 
     async draw(pointData) {
-        let i = 0;
-        for (i = 0; i < pointData.length; i++) {
-            let item = pointData[i];
-            const tangent = await createVector([item.tx, item.ty, 0], -1);
-            this.axis.crossVectors(this.up, tangent).normalize();
+        for (let i = 0; i < this.maxCount; i++) {
+            if (i < pointData.length - 1) {
+                let item = pointData[i];
+                const tangent = await createVector([item.tx, item.ty, 0], -1);
+                this.axis.crossVectors(this.up, tangent).normalize();
+                this.dummy.quaternion.setFromAxisAngle(this.axis, item.radians);
 
-            this.dummy.quaternion.setFromAxisAngle(this.axis, item.radians);
-            this.dummy.position.x = item.px;
-            this.dummy.position.y = item.py;
-            this.dummy.scale.set(10, 10, 1);
-            this.dummy.updateMatrix();
+                this.dummy.position.x = item.px;
+                this.dummy.position.y = item.py;
+                this.dummy.scale.set(5, 5, 1);
+                this.dummy.updateMatrix();
 
-            this.mesh.setMatrixAt(i, this.dummy.matrix);
+                this.mesh.setMatrixAt(i, this.dummy.matrix);
+            }
+            else {
+                this.dummy.visibility = false;
+                this.mesh.setMatrixAt(i, this.dummy.matrix);
+            }
         }
 
-        this._program.canvas.scene.add(this.mesh);
-
+        this.mesh.instanceMatrix.needsUpdate = true;
         this._program.canvas.render();
     }
 }
@@ -132,7 +163,7 @@ async function pointDown(guide, start) {
     if (guide._operations.length == 1) return;
 
     const cmd = guide._operations.join(",");
-    const data = pattern(cmd, 30, 0.01);
+    const data = pattern(cmd, 10, 0.01);
     await guide.draw(data);
 }
 
@@ -142,7 +173,7 @@ async function pointMove(guide, point) {
     if (guide._operations.length == 1) return;
 
     const cmd = guide._operations.join(",");
-    const data = pattern(cmd, 30, 0.01);
+    const data = pattern(cmd, 10, 0.01);
     await guide.draw(data);
 }
 
