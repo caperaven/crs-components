@@ -14,7 +14,7 @@ export default class CurveGeometryProvider extends BaseProvider {
         const gap       = Number(item.args.gap || 0);
         const size      = scale.y + gap;
 
-        let data = pattern(item.args.data, size, 0.1);
+        let data        = pattern(item.args.data, size, 0.1);
         const iconName  = `${item.args.icon}Data`;
         const imageData = (await import(`./../../../geometry-data/icons/${iconName}.js`))[iconName];
         const up        = await crs.createThreeObject("Vector3", 0, 1, 0 );
@@ -34,9 +34,6 @@ export default class CurveGeometryProvider extends BaseProvider {
             dummy.position.x = item.px;
             dummy.position.y = item.py;
             dummy.scale.set(scale.x, scale.y, scale.z);
-
-            //dummy.rotation.set(0, 0, item.radians);
-
             dummy.updateMatrix();
 
             mesh.setMatrixAt(i, dummy.matrix);

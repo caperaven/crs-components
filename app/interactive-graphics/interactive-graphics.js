@@ -138,5 +138,6 @@ export default class InteractiveGraphics extends crsbinding.classes.ViewBase {
 
     async drawOperationChanged(newValue) {
         this._program.drawing.pen.drawOperation = newValue;
+        await this._program.canvas._inputManager._states.currentState?.drawOperationChanged?.();
     }
 }
