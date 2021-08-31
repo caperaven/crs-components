@@ -6,7 +6,7 @@ import {BaseState} from "./base-state.js";
 import {setMouse} from "../helpers/pointer-functions.js";
 import {createNormalizedPlane} from "../../../threejs-helpers/shape-factory.js";
 import {MaterialType} from "../../../gfx-helpers/materials.js";
-import {LineCurveHelper} from "../../../gfx-helpers/line-curve-helper.js";
+import {LineCurveHelperJs} from "../../../gfx-helpers/line-curve-helper.js.delete";
 import init, {fill, stroke} from "./../../../../wasm/geometry/bin/geometry.js";
 import {rawToGeometry} from "./../../../gfx-helpers/raw-to-geometry.js";
 import CurveGeometryProvider from "./../../../gfx-providers/providers/geometry/curve-geometry-provider.js";
@@ -33,7 +33,7 @@ export class DrawPolyState extends BaseState {
         this._pointerUpCurveHandler = this._pointerUpCurve.bind(this);
 
         this._planeMaterial = await this._context.program.materials.get(MaterialType.BASIC, 0xff0000);
-        this._curve = await LineCurveHelper.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
+        this._curve = await LineCurveHelperJs.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         document.addEventListener("keyup", this._keyUpHandler);
         document.addEventListener("keydown", this._keyDownHandler);
@@ -307,7 +307,7 @@ export class DrawPolyState extends BaseState {
 
         this._points.length = 0;
         await this._curve.dispose();
-        this._curve = await LineCurveHelper.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
+        this._curve = await LineCurveHelperJs.new(2, 5, 2, 0, this._planeMaterial, this._context.canvas.scene, "path-outline");
     }
 
     async _createFill(fill, group) {

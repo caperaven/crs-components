@@ -65,7 +65,7 @@ export class BaseState extends crs.state.StateBase {
     async getIntersectionPlanePosition() {
         this._intersections.length = 0;
         const intersection = this._raycaster.intersectObjects([this._intersectPlane], false, this._intersections)[0];
-        return intersection.point.clone();
+        return intersection?.point.clone();
     }
 
     async _render() {

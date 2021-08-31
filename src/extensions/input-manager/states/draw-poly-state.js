@@ -22,7 +22,7 @@ export class DrawPolyState extends BaseState {
 
     async enter() {
         await super.enter();
-        this._context.program.drawing.guide = new InputGuideRenderer(this._context.program);
+        this._context.program.drawing.guide = await InputGuideRenderer.new(this._context.program);
 
         this.element.addEventListener("pointerdown", this._pointerDownHandler);
         document.addEventListener("keyup", this._keyUpHandler);
@@ -76,9 +76,9 @@ export class DrawPolyState extends BaseState {
         await setMouse(this._mouse, event, this._context.canvasRect);
         this._raycaster.setFromCamera(this._mouse, this.camera);
         const point = await this.getIntersectionPlanePosition();
+        if (point == null) return;
 
         await this.guide.pointerMove(point);
-
         await this._render();
     }
 
