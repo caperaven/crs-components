@@ -8,24 +8,16 @@ export class InputContinue extends InputBase {
         if (operations.length == 0) {
             await this.moveTo(this._start, operations);
         }
+
+        await this.lineTo(start, operations);
     }
 
     async pointMove(point, operations, operationType) {
         this.shape.position.set(point.x, point.y, 0);
-
-        if (this.points.length == 1) return;
-
-        if (this.operation != true) {
-            this.operation = true
-            await this.lineTo(point, operations);
-        }
-        else {
-            await this.updateLineTo(point, operations);
-        }
+        await this.updateLineTo(point, operations);
     }
 
     async pointUp(point, operations, operationType, cp) {
-        this.operation = false;
         delete this._start;
     }
 }

@@ -132,6 +132,10 @@ export class InputGuideRenderer {
     }
 
     async draw(pointData) {
+        if (pointData.length > this.maxCount) {
+            await this._rebuildInstanceMesh(pointData.length + 100);
+        }
+
         for (let i = 0; i < this.maxCount; i++) {
             if (i < pointData.length - 1) {
                 let item = pointData[i];
@@ -179,6 +183,7 @@ async function pointMove(guide, point) {
 
 async function pointUp(guide, point) {
     await guide._input.pointUp(point, guide._operations, OperationTypes.LINE);
+    const cmd = guide._operations.join(",");
 }
 
 async function curveDown(guide, point) {
