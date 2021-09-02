@@ -26,7 +26,7 @@ export class InputSingle extends InputBase {
         await this.clearPoints();
 
         if (this.cp != null) {
-            this._program.canvas.remove(this.cp);
+            this._program.canvas.scene.remove(this.cp);
         }
 
         delete this.p1;

@@ -42,6 +42,8 @@ export class InputBase {
         for (let point of this.points) {
             this._program.canvas.scene?.remove(point);
         }
+
+        this.points.length = 0;
     }
 
     async moveTo(point, operations) {
