@@ -34,6 +34,6 @@ export class InputSingle extends InputBase {
         delete this.cp;
         delete this._point;
         delete this._start;
-        await this._program.canvas._inputManager._states.currentState.closePath();
+        await this._program.canvas._inputManager._states.currentState.closePath(operations);
     }
 }

@@ -116,7 +116,6 @@ export class InputGuideRenderer {
     async pointerUp(point) {
         this._point = point;
         await this._input.pointUp(point, this._operations, this._program.drawing.segmentType);
-        const cmd = this._operations.join(",");
     }
 
     async clear() {

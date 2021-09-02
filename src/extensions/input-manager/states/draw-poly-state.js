@@ -1,7 +1,7 @@
 import {BaseState} from "./base-state.js";
 import {InputGuideRenderer} from "./draw-poly-state/input-guide-renderer.js";
 import {setMouse} from "../helpers/pointer-functions.js";
-
+import {PolyRenderer} from "./draw-poly-state/poly-renderer.js";
 
 export class DrawPolyState extends BaseState {
     get guide() {
@@ -80,7 +80,8 @@ export class DrawPolyState extends BaseState {
         await this._render();
     }
 
-    async closePath() {
+    async closePath(operations) {
+        await PolyRenderer.render(this._context.program, operations);
         await this.guide.clear();
     }
 
@@ -96,7 +97,7 @@ export class DrawPolyState extends BaseState {
         }
 
         if (event.code === "Enter" || event.code === "Space") {
-            await this.closePath();
+            await this.closePath(this.guide._operations);
         }
 
         this._context.program.drawing.segmentType = this._context.program.drawing.segmentTypeOptions.LINE;
