@@ -41,7 +41,7 @@ export class InputGuideRenderer {
         guide.axis              = await crs.createThreeObject("Vector3");
         guide.up                = await crs.createThreeObject("Vector3", 0, 1, 0 );
 
-        await guide._rebuildInstanceMesh(100);
+        await guide._rebuildInstanceMesh(0);
 
         return guide;
     }
@@ -61,18 +61,17 @@ export class InputGuideRenderer {
         this.mesh = new InstancedMesh(new PlaneGeometry(), this.instanceMaterial, count);
         this.mesh.instanceMatrix.setUsage(DynamicDrawUsage);
         this.mesh.name = name;
+
+        for (let i = 0; i < this.maxCount; i++) {
+            this.dummy.visibility = true;
+            this.mesh.setMatrixAt(i, this.dummy.matrix);
+        }
+
         this.mesh.instanceMatrix.needsUpdate = true;
         this.scene.add(this.mesh);
     }
 
     dispose() {
-        this._downFn[this._program.drawing.segmentTypeOptions.LINE] = null;
-        this._downFn[this._program.drawing.segmentTypeOptions.CURVE] = null;
-        this._moveFn[this._program.drawing.segmentTypeOptions.LINE] = null;
-        this._moveFn[this._program.drawing.segmentTypeOptions.CURVE] = null;
-        this._upFn[this._program.drawing.segmentTypeOptions.LINE] = null;
-        this._upFn[this._program.drawing.segmentTypeOptions.CURVE] = null;
-
         this._program.canvas.scene.remove(this.mesh);
 
         this.material.dispose();
@@ -81,15 +80,11 @@ export class InputGuideRenderer {
 
         delete this.material;
         delete this.instanceMaterial;
-        delete this.geometry;
         delete this.mesh;
         delete this.dummy;
         delete this.axis;
         delete this.up;
 
-        delete this._downFn;
-        delete this._moveFn;
-        delete this._upFn;
         delete this._program;
         delete this._startPoint;
         delete this._point;
@@ -127,6 +122,7 @@ export class InputGuideRenderer {
     async clear() {
         this._operations.length = 0;
         await this._input.clearPoints();
+        await this._rebuildInstanceMesh(0);
     }
 
     async draw(pointData) {
@@ -141,6 +137,7 @@ export class InputGuideRenderer {
                 this.axis.crossVectors(this.up, tangent).normalize();
                 this.dummy.quaternion.setFromAxisAngle(this.axis, item.radians);
 
+                this.dummy.visibility = true;
                 this.dummy.position.x = item.px;
                 this.dummy.position.y = item.py;
                 this.dummy.scale.set(5, 5, 1);

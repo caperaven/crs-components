@@ -50,6 +50,10 @@ export class InputBase {
         operations.push(`m,${point.x.toFixed(2)},${point.y.toFixed(2)},0`);
     }
 
+    async updateMoveTo(point, operations) {
+        operations[0] = `m,${point.x.toFixed(2)},${point.y.toFixed(2)},0`;
+    }
+
     async lineTo(point, operations) {
         operations.push(`l,${point.x.toFixed(2)},${point.y.toFixed(2)},0`);
     }
@@ -68,7 +72,13 @@ export class InputBase {
 
     async moveLine(point, operations) {
         this.p2.position.set(point.x, point.y, 0);
-        await this.updateLineTo(point, operations);
+
+        if (operations.length === 1) {
+            await this.updateMoveTo(point, operations);
+        }
+        else {
+            await this.updateLineTo(point, operations);
+        }
     }
 
     async moveCurve(point, operations) {
