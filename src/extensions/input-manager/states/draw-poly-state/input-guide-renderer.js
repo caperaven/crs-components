@@ -1,6 +1,5 @@
 import {InputSingle} from "./input-single.js";
 import {InputContinue} from "./input-continue.js";
-import {OperationTypes} from "./input-base.js";
 import {MaterialType} from "./../../../../gfx-helpers/materials.js";
 import init, {pattern} from "./../../../../../wasm/geometry/bin/geometry.js";
 
@@ -27,21 +26,6 @@ export class InputGuideRenderer {
 
     constructor(program) {
         this._program = program;
-
-        this._downFn = {
-            [program.drawing.segmentTypeOptions.LINE]: pointDown,
-            [program.drawing.segmentTypeOptions.CURVE]: curveDown
-        }
-
-        this._moveFn = {
-            [program.drawing.segmentTypeOptions.LINE]: pointMove,
-            [program.drawing.segmentTypeOptions.CURVE]: curveMove
-        }
-
-        this._upFn = {
-            [program.drawing.segmentTypeOptions.LINE]: pointUp,
-            [program.drawing.segmentTypeOptions.CURVE]: curveUp
-        }
 
         this._input = new InputContinue(program);
         this._operations = [];
@@ -113,17 +97,31 @@ export class InputGuideRenderer {
 
     async pointerDown(startPoint) {
         this._startPoint = startPoint;
-        this._downFn[this.segmentType](this, startPoint);
+
+        await this._input.pointDown(startPoint, this._operations, this._program.drawing.segmentType);
+
+        if (this._operations.length == 1) return;
+
+        const cmd = this._operations.join(",");
+        const data = pattern(cmd, 10, 0.01);
+        await this.draw(data);
     }
 
     async pointerMove(point) {
         this._point = point;
-        this._moveFn[this.segmentType](this, point);
+        await this._input.pointMove(point, this._operations, this._program.drawing.segmentType);
+
+        if (this._operations.length == 1) return;
+
+        const cmd = this._operations.join(",");
+        const data = pattern(cmd, 10, 0.01);
+        await this.draw(data);
     }
 
     async pointerUp(point) {
         this._point = point;
-        this._upFn[this.segmentType](this, point);
+        await this._input.pointUp(point, this._operations, this._program.drawing.segmentType);
+        const cmd = this._operations.join(",");
     }
 
     async clear() {
@@ -161,42 +159,6 @@ export class InputGuideRenderer {
     }
 }
 
-async function pointDown(guide, start) {
-    await guide._input.pointDown(start, guide._operations, OperationTypes.LINE);
-
-    if (guide._operations.length == 1) return;
-
-    const cmd = guide._operations.join(",");
-    const data = pattern(cmd, 10, 0.01);
-    await guide.draw(data);
-}
-
-async function pointMove(guide, point) {
-    await guide._input.pointMove(point, guide._operations, OperationTypes.LINE);
-
-    if (guide._operations.length == 1) return;
-
-    const cmd = guide._operations.join(",");
-    const data = pattern(cmd, 10, 0.01);
-    await guide.draw(data);
-}
-
-async function pointUp(guide, point) {
-    await guide._input.pointUp(point, guide._operations, OperationTypes.LINE);
-    const cmd = guide._operations.join(",");
-}
-
-async function curveDown(guide, point) {
-
-}
-
-async function curveMove(guide, point) {
-    console.log("curve move");
-}
-
-async function curveUp(guide, start) {
-    console.log("curve up");
-}
 
 async function createVector(data, i) {
     return await crs.createThreeObject("Vector3", Number(data[i + 1]), Number(data[i + 2]), Number(data[i + 3]));

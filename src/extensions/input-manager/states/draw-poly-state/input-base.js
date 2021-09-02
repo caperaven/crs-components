@@ -18,7 +18,7 @@ export class InputBase {
         delete this._program;
     }
 
-    async _createPoint(startPoint, color, name, addToPoints = true) {
+    async _createPoint(startPoint, color, name, addToPoints = true,) {
         color = color || "#000000";
         const material = await this._program.materials.get(MaterialType.BASIC, color);
         this.shape = await createNormalizedPlane(10, 10, material, "rect");
@@ -40,7 +40,7 @@ export class InputBase {
 
     async clearPoints() {
         for (let point of this.points) {
-            this._program.canvas.scene.remove(point);
+            this._program.canvas.scene?.remove(point);
         }
     }
 
@@ -57,6 +57,28 @@ export class InputBase {
     }
 
     async curveTo(cp, point, operations) {
-        operations.push(`c,${cp.x.toFixed(2)},${cp.y.toFixed(2)},0,${point.x.toFixed(2)},${point.y.toFixed(2)},0`);
+        operations.push(`q,${cp.x.toFixed(2)},${cp.y.toFixed(2)},0,${point.x.toFixed(2)},${point.y.toFixed(2)},0`);
+    }
+
+    async updateCurveTo(cp, point, operations) {
+        operations[operations.length - 1] = `q,${cp.x.toFixed(2)},${cp.y.toFixed(2)},0,${point.x.toFixed(2)},${point.y.toFixed(2)},0`;
+    }
+
+    async moveLine(point, operations) {
+        this.p2.position.set(point.x, point.y, 0);
+        await this.updateLineTo(point, operations);
+    }
+
+    async moveCurve(point, operations) {
+        if (this.cp == null) {
+            this._point = point;
+            this.cp = await this._createPoint(point, "#909090", "control-point", true);
+        }
+
+        const ox = this._point.x - (point.x - this._point.x);
+        const oy = this._point.y - (point.y - this._point.y);
+        this.cp.position.set(ox, oy, 0);
+
+        await this.updateCurveTo({x: ox, y: oy}, this.p2.position, operations);
     }
 }

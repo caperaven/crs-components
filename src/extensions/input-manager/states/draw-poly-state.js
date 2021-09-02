@@ -92,7 +92,7 @@ export class DrawPolyState extends BaseState {
 
     async _keyUp(event) {
         if (event.code === "Escape" || event.code === "Backspace") {
-            await this._clearMarkers();
+            await this.guide.clear();
         }
 
         if (event.code === "Enter" || event.code === "Space") {

@@ -107,7 +107,7 @@ export const schema = {
                     material: "green",
                     args: {
                         icon: "home",
-                        transform: "s,10,10,1",
+                        transform: "s,20,20,1",
                         gap: 20,
                         data: "m,-200,-200,0,l,-400,-400,0,l,-600,-200,0"
                     }
