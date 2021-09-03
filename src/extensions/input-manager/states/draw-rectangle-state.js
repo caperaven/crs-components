@@ -63,7 +63,7 @@ export class DrawRectangleState extends BaseState {
     }
 
     async _createRectangle(startPoint) {
-        const material = await this._context.canvas.materials.get(MaterialType.BASIC, 0x000000);
+        const material = await this._context.program.materials.get(MaterialType.BASIC, 0x000000);
         this.shape = await createNormalizedPlane(1, 1, material, "rect");
         this.shape.position.set(startPoint.x, startPoint.y, 0);
         this._context.canvas.scene.add(this.shape);

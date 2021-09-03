@@ -1,0 +1,1 @@
+stroke not working on poly - something to do with the enable stroke thing
