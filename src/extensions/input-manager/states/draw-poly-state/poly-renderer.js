@@ -26,7 +26,6 @@ export class PolyRenderer {
         if (isPolygon === false || program.drawing.stroke.enabled === true) {
             if (program.drawing.stroke.type === program.drawing.strokeTypeOptions.DOTTED) {
                 const color = program.drawing.stroke.color;
-                await program.materials.get(MaterialType.BASIC, color);
                 const dotted = program.drawing.stroke.dotted;
                 const provider = new CurveGeometryProvider();
                 const mesh = await provider.processItem({
@@ -35,8 +34,7 @@ export class PolyRenderer {
                         data: cmd,
                         icon: dotted.icon,
                         transform: `s,${dotted.xScale},${dotted.yScale},1`,
-                        gap: dotted.gap,
-                        rotation: dotted.rotation
+                        gap: dotted.gap
                     }
                 }, program);
                 mesh.position.z = 1;

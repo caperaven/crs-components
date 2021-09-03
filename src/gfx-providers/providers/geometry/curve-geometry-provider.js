@@ -1,5 +1,6 @@
 import {BaseProvider} from "../base-provider.js";
 import {rawToGeometry} from "./../../../gfx-helpers/raw-to-geometry.js";
+import {MaterialType} from "./../../../gfx-helpers/materials.js";
 import init, {pattern} from "./../../../../wasm/geometry/bin/geometry.js";
 
 export default class CurveGeometryProvider extends BaseProvider {
@@ -21,7 +22,7 @@ export default class CurveGeometryProvider extends BaseProvider {
         const axis      = await crs.createThreeObject("Vector3");
 
         const geometry  = await rawToGeometry(imageData);
-        const material  = await program.materials.getById(item.material);
+        const material  = await program.materials.get(MaterialType.INSTANCE, item.material);
         const mesh      = await crs.createThreeObject("InstancedMesh", geometry, material, data.length);
         const dummy     = await crs.createThreeObject("Object3D");
 
