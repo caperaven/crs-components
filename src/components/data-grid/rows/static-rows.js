@@ -128,16 +128,20 @@ async function createRootGroups(grid) {
     const column = grid._columns.find(item => item.field == grouping);
     const title = column.title;
 
+    let rowIndex = 3;
+
     for (let key of keys) {
         const descriptor = grid.groupDescriptor[key];
-        await createGroupedRow(template, `${title}: ${key}`, key, descriptor._count, 0, grid._columns.length, width, fragment);
+        if (await createGroupedRow(template, rowIndex, `${title}: ${key}`, key, descriptor._count, 0, grid._columns.length, width, fragment) === true) {
+            rowIndex ++;
+        };
     }
 
     grid.bodyElement.appendChild(fragment);
 }
 
-async function createGroupedRow(template, text, path, count, level, length, width, fragment) {
-    if (text.indexOf("_count") != -1) return;
+async function createGroupedRow(template, rowIndex, text, path, count, level, length, width, fragment) {
+    if (text.indexOf("_count") != -1) return false;
 
     const instance          = template.content.cloneNode(true);
     const contentElement    = instance.querySelector(".content");
@@ -152,9 +156,13 @@ async function createGroupedRow(template, text, path, count, level, length, widt
     countElement.textContent = `Count: ${count}`;
     chevronElement.dataset.path = path;
 
-    instance.children[0].style.gridColumn = `1 / span ${length}`;
+    const element = instance.children[0];
+    element.dataset.row = rowIndex;
+    element.style.gridColumn = `1 / span ${length}`;
+    element.style.gridRowStart = rowIndex;
 
     fragment.appendChild(instance);
+    return true;
 }
 
 async function expand(grid, path) {
@@ -163,27 +171,42 @@ async function expand(grid, path) {
     const fragment = document.createDocumentFragment();
     const target = grid.bodyElement.querySelector(`[data-path="${path}"]`).parentElement.parentElement;
 
+    let rowIndexes = Number(target.style.gridRowStart);
+    let rowIndex = rowIndexes + 1;
+
     if (items.ind == null) {
         const template = grid.querySelector("#group");
         const width = grid.rect.width - 8;
         const grouping = grid.grouping[level];
         const column = grid._columns.find(item => item.field == grouping);
         const title = column.title;
+        const keys = Object.keys(items);
 
-        for (let key of Object.keys(items)) {
+        // exclude the _count property
+        const size = keys.length - 1;
+
+        await moveRowIndexesUp(grid, rowIndexes, size);
+
+        for (let key of keys) {
             let count = items[key]._count;
 
             if (items[key].ind != null) {
                 count = items[key].ind.length;
             }
 
-            await createGroupedRow(template, `${title}: ${key}`, `${path}.${key}`, count, level, grid._columns.length, width, fragment);
+            if (await createGroupedRow(template, rowIndex,`${title}: ${key}`, `${path}.${key}`, count, level, grid._columns.length, width, fragment) === true) {
+                rowIndex ++;
+            };
         }
     }
     else {
+        const size = items.ind.length;
+        await moveRowIndexesUp(grid, rowIndexes, size);
+
         for (let index of items.ind) {
             const row = grid._data[index];
-            await createCells(grid, row, fragment);
+            await createCells(grid, row, fragment, rowIndex);
+            rowIndex ++;
         }
     }
 
@@ -192,5 +215,18 @@ async function expand(grid, path) {
     }
     else {
         target.parentElement.insertBefore(fragment, target.nextElementSibling);
+    }
+}
+
+async function moveRowIndexesUp(grid, startIndex, offset) {
+    let target = grid.querySelector(`[data-row="${startIndex}"]`);
+
+    while(target.nextElementSibling) {
+        const element = target.nextElementSibling;
+        let index = Number(element.dataset.row);
+        index += offset;
+        element.dataset.row = index;
+        element.style.gridRowStart = index;
+        target = element;
     }
 }
