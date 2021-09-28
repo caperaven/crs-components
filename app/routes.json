@@ -18,24 +18,9 @@
       "hasStyle": true
     },
     {
-      "title": "Interactive Graphics",
-      "hash": "#interactive-graphics",
-      "view": "interactive-graphics"
-    },
-    {
-      "title": "Graphics Program",
-      "hash": "#graphics-program",
-      "view": "graphics-program"
-    },
-    {
       "title": "Material Design",
       "hash": "#mdc",
       "view": "mdc"
-    },
-    {
-      "title": "Relative Placement",
-      "hash": "#relative-placement",
-      "view": "relative-placement"
     },
     {
       "title": "Toolbars",
@@ -58,34 +43,9 @@
       "view": "grid3d"
     },
     {
-      "title": "Simple Bar Chart",
-      "hash": "#simple-bar-chart",
-      "view": "simple-bar-chart"
-    },
-    {
-      "title": "Image Card",
-      "hash": "#image-card",
-      "view": "image-card"
-    },
-    {
       "title": "Monaco",
       "hash": "#monaco",
       "view": "monaco"
-    },
-    {
-      "title": "MSDF",
-      "hash": "#msdf",
-      "view": "msdf"
-    },
-    {
-      "title": "Flowchart Items",
-      "hash": "#flowchart-items",
-      "view": "flowchart-items"
-    },
-    {
-      "title": "FXAA Test",
-      "hash": "#fxaa",
-      "view": "fxaa"
     },
     {
       "title": "404",
@@ -98,11 +58,6 @@
       "title": "Radio",
       "hash": "#radio",
       "view": "radio"
-    },
-    {
-      "title": "Mesh Line",
-      "hash": "#mesh-line",
-      "view": "mesh-line"
     },
     {
       "title": "Visualizations",
