@@ -5,6 +5,9 @@ class PassFailGroup extends HTMLElement {
 
     set data(newValue) {
         this._data = newValue;
+        if (this.isReady === true && newValue != null) {
+            this._drawItems(newValue);
+        }
     }
 
     async connectedCallback() {
