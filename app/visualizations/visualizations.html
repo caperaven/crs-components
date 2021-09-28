@@ -9,7 +9,7 @@
 
     pie-chart {
         display: block;
-        width: 300px;
+        width: max-content;
     }
 
     .summary {
@@ -31,7 +31,7 @@
 
 <h2>Pie Chart</h2>
 
-<pie-chart data.one-way="data" summary.one-way="summary" id="demo-pie" data-width="150" data-margin="8">
+<pie-chart data.one-way="data" summary.one-way="summary" id="demo-pie" data-width="300" data-margin="32">
     <template>
         <div class="summary">
             <div class="count">${count}</div>

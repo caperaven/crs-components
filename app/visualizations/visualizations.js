@@ -62,12 +62,12 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
         values.push({
             title: "Item 4",
             value: 60,
-            color: "red"
+            color: "#ff0090"
         })
 
         this.setProperty("summary", {
             count: 328,
-            title: "Summary"
+            title: "Hello Summary"
         })
 
         crsbinding.data.updateUI(this, "data");
