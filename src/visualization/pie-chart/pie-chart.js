@@ -1,5 +1,5 @@
-import {select} from "./../../../third-party/d3js/d3-selection.js";
-import {pie, arc} from "./../../../third-party/d3js/d3-shape.js";
+import {select} from "../../3rd-party/d3js/d3-selection.js";
+import {pie, arc} from "../../3rd-party/d3js/d3-shape.js";
 
 class PieChart extends HTMLElement {
     get data() {

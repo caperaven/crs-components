@@ -70,12 +70,10 @@
         import "./node_modules/crs-state-machine/crs-state-machine.js";
 
         import {loadModules} from "./src/index.js";
-        import {loadThreeModules} from "./src/threejs-paths.js";
         import IndexViewModel from "./index.js";
 
         async function load() {
             await loadModules();
-            await loadThreeModules("/third-party/");
             document.viewModel = new IndexViewModel(document.body);
 
             window.addEventListener("load", (event) => {
