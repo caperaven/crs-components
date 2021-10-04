@@ -14,17 +14,20 @@ export default class Visualizations extends crsbinding.classes.ViewBase {
             {
                 title: "Running",
                 value: 150,
-                color: "#0276C2"
+                color: "#0276C2",
+                icon: "home"
             },
             {
                 title: "Complete",
                 value: 75,
-                color: "#FFBB00"
+                color: "#FFBB00",
+                icon: "settings"
             },
             {
                 title: "Aborted",
                 value: 28,
-                color: "#F97825"
+                color: "#F97825",
+                icon: "info"
             },
             {
                 title: "Cancelled",

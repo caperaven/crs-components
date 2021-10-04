@@ -113,14 +113,25 @@ class PieChart extends HTMLElement {
         const colorField = this.dataset.colorfield || "color";
         const titleField = this.dataset.titlefield || "title";
         const valueField = this.dataset.valuefield || "value";
+        const iconField = this.dataset.iconfield || "icon";
 
         const fragment = document.createDocumentFragment();
         for (let record of data) {
             const color = record[colorField] || "cornflowerblue";
             const title = record[titleField];
             const value = record[valueField];
+            const icon = record[iconField];
+
             const instance = template.content.cloneNode(true);
-            instance.querySelector(".item-color").style.background = color;
+
+            if (icon != null && icon.length > 0) {
+                instance.querySelector(".item-color").textContent = icon;
+                instance.querySelector(".item-color").style.color = color;
+            }
+            else {
+                instance.querySelector(".item-color").style.background = color;
+            }
+
             instance.querySelector(".item-text").textContent = title;
             instance.querySelector(".item-value").textContent = value;
             fragment.appendChild(instance);
