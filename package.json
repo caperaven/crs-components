@@ -1,6 +1,6 @@
 {
     "name": "crs-components",
-    "version": "0.0.74",
+    "version": "0.0.76",
     "description": "component library",
     "main": "index.js",
     "directories": {
@@ -42,7 +42,6 @@
         "crs-router": "0.0.75",
         "crs-modules": "^1.0.15",
         "crs-schema": "0.0.46",
-        "crs-state-machine": "0.0.22",
-        "svg-mesh-3d": "^1.1.0"
+        "crs-state-machine": "0.0.22"
     }
 }

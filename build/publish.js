@@ -14,6 +14,7 @@ class Publish {
         const instance = new Publish();
         await instance.copyFiles("./readme.md");
         await instance.copyFiles("./src/3rd-party/require.js", "3rd-party/");
+        await instance.copyFiles("./src/3rd-party/d3js/**/*.js", "3rd-party/d3js/");
         await instance.copyFiles("./fonts/**/*.*", "fonts");
 
         await instance.copyRecursiveMinified("./third-party/**/*.js");
