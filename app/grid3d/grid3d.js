@@ -35,6 +35,9 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 // },
                 // plugins: [
                 //     /* Plugin to add to grid that will execute on either of the events defined, all conditional logic is in the formatter */
+                //     /*
+                //          1. How do I register a plugin after the fact
+                //     */
                 //     new Formatter("afterNew,afterEdit,onAttach"),
                 //     new CellEditor("onEdit")
                 // ],
@@ -43,6 +46,11 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 },
                 grouping: ["month", "isActive", "value"]
             })
+
+            // this.grid.addPlugin(...)
+            // this.grid.removePlugin(...)
+            // this.grid.swapPlugin(...)
+            // this.grid.onEvent("onEdit", () => {})
         })
     }
 
