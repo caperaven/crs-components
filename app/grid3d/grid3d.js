@@ -21,11 +21,11 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 pageSize: 100,
                 scrollSpeed: 10,
                 features: {
-                    group       : true,
-                    sort        : true,
-                    move        : true,
-                    resize      : true,
-                    multiSelect : true  // add checkboxes and on selection fire "onSelectionChanged" event
+                    // group       : true,
+                    // sort        : true,
+                    // move        : true,
+                    // resize      : true,
+                    // multiSelect : true  // add checkboxes and on selection fire "onSelectionChanged" event
                 },
                 // events: {
                 //     /* actions to perform when a grid requests */
@@ -41,10 +41,8 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 //     new Formatter("afterNew,afterEdit,onAttach"),
                 //     new CellEditor("onEdit")
                 // ],
-                translations: {
-                    groupText: "drop here to group..."
-                },
-                grouping: ["month", "isActive", "value"]
+                // NB Use binding engine translations
+                //grouping: ["month", "isActive", "value"]
             })
 
             // this.grid.addPlugin(...)

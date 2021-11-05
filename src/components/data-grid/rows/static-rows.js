@@ -1,3 +1,7 @@
+/**
+ * I have all the data and will display it one page at a time
+ */
+
 export default class StaticRows {
     static async enable(grid, data) {
         grid._data = data;

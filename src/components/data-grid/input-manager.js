@@ -22,6 +22,9 @@ export class InputManager {
             get yOffset() { return this.position.y - this.startPosition.y }
         };
 
+        // JHR: this is populated from the feature
+        grid.dblClickEvents = grid.dblClickEvents || [];
+
         await enableEvents(grid, mouseEvents.DOWN, mouseEvents.DBLCLICK);
     }
 
@@ -101,6 +104,11 @@ async function click(event) {
 }
 
 async function dblClick(event) {
+    /*
+        Loop through the dbl click events and when you find something that matches the query. stop the loop and execute that intent.
+     */
+
+
     const classes = event.target.classList;
     if (classes.contains("column-header")) {
         this.resize?.autoSize(this, event.target);

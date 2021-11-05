@@ -2,7 +2,12 @@ import {createDragCanvas} from "./../../lib/element-utils.js";
 
 export default class Resize {
     static async enable(grid) {
-
+        grid.dblClickEvents = grid.dblClickEvents || [];
+        grid.dblClickEvents.push({
+                query: ".column-header",
+                feature: "resize",
+                fn: "autoSize"
+            })
     }
 
     static async disable(grid) {

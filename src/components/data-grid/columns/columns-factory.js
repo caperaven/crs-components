@@ -1,3 +1,10 @@
+/*
+    Q: How do I add custom columns?
+        - selection checkbox column
+        - status image column 1:N
+ */
+
+
 export class Columns {
     static async enable(grid, columns) {
         grid._columns = columns;
