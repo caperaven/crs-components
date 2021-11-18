@@ -1,0 +1,21 @@
+<style>
+    .columns {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 100%;
+        width: 100%;
+        height: 600px;
+        border: solid 1px silver;
+    }
+
+    .columns div:first-child {
+        border-right: solid 1px silver;
+    }
+</style>
+
+<h2>HTML Tree</h2>
+
+<div class="columns">
+    <div><html-tree for="target"></html-tree></div>
+    <div id="target"></div>
+</div>
