@@ -16,6 +16,18 @@
 <h2>HTML Tree</h2>
 
 <div class="columns">
-    <div><html-tree for="target"></html-tree></div>
-    <div id="target"></div>
+    <div>
+        <html-tree for="target"></html-tree>
+    </div>
+
+    <div id="target">
+        <div data-title="parent element">
+            <div data-title="child element 1">Item 1</div>
+            <div data-title="child element 2">Item 1</div>
+        </div>
+    </div>
 </div>
+
+<button click.call="buildTree">Build Tree</button>
+<button click.call="add">Create Element</button>
+<button click.call="addChild">Create Child</button>
