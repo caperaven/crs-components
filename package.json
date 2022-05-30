@@ -40,7 +40,7 @@
     "dependencies": {
         "crs-binding": "^0.0.260",
         "crs-modules": "^1.0.17",
-        "crs-process-api": "^0.0.157",
+        "crs-process-api": "^0.0.158",
         "crs-router": "^0.0.78",
         "crs-schema": "0.0.46",
         "crs-state-machine": "0.0.22"
