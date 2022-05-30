@@ -21,11 +21,11 @@ export default class Grid extends crsbinding.classes.ViewBase {
                 pageSize: 100,
                 scrollSpeed: 10,
                 features: {
-                    // group       : true,
-                    // sort        : true,
-                    // move        : true,
-                    // resize      : true,
-                    // multiSelect : true  // add checkboxes and on selection fire "onSelectionChanged" event
+                    group       : true,
+                    sort        : true,
+                    move        : true,
+                    resize      : true,
+                    multiSelect : true  // add checkboxes and on selection fire "onSelectionChanged" event
                 },
                 // events: {
                 //     /* actions to perform when a grid requests */

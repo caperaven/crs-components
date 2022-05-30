@@ -73,6 +73,10 @@
         import {loadModules} from "./src/index.js";
         import IndexViewModel from "./index.js";
 
+        crsbinding.translations.add({
+            list: "List"
+        })
+
         async function load() {
             await loadModules();
             document.viewModel = new IndexViewModel(document.body);
@@ -83,6 +87,15 @@
         }
 
         load().catch(e => console.error(e));
+
+        function hello_world(value) {
+            globalThis.value = value;
+            debugger;
+            console.log(value);
+        }
+
+        globalThis.hello_world = hello_world;
+
     </script>
 </body>
 </html>

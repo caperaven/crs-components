@@ -15,8 +15,8 @@ export default class HtmlTreeView extends crsbinding.classes.ViewBase {
     async add() {
         await crs.intent.dom.create_element({ args: {
             id          : "element1",
-            parentQuery : "#target",
-            tagName     : "div",
+            parentQuery : "#parent-element",
+            tagName     : "li",
             textContent : "Element 1",
             attributes  : {
                 "data-title": "Element 1"
@@ -25,26 +25,26 @@ export default class HtmlTreeView extends crsbinding.classes.ViewBase {
     }
 
     async addChild() {
+        const ul = await crs.intent.dom.create_element({args: {tagName: "ul"}});
+
         await crs.intent.dom.create_element({ args: {
             id          : "element2",
-            parentQuery : "#element1",
-            tagName     : "div",
+            parent      : ul,
+            tagName     : "li",
             textContent : "Element 2",
             attributes  : {
                 "data-title": "Element 2"
             }
         }})
 
-        // const element = document.createElement("div");
-        // element.id = "element2";
-        // element.textContent = "Element 2";
-        // element.setAttribute("data-title", "Element 1"
-        // const parent = document.querySelector("#element1");
-        // parent.appendChild(element);
+        document.querySelector("#element1").appendChild(ul);
     }
 
     async moveElement() {
-
+        await crs.intent.dom.move_element({ args: {
+            query       : "#element2",
+            target      : "#parent-element",
+        }})
     }
 
 }

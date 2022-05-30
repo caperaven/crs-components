@@ -1,3 +1,6 @@
+import {Containers} from "./containers.js"
+import {createAssociateElement} from "./utilities.js";
+
 class HtmlTree extends HTMLElement {
     async connectedCallback() {
         this.target = document.querySelector(`#${this.getAttribute("for")}`);
@@ -8,6 +11,8 @@ class HtmlTree extends HTMLElement {
 
         this.dblClickHandler = this.dblClick.bind(this);
         this.addEventListener("dblclick", this.dblClickHandler);
+
+        crs.intent.system.get_uuid = crs.intent.system.get_uuid || getUUID;
     }
 
     async disconnectedCallback() {
@@ -23,7 +28,21 @@ class HtmlTree extends HTMLElement {
         for (let mutation of mutationsList) {
             const parent = mutation.target;
             for (let element of mutation.addedNodes) {
-                await this.addToTree(parent, element);
+                // 1. if the element is a container, let the container specialization deal with it.
+                const nodeName = element.nodeName.toLowerCase();
+                let child;
+
+                if (Containers[nodeName] != null) {
+                    child = await Containers[nodeName](element);
+                    child._parentElement = element.parentElement;
+                }
+
+                // 2. add the element to the tree
+                await this.addToTree(parent, child || element);
+            }
+
+            for (let element of mutation.removedNodes) {
+                await this.removeFromTree(element);
             }
         }
     }
@@ -43,15 +62,21 @@ class HtmlTree extends HTMLElement {
      * @returns {Promise<void>}
      */
     async addToTree(parent, element) {
-        let treeTarget = parent == this.target ? this.firstChild : findElement(this, element.parentElement);
+        const targetParent = element.parentElement || element._parentElement;
+        let treeTarget = parent == this.target ? this.firstChild : findElement(this, targetParent);
 
-        if (treeTarget.nodeName == "LI") {
+        if (treeTarget.nodeName == "LI" && element.nodeName != "UL") {
             const ul = await crs.intent.dom.create_element({args: {tagName: "ul"}});
             treeTarget.appendChild(ul);
             treeTarget = ul;
         }
 
         await createAssociateElement(element, treeTarget);
+    }
+
+    async removeFromTree(element) {
+        let treeTarget = findElement(this, element);
+        removeElement(treeTarget);
     }
 
     async dblClick(event) {
@@ -74,6 +99,13 @@ function findElement(parent, element) {
     return null;
 }
 
+function removeElement(element) {
+    if (element == null) return;
+
+    element.parentElement.removeChild(element);
+    delete element._sourceElement;
+}
+
 /**
  * Remove the children and clear them from the UI
  * @param target
@@ -84,7 +116,7 @@ function clear(target) {
         target.removeChild(child);
     }
 
-    target._sourceElement = null;
+    delete target._sourceElement;
 }
 
 async function create(target, parent) {
@@ -99,16 +131,8 @@ async function create(target, parent) {
     }
 }
 
-async function createAssociateElement(element, parent) {
-    let result = await crs.intent.dom.create_element({
-        args: {
-            tagName: "li",
-            textContent: "$context.dataset.title",
-            parent: parent
-        }}, element);
+async function getUUID() {
 
-    result._sourceElement = element;
-    return result;
 }
 
 customElements.define("html-tree", HtmlTree);

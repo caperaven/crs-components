@@ -21,13 +21,14 @@
     </div>
 
     <div id="target">
-        <div data-title="parent element">
-            <div data-title="child element 1">Item 1</div>
-            <div data-title="child element 2">Item 1</div>
-        </div>
+        <ul id="parent-element" data-title="parent element">
+            <li data-title="child element 1">Item 1</li>
+            <li data-title="child element 2">Item 1</li>
+        </ul>
     </div>
 </div>
 
 <button click.call="buildTree">Build Tree</button>
 <button click.call="add">Create Element</button>
 <button click.call="addChild">Create Child</button>
+<button click.call="moveElement">Move Child</button>
