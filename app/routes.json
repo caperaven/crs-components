@@ -73,6 +73,11 @@
       "title": "HTML Tree",
       "hash": "#html-tree",
       "view": "html-tree"
+    },
+    {
+      "title": "File System",
+      "hash": "#file-system",
+      "view": "file-system"
     }
   ]
 }

@@ -77,7 +77,7 @@ module.exports = {
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "/app/welcome/welcome.js": "<rootDir>/app/welcome/welcome.js"
+    "/app/welcome/welcome.js": "<rootDir>/app/welcome/file-system.js"
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

@@ -1,0 +1,69 @@
+<style>
+    file-system {
+        display: block;
+        border: solid silver 1px;
+    }
+
+    file-system [role="listitem"] {
+        display: grid;
+        grid-template-columns: 2rem 1fr 2rem;
+        grid-template-rows: 2rem;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        padding-left:0.5rem;
+    }
+
+    file-system .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    file-system [role="listitem"]:nth-child(even) {
+        background: #FFFFFF
+    }
+    file-system [role="listitem"]:nth-child(odd) {
+        background: whitesmoke;
+    }
+
+    file-system .folder-icon {
+        fill: #fbc82e;
+    }
+
+    file-system .file-icon {
+        fill: cornflowerblue;
+    }
+</style>
+
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <symbol id="folder">
+        <path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
+    </symbol>
+    <symbol id="file">
+        <path d="M13,9V3.5L18.5,9M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6Z" />
+    </symbol>
+    <symbol id="chevron">
+        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+    </symbol>
+</svg>
+
+<template id="folder-template">
+    <div role="listitem">
+        <svg width="24px" height="24px" class="folder-icon"><use href="#folder"></use></svg>
+        <div></div>
+        <svg width="24px" height="24px"><use href="#chevron"></use></svg>
+    </div>
+</template>
+
+<template id="file-template">
+    <div role="listitem">
+        <svg width="24px" height="24px" class="file-icon"><use href="#file"></use></svg>
+        <div></div>
+    </div>
+</template>
+
+<div class="container" role="list">
+
+</div>
